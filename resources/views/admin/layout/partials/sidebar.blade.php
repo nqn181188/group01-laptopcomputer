@@ -1,7 +1,7 @@
 <!-- Brand Logo -->
 <a href="../../index3.html" class="brand-link">
     <img src="{{asset('/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <span class="brand-text font-weight-light">Admin System</span>
   </a>
 
   <!-- Sidebar -->
@@ -9,10 +9,10 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="{{asset('images/'.Session::get('user')->image)}}" class="img-circle elevation-2" alt="User Image">
+        <img src="#" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{Session::get('user')->username}}</a>
+        <a href="#" class="d-block">Admin</a>
       </div>
     </div>
 
@@ -25,55 +25,56 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route('admin.dashboard')}}" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
-              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
         </li>
         
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
-            <p>
-              Account
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                  Account List
-                </p>
-              </a>
-            </li> 
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                  Create New
-                </p>
-              </a>
-            </li> 
-          </ul>
-          
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Account
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link ml-3">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                   Account List
+                  </p>
+                </a>
+              </li> 
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link ml-3">
+                  <i class="nav-icon fas fa-user-plus "></i>
+                  <p>
+                    Create New User
+                  </p>
+                </a>
+              </li> 
+            </ul>
         </li>
+
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="nav-icon fab fa-product-hunt"></i>
             <p>
               Product
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+              <a href="#" class="nav-link ml-3">
+                <i class="nav-icon fas fa-th-list"></i>
                 <p>
                   Product List
                 </p>
@@ -82,15 +83,31 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+              <a href="{{route('admin.product.create')}}" class="nav-link ml-3">
+                <i class="nav-icon fas fa-plus-square"></i>
                 <p>
-                  Create New
+                  Create New Product
                 </p>
               </a>
             </li> 
           </ul>
-          
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cart-arrow-down"></i>
+            <p>
+              Order
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-comments"></i>
+            <p>
+              Feedback
+            </p>
+          </a>
         </li>
       </ul>
     </nav>

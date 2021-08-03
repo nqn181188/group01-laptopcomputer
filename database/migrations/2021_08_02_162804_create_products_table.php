@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->unsignedSmallInteger('price');
             $table->unsignedSmallInteger('quantity');
-            $table->unsignedTinyInteger('featured');
+            $table->unsignedTinyInteger('featured')->nullable();
             $table->string('image');
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')->references('id')->on('brands');

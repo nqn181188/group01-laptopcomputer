@@ -13,6 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+//=========ROUTE ON SHOP PAGE========
+
+
+
+
+//////////////////////////////////////
+
+
+//===========ROUTE ON ADMIN PAGE==============
+// Route::get('/admin','Admin\AdminController@dashboard')->middleware('adminLogin')->name('admin.dashboard');
+Route::get('/admin','Admin\AdminController@index');
+Route::get('/admin/login','Admin\AdminController@login')->name('admin.login');
+Route::post('/admin/process-login','Admin\AdminController@processLogin')->name('admin.process-login');
+
+// Route::get('/admin/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
+Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],function(){
+    Route::get('dashboard','Admin\AdminController@dashboard')->name('dashboard');
+    Route::resource('product', 'Admin\ProductController');
 });
+
+
+
+////////////////////////////////////////////
