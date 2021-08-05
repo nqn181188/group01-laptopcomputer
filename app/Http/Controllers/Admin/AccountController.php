@@ -38,17 +38,6 @@ class AccountController extends Controller
     public function store(Request $request)
     {
         $account = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();            
-            if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png') {
-                return redirect()->route('admin.account.create');
-            }
-            
-            $imgName = $file->getClientOriginalName();
-            $file->move('images', $imgName);
-            $account['image'] = $imgName;
-        }
         $account['password'] = md5($account['password']);
         Admin::create($account);
         return redirect()->route('admin.account.index');
@@ -73,7 +62,6 @@ class AccountController extends Controller
      */
     public function edit(Admin $admin)
     {
-        //
         return view('admin.account.update', compact('account'));
     }
 
@@ -111,20 +99,12 @@ class AccountController extends Controller
             'image.max' => 'Kích thước tối đa của tập tin hình ảnh là 10Mb',
         ]);
 
-        $account->username  = $request->username;
-        $account->password  = $request->password;
+        $account->firstname  = $request->firstname;
+        $account->lastname  = $request->lastname;
         $account->email  = $request->email;
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();            
-            if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png') {
-                return redirect()->route('admin.account.update');
-            }
-            
-            $imgName = $file->getClientOriginalName();
-            $file->move('images', $imgName);
-            $account['image'] = $imgName;
-        }
+        $account->address  = $request->address;
+        $account->password  = $request->password;
+        $account->role  = $request->role;
         $account['password'] = md5($account['password']);
         $account->save();
         return redirect()->route('admin.account.index');
@@ -138,11 +118,11 @@ class AccountController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        if ($admin->image != null) {
-            if (file_exists('images/' . $admin->image)) {
-                unlink('images/' . $admin->image);
-            }
-        }
+        // if ($admin->image != null) {
+        //     if (file_exists('images/' . $admin->image)) {
+        //         unlink('images/' . $admin->image);
+        //     }
+        // }
         $admin->delete();
         return redirect()->route('admin.account.index');
     }
