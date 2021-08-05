@@ -13,34 +13,38 @@
             <div class=" main-content-area">
                 <div class="wrap-login-item ">
                     <div class="register-form form-item ">
-                        <form class="form-stl" action="#" name="frm-login" method="get" >
+                        <form class="form-stl" action="{{route('customer.store')}}" name="frm-login" method="POST" >
+                            @csrf
                             <fieldset class="wrap-title">
                                 <h3 class="form-title">Create an account</h3>
                                 <h4 class="form-subtitle">Personal infomation</h4>
                             </fieldset>									
                             <fieldset class="wrap-input">
-                                <label for="frm-reg-lname">Name*</label>
-                                <input type="text" id="frm-reg-lname" name="reg-lname" placeholder="Last name*">
+                                <label for="firstname">Firstname</label>
+                                <input type="text" id="firstname" name="firstname" placeholder="First name">
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="frm-reg-email">Email Address*</label>
-                                <input type="email" id="frm-reg-email" name="reg-email" placeholder="Email address">
+                                <label for="lastname">Lastname</label>
+                                <input type="text" id="lastname" name="lastname" placeholder="Last name">
                             </fieldset>
-                            <fieldset class="wrap-functions ">
-                                <label class="remember-field">
-                                    <input name="newletter" id="new-letter" value="forever" type="checkbox"><span>Sign Up for Newsletter</span>
-                                </label>
+                            <fieldset class="wrap-input">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Email address">
                             </fieldset>
+                            {{-- <fieldset class="wrap-input">
+                                <label for="phone">Phone</label>
+                                <input type="text" id="phone" name="phone" placeholder="Phone number">
+                            </fieldset> --}}
                             <fieldset class="wrap-title">
                                 <h3 class="form-title">Login Information</h3>
                             </fieldset>
                             <fieldset class="wrap-input item-width-in-half left-item ">
-                                <label for="frm-reg-pass">Password *</label>
-                                <input type="text" id="frm-reg-pass" name="reg-pass" placeholder="Password">
+                                <label for="password">Password</label>
+                                <input type="text" id="password" name="password" placeholder="Password">
                             </fieldset>
                             <fieldset class="wrap-input item-width-in-half ">
-                                <label for="frm-reg-cfpass">Confirm Password *</label>
-                                <input type="text" id="frm-reg-cfpass" name="reg-cfpass" placeholder="Confirm Password">
+                                <label for="confirm">Confirm Password</label>
+                                <input type="text" id="confirm" name="confirm" placeholder="Confirm Password">
                             </fieldset>
                             <input type="submit" class="btn btn-sign" value="Register" name="register">
                         </form>

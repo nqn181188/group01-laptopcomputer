@@ -13,17 +13,18 @@
             <div class=" main-content-area">
                 <div class="wrap-login-item ">						
                     <div class="login-form form-item form-stl">
-                        <form name="frm-login">
+                        <form action="{{route('customer.process-login')}}" method="POST" name="frm-login">
+                            @csrf
                             <fieldset class="wrap-title">
                                 <h3 class="form-title">Log in to your account</h3>										
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="frm-login-uname">Email Address:</label>
-                                <input type="text" id="frm-login-uname" name="email" placeholder="Type your email address">
+                                <label for="email">Email Address:</label>
+                                <input type="text" id="email" name="email" placeholder="Type your email address">
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="frm-login-pass">Password:</label>
-                                <input type="password" id="frm-login-pass" name="pass" placeholder="************">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" placeholder="************">
                             </fieldset>
                             
                             <fieldset class="wrap-input">

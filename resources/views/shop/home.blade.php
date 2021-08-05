@@ -1,5 +1,5 @@
 @extends('shop.layout.layout1')
-@section('content')
+@section('contents')
 <div class="container">
     <!--MAIN SLIDE-->
     <div class="wrap-main-slide">
