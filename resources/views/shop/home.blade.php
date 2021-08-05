@@ -376,15 +376,14 @@
         <div class="wrap-products">
             <div class="wrap-product-tab tab-style-1">
                 <div class="tab-control">
-                    <a href="#acer" class="tab-control-item active"><img src="images/brands/logo-acer-149x40.png" alt="ACER"></a>
-                    <a href="#asus" class="tab-control-item"><img src="images/brands/logo-asus-149x40.png" alt="ASUS"></a>
-                    <a href="#dell" class="tab-control-item"><img src="images/brands/logo-dell-149x40.png" alt="DELL"></a>
-                    <a href="#hp" class="tab-control-item"><img src="images/brands/logo-hp-149x40-1.png" alt="HP"></a>
-                    <a href="#lenovo" class="tab-control-item"><img src="images/brands/logo-lenovo-149x40.png" alt="HP"></a>
-                    <a href="#macbook" class="tab-control-item"><img src="images/brands/logo-macbook-149x40.png" alt="HP"></a>
+                    <a href="#acer" class="tab-control-item active"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-acer-149x40.png" alt="ACER"></a>
+                    <a href="#asus" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-asus-149x40.png" alt="ASUS"></a>
+                    <a href="#dell" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-dell-149x40.png" alt="DELL"></a>
+                    <a href="#hp" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-hp-149x40-1.png" alt="HP"></a>
+                    <a href="#lenovo" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-lenovo-149x40.png" alt="HP"></a>
+                    <a href="#macbook" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-macbook-149x40.png" alt="HP"></a>
                 </div>
                 <div class="tab-contents">
-
                     <div class="tab-content-item active" id="acer">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}' >
                             <div class="product product-style-2 equal-elem ">
