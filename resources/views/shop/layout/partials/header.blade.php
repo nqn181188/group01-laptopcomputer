@@ -11,8 +11,8 @@
                 </div>
                 <div class="topbar-menu right-menu">
                     <ul>
-                        <li class="menu-item" ><a title="Register or Login" href="login.html">Login</a></li>
-                        <li class="menu-item" ><a title="Register or Login" href="register.html">Register</a></li>
+                        <li class="menu-item" ><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
+                        <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         <li class="menu-item" ><a title="Register or Login" href="register.html">My Account</a></li>
                 </div>
             </div>

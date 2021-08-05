@@ -18,6 +18,16 @@ class HomeController extends Controller
         return view('shop.home');
     }
 
+    public function login()
+    {
+        return view('shop.login');
+    }
+
+    public function register()
+    {
+        return view('shop.register');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

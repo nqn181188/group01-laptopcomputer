@@ -23,7 +23,7 @@ class CustomerRequest extends FormRequest
      */
     public function rules()
     {
-        $user_id=session('user')->id;
+        $customer=session('user')->id;
         
         switch ($this->method()) {
             case 'GET':
@@ -45,7 +45,7 @@ class CustomerRequest extends FormRequest
                 return [
                     'firstname' => 'required|min:3',
                     'lastname' => 'required|min:3',
-                    'email'    => 'email|unique:customers,email,'.$user_id,
+                    'email'    => 'email|unique:customers,email,'.$customer,
                     'password' => 'required|between:1,32',
                     'confirm' => 'same:password',
                     'address' => 'required',
