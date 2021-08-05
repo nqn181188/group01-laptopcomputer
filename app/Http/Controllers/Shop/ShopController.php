@@ -18,6 +18,8 @@ class ShopController extends Controller
         return view('shop.shop');
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *

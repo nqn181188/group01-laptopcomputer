@@ -32,7 +32,7 @@
 	</header>
 
 	<main id="main">
-		@yield('content')
+		@yield('contents')
 	</main>
 
 	<footer id="footer">

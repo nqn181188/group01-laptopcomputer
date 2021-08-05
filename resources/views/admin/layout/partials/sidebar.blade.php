@@ -13,6 +13,7 @@
       </div>
       <div class="infor ml-0">
         <a href="#" class="d-block">{{Session::get('user')->firstname}}</a>
+        <a href="{{ route('admin.logout')}}" class="d-block">Logout</a>
       </div>
     </div>
 
@@ -34,34 +35,78 @@
         </li>
         
         <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Account
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link ml-3">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                   Account List
-                  </p>
-                </a>
-              </li> 
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link ml-3">
-                  <i class="nav-icon fas fa-user-plus "></i>
-                  <p>
-                    Create New User
-                  </p>
-                </a>
-              </li> 
-            </ul>
-        </li>
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Account
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Admin
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('admin.account.index')}}" class="nav-link ml-3">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                      Admin List
+                    </p>
+                  </a>
+                </li> 
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('admin.account.create')}}" class="nav-link ml-3">
+                    <i class="nav-icon fas fa-user-plus "></i>
+                    <p>
+                      Create New User
+                    </p>
+                  </a>
+                </li> 
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Customer
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('admin.customer.index')}}" class="nav-link ml-3">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                      Customer List
+                    </p>
+                  </a>
+                </li> 
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('admin.customer.create')}}" class="nav-link ml-3">
+                    <i class="nav-icon fas fa-user-plus "></i>
+                    <p>
+                      Create New User
+                    </p>
+                  </a>
+                </li> 
+              </ul>
+            </li>
+          </ul>
+      </li>
+
+        
 
         <li class="nav-item">
           <a href="#" class="nav-link">

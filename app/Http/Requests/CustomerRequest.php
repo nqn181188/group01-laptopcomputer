@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AccountRequest extends FormRequest
+class CustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class AccountRequest extends FormRequest
      */
     public function rules()
     {
-        $user_id=session('user')->id;
+        $customer=session('user')->id;
         
         switch ($this->method()) {
             case 'GET':
@@ -34,11 +34,10 @@ class AccountRequest extends FormRequest
                 return [
                     'firstname' => 'required|min:3',
                     'lastname' => 'required|min:3',
-                    'email' => 'required|email|unique:admins,email',
+                    'email' => 'required|email|unique:customers,email',
                     'password' => 'required|between:1,32',
                     'confirm' => 'required|same:password',
                     'address' => 'required',
-                    'role' => 'required',
                 ];
             }
             case 'PUT':
@@ -46,12 +45,11 @@ class AccountRequest extends FormRequest
                 return [
                     'firstname' => 'required|min:3',
                     'lastname' => 'required|min:3',
-                    // 'username'=>'unique:admins,username,'.$user_id,
-                    'email'    => 'email|unique:admins,email,'.$user_id,
+                    'email'    => 'email|unique:customers,email,'.$customer,
                     'password' => 'required|between:1,32',
                     'confirm' => 'same:password',
                     'address' => 'required',
-                    'role' => 'required',
+                    'phone' => 'required|regex:/(0)[0-9]{9}/',
                 ];
             }
             default:
@@ -71,7 +69,8 @@ class AccountRequest extends FormRequest
             'email.required' => 'Bạn chưa nhập email',
             'email.unique' => 'Email này đã tồn tại',
             'address.required' => 'Bạn chưa nhập địa chỉ',
-            'role.required' => 'Bạn chưa chọn vai trò',
+            'phone.required' => 'Bạn chưa nhập số điện thoại',
+            'phone.regex' => 'Bạn cần bắt đầu số điện thoại là số 0 và số đt phải đủ 10 chữ số',
         ];
     }
 }
