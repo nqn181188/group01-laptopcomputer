@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 //=========ROUTE ON SHOP PAGE========
 Route::get('/','Shop\HomeController@index')->name('home');
 Route::get('/shop','Shop\ShopController@index')->name('shop');
-Route::get('/login','Shop\HomeController@login')->name('login');
-Route::get('/register','Shop\HomeController@register')->name('register');
-
-
+Route::get('/login','Shop\CustomerController@login')->name('login');
+Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
+Route::get('/register','Shop\CustomerController@register')->name('register');
+route::resource('customer', 'Shop\CustomerController');
 
 //////////////////////////////////////
 
