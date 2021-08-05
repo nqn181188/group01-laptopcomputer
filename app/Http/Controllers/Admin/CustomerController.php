@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\Customer;
 use Illuminate\Http\Request;
-use App\Http\Requests\AccountRequest;
 
-class AccountController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Admin::all();
-        return view('admin.account.index', compact('accounts'));
+        $customers = Customer::all();
+        return view('admin.customer.index', compact('customers'));
     }
 
     /**
@@ -27,7 +26,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('admin.account.create');
+        return view('admin.customer.create');
     }
 
     /**
@@ -36,21 +35,21 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AccountRequest $request)
+    public function store(Request $request)
     {
-        $account = $request->all();
-        $account['password'] = md5($account['password']);
-        Admin::create($account);
-        return redirect()->route('admin.account.index');
+        $customer = $request->all();
+        $customer['password'] = md5($customer['password']);
+        Customer::create($customer);
+        return redirect()->route('admin.customer.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $account
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $account)
+    public function show(Customer $customer)
     {
         //
     }
@@ -58,31 +57,31 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $account
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $account)
+    public function edit(Customer $customer)
     {
-        return view('admin.account.update', compact('account'));
+        return view('admin.customer.update', compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $account
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $account)
+    public function update(Request $request, Customer $customer)
     {
         $rules = [
             'firstname' => 'required|min:3',
             'lastname' => 'required|min:3',
-            'email'    => 'email|unique:admins,email,'.$account->id,
+            'email'    => 'email|unique:customers,email,'.$customer->id,
             'password' => 'required|between:1,32',
             'confirm' => 'same:password',
             'address' => 'required',
-            'role' => 'required',
+            'phone' => 'required|regex:/(0)[0-9]{9}/',
         ];
         $this->validate($request, $rules,
         [
@@ -94,35 +93,36 @@ class AccountController extends Controller
             'email.required' => 'Bạn chưa nhập email',
             'email.unique' => 'Email này đã tồn tại',
             'address.required' => 'Bạn chưa nhập địa chỉ',
-            'role.required' => 'Bạn chưa chọn vai trò',
-            
+            'phone.required' => 'Bạn chưa nhập số điện thoại',
+            'phone.regex' => 'Bạn cần bắt đầu số điện thoại là số 0 và số đt phải đủ 10 chữ số',
         ]);
 
-        $account->firstname  = $request->firstname;
-        $account->lastname  = $request->lastname;
-        $account->email  = $request->email;
-        $account->address  = $request->address;
-        $account->password  = $request->password;
-        $account->role  = $request->role;
-        $account['password'] = md5($account['password']);
-        $account->save();
-        return redirect()->route('admin.account.index');
+        $customer->firstname  = $request->firstname;
+        $customer->lastname  = $request->lastname;
+        $customer->email  = $request->email;
+        $customer->phone  = $request->phone;
+        $customer->address  = $request->address;
+        $customer->password  = $request->password;
+        $customer->lock  = $request->lock;
+        $customer['password'] = md5($customer['password']);
+        $customer->save();
+        return redirect()->route('admin.customer.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $account
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $account)
+    public function destroy(Customer $customer)
     {
-        // if ($account->image != null) {
-        //     if (file_exists('images/' . $account->image)) {
-        //         unlink('images/' . $account->image);
+        // if ($customer->image != null) {
+        //     if (file_exists('images/' . $customer->image)) {
+        //         unlink('images/' . $customer->image);
         //     }
         // }
-        $account->delete();
-        return redirect()->route('admin.account.index');
+        $customer->delete();
+        return redirect()->route('admin.customer.index');
     }
 }

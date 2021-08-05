@@ -35,6 +35,7 @@ Route::post('/admin/process-login','Admin\AdminController@processLogin')->name('
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],function(){
     Route::get('dashboard','Admin\AdminController@dashboard')->name('dashboard');
     Route::resource('account', 'Admin\AccountController');
+    Route::resource('customer', 'Admin\CustomerController');
     Route::resource('product', 'Admin\ProductController');
 });
 
