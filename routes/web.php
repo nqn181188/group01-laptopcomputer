@@ -28,6 +28,7 @@ Route::get('/shop','Shop\ShopController@index')->name('shop');
 //===========ROUTE ON ADMIN PAGE==============
 // Route::get('/admin','Admin\AdminController@dashboard')->middleware('adminLogin')->name('admin.dashboard');
 Route::get('/admin','Admin\AdminController@index');
+Route::get('/admin','Admin\AdminController@processLogout')->name('admin.logout');;
 Route::get('/admin/login','Admin\AdminController@login')->name('admin.login');
 Route::post('/admin/process-login','Admin\AdminController@processLogin')->name('admin.process-login');
 
@@ -40,3 +41,6 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
 });
 
 ////////////////////////////////////////////
+
+
+

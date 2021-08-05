@@ -13,6 +13,7 @@
       </div>
       <div class="infor ml-0">
         <a href="#" class="d-block">{{Session::get('user')->firstname}}</a>
+        <a href="{{ route('admin.logout')}}" class="d-block">Logout</a>
       </div>
     </div>
 

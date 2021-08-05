@@ -32,4 +32,9 @@ class AdminController extends Controller
         $request->session()->put('user',$account);
         return redirect()->route('admin.dashboard');
     }
+
+    public function processLogout(){
+        session()->forget('user');
+        return redirect()->route('admin.login');
+    }
 }
