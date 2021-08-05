@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 //=========ROUTE ON SHOP PAGE========
-Route::get('/','HomeController@index')->name('home');
+Route::get('/','Shop\HomeController@index')->name('home');
 
 
 

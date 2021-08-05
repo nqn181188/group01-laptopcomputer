@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.carousel.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/chosen.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset(assets/css/style.css)}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
 </head>
 <body class="home-page home-01 ">
@@ -32,7 +32,7 @@
 	</header>
 
 	<main id="main">
-		@yield('contents')
+		@yield('content')
 	</main>
 
 	<footer id="footer">
@@ -48,5 +48,6 @@
 	<script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.sticky.js')}}"></script>
 	<script src="{{asset('assets/js/functions.js')}}"></script>
+	@yield('my-scripts')
 </body>
 </html>

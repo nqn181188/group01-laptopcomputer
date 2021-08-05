@@ -207,8 +207,6 @@
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
-    
-
   </section>
   <!-- /.content -->   
 @endsection
