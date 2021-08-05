@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 //=========ROUTE ON SHOP PAGE========
-
+Route::get('/','HomeController@index')->name('home');
 
 
 
@@ -35,7 +35,5 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::get('dashboard','Admin\AdminController@dashboard')->name('dashboard');
     Route::resource('product', 'Admin\ProductController');
 });
-
-
 
 ////////////////////////////////////////////
