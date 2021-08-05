@@ -147,11 +147,11 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="typeofram">Hard Drive Type</label>
-                            <select name="typeofram" class="custom-select">
+                            <label for="hdtype">Hard Drive Type</label>
+                            <select name="hdtype" class="custom-select">
                                 <option value=''>---Type of Hard Driver---</option>
-                                <option value="DDR4">HDD</option>
-                                <option value="DDR3">SSD</option>
+                                <option value="HDD">HDD</option>
+                                <option value="SSD">SSD</option>
                             </select>
                         </div>
                     </div>
