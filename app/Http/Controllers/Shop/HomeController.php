@@ -15,7 +15,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('shop.home');
+        $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(20)->get();
+        $lastestProduct = Product::where('featured','1')->orderBy('created_at','desc')->limit(20)->get();
+        $acer = Product::where('brand_id','1')->get();
+        $asus = Product::where('brand_id','2')->get();
+        $dell = Product::where('brand_id','3')->get();
+        $hp = Product::where('brand_id','4')->get();
+        $lenovo = Product::where('brand_id','5')->get();
+        $macbook = Product::where('brand_id','6')->get();
+        return view('shop.home',compact(
+            'featuredProduct',
+            'lastestProduct',
+            'acer',
+            'asus',
+            'dell',
+            'hp',
+            'lenovo',
+            'macbook',
+        ));
     }
 
     
