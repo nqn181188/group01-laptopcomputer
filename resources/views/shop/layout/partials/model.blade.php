@@ -1,10 +1,9 @@
-<div class="modal" id="quickview">
-    <div class="modal-dialog">
+<div class="modal" id="quickview" style="top:50px">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
   
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">PRODUCT DETAIL</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
   
@@ -13,7 +12,7 @@
             <div class="container">
                 <div class="row">
             
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 main-content-area">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 main-content-area">
                         <div class="wrap-product-detail">
                             <div class="detail-media">
                                 <div class="product-gallery">
@@ -67,15 +66,18 @@
                                     <ul>
                                         <li id="quickview_cpu"></li>
                                         <li id="quickview_ram"></li>
+                                        <li id="quickview_hd"></li>
                                         <li id="quickview_screensize"></li>
+                                        <li id="quickview_gcard"></li>
+                                        <li id="quickview_dimension"></li>
+                                        <li id="quickview_weight"></li>
+                                        <li id="quickview_os"></li>
+                                        <li id="quickview_releaseyear"></li>
                                     </ul>
                                 </div>
-                                <div class="wrap-social">
-                                    <a class="link-socail" href="#"><img src="assets/images/social-list.png" alt=""></a>
-                                </div>
-                                <div class="wrap-price"><span class="product-price">$250.00</span></div>
+                                <div class="wrap-price"><span class="product-price" id="quickview_price"></span></div>
                                 <div class="stock-info in-stock">
-                                    <p class="availability">Availability: <b>In Stock</b></p>
+                                    <p class="availability">Availability: <b id="quickview_avail"></b></p>
                                 </div>
                                 <div class="quantity">
                                     <span>Quantity:</span>

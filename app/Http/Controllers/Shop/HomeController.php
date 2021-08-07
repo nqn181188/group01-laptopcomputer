@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(20)->get();
-        $lastestProduct = Product::where('featured','1')->orderBy('created_at','desc')->limit(20)->get();
+        $lastestProduct = Product::orderBy('created_at','desc')->limit(20)->get();
         $acer = Product::where('brand_id','1')->get();
         $asus = Product::where('brand_id','2')->get();
         $dell = Product::where('brand_id','3')->get();
