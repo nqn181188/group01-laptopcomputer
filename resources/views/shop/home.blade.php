@@ -55,6 +55,8 @@
         {{-- <div class="wrap-countdown mercado-countdown" data-expire="2020/12/12 12:34:56"></div> --}}
         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container " data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
             @foreach ($featuredProduct as $item)
+            <form action="" method="POST">
+            @csrf
             <div class="product product-style-2 equal-elem ">
                 <div class="product-thumnail">
                     <a href="detail.html" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
@@ -64,7 +66,9 @@
                         <span class="flash-item sale-label">HOT</span>
                     </div>
                     <div class="wrap-btn">
-                        <a href="#" class="function-link">quick view</a>
+                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                        {{-- <button class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id="{{$item->id}}">quick view</button> --}}
+                        {{-- <a class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id="{{$item->id}}">quick view</a> --}}
                     </div>
                 </div>
                 <div class="product-info">
@@ -79,6 +83,7 @@
                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                 </div>
             </div>
+            </form>
             @endforeach
             
         </div>
@@ -98,6 +103,8 @@
                     <div class="tab-content-item active" id="digital_1a">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}' >
                             @foreach ($lastestProduct as $item)
+                            <form action="">
+                            @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
                                     <a href="detail.html" title="{{$item->name}}">
@@ -107,17 +114,23 @@
                                         <span class="flash-item new-label">new</span>
                                     </div>
                                     <div class="wrap-btn">
-                                        <a href="#" class="function-link" data-toggle='modal' data-target="#myModal">quick view</a>
+                                        <button class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id="{{$item->id}}">quick view</button>
+                                        {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
                                     <a href="#" class="product-name"><span>{{$item->name}}</span></a>
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
-
+                                <!-- Button to Open the Modal -->
                             </div>
+                            </form>
+
                             @endforeach
                         </div>
+                        {{-- model--}}
+                            @include('shop.layout.partials.model')
+                        {{--end modal  --}}
                     </div>							
                 </div>
             </div>
@@ -146,20 +159,24 @@
                     <div class="tab-content-item active" id="acer">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}' >
                             @foreach ($acer as $item)
-                            <div class="product product-style-2 equal-elem ">
-                                <div class="product-thumnail">
-                                    <a href="detail.html" title="{{$item->name}}">
-                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
-                                    </a>
-                                    <div class="wrap-btn">
-                                        <a href="#" class="function-link">quick view</a>
+                            <form action="">
+                                @csrf
+                                <div class="product product-style-2 equal-elem ">
+                                    <div class="product-thumnail">
+                                        <a href="detail.html" title="{{$item->name}}">
+                                            <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
+                                        </a>
+                                        <div class="wrap-btn">
+                                            <button class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id="{{$item->id}}">quick view</button>
+                                            {{-- <a href="#" class="function-link">quick view</a> --}}
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                        <div class="wrap-price"><span class="product-price">{{$item->price}}</span></div>
                                     </div>
                                 </div>
-                                <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">{{$item->price}}</span></div>
-                                </div>
-                            </div>
+                            </form>
                             @endforeach
                         </div>
                     </div>
@@ -167,13 +184,16 @@
                     <div class="tab-content-item" id="asus">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container " data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
                             @foreach ($asus as $item)
+                            <form action="">
+                            @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
                                     <a href="detail.html" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <a href="#" class="function-link">quick view</a>
+                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -181,6 +201,7 @@
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                             </div>
+                            </form>
                             @endforeach
                         </div>
                     </div>
@@ -188,13 +209,16 @@
                     <div class="tab-content-item" id="dell">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
                             @foreach ($dell as $item)
+                            <form action="">
+                            @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
                                     <a href="detail.html" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <a href="#" class="function-link">quick view</a>
+                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -202,6 +226,7 @@
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                             </div>
+                            </form>
                             @endforeach
                         </div>
                     </div>
@@ -209,13 +234,16 @@
                     <div class="tab-content-item" id="hp">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
                             @foreach ($hp as $item)
+                            <form action="">
+                            @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
                                     <a href="detail.html" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <a href="#" class="function-link">quick view</a>
+                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -230,19 +258,23 @@
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                             </div>
+                            </form>
                             @endforeach
                         </div>
                     </div>
                     <div class="tab-content-item" id="lenovo">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
                             @foreach ($lenovo as $item)
+                            <form action="">
+                            @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
                                     <a href="detail.html" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <a href="#" class="function-link">quick view</a>
+                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -257,22 +289,24 @@
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                             </div>
+                            </form>
                             @endforeach
                         </div>
                     </div>
                     <div class="tab-content-item" id="macbook">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
                             @foreach ($macbook as $item)
+                            <form action="">
+                            @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
                                     <a href="detail.html" title="{{$item->name}}">
-                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
+                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <a href="{{asset('#quickview'.$item->id)}}" class="function-link">quick view</a>
+                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
-                                    <div class="quickviewbox"></div>
-                                    <!-- Button to Open the Modal -->
                                 </div>
                                 <div class="product-info">
                                     <a href="#" class="product-name"><span>{{$item->name}}</span></a>
@@ -286,15 +320,49 @@
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                             </div>
+                            </form>
                             @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>			
+    </div>
 </div>
+<button class="test"></button>
 @endsection
-@section('myscripts')
-    
+@section('my-scripts')
+    <script type="text/javascript">
+        $.ajaxSetup({
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+        $('.quickview').click(function(){
+            var product_id = $(this).data("id_product");
+            var _token = $('input[name="_token"]').val();
+            alert(product_id);
+            $.ajax({
+                url: '{{route('quick-view')}}',
+                type: 'post',
+                dataType: "JSON",
+                data: {product_id:product_id, _token:_token},
+                success:function(data){
+                    $('#quickview_name').html(data.name);
+                    $('#quickview_price').html(data.price);
+                    $('#quickview_cpu').html(data.cpu);
+                    $('#quickview_image').html(data.image);
+                    $('#quickview_ram').html(data.ram);
+                    $('#quickview_screensize').html(data.screensize);
+                    $('#quickview_gcard').html(data.gcard);
+                    $('#quickview_hd').html(data.hd);
+                    $('#dimension').html(data.width);
+                    $('#weight').html(data.weight);
+                    $('#quickview_os').html(data.os);
+                    $('#quickview_releaseyear').html(data.realeaseyear);
+                }
+            });
+        });
+
+    </script>
 @endsection

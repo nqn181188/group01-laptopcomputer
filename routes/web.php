@@ -23,7 +23,9 @@ Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
 Route::get('/register','Shop\CustomerController@register')->name('register');
 route::resource('customer', 'Shop\CustomerController');
-
+Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');
+Route::get('/shop/product-detail/','Shop\ProductDetailController@index')->name('product-detail');
+ 
 //////////////////////////////////////
 
 
