@@ -5,7 +5,7 @@
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="{{ route('home') }}" class="link">home</a></li>
-            <li class="item-link"><span>checkout</span></li>
+            <li class="item-link"><a href="{{ route('checkout') }}" class="link">checkout</a></li>
         </ul>
     </div>
     <div class=" main-content-area">
