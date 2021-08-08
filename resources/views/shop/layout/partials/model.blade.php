@@ -1,4 +1,4 @@
-<div class="modal" id="quickview" style="top:50px">
+<div class="modal" id="quickview" style="top:10px">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
   

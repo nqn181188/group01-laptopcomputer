@@ -173,7 +173,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                        <div class="wrap-price"><span class="product-price">{{$item->price}}</span></div>
+                                        <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                     </div>
                                 </div>
                             </form>

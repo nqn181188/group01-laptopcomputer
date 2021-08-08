@@ -27,7 +27,7 @@
 
                 <div class="wrap-search center-section">
                     <div class="wrap-search-form">
-                        <form action="#" id="form-search-top" name="form-search-top">
+                        <form action="{{route('search-product')}}" id="form-search-top" name="form-search-top">
                             <input type="text" name="search" value="" placeholder="Enter the name of the laptop you need to find...">
                             <button form="form-search-top" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             <div wrap-list-cate">
