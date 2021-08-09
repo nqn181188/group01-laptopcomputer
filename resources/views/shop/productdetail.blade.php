@@ -57,6 +57,7 @@
                         <i class="fa fa-star" aria-hidden="true"></i>
                         <a href="#" class="count-review">(05 review)</a>
                     </div>
+
                     <h2 class="product-name">{{$product->name}}</h2>
                     <div class="short-desc">
                         <ul>
@@ -75,7 +76,7 @@
                     <div class="quantity">
                         <span>Quantity:</span>
                         <div class="quantity-input">
-                            <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
+                            <input type="text" name="product-quatity" id="product-quantity" value="1" data-max="120" pattern="[0-9]*" >
                             
                             <a class="btn btn-reduce" href="#"></a>
                             <a class="btn btn-increase" href="#"></a>
@@ -292,4 +293,30 @@
     </div><!--end row-->
 
 </div><!--end container-->
+@endsection
+
+@section('my-scripts')
+<script>
+   
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.add-to-cart').click(function(e) {
+        e.preventDefault();     
+        quantity = $('#product-quantity').val();
+        pid = {{ $product->id }}
+
+        $.ajax({
+            type:'GET',
+            url:'{{ route('add-cart') }}',
+            data:{ pid:pid, quantity:quantity },
+            success:function(data){
+                window.location='{{ route('home') }}'  
+            }
+        });
+    })
+</script>
 @endsection

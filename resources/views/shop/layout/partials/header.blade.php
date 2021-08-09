@@ -52,12 +52,12 @@
                         </a>
                     </div>
                     <div class="wrap-icon-section minicart">
-                        <a href="{{route('cart')}}" class="link-direction">
+                        <a href="{{route('viewcart')}}" class="link-direction">
                             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index">4 items</span>
+                                {{-- <span class="index">4 items</span> --}}
                                 <span class="title">
-                                   <a href="{{route('cart')}}">CART</a> </span>
+                                   <a href="{{route('viewcart')}}">CART</a> </span>
                             </div>
                         </a>
                     </div>
@@ -87,7 +87,7 @@
                             <a href="{{route('shop')}}" class="link-term mercado-item-title">Shop</a>
                         </li>
                         <li class="menu-item">
-                            <a href="{{route('cart')}}" class="link-term mercado-item-title">Cart</a>
+                            <a href="{{route('viewcart')}}" class="link-term mercado-item-title">Cart</a>
                         </li>
                         <li class="menu-item">
                             <a href="{{route('checkout')}}" class="link-term mercado-item-title">Checkout</a>

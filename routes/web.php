@@ -16,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/clear-session', function() {
+    session()->forget('username');
+    session()->forget('cart');
+    // return back();
+});
 //=========ROUTE ON SHOP PAGE========
 Route::get('/','Shop\HomeController@index')->name('home');
 Route::get('/shop','Shop\ShopController@index')->name('shop');
-Route::get('/cart','Shop\CartController@index')->name('cart');
+Route::get('/viewcart','Shop\CartController@index')->name('viewcart');
+Route::get('/add-cart','Shop\CartController@addCart')->name('add-cart');
 Route::get('/checkout','Shop\CheckOutController@index')->name('checkout');
 Route::get('/aboutus','Shop\AboutUsController@index')->name('aboutus');
 Route::get('/contact','Shop\ContactController@index')->name('contact');
