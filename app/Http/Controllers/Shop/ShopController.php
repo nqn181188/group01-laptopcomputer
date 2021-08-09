@@ -13,9 +13,16 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('shop.shop');
+        $products = Product::paginate(12);
+        $pages = $request->page;
+        return view('shop.shop',compact(
+            'products',
+            'pages',
+
+        ));
+
     }
 
     

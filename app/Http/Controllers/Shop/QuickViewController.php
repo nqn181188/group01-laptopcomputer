@@ -19,7 +19,7 @@ class QuickViewController extends Controller
         }
         $output['avail']=$product->quantity>0?'In Stock':'Out Of Stock';
         $output['name']=$product->name;
-        $output['price']=number_format($product->price, 0, ',', '.');'$'.$product->price;
+        $output['price']='$'.$product->price;
         $output['image']=$product->image;
         $output['cpu']='CPU: '.$product->cpu;
         $output['ram']='RAM: '.$product->amountofram.'GB '.$product->typeofram;
