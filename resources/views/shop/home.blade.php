@@ -55,11 +55,11 @@
         {{-- <div class="wrap-countdown mercado-countdown" data-expire="2020/12/12 12:34:56"></div> --}}
         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container " data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
             @foreach ($featuredProduct as $item)
-            <form action="" method="POST">
+            <form action="" method="get">
             @csrf
             <div class="product product-style-2 equal-elem ">
                 <div class="product-thumnail">
-                    <a href="detail.html" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                     </a>
                     <div class="group-flash">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="product-info">
-                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
                     <div class="product-rating">
                         <i class="fa fa-star" aria-hidden="true"></i>
                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -107,19 +107,19 @@
                             @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="{{$item->name}}">
+                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                     </a>
                                     <div class="group-flash">
                                         <span class="flash-item new-label">new</span>
                                     </div>
                                     <div class="wrap-btn">
-                                        <button class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id="{{$item->id}}">quick view</button>
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                                 <!-- Button to Open the Modal -->
@@ -163,17 +163,17 @@
                                 @csrf
                                 <div class="product product-style-2 equal-elem ">
                                     <div class="product-thumnail">
-                                        <a href="detail.html" title="{{$item->name}}">
+                                        <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                             <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                         </a>
                                         <div class="wrap-btn">
-                                            <button class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id="{{$item->id}}">quick view</button>
+                                            <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                             {{-- <a href="#" class="function-link">quick view</a> --}}
                                         </div>
                                     </div>
                                     <div class="product-info">
-                                        <a href="#" class="product-name"><span>{{$item->name}}</span></a>
-                                        <div class="wrap-price"><span class="product-price">{{$item->price}}</span></div>
+                                        <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
+                                        <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                     </div>
                                 </div>
                             </form>
@@ -188,16 +188,16 @@
                             @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="{{$item->name}}">
+                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                             </div>
@@ -213,16 +213,16 @@
                             @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="{{$item->name}}">
+                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
                                     <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
                                 </div>
                             </div>
@@ -238,16 +238,16 @@
                             @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="{{$item->name}}">
+                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
                                     <div class="product-rating">
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -269,16 +269,16 @@
                             @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="{{$item->name}}">
+                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
                                     <div class="product-rating">
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -300,16 +300,16 @@
                             @csrf
                             <div class="product product-style-2 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="{{$item->name}}">
+                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                         <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                                     </a>
                                     <div class="wrap-btn">
-                                        <button class="function-link" type="button" data-target="#quickview" data-toggle="modal">quick view</button>
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
-                                    <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
                                     <div class="product-rating">
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -341,7 +341,6 @@
         $('.quickview').click(function(){
             var product_id = $(this).data("id_product");
             var _token = $('input[name="_token"]').val();
-            alert(product_id);
             $.ajax({
                 url: '{{route('quick-view')}}',
                 type: 'post',
@@ -356,10 +355,11 @@
                     $('#quickview_screensize').html(data.screensize);
                     $('#quickview_gcard').html(data.gcard);
                     $('#quickview_hd').html(data.hd);
-                    $('#dimension').html(data.width);
-                    $('#weight').html(data.weight);
+                    $('#quickview_dimension').html(data.dimension);
+                    $('#quickview_weight').html(data.weight);
                     $('#quickview_os').html(data.os);
-                    $('#quickview_releaseyear').html(data.realeaseyear);
+                    $('#quickview_releaseyear').html(data.releaseyear);
+                    $('#quickview_avail').html(data.avail);
                 }
             });
         });

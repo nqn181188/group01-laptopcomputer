@@ -27,7 +27,7 @@
 
                 <div class="wrap-search center-section">
                     <div class="wrap-search-form">
-                        <form action="#" id="form-search-top" name="form-search-top">
+                        <form action="{{route('search-product')}}" id="form-search-top" name="form-search-top">
                             <input type="text" name="search" value="" placeholder="Enter the name of the laptop you need to find...">
                             <button form="form-search-top" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             <div wrap-list-cate">
@@ -77,7 +77,7 @@
                             <a href="{{route('home')}}" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
                         </li>
                         <li class="menu-item">
-                            <a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+                            <a href="{{route('aboutus')}}" class="link-term mercado-item-title">About Us</a>
                         </li>
                         <li class="menu-item">
                             <a href="{{route('shop')}}" class="link-term mercado-item-title">Shop</a>
@@ -89,7 +89,7 @@
                             <a href="{{route('checkout')}}" class="link-term mercado-item-title">Checkout</a>
                         </li>
                         <li class="menu-item">
-                            <a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
+                            <a href="{{route('contact')}}" class="link-term mercado-item-title">Contact Us</a>
                         </li>																	
                     </ul>
                 </div>

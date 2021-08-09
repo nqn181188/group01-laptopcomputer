@@ -5,11 +5,11 @@
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="{{ route('home') }}" class="link">home</a></li>
-            <li class="item-link"><span>checkout</span></li>
+            <li class="item-link"><a href="{{ route('checkout') }}" class="link">checkout</a></li>
         </ul>
     </div>
     <div class=" main-content-area">
-        <form action="{{ route('do-checkout') }}" method="post" name="frm-billing">
+        <form action="#" method="post" name="frm-billing">
             @csrf
             <div class="wrap-address-billing">
                 <h3 class="box-title">Billing Address</h3>

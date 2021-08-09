@@ -21,12 +21,14 @@ Route::get('/','Shop\HomeController@index')->name('home');
 Route::get('/shop','Shop\ShopController@index')->name('shop');
 Route::get('/cart','Shop\CartController@index')->name('cart');
 Route::get('/checkout','Shop\CheckOutController@index')->name('checkout');
+Route::get('/aboutus','Shop\AboutUsController@index')->name('aboutus');
+Route::get('/contact','Shop\ContactController@index')->name('contact');
 Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
 Route::get('/register','Shop\CustomerController@register')->name('register');
 route::resource('customer', 'Shop\CustomerController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');
-Route::get('/shop/product-detail/','Shop\ProductDetailController@index')->name('product-detail');
+Route::get('/shop/product/{id}','Shop\ProductDetailController@index')->name('product-detail');
  
 //////////////////////////////////////
 

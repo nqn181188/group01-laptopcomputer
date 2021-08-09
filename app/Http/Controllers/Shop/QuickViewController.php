@@ -13,21 +13,23 @@ class QuickViewController extends Controller
         $product = Product::where('id',$product_id)->first();
         $product_image= ProductImage::where('product_id',$product_id);
         $output['product_image']='';
+        $output['avail']='';
         foreach($product_image as $p_image){
             $output['product_image'].=$p_image->image;
         }
+        $output['avail']=$product->quantity>0?'In Stock':'Out Of Stock';
         $output['name']=$product->name;
-        $output['price']=$product->price;
+        $output['price']=number_format($product->price, 0, ',', '.');'$'.$product->price;
         $output['image']=$product->image;
-        $output['cpu']=$product->cpu;
-        $output['ram']=$product->amountofram.'GB '.$product->typeofram;
-        $output['screensize']=$product->screensize.'"';
-        $output['gcard']=$product->gcard;
-        $output['hd']=$product->hdcapacity.'GB '.$product->hdtype;
-        $output['dimension']=$product->width.'x'.$product->depth.'x'.$product->height;
-        $output['weight']=$product->weight;
-        $output['os']=$product->os;
-        $output['releaseyear']=$product->releaseyear;
+        $output['cpu']='CPU: '.$product->cpu;
+        $output['ram']='RAM: '.$product->amountofram.'GB '.$product->typeofram;
+        $output['screensize']='SCREEN SIZE: '.$product->screensize.'"';
+        $output['gcard']='GRAPHIC CARD: '.$product->gcard;
+        $output['hd']='HARD DRIVER: '.$product->hdcapacity.' GB '.$product->hdtype;
+        $output['dimension']='DIMENSION: '.$product->width.' x '.$product->depth.' x '.$product->height.' (mm)';
+        $output['weight']='WEIGHT: '.$product->weight. ' kg';
+        $output['os']='OS: '.$product->os;
+        $output['releaseyear']='RELEASE YEAR: '.$product->releaseyear;
         echo json_encode($output);
     }
 }
