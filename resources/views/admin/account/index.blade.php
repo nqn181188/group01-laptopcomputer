@@ -63,12 +63,16 @@
                 @endif
               </td>
                 <td>
+                  @if ((session('user')->id==$item->id))
+                      
+                  @else
                   <a href="{{ route('admin.account.edit', $item->id) }}" class="btn btn-primary">Update</a>
                   <form style="display:inline-block" action="{{ route('admin.account.destroy', $item->id) }}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>
                   </form>
+                  @endif
                 </td>
               </tr>
               @endforeach
