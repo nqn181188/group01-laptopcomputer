@@ -34,7 +34,9 @@
             </p>
           </a>
         </li>
-        
+        @if (session('user')->role==2)
+            
+        @else
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
@@ -105,7 +107,9 @@
               </ul>
             </li>
           </ul>
-      </li>
+        </li>
+        @endif
+        
 
         
 
