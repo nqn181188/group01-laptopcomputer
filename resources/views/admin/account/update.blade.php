@@ -76,19 +76,20 @@
                 <label for="address">Address</label>
                 <input type="text" id="address" value="{{ $account->address}}" name="address" class="form-control"/>
               </div>
-              <div class="form-group">
-                <label for="role">Role</label>
-                
-                <select id="role" name="role" class="form-control">
-                  <option value="">Choose</option>
-                  <option value="1"  @if ( $account->role == 1)
-                    selected
-                  @endif>Admin</option>
-                  <option value="2" @if ( $account->role == 2)
-                    selected
-                  @endif>Manager</option>
-                </select>
-              </div>
+              @if ($account->role == 2)
+              @else
+                <div class="form-group">
+                  <label for="role">Role</label>
+                  
+                  <select id="role" name="role" class="form-control">
+                    <option value="">Choose</option>
+                    <option value="1"  @if ( $account->role == 1)
+                      selected
+                    @endif>Admin</option>
+                    <option value="2">Manager</option>
+                  </select>
+                </div>
+              @endif
               <div class="form-group">
                   <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
               </div>

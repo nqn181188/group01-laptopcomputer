@@ -49,6 +49,7 @@ class CustomerController extends Controller
         return view('shop.register');
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *

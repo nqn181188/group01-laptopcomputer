@@ -25,6 +25,7 @@ Route::get('/aboutus','Shop\AboutUsController@index')->name('aboutus');
 Route::get('/contact','Shop\ContactController@index')->name('contact');
 Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
+Route::get('/customer/process-logout','Shop\CustomerController@processLogout')->name('customer.process-logout');
 Route::get('/register','Shop\CustomerController@register')->name('register');
 route::resource('customer', 'Shop\CustomerController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');

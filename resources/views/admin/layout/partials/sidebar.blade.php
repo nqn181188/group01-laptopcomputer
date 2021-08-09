@@ -14,6 +14,7 @@
       <div class="infor ml-0">
         <a href="#" class="d-block">{{Session::get('user')->firstname}}</a>
         <a href="{{ route('admin.logout')}}" class="d-block">Logout</a>
+        <a href="{{ route('admin.account.edit', Session::get('user')->id) }}">Change Profile</a>
       </div>
     </div>
 
@@ -33,7 +34,9 @@
             </p>
           </a>
         </li>
-        
+        @if (session('user')->role==2)
+            
+        @else
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
@@ -104,7 +107,9 @@
               </ul>
             </li>
           </ul>
-      </li>
+        </li>
+        @endif
+        
 
         
 
