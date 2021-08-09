@@ -21,12 +21,17 @@
                             <fieldset class="wrap-input">
                                 <label for="email">Email Address:</label>
                                 <input type="text" id="email" name="email" placeholder="Type your email address">
+                                @error('email')
+                                    <div><span class="text-danger">{{$message}}</span></div>
+                                @enderror
                             </fieldset>
                             <fieldset class="wrap-input">
                                 <label for="password">Password:</label>
                                 <input type="password" id="password" name="password" placeholder="************">
                             </fieldset>
-                            
+                            @error('password')
+                                    <div><span class="text-danger">{{$message}}</span></div>
+                            @enderror
                             <fieldset class="wrap-input">
                                 <label class="remember-field">
                                     <input class="frm-input " name="rememberme" id="rememberme" value="forever" type="checkbox"><span>Remember me</span>

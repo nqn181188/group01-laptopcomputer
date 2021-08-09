@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -27,6 +28,21 @@ class CustomerController extends Controller
 
     public function processLogin(Request $request){
         // echo md5('1');
+        $validator = Validator::make($request->all(),[
+            'email'    => 'required',
+            'password' => 'required',
+            // 'password' => 'required|same:admins,password'.$account->id,
+        ],[
+            'email.required' => 'Bạn chưa nhập email',
+            'password.required' => 'Bạn chưa nhập password',
+            'password.same' => 'Nhập sai password',
+        ]);
+
+        if( $validator->fails() ){
+            return redirect()->back()->
+            withErrors($validator)->withInput();
+        }
+
         $email = $request->email;
         $pass = md5($request->password);
         $account = Customer::where('email',$email)->first();
