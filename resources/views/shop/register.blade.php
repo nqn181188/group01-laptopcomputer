@@ -12,6 +12,22 @@
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 col-md-offset-3">							
             <div class=" main-content-area">
                 <div class="wrap-login-item ">
+                    
+                    @if ($errors->any()) 
+                    <!--hiển thị thông báo lỗi-->  
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class='error'>
+                                @foreach($errors->all() as $err)
+                                <div class="alert alert-danger">
+                                <li>{{ $err }}</li>
+                                </div> 
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    @endif
+
                     <div class="register-form form-item ">
                         <form class="form-stl" action="{{route('customer.store')}}" name="frm-login" method="POST" >
                             @csrf

@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{asset('/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('/dist/css/adminlte.min.css')}}">
+  
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -25,22 +26,29 @@
       <p class="login-box-msg">Sign in to start your session</p>
       <form action="{{route('admin.process-login')}}" method="POST">
             @csrf
+            @error('email')
+                <div><span class="text-danger">{{$message}}</span></div>
+            @enderror
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Username" name="email">
+                <input type="text" class="form-control" placeholder="Username" name="email" id="email">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-user"></span>
                     </div>
                 </div>
             </div>
+            @error('password')
+            <div><span class="text-danger">{{$message}}</span></div>
+            @enderror
             <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password" id="password">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-8">
                     <div class="icheck-primary">

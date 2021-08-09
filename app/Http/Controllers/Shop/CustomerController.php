@@ -15,6 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        
         return redirect()->route('shop.login');
     }
 
@@ -23,8 +24,9 @@ class CustomerController extends Controller
         return view('shop.login');
     }
 
-    public function processLogin(REQUEST $request){
-        echo md5('1');
+
+    public function processLogin(Request $request){
+        // echo md5('1');
         $email = $request->email;
         $pass = md5($request->password);
         $account = Customer::where('email',$email)->first();

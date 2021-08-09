@@ -9,12 +9,16 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex mr-0">
       <div class="image">
-        <img style="width:25%" src="{{asset('/images/admin.png')}}" class="img-circle elevation-2" alt="User Image">
+        @if (Session::get('user')->role==1)
+        <img style="width:50%" src="{{asset('/images/admin.png')}}" class="img-circle elevation-2" alt="User Image">
+        @else
+        <img style="width:90%" src="{{asset('/images/manager.jpg')}}" class="img-circle elevation-2" alt="User Image">
+        @endif
       </div>
       <div class="infor ml-0">
         <a href="#" class="d-block">{{Session::get('user')->firstname}}</a>
-        <a href="{{ route('admin.logout')}}" class="d-block">Logout</a>
         <a href="{{ route('admin.account.edit', Session::get('user')->id) }}">Change Profile</a>
+        <a href="{{ route('admin.logout')}}" class="d-block">Logout</a>
       </div>
     </div>
 
