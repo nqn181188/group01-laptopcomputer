@@ -63,7 +63,7 @@
                 @endif
               </td>
                 <td>
-                  @if ((session('user')->id==$item->id))
+                  @if ((session('user')->id==$item->id) || session('user')->role==2 )
                       
                   @else
                   <a href="{{ route('admin.account.edit', $item->id) }}" class="btn btn-primary">Update</a>
