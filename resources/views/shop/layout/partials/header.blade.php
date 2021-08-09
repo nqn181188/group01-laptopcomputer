@@ -11,12 +11,12 @@
                 </div>
                 <div class="topbar-menu right-menu">
                     <ul>
-                        <li class="menu-item" ><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
-                        <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         @if (Session::get('user')==null)
+                            <li class="menu-item" ><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
+                            <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         @else
-                        <li class="menu-item" ><a title="Register or Login" href="#">{{Session::get('user')->firstname}}</a></li>
-                        <li class="menu-item" ><a href="{{ route('customer.process-logout')}}">Logout</a></li>
+                            <li class="menu-item" ><a title="Register or Login" href="#">{{Session::get('user')->firstname}}</a></li>
+                            <li class="menu-item" ><a href="{{ route('customer.process-logout')}}">Logout</a></li>
                         @endif
                 </div>
             </div>
