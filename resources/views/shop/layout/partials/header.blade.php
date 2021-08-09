@@ -15,7 +15,8 @@
                             <li class="menu-item" ><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
                             <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         @else
-                            <li class="menu-item" ><a title="Register or Login" href="#">{{Session::get('user')->firstname}}</a></li>
+                            <li class="menu-item" ><a title="My account" href="{{ route('customer.show',Session::get('user')->id)}}">{{Session::get('user')->firstname}}</a></li>
+                            <li class="menu-item" ><a href="{{ route('customer.edit', Session::get('user')->id) }}">Change Profile</a></li>
                             <li class="menu-item" ><a href="{{ route('customer.process-logout')}}">Logout</a></li>
                         @endif
                 </div>
@@ -46,7 +47,7 @@
                         <a href="#" class="link-direction">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index">0 item</span>
+                                {{-- <span class="index">0 item</span> --}}
                                 <span class="title">Wishlist</span>
                             </div>
                         </a>
@@ -55,7 +56,7 @@
                         <a href="{{route('cart')}}" class="link-direction">
                             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index">4 items</span>
+                                {{-- <span class="index">4 items</span> --}}
                                 <span class="title">
                                    <a href="{{route('cart')}}">CART</a> </span>
                             </div>

@@ -75,8 +75,7 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $rules = [
-            'firstname' => 'required|min:3',
-            'lastname' => 'required|min:3',
+            
             'email'    => 'email|unique:customers,email,'.$customer->id,
             'password' => 'required|between:1,32',
             'confirm' => 'same:password',
@@ -84,18 +83,19 @@ class CustomerController extends Controller
             'phone' => 'required|regex:/(0)[0-9]{9}/',
         ];
         $this->validate($request, $rules,
-        [
-            'firstname.required' => 'Bạn chưa nhập Tên',
-            'lastname.required' => 'Bạn chưa nhập Họ',
-            'password.required' => 'Bạn chưa nhập mật khẩu',
-            'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
-            'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
-            'email.required' => 'Bạn chưa nhập email',
-            'email.unique' => 'Email này đã tồn tại',
-            'address.required' => 'Bạn chưa nhập địa chỉ',
-            'phone.required' => 'Bạn chưa nhập số điện thoại',
-            'phone.regex' => 'Bạn cần bắt đầu số điện thoại là số 0 và số đt phải đủ 10 chữ số',
-        ]);
+            // [
+            //     'firstname.required' => 'Bạn chưa nhập Tên',
+            //     'lastname.required' => 'Bạn chưa nhập Họ',
+            //     'password.required' => 'Bạn chưa nhập mật khẩu',
+            //     'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
+            //     'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
+            //     'email.required' => 'Bạn chưa nhập email',
+            //     'email.unique' => 'Email này đã tồn tại',
+            //     'address.required' => 'Bạn chưa nhập địa chỉ',
+            //     'phone.required' => 'Bạn chưa nhập số điện thoại',
+            //     'phone.regex' => 'Bạn cần bắt đầu số điện thoại là số 0 và số đt phải đủ 10 chữ số',
+            // ]
+        );
 
         $customer->firstname  = $request->firstname;
         $customer->lastname  = $request->lastname;

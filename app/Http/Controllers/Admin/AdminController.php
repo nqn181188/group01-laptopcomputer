@@ -27,8 +27,8 @@ class AdminController extends Controller
             'email'    => 'required',
             'password' => 'required',
         ],[
-            'email.required' => 'Bạn chưa nhập email',
-            'password.required' => 'Bạn chưa nhập password',
+            'email.required' => 'Please enter your email',
+            'password.required' => 'Please enter your password',
         ]);
 
         if( $validator->fails() ){
@@ -41,10 +41,10 @@ class AdminController extends Controller
         $account = Admin::where('email',$email)->first();
         // Hash::check(request('password'), $account->password);
         if(!isset($account)){
-            $request->session()->flash('msg', 'Không có account này !');
+            $request->session()->flash('msg', 'There is not this account !');
             return redirect()->route('admin.login');
         }else if($pass!==$account->password){
-            $request->session()->flash('msgPass', 'Bạn nhập sai password !');
+            $request->session()->flash('msgPass', 'Wrong password !');
             return redirect()->route('admin.login');
             // with()->withInput();
         }

@@ -32,9 +32,8 @@ class CustomerController extends Controller
             'email'    => 'required',
             'password' => 'required',
         ],[
-            'email.required' => 'Bạn chưa nhập email',
-            'password.required' => 'Bạn chưa nhập password',
-            'password.same' => 'Nhập sai password',
+            'email.required' => 'Please enter your email',
+            'password.required' => 'Please enter your password',
         ]);
 
         if( $validator->fails() ){
@@ -46,11 +45,11 @@ class CustomerController extends Controller
         $pass = md5($request->password);
         $account = Customer::where('email',$email)->first();
         if(!$account){
-            $request->session()->flash('msg', 'Không có account này !');
+            $request->session()->flash('msg', 'There is not this account !');
             return redirect()->route('login');
         }
         if($pass!==$account->password){
-            $request->session()->flash('msgPass', 'Bạn nhập sai password !');
+            $request->session()->flash('msgPass', 'Wrong password !');
             return redirect()->route('login');
         }
         //lưu thông tin đăng nhập vào session
@@ -87,6 +86,20 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'firstname' => 'required|min:3',
+            'lastname' => 'required|min:3',
+            'email'    => 'email|unique:customers,email,',
+            'password' => 'required|between:1,32',
+            'confirm' => 'same:password',
+            'phone' => 'required|regex:/(0)[0-9]{9}/',
+        ]);
+
+        if( $validator->fails() ){
+            return redirect()->back()->
+            withErrors($validator)->withInput();
+        }
+
         $customer = $request->all();
         $customer['password'] = md5($customer['password']);
         Customer::create($customer);
@@ -101,7 +114,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('shop.my-account',compact('customer'));
     }
 
     /**
@@ -110,9 +123,13 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
+
+    public function myAccount(Customer $customer){
+    }
+
     public function edit(Customer $customer)
     {
-        //
+        return view('shop.update-my-account',compact('customer'));
     }
 
     /**
@@ -124,7 +141,24 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'email'    => 'email|unique:customers,email,'.$customer->id,
+            'password' => 'required|between:1,32',
+            'confirm' => 'same:password',
+            'phone' => 'required|regex:/(0)[0-9]{9}/',
+        ]);
+
+        if( $validator->fails() ){
+            return redirect()->back()->
+            withErrors($validator)->withInput();
+        }
+        $customer->email  = $request->email;
+        $customer->phone  = $request->phone;
+        $customer->address  = $request->address;
+        $customer->password  = $request->password;
+        $customer['password'] = md5($customer['password']);
+        $customer->save();
+        return redirect()->route('home');
     }
 
     /**

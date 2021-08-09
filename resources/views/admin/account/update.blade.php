@@ -70,7 +70,7 @@
               </div>
               <div class="form-group">
                   <label for="confirm">Confirm</label>
-                  <input type="password" id="confirm" value="{{ old('confirm',$account->password)}}" name="confirm" class="form-control"/>
+                  <input type="password" id="confirm" value="{{$account->password}}" name="confirm" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="email">Email</label>
