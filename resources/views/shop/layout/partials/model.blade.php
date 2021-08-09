@@ -61,7 +61,7 @@
                                 
                                 <h2 class="product-name" id="quickview_name"></h2>
                                 <div class="short-desc">
-                                    <ul>
+                                    <ul class="">
                                         <li id="quickview_cpu"></li>
                                         <li id="quickview_ram"></li>
                                         <li id="quickview_hd"></li>

@@ -1,6 +1,8 @@
 @extends('shop.layout.layout1')
 @section('contents')
-@include('shop.layout.partials.model')
+<div class="container">
+    @include('shop.layout.partials.model')
+</div>
 <div class="container">
     <!--MAIN SLIDE-->
     <div class="wrap-main-slide">
@@ -101,7 +103,7 @@
         <div class="wrap-products">
             <div class="wrap-product-tab tab-style-1">						
                 <div class="tab-contents">
-                    <div class="tab-content-item active" id="digital_1a">
+                    <div class="tab-content-item active" id="">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}' >
                             @foreach ($lastestProduct as $item)
                             <form action="">
@@ -114,8 +116,8 @@
                                     <div class="group-flash">
                                         <span class="flash-item new-label">new</span>
                                     </div>
-                                    <div class="wrap-btn">
-                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                                    <div class="">
+                                        <input value="Quick View" class="quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>

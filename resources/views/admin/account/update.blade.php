@@ -26,7 +26,11 @@
             <div class="card-body">
                 <ul class='error'>
                     @foreach($errors->all() as $err)
-                        <li>{{ $err }}</li>
+                    {{-- <div class="alert alert-danger">
+                      <li>{{ $err }}</li>
+                    </div>  --}}
+                    <li class="text-danger">{{ $err }}</li>
+
                     @endforeach
                 </ul>
             </div>
@@ -54,42 +58,41 @@
               @csrf
               <div class="form-group">
                   <label for="firstname">First name</label>
-                  <input type="text" id="firstname" value="{{ $account->firstname}}" name="firstname" class="form-control"/>
+                  <input type="text" id="firstname" value="{{ old('firstname',$account->firstname)}}" name="firstname" class="form-control"/>
               </div>
               <div class="form-group">
                 <label for="lastname">Last name</label>
-                <input type="text" id="lastname" value="{{ $account->lastname}}" name="lastname" class="form-control"/>
+                <input type="text" id="lastname" value="{{ old('lastname',$account->lastname)}}" name="lastname" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" id="password" value="{{ $account->password}}" name="password" class="form-control"/>
+                  <input type="password" id="password" value="{{ old('password',$account->password)}}" name="password" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="confirm">Confirm</label>
-                  <input type="password" id="confirm" value="{{ $account->password}}" name="confirm" class="form-control"/>
+                  <input type="password" id="confirm" value="{{$account->password}}" name="confirm" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="text" id="email" value="{{ $account->email}}" name="email" class="form-control"/>
+                  <input type="text" id="email" value="{{ old('email',$account->email)}}" name="email" class="form-control"/>
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" id="address" value="{{ $account->address}}" name="address" class="form-control"/>
+                <input type="text" id="address" value="{{ old('address',$account->address)}}" name="address" class="form-control"/>
               </div>
-              @if ($account->role == 2)
-              @else
-                <div class="form-group">
-                  <label for="role">Role</label>
-                  
-                  <select id="role" name="role" class="form-control">
-                    <option value="">Choose</option>
-                    <option value="1"  @if ( $account->role == 1)
-                      selected
-                    @endif>Admin</option>
-                    <option value="2">Manager</option>
-                  </select>
-                </div>
-              @endif
+              <div class="form-group">
+                <label for="role">Role</label>
+                
+                <select id="role" name="role" class="form-control">
+                  <option value="">Choose</option>
+                  <option value="1"  @if ( $account->role == 1)
+                    selected
+                  @endif>Admin</option>
+                  <option value="2" @if ( $account->role == 2)
+                    selected
+                  @endif>Manager</option>
+                </select>
+              </div>
               <div class="form-group">
                   <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
               </div>

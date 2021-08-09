@@ -8,8 +8,8 @@ use App\Models\Product;
 
 class ProductDetailController extends Controller
 {
-    public function index($name){
-        $product = Product::find($name);
+    public function index($id){
+        $product = Product::find($id);
         $relatedProduct = Product::where('brand_id',$product->brand_id)->get();
         $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->get();
         return view('shop.productdetail',compact(

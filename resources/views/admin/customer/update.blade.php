@@ -26,7 +26,11 @@
             <div class="card-body">
                 <ul class='error'>
                     @foreach($errors->all() as $err)
-                        <li>{{ $err }}</li>
+                    {{-- <div class="alert alert-danger">
+                      <li>{{ $err }}</li>
+                    </div>     --}}
+                    <li class="text-danger">{{ $err }}</li>
+
                     @endforeach
                 </ul>
             </div>
@@ -54,15 +58,15 @@
               @csrf
               <div class="form-group">
                   <label for="firstname">First name</label>
-                  <input type="text" id="firstname" value="{{ $customer->firstname}}" name="firstname" class="form-control"/>
+                  <input type="text" id="firstname" value="{{ old('firstname',$customer->firstname)}}" name="firstname" class="form-control"/>
               </div>
               <div class="form-group">
                 <label for="lastname">Last name</label>
-                <input type="text" id="lastname" value="{{ $customer->lastname}}" name="lastname" class="form-control"/>
+                <input type="text" id="lastname" value="{{ old('lastname',$customer->lastname)}}" name="lastname" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" id="password" value="{{ $customer->password}}" name="password" class="form-control"/>
+                  <input type="password" id="password" value="{{ old('password', $customer->password)}}" name="password" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="confirm">Confirm</label>
@@ -70,15 +74,15 @@
               </div>
               <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="text" id="email" value="{{ $customer->email}}" name="email" class="form-control"/>
+                  <input type="text" id="email" value="{{ old('email',$customer->email)}}" name="email" class="form-control"/>
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" id="address" value="{{ $customer->address}}" name="address" class="form-control"/>
+                <input type="text" id="address" value="{{ old('address',$customer->address)}}" name="address" class="form-control"/>
               </div>
               <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" id="phone" value="{{ $customer->phone}}" name="phone" class="form-control"/>
+                <input type="text" id="phone" value="{{ old('phone',$customer->phone)}}" name="phone" class="form-control"/>
               </div>
               <div class="form-group">
                 <label for="role">Lock</label>
