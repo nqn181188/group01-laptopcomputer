@@ -15,12 +15,12 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::paginate(12);
+        $paginate = 12;
+        $products = Product::paginate($paginate);
         $pages = $request->page;
         return view('shop.shop',compact(
             'products',
-            'pages',
-
+            'paginate',
         ));
 
     }

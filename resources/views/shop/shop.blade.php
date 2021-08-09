@@ -68,23 +68,15 @@
 
             <div class="wrap-pagination-info">
                 <ul class="page-numbers">
-                   {!!$products->links()!!}
-                   @if($products->currentPage() != 0)
+                        <li><a href="{{ $products->url($products->url(1))}}" class="page-number-item next-link">First</a></li>
                         <li><a href="{{ $products->previousPageUrl() }}" class="page-number-item next-link">Previous</a></li>
                         @for($i=1; $i<=$products->lastPage(); $i++) 
-                            @if($i== $products->currentPage())
-                                <li><a class="page-number-item">{{ $i }}</a></li>
-                            @else
-                                <li><a href="{{ $products->url($i) }}">{{ $i }}</a></li>
-                            @endif
+                            <li><a class="page-number-item {{$i==$products->currentPage()?'current':''}}" href="{{$products->url($i)}}" >{{$i}}</a></li>
                         @endfor
-                        @if($products->currentPage() != $products->lastPage())
-                        <a href="{{ $products->nextPageUrl() }}">>&nbsp;</a>
-                        <a href="{{ $products->url($products->lastPage()) }}">»</a>
-                        @endif
-                    @endif
+                        <li><a class="page-number-item next-link" href="{{ $products->nextPageUrl() }}" >Next</a></li>
+                        <li><a href="{{ $products->url($products->lastPage())}}" class="page-number-item next-link">Last</a></li>
                 </ul>
-                <p class="result-count">Showing 1-8 of 12 result</p>
+                <p class="result-count">Showing {{($products->currentPage()-1)*$paginate+1}}-{{($products->currentPage()-1)*$paginate+$products->count()}} of {{$products->total()}}</p>
             </div>
         </div><!--end main products area-->
         @include('shop.layout.partials.sidebar')
