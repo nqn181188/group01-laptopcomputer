@@ -11,7 +11,6 @@
         <div class="modal-body">
             <div class="container">
                 <div class="row">
-            
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 main-content-area">
                         <div class="wrap-product-detail">
                             <div class="detail-media">
@@ -19,35 +18,34 @@
                                   <ul class="slides">
                                         <li data-thumb="{{asset('assets/images/products/digital_18.jpg')}}">
                                         <img src="{{asset('assets/images/products/digital_18.jpg')}}" alt="product thumbnail" />
-                                    </li>
+                                        </li>
+                                        <li data-thumb="{{asset('assets/images/products/digital_17.jpg')}}">
+                                            <img src="{{asset('assets/images/products/digital_17.jpg')}}" alt="product thumbnail" />
+                                        </li>
             
-                                    <li data-thumb="{{asset('assets/images/products/digital_17.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_17.jpg')}}" alt="product thumbnail" />
-                                    </li>
-            
-                                    <li data-thumb="{{asset('assets/images/products/digital_15.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_15.jpg')}}" alt="product thumbnail" />
-                                    </li>
-            
-                                    <li data-thumb="{{asset('assets/images/products/digital_02.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_02.jpg')}}" alt="product thumbnail" />
-                                    </li>
-            
-                                    <li data-thumb="{{asset('assets/images/products/digital_08.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_08.jpg')}}" alt="product thumbnail" />
-                                    </li>
-            
-                                    <li data-thumb="{{asset('assets/images/products/digital_10.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_10.jpg')}}" alt="product thumbnail" />
-                                    </li>
-            
-                                    <li data-thumb="{{asset('assets/images/products/digital_12.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_12.jpg')}}" alt="product thumbnail" />
-                                    </li>
-            
-                                    <li data-thumb="{{asset('assets/images/products/digital_14.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_14.jpg')}}" alt="product thumbnail" />
-                                    </li>
+                                        <li data-thumb="{{asset('assets/images/products/digital_15.jpg')}}">
+                                            <img src="{{asset('assets/images/products/digital_15.jpg')}}" alt="product thumbnail" />
+                                        </li>
+                
+                                        <li data-thumb="{{asset('assets/images/products/digital_02.jpg')}}">
+                                            <img src="{{asset('assets/images/products/digital_02.jpg')}}" alt="product thumbnail" />
+                                        </li>
+                
+                                        <li data-thumb="{{asset('assets/images/products/digital_08.jpg')}}">
+                                            <img src="{{asset('assets/images/products/digital_08.jpg')}}" alt="product thumbnail" />
+                                        </li>
+                
+                                        <li data-thumb="{{asset('assets/images/products/digital_10.jpg')}}">
+                                            <img src="{{asset('assets/images/products/digital_10.jpg')}}" alt="product thumbnail" />
+                                        </li>
+                
+                                        <li data-thumb="{{asset('assets/images/products/digital_12.jpg')}}">
+                                            <img src="{{asset('assets/images/products/digital_12.jpg')}}" alt="product thumbnail" />
+                                        </li>
+                
+                                        <li data-thumb="{{asset('assets/images/products/digital_14.jpg')}}">
+                                            <img src="{{asset('assets/images/products/digital_14.jpg')}}" alt="product thumbnail" />
+                                        </li>
                                   </ul>
                                 </div>
                             </div>
@@ -98,18 +96,9 @@
                             </div>
                         </div>
                     </div><!--end main products area-->
-            
-                    
-            
                 </div><!--end row-->
-            
             </div><!--end container-->
-
-
-
-
         </div>
-  
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

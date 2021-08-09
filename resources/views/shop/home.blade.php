@@ -1,5 +1,6 @@
 @extends('shop.layout.layout1')
 @section('contents')
+@include('shop.layout.partials.model')
 <div class="container">
     <!--MAIN SLIDE-->
     <div class="wrap-main-slide">
@@ -129,7 +130,7 @@
                             @endforeach
                         </div>
                         {{-- model--}}
-                            @include('shop.layout.partials.model')
+                            
                         {{--end modal  --}}
                     </div>							
                 </div>
@@ -333,11 +334,11 @@
 @endsection
 @section('my-scripts')
     <script type="text/javascript">
-        $.ajaxSetup({
-			headers:{
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
+        // $.ajaxSetup({
+		// 	headers:{
+		// 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		// 	}
+		// });
         $('.quickview').click(function(){
             var product_id = $(this).data("id_product");
             var _token = $('input[name="_token"]').val();
