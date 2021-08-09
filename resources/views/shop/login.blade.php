@@ -24,14 +24,22 @@
                                 @error('email')
                                     <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
+                                @if (Session::has('msg'))
+                                <div><span class="text-danger">{{Session::get('msg')}}</span></div>
+                                @endif
                             </fieldset>
                             <fieldset class="wrap-input">
                                 <label for="password">Password:</label>
                                 <input type="password" id="password" name="password" placeholder="************">
                             </fieldset>
                             @error('password')
-                                    <div><span class="text-danger">{{$message}}</span></div>
+                                <div><span class="text-danger">{{$message}}</span></div>
                             @enderror
+                            
+                                @if (Session::has('msgPass'))
+                                    <div><span class="text-danger">{{Session::get('msgPass')}}</span></div>
+                                @endif
+                            
                             <fieldset class="wrap-input">
                                 <label class="remember-field">
                                     <input class="frm-input " name="rememberme" id="rememberme" value="forever" type="checkbox"><span>Remember me</span>

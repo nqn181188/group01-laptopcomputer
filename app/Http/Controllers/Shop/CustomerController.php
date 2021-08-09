@@ -31,7 +31,6 @@ class CustomerController extends Controller
         $validator = Validator::make($request->all(),[
             'email'    => 'required',
             'password' => 'required',
-            // 'password' => 'required|same:admins,password'.$account->id,
         ],[
             'email.required' => 'Bạn chưa nhập email',
             'password.required' => 'Bạn chưa nhập password',
@@ -47,9 +46,11 @@ class CustomerController extends Controller
         $pass = md5($request->password);
         $account = Customer::where('email',$email)->first();
         if(!$account){
+            $request->session()->flash('msg', 'Không có account này !');
             return redirect()->route('login');
         }
         if($pass!==$account->password){
+            $request->session()->flash('msgPass', 'Bạn nhập sai password !');
             return redirect()->route('login');
         }
         //lưu thông tin đăng nhập vào session

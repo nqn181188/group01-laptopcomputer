@@ -29,6 +29,9 @@
             @error('email')
                 <div><span class="text-danger">{{$message}}</span></div>
             @enderror
+            @if (Session::has('msg'))
+            <div><span class="text-danger">{{Session::get('msg')}}</span></div>
+            @endif
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Username" name="email" id="email">
                 <div class="input-group-append">
@@ -40,6 +43,9 @@
             @error('password')
             <div><span class="text-danger">{{$message}}</span></div>
             @enderror
+            @if (Session::has('msgPass'))
+            <div><span class="text-danger">{{Session::get('msg')}}</span></div>
+            @endif
             <div class="input-group mb-3">
                 <input type="password" class="form-control" placeholder="Password" name="password" id="password">
                 <div class="input-group-append">
