@@ -26,9 +26,11 @@
             <div class="card-body">
                 <ul class='error'>
                     @foreach($errors->all() as $err)
-                    <div class="alert alert-danger">
+                    {{-- <div class="alert alert-danger">
                       <li>{{ $err }}</li>
-                    </div>    
+                    </div>     --}}
+                    <li class="text-danger">{{ $err }}</li>
+
                     @endforeach
                 </ul>
             </div>
