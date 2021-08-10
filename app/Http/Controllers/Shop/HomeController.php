@@ -34,6 +34,17 @@ class HomeController extends Controller
             'macbook',
         ));
     }
+    public function searchproduct(REQUEST $request){
+        $paginate='12';
+        $searchname = $request->search;
+        $searchproducts = Product::where('name','like','%'.$searchname.'%')->paginate($paginate);
+        $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(5)->get();
+        return view('shop.searchproduct',compact(
+            'searchproducts',
+            'featuredProduct',
+            'paginate',
+        ));
+    }
 
     
     

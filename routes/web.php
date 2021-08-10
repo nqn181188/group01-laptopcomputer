@@ -30,6 +30,7 @@ Route::get('/register','Shop\CustomerController@register')->name('register');
 route::resource('customer', 'Shop\CustomerController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');
 Route::get('/shop/product/{name}','Shop\ProductDetailController@index')->name('product-detail');
+Route::get('/shop/search-product','Shop\HomeController@searchproduct')->name('search-product');
  
 //////////////////////////////////////
 
