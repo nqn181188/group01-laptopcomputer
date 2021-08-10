@@ -44,7 +44,7 @@
                         <a href="#" class="link-direction">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             <div class="left-info">
-                                {{-- <span class="index">0 item</span> --}}
+                                <span class="index">0 item</span>
                                 <span class="title">Wishlist</span>
                             </div>
                         </a>
@@ -53,9 +53,10 @@
                         <a href="{{route('viewcart')}}" class="link-direction">
                             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                             <div class="left-info">
-                                {{-- <span class="index">4 items</span> --}}
+                                <span class="index">4 items</span>
                                 <span class="title">
-                                   <a href="{{route('viewcart')}}">CART</a> </span>
+                                   <a href="{{route('viewcart')}}">CART</a>
+                                </span>
                             </div>
                         </a>
                     </div>
