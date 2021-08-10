@@ -117,4 +117,39 @@ class CartController extends Controller
         $request->session()->put('cart', $cart);
     }
 
+    public function deleteCartItem(Request $request) {
+        $id = $request->pid;
+        if ($request->session()->has('cart')) {
+            $cart = $request->session()->get('cart');
+            
+            for($i = 0; $i < count($cart); $i++) {
+                if ($cart[$i]->id === $id) {
+                    break;
+                }
+            }
+            \array_splice($cart, $i, 1);   // xóa và reindex chỉ số
+            // lưu vào session
+            $request->session()->put('cart', $cart);
+        }
+    }
+    public function changeCartQuantity(Request $request) {
+        $id = $request->pid;
+        $quantity = $request->quantity;
+        if ($request->session()->has('cart')) {
+            $cart = $request->session()->get('cart');
+            
+            foreach($cart as $elem) {
+                if ($elem->id === $id) {
+                    $item = $elem;
+                    break;
+                }
+            }
+
+            if (isset($item)) {
+                $item->quantity = $quantity;
+            }
+            // lưu vào session
+            $request->session()->put('cart', $cart);
+        }
+    }
 }

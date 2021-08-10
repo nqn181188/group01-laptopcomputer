@@ -34,14 +34,14 @@
                     <div class="price-field produtc-price"><p class="price">{{ $item->price }} đ</p></div>
                     <div class="quantity">
                         <div class="quantity-input" data-id={{ $item->id }}>
-                            <input type="text" name="product-quatity" value="{{ $item->quantity }}" data-max="120" pattern="[0-9]*" >									
+                            <input type="text" name="product-quantity" value="{{ $item->quantity }}" data-max="120" pattern="[0-9]*" >									
                             <a class="btn btn-increase" href="#"></a>
                             <a class="btn btn-reduce" href="#"></a>
                         </div>
                     </div>
                     <div class="price-field sub-total"><p class="price">{{ $item->quantity * $item->price }} đ</p></div>
                     <div class="delete">
-                        <a href="#" class="btn btn-delete" title="">
+                        <a href="#" class="btn btn-delete" title="" data-id={{ $item->id }}>
                             <span>Delete from your cart</span>
                             <i class="fa fa-times-circle" aria-hidden="true"></i>
                         </a>
@@ -68,7 +68,7 @@
             </div>
             <div class="update-clear">
                 <a class="btn btn-clear" href="#">Clear Shopping Cart</a>
-                <a class="btn btn-update" href="#">Update Shopping Cart</a>
+               
             </div>
         </div>
 
@@ -77,4 +77,82 @@
     </div><!--end main content area-->
 </div><!--end container-->
 
+@endsection
+@section('my-scripts')
+<script>
+    // setup csrf-token cho post method
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.btn-delete').click(function(e){
+        e.preventDefault();
+        pid = $(this).data("id");
+        // alert(id);
+        $.ajax({
+            type:'GET',
+            url:'{{ route('delete-cart-item') }}',
+            data:{ pid:pid },
+            success:function(data){
+                alert('hoàn thành xóa sản phẩm khỏi giỏ hàng');
+                window.location='{{ route('viewcart') }}'
+            }
+        });
+    });
+    @section('my-scripts')
+<script>
+    // setup csrf-token cho post method
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.btn-delete').click(function(e){
+        e.preventDefault();
+        pid = $(this).data("id");
+        // alert(id);
+        $.ajax({
+            type:'GET',
+            url:'{{ route('delete-cart-item') }}',
+            data:{ pid:pid },
+            success:function(data){
+                alert('hoàn thành xóa sản phẩm khỏi giỏ hàng');
+                window.location='{{ route('viewcart') }}'
+            }
+        });
+    });
+
+    $(".quantity-input").on('click', '.btn', function(event) {
+        event.preventDefault();
+        
+        // alert(pid);
+        var _this = $(this),
+            _input = _this.siblings('input[name=product-quantity]'),
+            _current_value = _this.siblings('input[name=product-quantity]').val(),
+            _max_value = _this.siblings('input[name=product-quantity]').attr('data-max');
+        if(_this.hasClass('btn-reduce')){
+            if (parseInt(_current_value, 10) > 1) _input.val(parseInt(_current_value, 10) - 1);
+        }else {
+            if (parseInt(_current_value, 10) < parseInt(_max_value, 10)) _input.val(parseInt(_current_value, 10) + 1);
+        }
+
+        pid = $('.quantity-input').data("id");
+        quantity = _input.val();
+        $.ajax({
+            type:'GET',
+            url:'{{ route('change-cart-quantity') }}',
+            data:{ pid:pid, quantity:quantity },
+            success:function(data){
+                window.location='{{ route('viewcart') }}'
+            }
+        });
+    });
+</script>
+@endsection
+
+  
+</script>
 @endsection
