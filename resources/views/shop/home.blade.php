@@ -13,7 +13,7 @@
                     <h2 class="f-title">Latest Model <b>HP <i class="fa fa-laptop" aria-hidden="true"></i></b></h2>
                     <span class="subtitle">New Model HP Laptop with 11th Generation Processor are available</span>
                     <p class="sale-info">Stating at: <span class="price">$600</span></p>
-                    <a href="#" class="btn-link">Shop Now</a>
+                    <a href="{{route('search-product','hp')}}" class="btn-link">Shop Now</a>
                 </div>
             </div>
             <div class="item-slide">
@@ -32,12 +32,11 @@
                     <h2 class="f-title">MacBook Air <b>Power. It’s in the Air.</b></h2>
                     <span class="f-subtitle">Supercharged by the Apple M1 chip</span>
                     <p class="sale-info">Stating at: <b class="price">$1200.00</b></p>
-                    <a href="#" class="btn-link">Shop Now</a>
+                    <a href="{{route('search-product','maccbook')}}" class="btn-link">Shop Now</a>
                 </div>
             </div>
         </div>
     </div>
-
     <!--BANNER-->
     <div class="wrap-banner style-twin-default">
         <div class="banner-item">
@@ -51,7 +50,6 @@
             </a>
         </div>
     </div>
-
     <!--On Sale-->
     <div class="wrap-show-advance-info-box style-1 has-countdown">
         <h3 class="title-box">FEATURED PRODUCTS</h3>
@@ -83,12 +81,11 @@
                         <i class="fa fa-star" aria-hidden="true"></i>
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </div>
-                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
+                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                 </div>
             </div>
             </form>
             @endforeach
-            
         </div>
     </div>
 
@@ -116,24 +113,21 @@
                                     <div class="group-flash">
                                         <span class="flash-item new-label">new</span>
                                     </div>
-                                    <div class="">
-                                        <input value="Quick View" class="quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                                    <div class="wrap-btn">
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                 </div>
                                 <!-- Button to Open the Modal -->
                             </div>
                             </form>
-
                             @endforeach
                         </div>
-                        {{-- model--}}
-                            
-                        {{--end modal  --}}
+                        
                     </div>							
                 </div>
             </div>
@@ -151,18 +145,18 @@
         <div class="wrap-products">
             <div class="wrap-product-tab tab-style-1">
                 <div class="tab-control">
-                    <a href="#acer" class="tab-control-item active"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-acer-149x40.png" alt="ACER"></a>
-                    <a href="#asus" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-asus-149x40.png" alt="ASUS"></a>
-                    <a href="#dell" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-dell-149x40.png" alt="DELL"></a>
-                    <a href="#hp" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-hp-149x40-1.png" alt="HP"></a>
-                    <a href="#lenovo" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-lenovo-149x40.png" alt="HP"></a>
-                    <a href="#macbook" class="tab-control-item"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="images/brands/logo-macbook-149x40.png" alt="HP"></a>
+                    @foreach ($brands as $brand)
+                    <a href="#{{$brand->brand}}" class="tab-control-item {{$brand->brand=='Acer'?'active':''}}"><img style="border : 1px solid rgb(252, 252, 252); border-radius:20px" src="{{asset('images/brands/'.$brand->image)}}" alt="{{$brand->name}}"></a>
+                    @endforeach
+                    
                 </div>
                 <div class="tab-contents">
-                    <div class="tab-content-item active" id="acer">
+                    @foreach ($brands as $brand)
+                    <div class="tab-content-item {{$brand->brand=='Acer'?'active':''}}" id="{{$brand->brand}}">
                         <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}' >
-                            @foreach ($acer as $item)
-                            <form action="">
+                            @foreach ($products as $item)
+                            @if ($item->brand_id==$brand->id)
+                            <form>
                                 @csrf
                                 <div class="product product-style-2 equal-elem ">
                                     <div class="product-thumnail">
@@ -176,163 +170,20 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                        <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
+                                        <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                     </div>
                                 </div>
                             </form>
+                            @endif
                             @endforeach
                         </div>
                     </div>
-
-                    <div class="tab-content-item" id="asus">
-                        <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container " data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
-                            @foreach ($asus as $item)
-                            <form action="">
-                            @csrf
-                            <div class="product product-style-2 equal-elem ">
-                                <div class="product-thumnail">
-                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
-                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
-                                    </a>
-                                    <div class="wrap-btn">
-                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
-                                        {{-- <a href="#" class="function-link">quick view</a> --}}
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
-                                </div>
-                            </div>
-                            </form>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="tab-content-item" id="dell">
-                        <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
-                            @foreach ($dell as $item)
-                            <form action="">
-                            @csrf
-                            <div class="product product-style-2 equal-elem ">
-                                <div class="product-thumnail">
-                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
-                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
-                                    </a>
-                                    <div class="wrap-btn">
-                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
-                                        {{-- <a href="#" class="function-link">quick view</a> --}}
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
-                                </div>
-                            </div>
-                            </form>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="tab-content-item" id="hp">
-                        <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
-                            @foreach ($hp as $item)
-                            <form action="">
-                            @csrf
-                            <div class="product product-style-2 equal-elem ">
-                                <div class="product-thumnail">
-                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
-                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
-                                    </a>
-                                    <div class="wrap-btn">
-                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
-                                        {{-- <a href="#" class="function-link">quick view</a> --}}
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
-                                </div>
-                            </div>
-                            </form>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="tab-content-item" id="lenovo">
-                        <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
-                            @foreach ($lenovo as $item)
-                            <form action="">
-                            @csrf
-                            <div class="product product-style-2 equal-elem ">
-                                <div class="product-thumnail">
-                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
-                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
-                                    </a>
-                                    <div class="wrap-btn">
-                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
-                                        {{-- <a href="#" class="function-link">quick view</a> --}}
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
-                                </div>
-                            </div>
-                            </form>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="tab-content-item" id="macbook">
-                        <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
-                            @foreach ($macbook as $item)
-                            <form action="">
-                            @csrf
-                            <div class="product product-style-2 equal-elem ">
-                                <div class="product-thumnail">
-                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
-                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
-                                    </a>
-                                    <div class="wrap-btn">
-                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
-                                        {{-- <a href="#" class="function-link">quick view</a> --}}
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
-                                </div>
-                            </div>
-                            </form>
-                            @endforeach
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </div>
-<button class="test"></button>
 @endsection
 @section('my-scripts')
     <script type="text/javascript">

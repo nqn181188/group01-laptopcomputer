@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Brand;
 
 class HomeController extends Controller
 {
@@ -17,32 +18,41 @@ class HomeController extends Controller
     {
         $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(20)->get();
         $lastestProduct = Product::orderBy('created_at','desc')->limit(20)->get();
-        $acer = Product::where('brand_id','1')->get();
-        $asus = Product::where('brand_id','2')->get();
-        $dell = Product::where('brand_id','3')->get();
-        $hp = Product::where('brand_id','4')->get();
-        $lenovo = Product::where('brand_id','5')->get();
-        $macbook = Product::where('brand_id','6')->get();
+        $brands = Brand::all();
+        $products = Product::all();
         return view('shop.home',compact(
             'featuredProduct',
             'lastestProduct',
-            'acer',
-            'asus',
-            'dell',
-            'hp',
-            'lenovo',
-            'macbook',
+            'products',
+            'brands',
         ));
     }
     public function searchproduct(REQUEST $request){
-        $paginate='12';
+        $paginate=12;
         $searchname = $request->search;
-        $searchproducts = Product::where('name','like','%'.$searchname.'%')->paginate($paginate);
-        $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(5)->get();
+        $searchproducts = Product::where('name','like','%'.$searchname.'%')->orderBy('featured','desc');
+        $orderby='';
+        if($request->orderby){
+            $orderby=$request->orderby;
+            switch ($orderby){
+                case 'price-asc' : $searchproducts->orderBy('price','asc');
+                break;
+                case 'price-desc' : $searchproducts->orderBy('price','desc');
+                break;
+                default: $searchproducts->orderBy('featured','desc');
+            }
+        }
+        if($request->post_per_page){
+            $paginate = $request->post_per_page;
+        }
+        $searchproducts=$searchproducts->paginate($paginate);
+        $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit($paginate)->get();
         return view('shop.searchproduct',compact(
             'searchproducts',
             'featuredProduct',
             'paginate',
+            'searchname',
+            'orderby',
         ));
     }
 

@@ -1,7 +1,7 @@
 @extends('shop.layout.layout1')
 @section('contents')
 <div class="container">
-
+    @include('shop.layout.partials.model')
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="#" class="link">home</a></li>
@@ -23,34 +23,26 @@
                 <h1 class="shop-title">Search product</h1>
 
                 <div class="wrap-right">
-
-                    <div class="sort-item orderby ">
-                        <form action="">
-                        <select name="orderby" class="use-chosen" >
-                            <option value="menu_order" selected="selected">Default sorting</option>
-                            <option value="popularity">Sort by popularity</option>
-                            <option value="rating">Sort by average rating</option>
-                            <option value="date">Sort by newness</option>
-                            <option value="price">Sort by price: low to high</option>
-                            <option value="price-desc">Sort by price: high to low</option>
-                        </select>
-                        </form>
-                    </div>
-
-                    <div class="sort-item product-per-page">
-                        <form action="">
-                            <select name="post-per-page" class="use-chosen" >
-                            <option value="12" selected="selected">12 per page</option>
-                            <option value="16">16 per page</option>
-                            <option value="18">18 per page</option>
-                            <option value="21">21 per page</option>
-                            <option value="24">24 per page</option>
-                            <option value="30">30 per page</option>
-                            <option value="32">32 per page</option>
-                        </select>
+                    <form id="sort-item">
+                        <input type="hidden" value="{{$searchname}}" name="search"> 
+                        <div class="sort-item orderby">
+                            <select name="orderby" class="use-chosen" >
+                                <option value="menu_order"{{$orderby=='menu_order'?'selected':''}}>Default sorting</option>
+                                <option value="price-asc" {{$orderby=='price-asc'?'selected':''}}>Sort by price: Low to High</option>
+                                <option value="price-desc"{{$orderby=='price-desc'?'selected':''}}>Sort by price: High to Low</option>
+                            </select>
+                        </div>
+    
+                        <div class="sort-item product-per-page">
+                                <select name="post_per_page" class="use-chosen" >
+                                <option value="6" {{$paginate=='9'?'selected':''}}>6 per page</option>
+                                <option value="12" {{$paginate=='12'?'selected':''}}>12 per page</option>
+                                <option value="18" {{$paginate=='18'?'selected':''}}>18 per page</option>
+                                <option value="24" {{$paginate=='24'?'selected':''}}>24 per page</option>
+                                <option value="36" {{$paginate=='36'?'selected':''}}>36 per page</option>
+                            </select>
+                        </div>
                     </form>
-                        
-                    </div>
                 </div>
 
             </div><!--end wrap shop control-->
@@ -65,10 +57,19 @@
                                 <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                     <figure><img src="{{asset('images/products/'.$item->image)}}" alt="{{$item->name}}"></figure>
                                 </a>
+                                <div class="group-flash">
+                                    @if ($item->featured)
+                                    <span class="flash-item sale-label">HOT</span>
+                                    @endif
+                                </div>
+                                <div class="wrap-btn">
+                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                                    {{-- <a href="#" class="function-link">quick view</a> --}}
+                                </div>
                             </div>
                             <div class="product-info">
                                 <a href="#" class="product-name"><span>{{$item->name}}</span></a>
-                                <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
+                                <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                 <a href="#" class="btn add-to-cart">Add To Cart</a>
                             </div>
                         </div>
@@ -83,13 +84,13 @@
 
             <div class="wrap-pagination-info">
                 <ul class="page-numbers">
-                        <li><a href="{{ $searchproducts->url($searchproducts->url(1))}}" class="page-number-item next-link">First</a></li>
-                        <li><a href="{{ $searchproducts->previousPageUrl() }}" class="page-number-item next-link">Previous</a></li>
+                        <li><a href="{{ request()->fullUrlWithQuery(['page' => 1]) }} " class="page-number-item next-link">First</a></li>
+                        <li><a href="{{ request()->fullUrlWithQuery(['page' => $searchproducts->currentPage()-1])}}" class="page-number-item next-link">Previous</a></li>
                         @for($i=1; $i<=$searchproducts->lastPage(); $i++) 
-                            <li><a class="page-number-item {{$i==$searchproducts->currentPage()?'current':''}}" href="{{$searchproducts->url($i)}}" >{{$i}}</a></li>
+                            <li><a class="page-number-item {{$i==$searchproducts->currentPage()?'current':''}}" href="{{ request()->fullUrlWithQuery(['page' => $i])}}">{{$i}}</a></li>
                         @endfor
-                        <li><a class="page-number-item next-link" href="{{ $searchproducts->nextPageUrl() }}" >Next</a></li>
-                        <li><a href="{{ $searchproducts->url($searchproducts->lastPage())}}" class="page-number-item next-link">Last</a></li>
+                        <li><a class="page-number-item next-link" href="{{ request()->fullUrlWithQuery(['page' => $searchproducts->currentPage()+1])}}" >Next</a></li>
+                        <li><a href="{{ request()->fullUrlWithQuery(['page' => ceil($searchproducts->total()/$paginate)])}}" class="page-number-item next-link">Last</a></li>
                 </ul>
                 <p class="result-count">Showing {{($searchproducts->currentPage()-1)*$paginate+1}}-{{($searchproducts->currentPage()-1)*$paginate+$searchproducts->count()}} of {{$searchproducts->total()}}</p>
             </div>
@@ -337,9 +338,10 @@
 @endsection
 @section('my-scripts')
     <script type="text/javascript">
-        $('.orderby').load(function(){
-            $(form)
-
+        $(function(){
+            $('.use-chosen').change(function(){
+                $('#sort-item').submit();
+            });
         });
     
     </script>

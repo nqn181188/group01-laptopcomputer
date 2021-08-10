@@ -15,12 +15,26 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
-        $paginate = 12;
-        $products = Product::paginate($paginate);
-        $pages = $request->page;
+        $paginate=12;
+        $products = Product::where('id','!=','0')->orderBy('featured','desc');
+        $orderby='featured';
+        if($request->orderby){
+            $orderby=$request->orderby;
+            switch ($orderby){
+                case 'price-asc' : $products->orderBy('price','asc');
+                case 'price-desc' : $products->orderBy('price','desc');
+                default : $products->orderBy('featured','desc');
+            }
+        }
+        if($request->post_per_page){
+            $paginate = $request->post_per_page;
+        }
+        $products=$products->paginate($paginate);
+
         return view('shop.shop',compact(
             'products',
             'paginate',
+            'orderby',
         ));
 
     }
