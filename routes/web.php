@@ -26,6 +26,8 @@ Route::get('/','Shop\HomeController@index')->name('home');
 Route::get('/shop','Shop\ShopController@index')->name('shop');
 Route::get('/viewcart','Shop\CartController@index')->name('viewcart');
 Route::get('/add-cart','Shop\CartController@addCart')->name('add-cart');
+Route::get('/delete-cart-item', 'Shop\CartController@deleteCartItem')->name('delete-cart-item');
+Route::get('/change-cart-quantity', 'Shop\CartController@changeCartQuantity')->name('change-cart-quantity');
 Route::get('/checkout','Shop\CheckOutController@index')->name('checkout');
 Route::get('/aboutus','Shop\AboutUsController@index')->name('aboutus');
 Route::get('/contact','Shop\ContactController@index')->name('contact');
