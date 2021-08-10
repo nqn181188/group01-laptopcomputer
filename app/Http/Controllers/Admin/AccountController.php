@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -40,6 +41,8 @@ class AccountController extends Controller
     {
         $account = $request->all();
         $account['password'] = md5($account['password']);
+        // $account['password'] = Hash::make($request->password);
+        
         Admin::create($account);
         return redirect()->route('admin.account.index');
     }
@@ -105,6 +108,7 @@ class AccountController extends Controller
         $account->password  = $request->password;
         $account->role  = $request->role;
         $account['password'] = md5($account['password']);
+        // $account['password'] = Hash::make($request->password);
         $account->save();
         return redirect()->route('admin.account.index');
     }

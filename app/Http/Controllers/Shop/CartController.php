@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Models\CartItem;
 class CartController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class CartController extends Controller
     public function index()
     {
         //
-        return view('shop.cart');
+        return view('shop.viewcart');
     }
 
     /**
@@ -83,4 +84,37 @@ class CartController extends Controller
     {
         //
     }
+    public function addCart(Request $request) {
+        $id = $request->pid;
+        $quantity = $request->quantity;
+        $product = Product::find($id);
+        // lấy cart từ session, nếu chưa có thì tạo mới
+        // cart là 1 mảng các CartItem
+        if ($request->session()->has('cart')) {
+            $cart = $request->session()->get('cart');
+        } else {
+            $cart = [];
+        }
+        // xử lý thêm số lượng nếu item đã có trong cart
+        // duyệt $cart để tìm xem có sản phẩm trong cart không?
+        foreach($cart as $elem) {
+            if ($elem->id === $id) {
+                $item = $elem;
+                break;
+            }
+        }
+        // có sản phẩm -> tăng số lượng
+        if (isset($item)) {
+            $item->quantity += $quantity;
+        } else {
+            // chưa có sản phẩm, tạo mới
+            // tạo đối tượng cart item
+            $item = new CartItem($id, $product->name, $quantity, $product->price, $product->image);
+            // thêm vào giỏ hàng
+            $cart[] = $item;
+        }
+        // lưu vào session
+        $request->session()->put('cart', $cart);
+    }
+
 }

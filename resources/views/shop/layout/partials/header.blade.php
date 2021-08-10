@@ -11,12 +11,13 @@
                 </div>
                 <div class="topbar-menu right-menu">
                     <ul>
-                        <li class="menu-item" ><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
-                        <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         @if (Session::get('user')==null)
+                            <li class="menu-item" ><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
+                            <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         @else
-                        <li class="menu-item" ><a title="Register or Login" href="#">{{Session::get('user')->firstname}}</a></li>
-                        <li class="menu-item" ><a href="{{ route('customer.process-logout')}}">Logout</a></li>
+                            <li class="menu-item" ><a title="My account" href="{{ route('customer.show',Session::get('user')->id)}}">{{Session::get('user')->firstname}}</a></li>
+                            <li class="menu-item" ><a href="{{ route('customer.edit', Session::get('user')->id) }}">Change Profile</a></li>
+                            <li class="menu-item" ><a href="{{ route('customer.process-logout')}}">Logout</a></li>
                         @endif
                 </div>
             </div>
@@ -43,18 +44,18 @@
                         <a href="#" class="link-direction">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index">0 item</span>
+                                {{-- <span class="index">0 item</span> --}}
                                 <span class="title">Wishlist</span>
                             </div>
                         </a>
                     </div>
                     <div class="wrap-icon-section minicart">
-                        <a href="{{route('cart')}}" class="link-direction">
+                        <a href="{{route('viewcart')}}" class="link-direction">
                             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index">4 items</span>
+                                {{-- <span class="index">4 items</span> --}}
                                 <span class="title">
-                                   <a href="{{route('cart')}}">CART</a> </span>
+                                   <a href="{{route('viewcart')}}">CART</a> </span>
                             </div>
                         </a>
                     </div>
@@ -84,7 +85,7 @@
                             <a href="{{route('shop')}}" class="link-term mercado-item-title">Shop</a>
                         </li>
                         <li class="menu-item">
-                            <a href="{{route('cart')}}" class="link-term mercado-item-title">Cart</a>
+                            <a href="{{route('viewcart')}}" class="link-term mercado-item-title">Cart</a>
                         </li>
                         <li class="menu-item">
                             <a href="{{route('checkout')}}" class="link-term mercado-item-title">Checkout</a>
