@@ -14,8 +14,8 @@
                 <div class="detail-media">
                     <div class="product-gallery">
                       <ul class="slides">
-                            <li data-thumb="{{asset('assets/images/products/digital_18.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_18.jpg')}}" alt="product thumbnail" />
+                            <li data-thumb="{{asset('images/products/'.$product->image)}}">
+                            <img src="{{asset('images/products/'.$product->image)}}" />
                         </li>
 
                         <li data-thumb="{{asset('assets/images/products/digital_17.jpg')}}">
@@ -61,13 +61,16 @@
                     <h2 class="product-name">{{$product->name}}</h2>
                     <div class="short-desc">
                         <ul>
-                            <li>7,9-inch LED-backlit, 130Gb</li>
-                            <li>Dual-core A7 with quad-core graphics</li>
-                            <li>FaceTime HD Camera 7.0 MP Photos</li>
+                            <li>CPU : {{$product->cpu}}</li>
+                            <li>RAM : {{$product->amountofram}} {{$product->typeofram}}</li>
+                            <li>Hard Drive : {{$product->hdcapacity}} {{$product->hdtype}} </li>
+                            <li>Screen Size : {{$product->screensize}}</li>
+                            <li>Graphic Card : {{str_contains($product->gcard,'Intel Iris Xe Graphics')||str_contains($product->gcard,'Intel UHD Graphics')?'Onboard':''}}{{$product->gcard}}</li>
+                            <li>Dimension : {{$product->width}} x {{$product->depth}} x {{$product->height}} (mm)</li>
+                            <li>Weight : {{$product->weight}}</li>
+                            <li>OS : {{$product->os}}</li>
+                            <li>Release Year : {{$product->releaseyear}}</li>
                         </ul>
-                    </div>
-                    <div class="wrap-social">
-                        <a class="link-socail" href="#"><img src="assets/images/social-list.png" alt=""></a>
                     </div>
                     <div class="wrap-price"><span class="product-price">${{$product->price}}</span></div>
                     <div class="stock-info in-stock">
