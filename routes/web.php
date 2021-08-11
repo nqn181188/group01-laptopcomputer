@@ -16,11 +16,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/clear-session', function() {
-    session()->forget('username');
-    session()->forget('cart');
-    // return back();
-});
+Route::get('/clear-cart', 'Shop\CartController@clearSession')->name('clear-cart');
+   
 //=========ROUTE ON SHOP PAGE========
 Route::get('/','Shop\HomeController@index')->name('home');
 Route::get('/shop','Shop\ShopController@index')->name('shop');

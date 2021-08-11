@@ -26,7 +26,7 @@
                 @endphp
                 <li class="pr-cart-item">
                     <div class="product-image">
-                        <figure><img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->name }}"></figure>
+                        <figure><img src="{{ asset('images/products/' . $item->image) }}" alt="{{ $item->name }}"></figure>
                     </div>
                     <div class="product-name">
                         <a class="link-to-product" href="{{ route('product-detail', $item->id) }}">{{ $item->name }}</a>
@@ -67,7 +67,7 @@
                 <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
             </div>
             <div class="update-clear">
-                <a class="btn btn-clear" href="#">Clear Shopping Cart</a>
+                <a class="btn btn-clear" href="{{route('clear-cart')}}">Clear Shopping Cart</a>
                
             </div>
         </div>
@@ -101,30 +101,7 @@
             }
         });
     });
-    @section('my-scripts')
-<script>
-    // setup csrf-token cho post method
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $('.btn-delete').click(function(e){
-        e.preventDefault();
-        pid = $(this).data("id");
-        // alert(id);
-        $.ajax({
-            type:'GET',
-            url:'{{ route('delete-cart-item') }}',
-            data:{ pid:pid },
-            success:function(data){
-                alert('hoàn thành xóa sản phẩm khỏi giỏ hàng');
-                window.location='{{ route('viewcart') }}'
-            }
-        });
-    });
-
+   
     $(".quantity-input").on('click', '.btn', function(event) {
         event.preventDefault();
         
@@ -150,9 +127,5 @@
             }
         });
     });
-</script>
-@endsection
-
-  
 </script>
 @endsection

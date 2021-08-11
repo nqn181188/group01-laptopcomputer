@@ -152,4 +152,10 @@ class CartController extends Controller
             $request->session()->put('cart', $cart);
         }
     }
+    public function clearSession(Request $request){
+        
+    
+        session()->forget('cart');
+    
+    }
 }
