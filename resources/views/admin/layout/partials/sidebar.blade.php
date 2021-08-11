@@ -127,7 +127,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link ml-3">
+              <a href="{{route('admin.product.index')}}" class="nav-link ml-3">
                 <i class="nav-icon fas fa-th-list"></i>
                 <p>
                   Product List
