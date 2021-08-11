@@ -45,7 +45,6 @@ class CustomerController extends Controller
         $pass = md5($request->password);
         $account = Customer::where('email',$email)->first();
         if(!$account){
-            $request->session()->flash('msg', 'There is not this account !');
             return redirect()->route('login');
         }
         if($pass!==$account->password){
@@ -62,7 +61,7 @@ class CustomerController extends Controller
         return redirect()->route('home');
     }
 
-    public function checkEmailRegister(Request $request){
+    public function checkEmail(Request $request){
         $email = $request->email;
         $customer = Customer::where('email',$email)->first();
         $result = false;

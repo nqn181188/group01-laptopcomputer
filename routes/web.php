@@ -32,7 +32,7 @@ Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
 Route::get('/customer/process-logout','Shop\CustomerController@processLogout')->name('customer.process-logout');
 Route::get('/register','Shop\CustomerController@register')->name('register');
-Route::get('/check-email-register','Shop\CustomerController@checkEmailRegister')->name('check-email-register');
+Route::get('/check-email','Shop\CustomerController@checkEmail')->name('check-email');
 
 // Route::get('/customer/{customer}/my-account','Shop\CustomerController@myAccount')->name('my-account');
 route::resource('customer', 'Shop\CustomerController');
@@ -49,6 +49,9 @@ Route::get('/admin','Admin\AdminController@index');
 Route::get('/admin','Admin\AdminController@processLogout')->name('admin.logout');;
 Route::get('/admin/login','Admin\AdminController@login')->name('admin.login');
 Route::post('/admin/process-login','Admin\AdminController@processLogin')->name('admin.process-login');
+Route::get('/admin/check-email-login','Admin\AdminController@checkEmailLogin')->name('admin.check-email-login');
+// Route::get('/admin/check-email','Admin\AccountController@checkEmail')->name('admin.check-email');
+// Route::get('/admin/check-email-customer','Admin\CustomerController@checkEmail')->name('admin.check-email-customer');
 
 // Route::get('/admin/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],function(){

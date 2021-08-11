@@ -38,6 +38,7 @@ class CustomerRequest extends FormRequest
                     'password' => 'required|between:1,32',
                     'confirm' => 'required|same:password',
                     'address' => 'required',
+                    'phone' => 'required',
                 ];
             }
             case 'PUT':
@@ -57,20 +58,20 @@ class CustomerRequest extends FormRequest
         }
     }
 
-    public function messages() {
-        return [
-            // 'username.required' => 'Bạn chưa nhập tài khoản',
-            // 'username.unique' => 'Tài khoản này đã tồn tại',
-            'firstname.required' => 'Bạn chưa nhập Tên',
-            'lastname.required' => 'Bạn chưa nhập Họ',
-            'password.required' => 'Bạn chưa nhập mật khẩu',
-            'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
-            'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
-            'email.required' => 'Bạn chưa nhập email',
-            'email.unique' => 'Email này đã tồn tại',
-            'address.required' => 'Bạn chưa nhập địa chỉ',
-            'phone.required' => 'Bạn chưa nhập số điện thoại',
-            'phone.regex' => 'Bạn cần bắt đầu số điện thoại là số 0 và số đt phải đủ 10 chữ số',
-        ];
-    }
+    // public function messages() {
+    //     return [
+    //         'username.required' => 'Bạn chưa nhập tài khoản',
+    //         'username.unique' => 'Tài khoản này đã tồn tại',
+    //         'firstname.required' => 'Bạn chưa nhập Tên',
+    //         'lastname.required' => 'Bạn chưa nhập Họ',
+    //         'password.required' => 'Bạn chưa nhập mật khẩu',
+    //         'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
+    //         'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
+    //         'email.required' => 'Bạn chưa nhập email',
+    //         'email.unique' => 'Email này đã tồn tại',
+    //         'address.required' => 'Bạn chưa nhập địa chỉ',
+    //         'phone.required' => 'Bạn chưa nhập số điện thoại',
+    //         'phone.regex' => 'Bạn cần bắt đầu số điện thoại là số 0 và số đt phải đủ 10 chữ số',
+    //     ];
+    // }
 }

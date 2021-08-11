@@ -26,6 +26,17 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function checkEmail(Request $request){
+    //     $email = $request->email;
+    //     $account = Admin::where('email',$email)->first();
+    //     $result = false;
+    //     if (isset($account)){
+    //         $result = true;
+    //     }
+    //     return $result;
+    // }
+
     public function create()
     {
         return view('admin.account.create');

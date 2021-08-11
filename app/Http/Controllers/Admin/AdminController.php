@@ -21,6 +21,17 @@ class AdminController extends Controller
     public function login(){
         return view('admin.login');
     }
+
+    public function checkEmailLogin(Request $request){
+        $email = $request->email;
+        $account = Admin::where('email',$email)->first();
+        $result = false;
+        if (isset($account)){
+            $result = true;
+        }
+        return $result;
+    }
+    
     public function processLogin(REQUEST $request){
         // echo md5('1');
         $validator = Validator::make($request->all(),[

@@ -21,6 +21,7 @@
                             <fieldset class="wrap-input">
                                 <label for="email">Email Address:</label>
                                 <input type="text" id="email" name="email" placeholder="Type your email address">
+                                <div  ><span id="messageEmail" class="text-danger"></span></div>
                                 @error('email')
                                     <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
@@ -55,4 +56,39 @@
     </div><!--end row-->
 
 </div><!--end container-->
+@endsection
+
+
+@section('my-scripts')
+    <script>
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+
+        $(document).ready(function(){
+
+        $("#email").keyup(function(){
+            emailInput = $(this).val();
+            
+            $.ajax({
+            type:'get',
+            url:'{{ route('check-email') }}',
+            data:{ email:emailInput },
+            success:function(data){
+                // alert(data);
+                if(data==1){
+                    $("#messageEmail").html('');
+                }else{
+                    $("#messageEmail").html('Email is not exist');
+                }
+            }
+            });
+             
+
+        });
+
+        });
+    </script>
 @endsection

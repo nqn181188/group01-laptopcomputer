@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,17 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function checkEmail(Request $request){
+    //     $email = $request->email;
+    //     $account = Customer::where('email',$email)->first();
+    //     $result = false;
+    //     if (isset($account)){
+    //         $result = true;
+    //     }
+    //     return $result;
+    // }
+
     public function create()
     {
         return view('admin.customer.create');
@@ -35,7 +47,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
         $customer = $request->all();
         $customer['password'] = md5($customer['password']);

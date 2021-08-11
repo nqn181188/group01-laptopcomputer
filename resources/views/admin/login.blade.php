@@ -32,6 +32,7 @@
             @if (Session::has('msg'))
             <div><span class="text-danger">{{Session::get('msg')}}</span></div>
             @endif
+            <div ><span id="messageEmail" class="text-danger"></span></div>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Username" name="email" id="email">
                 <div class="input-group-append">
@@ -83,5 +84,36 @@
 <script src="{{asset ('/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset ('/dist/js/adminlte.min.js')}}"></script>
+
+<script>
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+
+    $(document).ready(function(){
+
+    $("#email").keyup(function(){
+        emailInput = $(this).val();
+        
+        $.ajax({
+        type:'get',
+        url:'{{ route('admin.check-email-login') }}',
+        data:{ email:emailInput },
+        success:function(data){
+            // alert(data);
+            if(data==1){
+                $("#messageEmail").html('');
+            }else{
+                $("#messageEmail").html('Email is not exist');
+            }
+        }
+        });
+
+    });
+
+    });
+</script>
 </body>
 </html>

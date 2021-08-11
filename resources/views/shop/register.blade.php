@@ -93,7 +93,7 @@
             
             $.ajax({
             type:'get',
-            url:'{{ route('check-email-register') }}',
+            url:'{{ route('check-email') }}',
             data:{ email:emailInput },
             success:function(data){
                 // alert(data);

@@ -72,6 +72,7 @@
                     <label for="email">Email</label>
                     <input type="text" id="email" name="email" class="form-control"/>
                 </div>
+                <div ><span id="messageEmail" class="text-danger"></span></div>
                 <div class="form-group">
                   <label for="address">Address</label>
                   <input type="text" id="address" name="address" class="form-control"/>
@@ -94,4 +95,39 @@
     </div>
   </section>
   <!-- /.content -->
+@endsection
+
+@section('myscripts')
+{{--     
+<script>
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+
+    $(document).ready(function(){
+
+    $("#email").keyup(function(){
+        emailInput = $(this).val();
+        
+        $.ajax({
+        type:'get',
+        url:'{{ route('admin.check-email') }}',
+        data:{ email:emailInput },
+        success:function(data){
+            // alert(data);
+            if(data==1){
+                $("#messageEmail").html('Email is exist');
+            }else{
+                $("#messageEmail").html('');
+            }
+        }
+        });
+
+    });
+
+    });
+</script> --}}
+
 @endsection
