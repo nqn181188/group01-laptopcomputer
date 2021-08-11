@@ -102,9 +102,6 @@
 @endsection
 @section('my-scripts')
     <script type="text/javascript">
-        $('.model').load(function(){
-            $('.product-gallery').on();
-        })
         $.ajaxSetup({
 			headers:{
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
