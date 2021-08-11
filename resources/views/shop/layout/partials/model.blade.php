@@ -14,10 +14,11 @@
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 main-content-area">
                         <div class="wrap-product-detail">
                             <div class="detail-media">
+                                {{-- <img class="first-image" src="{{asset('assets/images/products/digital_18.jpg')}}" alt="product thumbnail" /> --}}
                                 <div class="product-gallery">
                                   <ul class="slides">
                                         <li data-thumb="{{asset('assets/images/products/digital_18.jpg')}}">
-                                        <img src="{{asset('assets/images/products/digital_18.jpg')}}" alt="product thumbnail" />
+                                        <img src="{{asset('assets/images/products/digital_18.jpg')}}" />
                                         </li>
                                         <li data-thumb="{{asset('assets/images/products/digital_17.jpg')}}">
                                             <img src="{{asset('assets/images/products/digital_17.jpg')}}" alt="product thumbnail" />
@@ -80,7 +81,7 @@
                                 <div class="quantity">
                                     <span>Quantity:</span>
                                     <div class="quantity-input">
-                                        <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
+                                        <input type="text" name="" value="1" data-max="120" pattern="[0-9]*" >
                                         
                                         <a class="btn btn-reduce" href="#"></a>
                                         <a class="btn btn-increase" href="#"></a>
@@ -106,4 +107,4 @@
   
       </div>
     </div>
-  </div>
+</div>

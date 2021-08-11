@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -14,8 +15,15 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        $brands=Brand::all();
         $paginate=12;
+        if($request->check_category){
+            $category = $request->check_category;
+        }else{
+            $category[]=1;
+        }
+        
         $products = Product::where('id','!=','0')->orderBy('featured','desc');
         $orderby='featured';
         if($request->orderby){
@@ -35,6 +43,8 @@ class ShopController extends Controller
             'products',
             'paginate',
             'orderby',
+            'brands',
+            'category'
         ));
 
     }

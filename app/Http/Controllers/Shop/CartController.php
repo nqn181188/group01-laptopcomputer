@@ -156,6 +156,7 @@ class CartController extends Controller
         
     
         session()->forget('cart');
+        return redirect()->route('home');
     
     }
 }
