@@ -62,6 +62,16 @@ class CustomerController extends Controller
         return redirect()->route('home');
     }
 
+    public function checkEmailRegister(Request $request){
+        $email = $request->email;
+        $customer = Customer::where('email',$email)->first();
+        $result = false;
+        if (isset($customer)){
+            $result = true;
+        }
+        return $result;
+    }
+
     public function register()
     {
         return view('shop.register');
