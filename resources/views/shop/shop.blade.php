@@ -140,5 +140,6 @@
                 $('#sort-item').submit();
             });
         });
+
     </script>
 @endsection
