@@ -35,6 +35,8 @@ Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
 Route::get('/customer/process-logout','Shop\CustomerController@processLogout')->name('customer.process-logout');
 Route::get('/register','Shop\CustomerController@register')->name('register');
+Route::get('/check-email-register','Shop\CustomerController@checkEmailRegister')->name('check-email-register');
+
 // Route::get('/customer/{customer}/my-account','Shop\CustomerController@myAccount')->name('my-account');
 route::resource('customer', 'Shop\CustomerController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');

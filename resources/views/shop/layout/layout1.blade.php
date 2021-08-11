@@ -49,6 +49,8 @@
 	<script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.sticky.js')}}"></script>
 	<script src="{{asset('assets/js/functions.js')}}"></script>
+	<script src="{{asset('dist/js/myjs.js')}}"></script>
+	
 	@yield('my-scripts')
 </body>
 </html>
