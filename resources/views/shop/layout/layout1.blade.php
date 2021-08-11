@@ -16,6 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/css/flexslider.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
+		@yield('my-css')
 	</head>
 <body class="home-page home-01 ">
 

@@ -1,7 +1,7 @@
-@extends('shop.layout.layout2')
+@extends('shop.layout.layout1')
 @section('contents')
+@include('shop.layout.partials.model')
 <div class="container">
-    @include('shop.layout.partials.model')
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="#" class="link">home</a></li>
@@ -9,6 +9,7 @@
         </ul>
     </div>
     <div class="row">
+        <form id="sort-item">
         @include('shop.layout.partials.sidebar')
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 
@@ -18,7 +19,7 @@
 
                 <div class="wrap-right">
 
-                    <form id="sort-item">
+                    
                         <div class="sort-item orderby">
                             <select name="orderby" class="use-chosen">
                                 @if (isset($page))
@@ -29,7 +30,6 @@
                                 <option value="price-desc"{{$orderby=='price_desc'?'selected':''}}>Sort by price: High to Low</option>
                             </select>
                         </div>
-    
                         <div class="sort-item product-per-page">
                                 <select name="post_per_page" class="use-chosen">
                                 <option value="6" {{$paginate=='9'?'selected':''}}>6 per page</option>
@@ -39,6 +39,7 @@
                                 <option value="36" {{$paginate=='36'?'selected':''}}>36 per page</option>
                             </select>
                         </div>
+                        <input type="hidden" value="{{$products->currentPage()}}" name="page">
                     </form>
 
                 </div>
@@ -48,6 +49,8 @@
             <div class="row">
                 <ul class="product-list grid-products equal-container">
                     @foreach ($products as $item)
+                    <form>
+                    @csrf
                     <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
                         <div class="product product-style-3 product-style-2 equal-elem ">
                             <div class="product-thumnail">
@@ -60,7 +63,7 @@
                                     @endif
                                 </div>
                                 <div class="wrap-btn">
-                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id ="{{$item->id}}">
                                     {{-- <a href="#" class="function-link">quick view</a> --}}
                                 </div>
                             </div>
@@ -71,10 +74,10 @@
                             </div>
                         </div>
                     </li>
+                    </form>
                     @endforeach
                     
                 </ul>
-
             </div>
 
             <div class="wrap-pagination-info">
@@ -99,13 +102,16 @@
 @endsection
 @section('my-scripts')
     <script type="text/javascript">
-        // $.ajaxSetup({
-		// 	headers:{
-		// 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		// 	}
-		// });
+        $('.model').load(function(){
+            $('.product-gallery').on();
+        })
+        $.ajaxSetup({
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
         $('.quickview').click(function(){
-            var product_id = $(this).data("id_product");
+            var product_id = $(this).data("product_id");
             var _token = $('input[name="_token"]').val();
             $.ajax({
                 url: '{{route('quick-view')}}',
@@ -134,11 +140,5 @@
                 $('#sort-item').submit();
             });
         });
-        $(function(){
-            $('body').load(function(){
-                $('#sort-item').submit();
-            });
-        });
-
     </script>
 @endsection

@@ -42,6 +42,7 @@
                                 <option value="36" {{$paginate=='36'?'selected':''}}>36 per page</option>
                             </select>
                         </div>
+                        <input type="hidden" value="{{$searchproducts->currentPage()}}" name="page">
                     </form>
                 </div>
 
@@ -51,6 +52,8 @@
 
                 <ul class="product-list grid-products equal-container">
                     @foreach ($searchproducts as $item)
+                    <form>
+                    @csrf
                     <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
                         <div class="product product-style-2 product-style-3 equal-elem ">
                             <div class="product-thumnail">
@@ -63,7 +66,7 @@
                                     @endif
                                 </div>
                                 <div class="wrap-btn">
-                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id="{{$item->id}}">
                                     {{-- <a href="#" class="function-link">quick view</a> --}}
                                 </div>
                             </div>
@@ -74,6 +77,7 @@
                             </div>
                         </div>
                     </li>
+                    </form>
                     @endforeach
                     
                     
@@ -150,7 +154,7 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                 </div>
                             </div>
                         </li>
@@ -338,6 +342,36 @@
 @endsection
 @section('my-scripts')
     <script type="text/javascript">
+        $.ajaxSetup({
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+        $('.quickview').click(function(){
+            var product_id = $(this).data("product_id");
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{{route('quick-view')}}',
+                type: 'POST',
+                dataType: "JSON",
+                data: {product_id:product_id, _token:_token},
+                success:function(data){
+                    $('#quickview_name').html(data.name);
+                    $('#quickview_price').html(data.price);
+                    $('#quickview_cpu').html(data.cpu);
+                    $('#quickview_image').html(data.image);
+                    $('#quickview_ram').html(data.ram);
+                    $('#quickview_screensize').html(data.screensize);
+                    $('#quickview_gcard').html(data.gcard);
+                    $('#quickview_hd').html(data.hd);
+                    $('#quickview_dimension').html(data.dimension);
+                    $('#quickview_weight').html(data.weight);
+                    $('#quickview_os').html(data.os);
+                    $('#quickview_releaseyear').html(data.releaseyear);
+                    $('#quickview_avail').html(data.avail);
+                }
+            });
+        });
         $(function(){
             $('.use-chosen').change(function(){
                 $('#sort-item').submit();
