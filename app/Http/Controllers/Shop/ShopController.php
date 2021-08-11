@@ -16,16 +16,34 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {   
-        $brands=Brand::all();
         $paginate=12;
-        if($request->check_category){
-            $category = $request->check_category;
-        }else{
-            $category[]=1;
+        $brands=Brand::all();
+        $rams = Product::select('amountofram')->distinct()->orderBy('amountofram','asc')->get();
+        $hds = Product::select('hdcapacity','hdtype')->distinct()->orderBy('hdcapacity','asc')->get();
+        $screensizes = Product::select('screensize')->distinct()->orderBy('screensize','asc')->get();
+        $checked_brands=array();
+        $checked_rams=array();
+        $checked_hds=array();
+        $checked_screensizes=array();
+
+        $products = Product::where('id','!=',0)->orderBy('featured','desc');
+        if($request->checked_brands){
+            $checked_brands = $request->checked_brands;
+            $products->whereIn('brand_id',$checked_brands);
         }
-        
-        $products = Product::where('id','!=','0')->orderBy('featured','desc');
-        $orderby='featured';
+        if($request->checked_rams){
+            $checked_rams = $request->checked_rams;
+            $products->whereIn('amountofram',$checked_rams);
+        }
+        if($request->checked_hds){
+            $checked_hds = $request->checked_hds;
+            $products->whereIn('hdcapacity',$checked_hds);
+        }
+        if($request->checked_screensizes){
+            $checked_screensizes = $request->checked_screensizes;
+            $products->whereIn('screensize',$checked_screensizes);
+        }
+        $orderby='';
         if($request->orderby){
             $orderby=$request->orderby;
             switch ($orderby){
@@ -44,7 +62,14 @@ class ShopController extends Controller
             'paginate',
             'orderby',
             'brands',
-            'category'
+            'checked_brands',
+            'rams',
+            'checked_rams',
+            'hds',
+            'checked_hds',
+            'screensizes',
+            'checked_screensizes',
+
         ));
 
     }

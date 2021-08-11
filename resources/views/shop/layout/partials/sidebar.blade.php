@@ -1,25 +1,48 @@
 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
     
     <div class="widget mercado-widget filter-widget brand-widget">
-        <h2 class="widget-title">Brand</h2>
+        {{-- BRAND --}}
         <div class="widget-content">
             <ul class="list-style vertical-list list-limited" data-show="6">
+                <h5 style="border-bottom:1px solid grey;padding-bottom:10px;font-weight:bold">BRAND</h5>
                 @foreach ($brands as $brand)
                     <div class="checkbox use-chosen">
-                    <label ><input type="checkbox" name="check_category[]" {{in_array($brand->brand,$category)?'checked':''}} value="{{$brand->brand}}">{{$brand->brand}}</label>
+                    <label ><input type="checkbox" name="checked_brands[]" {{in_array($brand->id,$checked_brands)?'checked':''}} value="{{$brand->id}}">{{$brand->brand}}</label>
                   </div>
                 @endforeach
-                {{-- @foreach ($brands as $brand)
-                @php
-                    $para = $brand->brand;
-                @endphp
-                <li class="list-item"><a class="filter-link {{in_array($para, $parameter)?'active':''}}" href="{{ request()->fullUrlWithQuery([$para => $brand->brand]) }}"><img src="{{asset('images/brands/'.$brand->image)}}" alt=""></a></li>
+            </ul>
+        </div>
+        {{-- RAM --}}
+        <div class="widget-content">
+            <ul class="list-style vertical-list list-limited" data-show="6">
+                <h5 style="border-bottom:1px solid grey;padding-bottom: 10px;padding-top: 10px;font-weight:bold">SYSTEM RAM</h5>
+                @foreach ($rams as $ram)
+                    <div class="checkbox use-chosen">
+                    <label ><input type="checkbox" name="checked_rams[]" {{in_array($ram->amountofram,$checked_rams)?'checked':''}} value="{{$ram->amountofram}}">{{$ram->amountofram}} GB</label>
+                  </div>
                 @endforeach
-                {{-- <li class="list-item default-hiden"><a class="filter-link " href="#">Printer & Ink</a></li>
-                <li class="list-item default-hiden"><a class="filter-link " href="#">CPUs & Prosecsors</a></li>
-                <li class="list-item default-hiden"><a class="filter-link " href="#">Sound & Speaker</a></li>
-                <li class="list-item default-hiden"><a class="filter-link " href="#">Shop Smartphone & Tablets</a></li>
-                <li class="list-item"><a data-label='Show less<i class="fa fa-angle-up" aria-hidden="true"></i>' class="btn-control control-show-more" href="#">Show more<i class="fa fa-angle-down" aria-hidden="true"></i></a></li> --}}
+            </ul>
+        </div>
+        {{-- HARD DRIVER --}}
+        <div class="widget-content">
+            <ul class="list-style vertical-list list-limited" data-show="6">
+                <h5 style="border-bottom:1px solid grey;padding-bottom: 10px;padding-top: 10px;font-weight:bold">HARD DRIVE</h5>
+                @foreach ($hds as $hd)
+                    <div class="checkbox use-chosen">
+                    <label ><input type="checkbox" name="checked_hds[]" {{in_array($hd->hdcapacity,$checked_hds)?'checked':''}} value="{{$hd->hdcapacity}}">{{$hd->hdcapacity}} GB {{$hd->hdtype}}</label>
+                  </div>
+                @endforeach
+            </ul>
+        </div>
+        {{-- SCREEN SIZE --}}
+        <div class="widget-content">
+            <ul class="list-style vertical-list list-limited" data-show="6">
+                <h5 style="border-bottom:1px solid grey;padding-bottom: 10px;padding-top: 10px;font-weight:bold">SCREEN SIZE</h5>
+                @foreach ($screensizes as $screensize)
+                    <div class="checkbox use-chosen">
+                    <label ><input type="checkbox" name="checked_screensizes[]" {{in_array($screensize->screensize,$checked_screensizes)?'checked':''}} value="{{$screensize->screensize}}">{{$screensize->screensize}} inches</label>
+                  </div>
+                @endforeach
             </ul>
         </div>
     </div><!-- brand widget-->
