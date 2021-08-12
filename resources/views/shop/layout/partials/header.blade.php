@@ -27,7 +27,7 @@
             <div class="mid-section main-info-area">
 
                 <div class="wrap-logo-top left-section">
-                    <a href="{{route('home')}}" class="link-to-home"><img src="{{asset('images/logo.png')}}" alt="mercado"></a>
+                    <a href="{{route('home')}}" class="link-to-home"><img style="height: 80%" src="{{asset('images/logo.png')}}" alt="mercado"></a>
                 </div>
 
                 <div class="wrap-search center-section">

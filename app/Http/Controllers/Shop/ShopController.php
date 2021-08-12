@@ -21,20 +21,29 @@ class ShopController extends Controller
         $rams = Product::select('amountofram')->distinct()->orderBy('amountofram','asc')->get();
         $hds = Product::select('hdcapacity','hdtype')->distinct()->orderBy('hdcapacity','asc')->get();
         $screensizes = Product::select('screensize')->distinct()->orderBy('screensize','asc')->get();
+        $cputypes = Product::select('cputype')->distinct()->orderBy('cputype','asc')->get();
         $checked_brands=array();
         $checked_rams=array();
         $checked_hds=array();
         $checked_screensizes=array();
+        $checked_gcards=array();
+        $checked_cputypes=array();
+        $checked_price='';
 
         $products = Product::where('id','!=',0)->orderBy('featured','desc');
         if($request->checked_brands){
             $checked_brands = $request->checked_brands;
             $products->whereIn('brand_id',$checked_brands);
         }
+        if($request->checked_cputypes){
+            $checked_cputypes = $request->checked_cputypes;
+            $products->whereIn('cputype',$checked_cputypes);
+        }
         if($request->checked_rams){
             $checked_rams = $request->checked_rams;
             $products->whereIn('amountofram',$checked_rams);
         }
+        
         if($request->checked_hds){
             $checked_hds = $request->checked_hds;
             $products->whereIn('hdcapacity',$checked_hds);
@@ -43,13 +52,35 @@ class ShopController extends Controller
             $checked_screensizes = $request->checked_screensizes;
             $products->whereIn('screensize',$checked_screensizes);
         }
+        if($request->checked_gcards){
+            $checked_gcards = $request->checked_gcards;
+            if(count($checked_gcards)==1){
+                if ($checked_gcards[0]=='onboard'){
+                    $products->where('gcard','like','%'.'intel'.'%');
+                }else{
+                    $products->where('gcard','like','%'.'nvidia'.'%');
+                }
+            }
+        }
+        if($request->checked_price!=''){
+            $checked_price = $request->checked_price;
+            // dd($checked_price);
+            switch($checked_price){
+                case '0' : $products->whereBetween('price',[0,500]); break;
+                case '500' : $products->whereBetween('price',[500,1000]); break;
+                case '1000' : $products->whereBetween('price',[1000,1500]); break;
+                case '1500' : $products->whereBetween('price',[1500,2000]); break;
+                case '2000' : $products->where('price','>=','2000'); break;
+                default : $products=$products;
+            }
+        }
         $orderby='';
         if($request->orderby){
             $orderby=$request->orderby;
             switch ($orderby){
-                case 'price-asc' : $products->orderBy('price','asc');
-                case 'price-desc' : $products->orderBy('price','desc');
-                default : $products->orderBy('featured','desc');
+                case 'price-asc' : $products->orderBy('price','asc'); break;
+                case 'price-desc' : $products->orderBy('price','desc'); break;
+                default : $products->orderBy('featured','desc'); break;
             }
         }
         if($request->post_per_page){
@@ -69,6 +100,10 @@ class ShopController extends Controller
             'checked_hds',
             'screensizes',
             'checked_screensizes',
+            'checked_gcards',
+            'cputypes',
+            'checked_cputypes',
+            'checked_price',
 
         ));
 
