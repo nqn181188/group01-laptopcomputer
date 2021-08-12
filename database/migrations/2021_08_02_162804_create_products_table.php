@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('model');
             $table->text('description')->nullable();
             $table->string('cpu')->nullable();
+            $table->string('cputype')->nullable();
             $table->unsignedTinyInteger('amountofram')->nullable();
             $table->string('typeofram')->nullable();
             $table->float('screensize',3,1)->nullable();

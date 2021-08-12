@@ -11,6 +11,6 @@ class Product extends Model
     protected $table = 'products';
     //mô hình mass assignment
     protected $fillable = ['name','price','quantity','featured','image','brand_id','model',
-                            'description','cpu','amountofram','typeofram','screensize','gcard',
+                            'description','cpu','cputype','amountofram','typeofram','screensize','gcard',
                             'hdtype','hdcapacity','width','depth','height','weight','os','releaseyear'];
 }
