@@ -9,7 +9,7 @@
         </ul>
     </div>
     <div class=" main-content-area">
-        <form action="#" method="post" name="frm-billing">
+        <form action="{{ route('do-checkout') }}" method="post" name="frm-billing">
             @csrf
             <div class="wrap-address-billing">
                 <h3 class="box-title">Billing Address</h3>

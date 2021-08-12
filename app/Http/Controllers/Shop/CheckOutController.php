@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Customer;
 use App\Models\OrderDetail;
+use App\Models\CartItem;
 class CheckOutController extends Controller
 {
     /**
@@ -119,7 +120,7 @@ class CheckOutController extends Controller
             $cust = new Customer();
             $cust->firstname = $fname;
             $cust->lastname = $lname;
-            $cust->username = $email;
+         
             $cust->password = \md5('123456');
             $cust->email = $email;
             $cust->phone = $phone;
