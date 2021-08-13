@@ -94,13 +94,27 @@ class CheckOutController extends Controller
         $add = $request->add;
         if ($request->session()->has('cart')) {
             $cart = $request->session()->get('cart');
+
+            if (isset($request->createAccount)) {
+                $cust = new Customer();
+                $cust->firstname = $fname;
+                $cust->lastname = $lname;
+             
+                $cust->password = \md5('123456');
+                $cust->email = $email;
+                $cust->phone = $phone;
+                $cust->address = $add;
+                $cust->save();
+            }
             // tạo và lưu order
             $ord = new Order();
+            $ord->cust_id=$cust->id;
             $ord->firstname = $fname;
             $ord->lastname = $lname;
             $ord->email = $email;
             $ord->phone = $phone;
             $ord->address = $add;
+           
             $ord->order_date = \Carbon\Carbon::now();
             // lưu order
             $ord->save();
@@ -116,17 +130,7 @@ class CheckOutController extends Controller
             }
         }
 
-        if (isset($request->createAccount)) {
-            $cust = new Customer();
-            $cust->firstname = $fname;
-            $cust->lastname = $lname;
-         
-            $cust->password = \md5('123456');
-            $cust->email = $email;
-            $cust->phone = $phone;
-            $cust->address = $add;
-            $cust->save();
-        }
+    
 
         // xóa session
         session()->forget('cart');

@@ -10,6 +10,9 @@
     </div>
     <div class=" main-content-area">
         <form action="{{ route('do-checkout') }}" method="post" name="frm-billing">
+            @php
+            $total = 0;
+            @endphp
             @csrf
             <div class="wrap-address-billing">
                 <h3 class="box-title">Billing Address</h3>
@@ -69,7 +72,7 @@
                             <span class="payment-desc">card if you don't have a paypal account</span>
                         </label>
                     </div>
-                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">$100.00</span></p>
+                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">@if(Session::has('cart')){{number_format($total)}}@endif đ</span></p>
                     {{-- <a href="thankyou.html" class="btn btn-medium">Place order now</a> --}}
                     <button type="submit" class="btn btn-medium">Place order now</button>
                 </div>
