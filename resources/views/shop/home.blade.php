@@ -205,6 +205,7 @@
                     $('#quickview_price').html(data.price);
                     $('#quickview_cpu').html(data.cpu);
                     $('#quickview_image').html(data.image);
+                    $('#quickview_gallery').html(data.gallery);
                     $('#quickview_ram').html(data.ram);
                     $('#quickview_screensize').html(data.screensize);
                     $('#quickview_gcard').html(data.gcard);

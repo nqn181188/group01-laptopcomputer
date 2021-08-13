@@ -20,16 +20,17 @@ class QuickViewController extends Controller
         $output['avail']=$product->quantity>0?'In Stock':'Out Of Stock';
         $output['name']=$product->name;
         $output['price']='$'.number_format($product->price, 0, '.', ',');
-        $output['image']=$product->image;
-        $output['cpu']='CPU: '.$product->cpu;
-        $output['ram']='RAM: '.$product->amountofram.'GB '.$product->typeofram;
-        $output['screensize']='SCREEN SIZE: '.$product->screensize.'"';
-        $output['gcard']='GRAPHIC CARD: '.$product->gcard;
-        $output['hd']='HARD DRIVER: '.$product->hdcapacity.' GB '.$product->hdtype;
-        $output['dimension']='DIMENSION: '.$product->width.' x '.$product->depth.' x '.$product->height.' (mm)';
-        $output['weight']='WEIGHT: '.$product->weight. ' kg';
-        $output['os']='OS: '.$product->os;
-        $output['releaseyear']='RELEASE YEAR: '.$product->releaseyear;
+        $output['image']= '<img src="images/products/'.$product->image.'" alt="">';
+
+        $output['cpu']=$product->cpu;
+        $output['ram']=$product->amountofram.'GB '.$product->typeofram;
+        $output['screensize']=$product->screensize.'"';
+        $output['gcard']=$product->gcard;
+        $output['hd']=$product->hdcapacity.' GB '.$product->hdtype;
+        $output['dimension']=$product->width.' x '.$product->depth.' x '.$product->height.' (mm)';
+        $output['weight']=$product->weight. ' kg';
+        $output['os']=$product->os;
+        $output['releaseyear']=$product->releaseyear;
         echo json_encode($output);
     }
 }
