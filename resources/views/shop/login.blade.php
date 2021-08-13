@@ -80,6 +80,8 @@
                 // alert(data);
                 if(data==1){
                     $("#messageEmail").html('');
+                }else if(!emailInput){
+                    $("#messageEmail").html('');
                 }else{
                     $("#messageEmail").html('Email is not exist');
                 }
