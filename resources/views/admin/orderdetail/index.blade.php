@@ -11,7 +11,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Order</li>
+            <li class="breadcrumb-item active">Order Detail</li>
           </ol>
         </div>
       </div>
@@ -41,29 +41,30 @@
             <thead>
                 <tr>
                   <th>Order </th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>Product </th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Ship First Name</th>
+                  <th> Ship Last Name</th>
+                  <th>Ship Email</th>
+                  <th>Ship Phone</th>
+                  <th>Ship Address</th>
+                 
                 </tr>
             </thead>
-            <tbody>
-              @foreach($order as $item)
+             <tbody>
+              @foreach($orderdetail as $item)
               <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->firstname}}</td>
-                <td>{{$item->lastname}}</td>
-                <td>{{$item->email}}</td>
-                <td>{{$item->phone}}</td>
-                <td>{{$item->address}}</td>
-                <td class="text-center align-middle">
-                  @if($item->status)
-                    <span class="badge badge-success">Status</span>
-                  @endif
-                </td>
+                <td>{{$item->order_id}}</td>
+                <td>{{$item->product_id}}</td>
+                <td>{{$item->price}}</td>
+                <td>{{$item->quantity}}</td>
+                <td>{{$item->shipfirstname}}</td>
+                <td>{{$item->shiplastname}}</td>
+                <td>{{$item->shipemail}}</td>
+                <td>{{$item->shipphone}}</td>
+                <td>{{$item->shipaddress}}</td>
+               
                 <td>
                   @if ((session('user')->id==$item->id) || session('user')->role==2 )
                       
@@ -80,8 +81,8 @@
               @endforeach
             </tbody>
         </table>
-      </div>
-      <!-- /.card-body -->
+      </div> 
+      <!-- /.card-body --> 
     </div>
     <!-- /.card -->
 
