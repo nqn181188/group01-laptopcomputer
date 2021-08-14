@@ -1,5 +1,4 @@
 @extends('admin.layout.layout')
-
 @section('contents')
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -10,7 +9,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item active">Product</li>
           </ol>
         </div>
@@ -23,87 +22,154 @@
 
     <!-- Default box -->
     <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Product</h3>
-
-        <div class="card-tools">
-          <a href="{{ route('admin.product.create') }}"><i class="fas fa-user-plus"></i></a>
-          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-            <i class="fas fa-times"></i>
-          </button>
+        <div class="card-header">
+            <form id="filter-products" class="form-inline">
+              @if (isset($page))
+              <input type="hidden" value={{$page}} name=page>
+              @endif
+              <div class="row">
+                  <div class="d-inline use-chosen">
+                    <input name="name" type="text" class="form-control search-name" value="{{$name}}" id="name" placeholder="Search by name...">
+                  </div>
+                  <div class="d-inline px-2">
+                    <select class="form-control use-chosen" name="brand_id">
+                      <option value=''>Brand</option>
+                      @foreach ($brands as $brand)
+                        <option {{$brand->id==$brand_id?'selected':''}} value='{{$brand->id}}'>{{$brand->brand}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="d-inline px-2">
+                    <select class="form-control use-chosen" name="price">
+                      <option {{$price==1?'selected':''}}value='1'>Price</option>
+                      <option {{$price==0?'selected':''}} value='0'>$0 - $500</option>
+                      <option {{$price==500?'selected':''}} value='500'>$500 - $1000</option>
+                      <option {{$price==1000?'selected':''}} value='1000'>$1000 - $1500</option>
+                      <option {{$price==1500?'selected':''}} value='1500'>$1500 - $2000</option>
+                      <option {{$price==2000?'selected':''}}value='2000'>$2000+</option>
+                    </select>
+                  </div>
+                  <div class="d-inline px-2">
+                    <select class="form-control use-chosen" name="sortby">
+                      <option value=''>Sort by</option>
+                      <option {{$sortby=='price-asc'?'selected':''}} value='price-asc'>Sort by price: Low to High</option>
+                      <option {{$sortby=='price-desc'?'selected':''}} value='price-desc'>Sort by price: High to Low</option>
+                      <option {{$sortby=='name-asc'?'selected':''}} value='name-asc'>Sort by name : A-Z</option>
+                      <option {{$sortby=='name-desc'?'selected':''}} value='name-desc'>Sort by name : Z-A</option>
+                    </select>
+                  </div>
+                  <div class="d-inline px-2">
+                    <select class="form-control use-chosen" name="paginate">
+                      <option {{$paginate=='6'?'selected':''}} value='6'>6 per page</option>
+                      <option {{$paginate=='12'?'selected':''}} value='12'>12 per page</option>
+                      <option {{$paginate=='18'?'selected':''}} value='18'>18 per page</option>
+                      <option {{$paginate=='24'?'selected':''}} value='24'>24 per page</option>
+                      <option {{$paginate=='36'?'sele   cted':''}} value='36'>36 per page</option>
+                    </select>
+                  </div>
+                  <div class="d-inline px-2">
+                    <div class="form-check-inline use-chosen">
+                      <label class="form-check-label pt-2">
+                        <input name="featured" type="checkbox" class="form-check-input" value="1">Featured
+                      </label>
+                    </div>
+                  </div>
+                  <div class="d-inline px-2 use-chosen">
+                    <div class="form-check-inline">
+                      <label class="form-check-label pt-2">
+                        <input name="new" type="checkbox" class="form-check-input" value="1">New
+                      </label>
+                    </div>
+                  </div>
+                  
+              </div>
+            </form>
         </div>
-      </div>
+        
       <div class="card-body p-0">
-        <table class="table table-striped projects">
-            <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Featured</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Brand</th>
-                  <th>Model</th>
-                  <th>Description</th>
-                  <th>Image</th>
-                  <th>CPU</th>
-                  <th>Amount of RAM (GB)</th>
-                  <th>Screen Size (inches)</th>
-                  <th>Graphic Card</th>
-                  <th>Hard Driver Capacity</th>
-                  <th>Hard Drive Type</th>
-                  <th>Width (mm)</th>
-                  <th>Depth (mm)</th>
-                  <th>Height (mm)</th>
-                  <th>Weight (kg)</th>
-                  <th>OS Information</th>
-                  <th>Release Year</th>
-                  <th>Action</th>
-                </tr>
-            </thead>
-            {{-- <tbody>
-              @foreach($products as $item)
+        <table class="table table-striped project ">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-center align-middle" style="width: 5%">Roll Number</th>
+              <th class="text-center align-middle" style="width: 15%">Image</th>
+              <th class="text-center align-middle" style="width: 35%">Name</th>
+              <th class="text-center align-middle" style="width: 5%">Quantity</th>
+              <th class="text-center align-middle" style="width: 5%">Price</th>
+              <th class="text-center align-middle" style="width: 5%">Featured</th>
+              <th class="text-center align-middle" style="width: 30%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @php
+                $count=1;
+            @endphp
+            @foreach ($products as $item)
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="text-center align-middle">
+                  <span>{{$count++}}</span>
+                </td>
                 <td>
-                  <a href="{{ route('admin.product.edit', $item->id) }}" class="btn btn-primary">Update</a>
-                  <form style="display:inline-block" action="{{ route('admin.product.destroy', $item->id) }}" method="POST">
+                    @if($item->image!=null)
+                    <img src="{{asset('/images/products/'.$item->image)}}" alt="{{$item->image}}" style="width: 50%">
+                    @endif
+                </td>
+                <td class="align-middle">{{$item->name}}</td>
+                <td class="text-center align-middle">{{$item->quantity}}</td>
+                <td class="text-center align-middle">{{$item->price}}</td>
+                <td class="text-center align-middle">
+                  @if($item->featured)
+                    <span class="badge badge-success">Featured</span>
+                  @endif
+                </td>
+                <td>
+                  <a href="{{route('admin.product.edit',$item->id)}}" class="btn btn-primary">Update</a>
+                  <form style="display:inline-block" action="{{route('admin.product.destroy',$item->id)}}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>
                   </form>
                 </td>
               </tr>
-              @endforeach
-            </tbody> --}}
+            @endforeach
+          </tbody>
         </table>
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <li class="page-item {{$products->currentPage()==1?'disabled':''}}">
+                    <a href="{{request()->fullUrlWithQuery(['page' => 1]) }} " class="page-link">First</a>
+                </li>
+                <li class="page-item {{$products->currentPage()==1?'disabled':''}}">
+                    <a href="{{request()->fullUrlWithQuery(['page' => $products->currentPage()-1])}}" class="page-link">Previous</a>
+                </li>
+                @for ($i = 1; $i<=$products->lastPage(); $i++)
+                  <li class="page-item {{$products->currentPage()==$i?'active':''}}" ><a class="page-link" href="{{request()->fullUrlWithQuery(['page' => $i])}}">{{$i}}</a></li>
+                @endfor
+                <li class="page-item {{$products->currentPage()==$products->lastPage()?'disabled':''}}">
+                  <a href="{{request()->fullUrlWithQuery(['page' => $products->currentPage()+1])}}" class="page-link">Next</a>
+                </li>
+                <li class="page-item {{$products->currentPage()==$products->lastPage()?'disabled':''}}">
+                  <a href="{{request()->fullUrlWithQuery(['page' => ceil($products->total()/$paginate)])}}" class="page-link">Last</a>
+                </li>
+            </ul>
+            <p class="text-center text-secondary">Showing {{($products->currentPage()-1)*$paginate+1}}-{{($products->currentPage()-1)*$paginate+$products->count()}} of {{$products->total()}}</p>
+        </nav>
       </div>
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
 
   </section>
-  <!-- /.content -->
+  <!-- /.content -->   
+@endsection
+@section('my-scripts')
+    <script type="text/javascript">
+        $(function(){
+            $('.use-chosen').change(function(){
+                $('#filter-products').submit();
+            });
+            $('.search-name').change(function(){
+                $('#filter-products').submit();
+            });
+        });
+    </script>
 @endsection

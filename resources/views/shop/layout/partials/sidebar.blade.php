@@ -70,9 +70,9 @@
         <div class="widget-content">
             <ul class="list-style vertical-list list-limited" data-show="6">
                 <h5 style="border-bottom:1px solid grey;padding-bottom: 10px;padding-top: 10px;font-weight:bold">PRICE</h5>
-                    <div class="checkbox use-chosen">
+                    <div class="checkbox">
                         <div class="form-group">
-                            <select class="form-control" name="checked_price" id="sel1">
+                            <select class="form-control use-chosen" name="checked_price" id="sel1">
                               <option value="">Choose a range of price</option>
                               <option value="0" {{$checked_price=='0'?'selected':''}}>$0 - $500</option>
                               <option value="500" {{$checked_price=='500'?'selected':''}}>$500 - $1000</option>

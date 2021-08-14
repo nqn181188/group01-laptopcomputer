@@ -16,7 +16,7 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {   
-        $paginate=12;
+        $paginate=$request->post_per_page??12;
         $brands=Brand::all();
         $rams = Product::select('amountofram')->distinct()->orderBy('amountofram','asc')->get();
         $hds = Product::select('hdcapacity','hdtype')->distinct()->orderBy('hdcapacity','asc')->get();
@@ -82,9 +82,6 @@ class ShopController extends Controller
                 case 'price-desc' : $products->orderBy('price','desc'); break;
                 default : $products->orderBy('featured','desc'); break;
             }
-        }
-        if($request->post_per_page){
-            $paginate = $request->post_per_page;
         }
         $products=$products->paginate($paginate);
 
