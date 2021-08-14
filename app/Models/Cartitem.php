@@ -13,6 +13,11 @@ Class CartItem{
     public $quantity;
     public $price;
     public $image;
+    public $sfname;
+    public $slname;
+    public $sphone;
+    public $semail;
+    public $sadd;
 
     
     public function __construct($id, $name, $quantity, $price, $image) {
@@ -21,5 +26,10 @@ Class CartItem{
         $this->quantity = $quantity;
         $this->price = $price;
         $this->image = $image;
+        $this->shipemail=$semail;
+        $this->shipphone=$sphone;
+        $this->shipaddress=$sadd;
+        $this->shipname=$sfname;
+        $this->shipname=$slname;
     }
 }
