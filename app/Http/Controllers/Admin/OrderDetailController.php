@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
-class OrderController extends Controller
+
+class OrderDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +16,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
-        $order = Order::all();
-        return view('admin.order.index', compact('order'));
+        // public function orderdetail(){
+        $orderdetail = Orderdetail::all();
+        return view('admin.orderdetail.index', compact('orderdetail'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -85,5 +87,4 @@ class OrderController extends Controller
     {
         //
     }
-   
 }

@@ -87,11 +87,18 @@ class CheckOutController extends Controller
         //
     }
     public function doCheckout(Request $request) {
+        
         $fname = $request->fname;
         $lname = $request->lname;
         $email = $request->email;
         $phone = $request->phone;
         $add = $request->add;
+        $sfname = $request->sfname;
+        $slname = $request->slname;
+        $semail = $request->semail;
+        $sphone = $request->sphone;
+        $sadd = $request->sadd;
+       
         if ($request->session()->has('cart')) {
             $cart = $request->session()->get('cart');
 
@@ -126,6 +133,11 @@ class CheckOutController extends Controller
                 $detail->product_id = $item->id;
                 $detail->quantity = $item->quantity;
                 $detail->price = $item->price;
+                $detail->shipfirstname = $item->sfname;
+                $detail->shiplastname = $item->slname;
+                $detail->shipemail= $item->semail;
+                $detail->shipphone = $item->sphone;
+                $detail->shipaddress = $item->sadd;
                 $detail->save();
             }
         }

@@ -49,6 +49,42 @@
                 </p>
             
             </div>
+
+            <div class="wrap-address-billing">
+                <h3 class="box-title">Shipping Address</h3>
+            
+                <p class="row-in-form">
+                    <label for="fname">Ship first name<span>*</span></label>
+                    <input id="fname" type="text" name="sfname" value="" placeholder="Your name">
+                </p>
+                <p class="row-in-form">
+                    <label for="lname">Ship last name<span>*</span></label>
+                    <input id="lname" type="text" name="slname" value="" placeholder="Your last name">
+                </p>
+                <p class="row-in-form">
+                    <label for="email">ship email addreess:</label>
+                    <input id="email" type="email" name="semail" value="" placeholder="Type your email">
+                </p>
+                <p class="row-in-form">
+                    <label for="phone">Ship phone number<span>*</span></label>
+                    <input id="phone" type="number" name="sphone" value="" placeholder="10 digits format">
+                </p>
+                <p class="row-in-form fill-wife">
+                    <label for="add">Ship address:</label>
+                    <input id="add" type="text" name="sadd" value="" placeholder="Street at apartment number">
+                </p>
+                <p class="row-in-form fill-wife">
+                    <label class="checkbox-field">
+                        <input name="createAccount" id="create-account" value="1" type="checkbox">
+                        <span>Create an account?</span>
+                    </label>
+                    {{-- <label class="checkbox-field">
+                        <input name="different-add" id="different-add" value="forever" type="checkbox">
+                        <span>Ship to a different address?</span>
+                    </label> --}}
+                </p>
+            
+            </div>
             <div class="summary summary-checkout">
                 <div class="summary-item payment-method">
                     <h4 class="title-box">Payment Method</h4>
