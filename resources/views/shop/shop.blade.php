@@ -57,6 +57,7 @@
                                 <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
                                     <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                 </a>
+                                
                                 <div class="group-flash">
                                     @if ($item->featured)
                                     <span class="flash-item sale-label">HOT</span>
@@ -69,6 +70,9 @@
                             </div>
                             <div class="product-info">
                                 <a href="#" class="product-name" style="font-weight: bold"><span>{{$item->name}}</span></a>
+                                <div class="star-rating">
+                                    <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
+                                </div>
                                 <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                 <a href="#" class="btn add-to-cart">Add To Cart</a>
                             </div>

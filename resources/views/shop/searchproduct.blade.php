@@ -72,6 +72,9 @@
                             </div>
                             <div class="product-info">
                                 <a href="#" class="product-name"><span>{{$item->name}}</span></a>
+                                <div class="star-rating">
+                                    <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
+                                </div>
                                 <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                 <a href="#" class="btn add-to-cart">Add To Cart</a>
                             </div>

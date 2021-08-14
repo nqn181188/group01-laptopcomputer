@@ -11,7 +11,18 @@
   <link rel="stylesheet" href="{{asset('/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('/dist/css/adminlte.min.css')}}">
-  
+  <script src="{{asset('/dist/js/myjs.js')}}"></script>
+  <style>
+      .input-err{
+        border: 1px solid rgb(204, 86, 86);
+        box-shadow: 0px 1px 10px 0px rgb(204, 86, 86,0.5);
+      }
+      .errMessager{
+        font-size: 90%;
+        padding-top: 5px;
+      }
+  </style>
+
 
 </head>
 <body class="hold-transition sidebar-mini">

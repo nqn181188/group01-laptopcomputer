@@ -5,12 +5,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Create New Product</h1>
+          <h1>Edit Product</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Product</li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">Product</a></li>
+            <li class="breadcrumb-item active">Edit Product</li>
           </ol>
         </div>
       </div>
@@ -34,14 +35,15 @@
             </div>
         </div>
       <div class="card-body p-0">
-        <form  action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">
+        <form id="create-product-form"  action="{{route('admin.product.update')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-10">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" class="form-control" name="name">
+                            <input type="text" id="name" class="form-control" name="name" value="{{$product->name}}">
+                            <div id="nameErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -55,47 +57,51 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="quantity">Quantity</label>
-                            <input type="text" name="quantity" id="quantity" class="form-control">
+                            <input type="text" name="quantity" id="quantity" class="form-control" value="{{$product->quantity}}">
+                            <div id="quantityErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="price">Price</label>
-                            <input type="text" name="price" id="price" class="form-control">
+                            <input type="text" name="price" id="price" class="form-control" value="{{$product->price}}">
+                            <div id="priceErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="brand_id">Brand</label>
-                            <select name="brand_id" class="custom-select">
-                                <option value='0'>---Select Brand---</option>
-                                <option value="1">Acer</option>
-                                <option value="2">Asus</option>
-                                <option value="3">Dell</option>
-                                <option value="4">HP</option>
-                                <option value="5">Lenovo</option>
-                                <option value="6">MacBook</option>
+                            <label for="brand">Brand</label>
+                            <select name="brand" id="brand" class="custom-select">
+                                <option value="">---Select Brand---</option>
+                                @foreach ($brands as $brand)
+                                <option {{$product->brand_id==$brand->id?'selected':''}} value="{{$brand->id}}">{{$brand->brand}}</option>
+                                @endforeach
                             </select>
+                            <div id="brandErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="model">Model</label>
-                            <input type="text" name="model" id="model" class="form-control">
+                            <input type="text" name="model" id="model" class="form-control" value="{{$product->model}}">
+                            <div id="modelErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                    <textarea class="form-control" rows="5" id="description" name="description" value="{{$product->description}}"></textarea>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="customFile">Image</label>
+                    <input type="hidden" id='check-image' value='1'>
+                    <img  src="{{asset('images/products/'.$product->image)}}" alt="{{$product->name}}" class="w-50">
+                    <label class="form-label" for="image">Image</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="image">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <input type="file" class="custom-file-input" id="image" name="image" value="{{$product->image}}">
+                        <label class="custom-file-label" for="image">Choose file</label>
+                        <div id="imageErr" class="text-danger font-italic errMessager"></div>
                     </div>
                 </div>
                 
@@ -103,26 +109,29 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="cpu">CPU</label>
-                            <input type="text" name="cpu" id="cpu" class="form-control">
+                            <input type="text" name="cpu" id="cpu" class="form-control" value="{{$product->cpu}}">
+                            <div id="cpuErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="amountofram">Amount of RAM (GB)</label>
-                            <input type="text" name="amountofram" id="amountofram" class="form-control">
+                            <input type="text" name="amountofram" id="amountofram" class="form-control" value="{{$product->amountofram}}">
+                            <div id="amountoframErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="typeofram">Type of RAM</label>
-                            <select name="typeofram" class="custom-select">
-                                <option value=''>---Type of RAM---</option>
-                                <option value="DDR4">DDR4</option>
-                                <option value="DDR3">DDR3</option>
-                                <option value="DDR3L">DDR3L</option>
-                                <option value="LPDDR3">LPDDR3</option>
-                                <option value="LPDDR4">LPDDR4</option>
+                            <select name="typeofram" id="typeofram" class="custom-select">
+                                <option value="">---Type of RAM---</option>
+                                <option {{$product->typeofram=="DDR4"?'selected':''}} value="DDR4">DDR4</option>
+                                <option {{$product->typeofram=="DDR3"?'selected':''}} value="DDR3">DDR3</option>
+                                <option {{$product->typeofram=="DDR3L"?'selected':''}} value="DDR3L">DDR3L</option>
+                                <option {{$product->typeofram=="LPDDR3"?'selected':''}} value="LPDDR3">LPDDR3</option>
+                                <option {{$product->typeofram=="LPDDR4"?'selected':''}} value="LPDDR4">LPDDR4</option>
                             </select>
+                            <div id="typeoframErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                 </div>
@@ -130,29 +139,33 @@
                     <div class="col-sm-2">
                         <div class="form-group">
                             <label for="screensize">Screen Size (inches)</label>
-                            <input type="text" name="screensize" id="screensize" class="form-control">
+                            <input type="text" name="screensize" id="screensize" class="form-control" value="{{$product->amountofram}}">
+                            <div id="screensizeErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="gcard">Graphic Card</label>
-                            <input type="text" name="gcard" id="gcard" class="form-control">
+                            <input type="text" name="gcard" id="gcard" class="form-control" value="{{$product->amountofram}}">
+                            <div id="gcardErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="hdcapacity">Hard Driver Capacity</label>
-                            <input type="text" name="hdcapacity" id="hdcapacity" class="form-control">
+                            <input type="text" name="hdcapacity" id="hdcapacity" class="form-control" value="{{$product->amountofram}}">
+                            <div id="hdcapacityErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="hdtype">Hard Drive Type</label>
-                            <select name="hdtype" class="custom-select">
+                            <select name="hdtype" id="hdtype" class="custom-select">
                                 <option value=''>---Type of Hard Driver---</option>
-                                <option value="HDD">HDD</option>
-                                <option value="SSD">SSD</option>
+                                <option {{$product->hdtype=="HDD"?'selected':''}} value="HDD">HDD</option>
+                                <option {{$product->hdtype=="SSD"?'selected':''}} value="SSD">SSD</option>
                             </select>
+                            <div id="hdtypeErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                 </div>
@@ -160,25 +173,29 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="width">Width (mm)</label>
-                            <input type="text" name="width" id="width" class="form-control">
+                            <input type="text" name="width" id="width" class="form-control" value="{{$product->width}}">
+                            <div id="widthErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="depth">Depth (mm)</label>
-                            <input type="text" name="depth" id="depth" class="form-control">
+                            <input type="text" name="depth" id="depth" class="form-control" value="{{$product->depth}}">
+                            <div id="depthErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="height">Height (mm)</label>
-                            <input type="text" name="height" id="height" class="form-control">
+                            <input type="text" name="height" id="height" class="form-control" value="{{$product->height}}">
+                            <div id="heightErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="weight">Weight (kg)</label>
-                            <input type="text" name="weight" id="weight" class="form-control">
+                            <input type="text" name="weight" id="weight" class="form-control" value="{{$product->weight}}">
+                            <div id="weightErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                 </div>
@@ -186,18 +203,20 @@
                     <div class="col-sm-9">
                         <div class="form-group">
                             <label for="os">OS Information</label>
-                            <input type="text" name="os" id="os" class="form-control">
+                            <input type="text" name="os" id="os" class="form-control" value="{{$product->os}}">
+                            <div id="osErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="releaseyear">Release Year</label>
-                            <input type="text" name="releaseyear" id="releaseyear" class="form-control">
+                            <input type="text" name="releaseyear" id="releaseyear" class="form-control" value="{{$product->releaseyear}}">
+                            <div id="releaseyearErr" class="text-danger font-italic errMessager"></div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <input type="submit" value="Create" class="btn btn-primary">
+                    <input type="submit" onclick="return validateCreateProductForm()" value="Update" class="btn btn-primary">
                 </div>
               </div>
 

@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
             <li class="breadcrumb-item active">Product</li>
           </ol>
         </div>
@@ -22,11 +22,9 @@
 
     <!-- Default box -->
     <div class="card">
-        <div class="card-header">
-            <form id="filter-products" class="form-inline">
-              @if (isset($page))
-              <input type="hidden" value={{$page}} name=page>
-              @endif
+        <div class="card-header bg-secondary">
+            <form id="filter-products" class="form-inline bg-secondary">
+              <input type="hidden" value={{$products->currentPage()}} name="page">
               <div class="row">
                   <div class="d-inline use-chosen">
                     <input name="name" type="text" class="form-control search-name" value="{{$name}}" id="name" placeholder="Search by name...">
@@ -41,12 +39,12 @@
                   </div>
                   <div class="d-inline px-2">
                     <select class="form-control use-chosen" name="price">
-                      <option {{$price==1?'selected':''}}value='1'>Price</option>
-                      <option {{$price==0?'selected':''}} value='0'>$0 - $500</option>
-                      <option {{$price==500?'selected':''}} value='500'>$500 - $1000</option>
-                      <option {{$price==1000?'selected':''}} value='1000'>$1000 - $1500</option>
-                      <option {{$price==1500?'selected':''}} value='1500'>$1500 - $2000</option>
-                      <option {{$price==2000?'selected':''}}value='2000'>$2000+</option>
+                      <option value="">Price</option>
+                      <option {{$price=='0'?'selected':''}} value='0'>$0 - $500</option>
+                      <option {{$price=='500'?'selected':''}} value='500'>$500 - $1000</option>
+                      <option {{$price=='1000'?'selected':''}} value='1000'>$1000 - $1500</option>
+                      <option {{$price=='1500'?'selected':''}} value='1500'>$1500 - $2000</option>
+                      <option {{$price=='2000'?'selected':''}} value='2000'>$2000+</option>
                     </select>
                   </div>
                   <div class="d-inline px-2">
@@ -56,6 +54,8 @@
                       <option {{$sortby=='price-desc'?'selected':''}} value='price-desc'>Sort by price: High to Low</option>
                       <option {{$sortby=='name-asc'?'selected':''}} value='name-asc'>Sort by name : A-Z</option>
                       <option {{$sortby=='name-desc'?'selected':''}} value='name-desc'>Sort by name : Z-A</option>
+                      <option {{$sortby=='newest'?'selected':''}} value='newest'>Sort by date : Newest to Oldest</option>
+                      <option {{$sortby=='oldest'?'selected':''}} value=oldest'>Sort by date : Oldest to Newest</option>
                     </select>
                   </div>
                   <div class="d-inline px-2">
@@ -70,18 +70,10 @@
                   <div class="d-inline px-2">
                     <div class="form-check-inline use-chosen">
                       <label class="form-check-label pt-2">
-                        <input name="featured" type="checkbox" class="form-check-input" value="1">Featured
+                        <input {{$featured==1?'checked':''}} name="featured" type="checkbox" class="form-check-input" value="1">Featured
                       </label>
                     </div>
                   </div>
-                  <div class="d-inline px-2 use-chosen">
-                    <div class="form-check-inline">
-                      <label class="form-check-label pt-2">
-                        <input name="new" type="checkbox" class="form-check-input" value="1">New
-                      </label>
-                    </div>
-                  </div>
-                  
               </div>
             </form>
         </div>
@@ -110,7 +102,7 @@
                 </td>
                 <td>
                     @if($item->image!=null)
-                    <img src="{{asset('/images/products/'.$item->image)}}" alt="{{$item->image}}" style="width: 50%">
+                    <img class="d-block mx-auto" src="{{asset('/images/products/'.$item->image)}}" alt="{{$item->image}}" style="width: 50%">
                     @endif
                 </td>
                 <td class="align-middle">{{$item->name}}</td>
@@ -122,7 +114,7 @@
                   @endif
                 </td>
                 <td>
-                  <a href="{{route('admin.product.edit',$item->id)}}" class="btn btn-primary">Update</a>
+                  <a href="{{route('admin.product.edit',$item)}}" class="btn btn-primary">Edit</a>
                   <form style="display:inline-block" action="{{route('admin.product.destroy',$item->id)}}" method="POST">
                     @method("DELETE")
                     @csrf
@@ -133,7 +125,7 @@
             @endforeach
           </tbody>
         </table>
-        <nav aria-label="...">
+        <nav class="mt-3" aria-label="...">
             <ul class="pagination justify-content-center">
                 <li class="page-item {{$products->currentPage()==1?'disabled':''}}">
                     <a href="{{request()->fullUrlWithQuery(['page' => 1]) }} " class="page-link">First</a>
@@ -165,9 +157,6 @@
     <script type="text/javascript">
         $(function(){
             $('.use-chosen').change(function(){
-                $('#filter-products').submit();
-            });
-            $('.search-name').change(function(){
                 $('#filter-products').submit();
             });
         });

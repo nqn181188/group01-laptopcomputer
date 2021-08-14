@@ -24,7 +24,6 @@ class ProductController extends Controller
         $price = $request->price??'';
         $sortby = $request->sortby??'';
         $featured = $request->featured??0;
-        $new = $request->new??0;
         $products = Product::where('id','!=','0');
         if($name){
             $products->where('name','like','%'.$name.'%');
@@ -48,27 +47,24 @@ class ProductController extends Controller
                 case 'price-desc' : $products->orderBy('price','desc'); break;
                 case 'name-asc' : $products->orderBy('name','asc'); break;
                 case 'name-desc' : $products->orderBy('name','desc'); break;
+                case 'newest' : $products->orderBy('created_at','desc'); break;
+                case 'oldest' : $products->orderBy('created_at','asc'); break;
                 default : $products=$products;
             }
         }
         if($featured){
             $products->where('featured',1);
         }
-        if($featured){
-            $products->where('created_at','desc')->limit(10);
-        }
         $products = $products->paginate($paginate);
         return view('admin.product.index', compact(
             'products',
             'brands',
             'paginate',
-            'page',
             'name',
             'brand_id',
             'price',
             'sortby',
             'featured',
-            'new',
         ));
     }
 
@@ -79,7 +75,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $brands = Brand::all();
+        return view('admin.product.create',compact(
+            'brands',
+        ));
     }
 
     /**
@@ -124,7 +123,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.product.update');
+        $brands = Brand::all();
+        return view('admin.product.update',compact(
+            'product',
+            'brands',
+        ));
     }
 
     /**

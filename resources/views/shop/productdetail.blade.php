@@ -49,15 +49,9 @@
                     </div>
                 </div>
                 <div class="detail-info">
-                    <div class="product-rating">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <a href="#" class="count-review">(05 review)</a>
+                    <div class="star-rating">
+                        <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
                     </div>
-
                     <h2 class="product-name">{{$product->name}}</h2>
                     <div class="short-desc">
                         <ul>
@@ -72,14 +66,14 @@
                             <li>Release Year : {{$product->releaseyear}}</li>
                         </ul>
                     </div>
-                    <div class="wrap-price"><span class="product-price">${{$product->price}}</span></div>
+                    <div class="wrap-price"><span class="product-price">${{number_format($product->price, 0, '.', ',')}}</span></div>
                     <div class="stock-info in-stock">
                         <p class="availability">Availability: <b>{{$product->quantity>0?'In Stock':'Out Of Stock'}}</b></p>
                     </div>
                     <div class="quantity">
                         <span>Quantity:</span>
                         <div class="quantity-input">
-                            <input type="text" name="product-quatity" id="product-quantity" value="1" data-max="120" pattern="[0-9]*" >
+                            <input type="text" name="product-quatity" id="product-quantity" value="1" data-max="9" pattern="[0-9]*" >
                             
                             <a class="btn btn-reduce" href="#"></a>
                             <a class="btn btn-increase" href="#"></a>
@@ -96,7 +90,7 @@
                 <div class="advance-info">
                     <div class="tab-control normal">
                         <a href="#description" class="tab-control-item active">description</a>
-                        <a href="#add_infomation" class="tab-control-item">Addtional Infomation</a>
+                        <a href="#add_infomation" class="tab-control-item">Tech Specs</a>
                         <a href="#review" class="tab-control-item">Reviews</a>
                     </div>
                     <div class="tab-contents">
@@ -107,15 +101,38 @@
                             <table class="shop_attributes">
                                 <tbody>
                                     <tr>
-                                        <th>Weight</th><td class="product_weight">1 kg</td>
+                                        <th>CPU</th><td>{{$product->cpu}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Dimensions</th><td class="product_dimensions">12 x 15 x 23 cm</td>
+                                        <th>RAM</th><td>{{$product->amountofram}} GB {{$product->typeofram}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Color</th><td><p>Black, Blue, Grey, Violet, Yellow</p></td>
+                                        <th>Hard Drive</th><td>{{$product->hdtype}} {{$product->hdcapacity}} GB </td>
                                     </tr>
-                                </tbody>
+                                    <tr>
+                                        <th>Screen size</th><td>{{$product->screensize}}"</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Graphic Card</th><td>{{$product->gcard}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Width</th><td>{{$product->width}} (mm)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Depth</th><td>{{$product->depth}} (mm)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Height</th><td>{{$product->height}} (mm)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight</th><td>{{$product->weight}} (kg)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>OS</th><td>{{$product->os}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Release Year</th><td>{{$product->releaseyear}}</td>
+                                    </tr>
                             </table>
                         </div>
                         <div class="tab-content-item " id="review">
@@ -123,14 +140,13 @@
                             <div class="wrap-review-form">
                                 
                                 <div id="comments">
-                                    <h2 class="woocommerce-Reviews-title">01 review for <span>Radiant-360 R6 Chainsaw Omnidirectional [Orage]</span></h2>
+                                    <h2 class="woocommerce-Reviews-title">01 review for <span>{{$product->name}}</span></h2>
                                     <ol class="commentlist">
                                         <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
                                             <div id="comment-20" class="comment_container"> 
-                                                <img alt="" src="assets/images/author-avata.jpg" height="80" width="80">
                                                 <div class="comment-text">
                                                     <div class="star-rating">
-                                                        <span class="width-80-percent">Rated <strong class="rating">5</strong> out of 5</span>
+                                                        <span class="width-100-percent">Rated <strong class="rating">4</strong> out of 5</span>
                                                     </div>
                                                     <p class="meta"> 
                                                         <strong class="woocommerce-review__author">admin</strong> 
@@ -145,7 +161,6 @@
                                         </li>
                                     </ol>
                                 </div><!-- #comments -->
-
                                 <div id="review_form_wrapper">
                                     <div id="review_form">
                                         <div id="respond" class="comment-respond"> 

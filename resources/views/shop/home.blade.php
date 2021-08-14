@@ -74,12 +74,8 @@
                 </div>
                 <div class="product-info">
                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                    <div class="product-rating">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
+                    <div class="star-rating">
+                        <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
                     </div>
                     <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                 </div>
