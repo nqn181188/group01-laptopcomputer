@@ -40,30 +40,30 @@
         <table class="table table-striped projects">
             <thead>
                 <tr>
-                  <th>Order Id</th>
-                  <th>Product Id</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Ship firstname</th>
-                  <th>Ship lastname</th>
-                  <th>Ship email</th>
-                  <th>Ship phone</th>
-                  <th>Ship address</th>
+                  <th>Order </th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
             </thead>
-            {{-- <tbody>
-              @foreach($orders as $item)
+            <tbody>
+              @foreach($order as $item)
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{$item->id}}</td>
+                <td>{{$item->firstname}}</td>
+                <td>{{$item->lastname}}</td>
+                <td>{{$item->email}}</td>
+                <td>{{$item->phone}}</td>
+                <td>{{$item->address}}</td>
+                <td class="text-center align-middle">
+                  @if($item->status)
+                    <span class="badge badge-success">Status</span>
+                  @endif
+                </td>
                 <td>
                   @if ((session('user')->id==$item->id) || session('user')->role==2 )
                       
@@ -78,7 +78,7 @@
                 </td>
               </tr>
               @endforeach
-            </tbody> --}}
+            </tbody>
         </table>
       </div>
       <!-- /.card-body -->
