@@ -16,7 +16,7 @@
             @csrf
             <div class="wrap-address-billing">
                 <h3 class="box-title">Billing Address</h3>
-            
+           
                 <p class="row-in-form">
                     <label for="fname">first name<span>*</span></label>
                     <input id="fname" type="text" name="fname" value="" placeholder="Your name">
@@ -108,7 +108,7 @@
                             <span class="payment-desc">card if you don't have a paypal account</span>
                         </label>
                     </div>
-                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">@if(Session::get('cart')){{number_format($total)}}@endif đ</span></p>
+                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price"> {{number_format($total)}} đ</span></p>
                     {{-- <a href="thankyou.html" class="btn btn-medium">Place order now</a> --}}
                     <button type="submit" class="btn btn-medium">Place order now</button>
                 </div>
