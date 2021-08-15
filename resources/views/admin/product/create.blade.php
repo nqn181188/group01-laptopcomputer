@@ -101,6 +101,9 @@
                         <input type="file" class="custom-file-input" id="image" name="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                         <div id="imageErr" class="text-danger font-italic errMessager"></div>
+                        @if(isset($errorUploadImage))
+                        <div class="text-danger font-italic errMessager">{{$erroUploadImage}}</div>
+                        @endif
                     </div>
                 </div>
                 

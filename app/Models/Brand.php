@@ -10,5 +10,5 @@ class Brand extends Model
     use HasFactory;
     protected $table = 'brands';
     //mô hình mass assignment
-    protected $fillable = ['brands'];
+    protected $fillable = ['brand','image'];
 }

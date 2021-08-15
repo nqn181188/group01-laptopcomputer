@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Brand;
 use Illuminate\Http\Request;
-
+use File;
 class ProductController extends Controller
 {
     /**
@@ -14,6 +14,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index(REQUEST $request)
     {
         $paginate = $request->paginate??12 ;
@@ -24,7 +25,7 @@ class ProductController extends Controller
         $price = $request->price??'';
         $sortby = $request->sortby??'';
         $featured = $request->featured??0;
-        $products = Product::where('id','!=','0');
+        $products = Product::where('id','!=','0')->orderBy('created_at','desc');
         if($name){
             $products->where('name','like','%'.$name.'%');
         }
@@ -49,7 +50,7 @@ class ProductController extends Controller
                 case 'name-desc' : $products->orderBy('name','desc'); break;
                 case 'newest' : $products->orderBy('created_at','desc'); break;
                 case 'oldest' : $products->orderBy('created_at','asc'); break;
-                default : $products=$products;
+                default : $products->orderBy('created_at','desc');
             }
         }
         if($featured){
@@ -94,7 +95,10 @@ class ProductController extends Controller
             $file=$request->file('image');
             $extension = $file->getClientOriginalExtension();
             if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
-                return redirect()->route('admin.account.create');
+                $erroUploadImage = 'Please choose the file with extension is jpg, jpeg or png';
+                return redirect()->route('admin.product.create')->with(
+                    'erroUploadImage',
+                );
             }
             $imgName=$file->getClientOriginalName();
             $file->move('images/products',$imgName);
@@ -137,9 +141,49 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request,$id)
     {
-        //
+        $product = Product::find($id);
+        $product->name=$request->name;
+        $product->quantity=$request->quantity;
+        $product->price=$request->price;
+        $product->brand_id=$request->brand_id;
+        $product->model=$request->model;
+        $product->description=$request->description;
+        $product->cpu=$request->cpu;
+        $product->amountofram=$request->amountofram;
+        $product->typeofram=$request->typeofram;
+        $product->screensize=$request->screensize;
+        $product->gcard=$request->gcard;
+        $product->hdcapacity=$request->hdcapacity;
+        $product->hdtype=$request->hdtype;
+        $product->width=$request->width;
+        $product->depth=$request->depth;
+        $product->height=$request->height;
+        $product->weight=$request->weight;
+        $product->os=$request->os;
+        $product->releaseyear=$request->releaseyear;
+        if($request->hasFile('image')){
+            if($product->image!=null){
+                if(File::exists(public_path("images/products/$product->image"))){
+                    File::delete(public_path("images/products/$product->image"));
+                }
+            }
+            $file=$request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
+                $item=Product::where('id',$id)->first();
+                $erroUploadImage = 'Please choose the file with extension is jpg, jpeg or png';
+                return redirect()->route('admin.product.edit',$item)->with(
+                    'erroUploadImage',
+                );
+            }
+            $imgName=$file->getClientOriginalName();
+            $file->move('images/products',$imgName);
+            $product['image']=$imgName;
+        }
+        $product->save();
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -148,16 +192,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
-    {
-        {
-            if($product->image!=null){
-                if(file_exists(asset('/images/').$product->image)){
-                    unlink(asset('/images/').$product->image);
-                }
+    public function destroy(Product $product){
+        if($product->image!=null){
+            if(File::exists(public_path("images/products/$product->image"))){
+                File::delete(public_path("images/products/$product->image"));
             }
+        }
             $product->delete();
             return redirect()->route('admin.product.index');
-        }
     }
+
 }

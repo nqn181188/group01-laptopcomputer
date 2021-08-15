@@ -35,7 +35,8 @@
             </div>
         </div>
       <div class="card-body p-0">
-        <form id="create-product-form"  action="{{route('admin.product.update')}}" method="POST" enctype="multipart/form-data">
+        <form id="create-product-form"  action="{{route('admin.product.update',$product->id)}}" method="POST" enctype="multipart/form-data">
+            @method('PATCH')
             @csrf
             <div class="card-body">
                 <div class="row">
@@ -73,7 +74,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="brand">Brand</label>
-                            <select name="brand" id="brand" class="custom-select">
+                            <select name="brand_id" id="brand" class="custom-select">
                                 <option value="">---Select Brand---</option>
                                 @foreach ($brands as $brand)
                                 <option {{$product->brand_id==$brand->id?'selected':''}} value="{{$brand->id}}">{{$brand->brand}}</option>
@@ -96,12 +97,17 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" id='check-image' value='1'>
-                    <img  src="{{asset('images/products/'.$product->image)}}" alt="{{$product->name}}" class="w-50">
+                    <div>
+                        <img style="width: 30%"  src="{{asset('images/products/'.$product->image)}}" alt="{{$product->name}}" class="img-thumbnail img-fluid">
+                    </div>
                     <label class="form-label" for="image">Image</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="image" name="image" value="{{$product->image}}">
-                        <label class="custom-file-label" for="image">Choose file</label>
+                        <label class="custom-file-label" for="image">Choose another image</label>
                         <div id="imageErr" class="text-danger font-italic errMessager"></div>
+                        @if(isset($errorUploadImage))
+                        <div class="text-danger font-italic errMessager">{{$erroUploadImage}}</div>
+                        @endif
                     </div>
                 </div>
                 

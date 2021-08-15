@@ -10,6 +10,6 @@ class OrderDetail extends Model
     use HasFactory;
     protected $table = 'order_details';
     //mô hình mass assignment
-    protected $fillable = ['order_id','product_id','price','quantity','shipfirstname',
+    protected $fillable = ['ordernumber','product_id','price','quantity','shipfirstname',
                             'shiplastname','shipemail','shipphone','shipaddress'];
 }

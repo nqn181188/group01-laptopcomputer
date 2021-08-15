@@ -38,9 +38,7 @@
             </p>
           </a>
         </li>
-        @if (session('user')->role==2)
-            
-        @else
+        @if (session('user')->role==1)
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
@@ -113,10 +111,6 @@
           </ul>
         </li>
         @endif
-        
-
-        
-
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fab fa-product-hunt"></i>
@@ -125,6 +119,16 @@
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('admin.brand.index')}}" class="nav-link ml-3">
+                <i class="nav-icon fas fa-th-list"></i>
+                <p>
+                  Brand
+                </p>
+              </a>
+            </li> 
+          </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.product.index')}}" class="nav-link ml-3">
@@ -141,6 +145,16 @@
                 <i class="nav-icon fas fa-plus-square"></i>
                 <p>
                   Create New Product
+                </p>
+              </a>
+            </li> 
+          </ul>
+			 <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('admin.brand.create')}}" class="nav-link ml-3">
+                <i class="nav-icon fas fa-plus-square"></i>
+                <p>
+                  Insert New Brand
                 </p>
               </a>
             </li> 
