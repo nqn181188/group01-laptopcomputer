@@ -75,6 +75,7 @@
                                 </div>
                                 <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                 <a href="#" class="btn add-to-cart">Add To Cart</a>
+                                {{-- <button type="button" class="btn add-to-cart" name="add-cart">Add To Cart</button> --}}
                             </div>
                         </div>
                     </li>
@@ -141,6 +142,20 @@
                 $('#sort-item').submit();
             });
         });
+        $('.add-to-cart').click(function(e) {
+        e.preventDefault();     
+        quantity = $('#product-quantity').val();
+        pid = {{ $item->id}}
+
+        $.ajax({
+            type:'GET',
+            url:'{{ route('add-cart') }}',
+            data:{ pid:pid, quantity:quantity },
+            success:function(data){
+                window.location='{{ route('home') }}'  
+            }
+        });
+    });
 
     </script>
 @endsection

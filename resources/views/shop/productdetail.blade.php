@@ -335,6 +335,6 @@
                 window.location='{{ route('home') }}'  
             }
         });
-    })
+    });
 </script>
 @endsection
