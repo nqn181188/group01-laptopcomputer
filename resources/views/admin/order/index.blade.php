@@ -65,16 +65,14 @@
                   @endif
                 </td>
                 <td>
-                  @if ((session('user')->id==$item->id) || session('user')->role==2 )
-                      
-                  @else
-                  <a href="{{ route('admin.order.edit', $item->id) }}" class="btn btn-primary">Detail</a>
+                
+                  <a href="{{ route('admin.orderdetail.index', $item->id) }}" class="btn btn-primary">Detail</a>
                   <form style="display:inline-block" action="{{ route('admin.order.destroy', $item->id) }}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>
                   </form>
-                  @endif
+                
                 </td>
               </tr>
               @endforeach

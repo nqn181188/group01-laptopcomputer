@@ -157,7 +157,7 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.order.index')}}" class="nav-link ml-3">
-                <i class="nav-icon fas fa-plus-square"></i>
+                <i class="nav-icon fas fa-th-list"></i>
                 <p>
                   Order List
                 </p>

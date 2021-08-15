@@ -81,9 +81,18 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
         //
+        
+            // if($order->id!=null){
+            //     if(file_exists(asset('/images/').$product->image)){
+            //         unlink(asset('/images/').$product->image);
+            //     }
+            // }
+            $order->delete();
+            return redirect()->route('admin.order.index');
+        
     }
    
 }

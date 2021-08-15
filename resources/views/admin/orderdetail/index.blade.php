@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Order</h1>
+          <h1>Order Detail</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -24,7 +24,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Order</h3>
+        <h3 class="card-title">Order Detail</h3>
 
         <div class="card-tools">
           <a href="{{ route('admin.order.create') }}"><i class="fas fa-user-plus"></i></a>
@@ -64,19 +64,17 @@
                 <td>{{$item->shipemail}}</td>
                 <td>{{$item->shipphone}}</td>
                 <td>{{$item->shipaddress}}</td>
-               
+{{--                
                 <td>
-                  @if ((session('user')->id==$item->id) || session('user')->role==2 )
-                      
-                  @else
+                 
                   <a href="{{ route('admin.order.edit', $item->id) }}" class="btn btn-primary">Detail</a>
                   <form style="display:inline-block" action="{{ route('admin.order.destroy', $item->id) }}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>
                   </form>
-                  @endif
-                </td>
+                
+                </td> --}}
               </tr>
               @endforeach
             </tbody>
