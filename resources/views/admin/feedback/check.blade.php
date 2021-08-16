@@ -48,7 +48,7 @@
           <label for="lastname">Lastname<span></span></label>
           <input type="text" value="{{$feedback->lastname}}" id="lastname" name="lastname" readonly>
 
-          <label for="email">Email<span>*</span></label>
+          <label for="email">Email<span></span></label>
           <input type="text" value="{{$feedback->email}}" id="email" name="email" readonly>
 
           <label for="phone">Number Phone</label>
@@ -65,7 +65,7 @@
 
           <label for="note">Note</label>
           <input type="text" id="note" name="note" 
-            value="@if (isset($feedback->note))
+            value="@if ($feedback->note)
                 {{$feedback->note}}
             @endif">
         </form>
