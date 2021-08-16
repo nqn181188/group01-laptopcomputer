@@ -15,8 +15,7 @@ class CustomerCommentController extends Controller
      */
     public function index()
     {   
-        $cusComments = CustomerComment::all();
-        return view('admin.comment.index', compact('cusComments'));
+        
     }
 
     /**

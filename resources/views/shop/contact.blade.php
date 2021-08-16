@@ -7,7 +7,7 @@
         <div class="wrap-breadcrumb">
             <ul>
                 <li class="item-link"><a href="{{route('home')}}" class="link">Home</a></li>
-                <li class="item-link"><a href="{{route('contact')}}" class="link">Contact Us</a></li>
+                <li class="item-link"><a href="{{route('contact.index')}}" class="link">Contact Us</a></li>
             </ul>
         </div>
         <div class="row">
@@ -16,10 +16,13 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="contact-box contact-form">
                             <h2 class="box-title">Leave a Message</h2>
-                            <form action="#" method="get" name="frm-contact">
+                            <form action="{{route('contact.store')}}" method="get" name="frm-contact">
 
-                                <label for="name">Name<span>*</span></label>
-                                <input type="text" value="" id="name" name="name" >
+                                <label for="firstname">Firstname<span>*</span></label>
+                                <input type="text" value="" id="firstname" name="firstname" >
+
+                                <label for="lastname">Lastname<span>*</span></label>
+                                <input type="text" value="" id="lastname" name="lastname" >
 
                                 <label for="email">Email<span>*</span></label>
                                 <input type="text" value="" id="email" name="email" >

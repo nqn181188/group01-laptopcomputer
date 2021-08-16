@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Shop;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
@@ -15,7 +15,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('shop.contact');
+        $custFb = Feedback::all();
+        return view('admin.feedback.index', compact('custFb'));
     }
 
     /**
@@ -36,10 +37,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $feedbackCust = $request->all();
-        
-        Feedback::create($feedbackCust);
-        return redirect()->route('contact.index');
+        //
     }
 
     /**
@@ -50,7 +48,6 @@ class ContactController extends Controller
      */
     public function show(Feedback $feedback)
     {
-        //
     }
 
     /**
@@ -61,7 +58,7 @@ class ContactController extends Controller
      */
     public function edit(Feedback $feedback)
     {
-        //
+        return view('admin.feedback.check', compact('feedback'));
     }
 
     /**
@@ -73,7 +70,10 @@ class ContactController extends Controller
      */
     public function update(Request $request, Feedback $feedback)
     {
-        //
+        $feedback->read  = $request->read;
+        $feedback->note  = $request->note;
+        $feedback->save();
+        return redirect()->route('admin.contact.index');
     }
 
     /**

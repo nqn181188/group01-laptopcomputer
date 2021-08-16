@@ -10,5 +10,5 @@ class Feedback extends Model
     use HasFactory;
     protected $table = 'feedback';
     //mô hình mass assignment
-    protected $fillable = ['firstname','lastname','email','phone','comment','read'];
+    protected $fillable = ['firstname','lastname','email','phone','comment','read','note'];
 }

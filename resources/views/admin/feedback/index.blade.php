@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Account</h1>
+          <h1>Feedback</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Customer account</li>
+            <li class="breadcrumb-item active">Customer Feedback</li>
           </ol>
         </div>
       </div>
@@ -24,10 +24,10 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Customer Account</h3>
+        <h3 class="card-title">Customer Feedback</h3>
 
         <div class="card-tools">
-          <a href="{{ route('admin.customercomment.create') }}"><i class="fas fa-user-plus"></i></a>
+          <a href="{{ route('admin.contact.create') }}"><i class="fas fa-user-plus"></i></a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
           </button>
@@ -40,23 +40,34 @@
         <table class="table table-striped projects">
             <thead>
                 <tr>
-                  <th>Customer Id</th>
-                  <th>Product Id</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
                   <th>Comment</th>
-                  <th>Rate</th>
+                  <th>Read</th>
+                  <th>Note</th>
                   <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-              @foreach($cusComments as $item)
+              @foreach($custFb as $item)
               <tr>
-                <td>{{ $item->cust_id }}</td>
-                <td>{{ $item->product_id }}</td>
+                <td>{{ $item->firstname }}</td>
+                <td>{{ $item->lastname }}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->phone }}</td>
                 <td>{{ $item->comment }}</td>
-                <td>{{ $item->rate }}</td>
-                <td>
-                  <a href="{{ route('admin.customercomment.edit', $item->id) }}" class="btn btn-primary">Update</a>
-                  <form style="display:inline-block" action="{{ route('admin.customercomment.destroy', $item->id) }}" method="POST">
+                <td class="align-middle">
+                  @if($item->read)
+                    <span class="badge badge-success">Readed</span>
+                  @endif
+                </td>
+                
+                <td>{{ $item->note }}</td>
+                <td> 
+                  <a href="{{ route('admin.contact.edit', $item->id) }}" class="btn btn-primary">Check</a>
+                  <form style="display:inline-block" action="{{ route('admin.contact.destroy', $item->id) }}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>

@@ -190,7 +190,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="{{route('admin.customercomment.index')}}" class="nav-link">
+          <a href="{{route('admin.contact.index')}}" class="nav-link">
             <i class="nav-icon fas fa-comments"></i>
             <p>
               Feedback

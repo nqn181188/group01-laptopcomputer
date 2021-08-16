@@ -28,7 +28,6 @@ Route::get('/change-cart-quantity', 'Shop\CartController@changeCartQuantity')->n
 Route::get('/checkout','Shop\CheckOutController@index')->name('checkout');
 Route::post('/do-checkout', 'Shop\CheckOutController@doCheckout')->name('do-checkout');
 Route::get('/aboutus','Shop\AboutUsController@index')->name('aboutus');
-Route::get('/contact','Shop\ContactController@index')->name('contact');
 Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
 Route::get('/customer/process-logout','Shop\CustomerController@processLogout')->name('customer.process-logout');
@@ -37,6 +36,7 @@ Route::get('/check-email','Shop\CustomerController@checkEmail')->name('check-ema
 
 // Route::get('/customer/{customer}/my-account','Shop\CustomerController@myAccount')->name('my-account');
 route::resource('customer', 'Shop\CustomerController');
+route::resource('contact', 'Shop\ContactController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');
 Route::get('/shop/product/{name}','Shop\ProductDetailController@index')->name('product-detail');
 Route::get('/shop/search-product','Shop\HomeController@searchproduct')->name('search-product');
@@ -64,6 +64,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::resource('orderdetail', 'Admin\OrderDetailController');
     Route::resource('customercomment', 'Admin\CustomerCommentController');
     Route::resource('brand','Admin\BrandController');
+    Route::resource('contact','Admin\ContactController');
     
 
 

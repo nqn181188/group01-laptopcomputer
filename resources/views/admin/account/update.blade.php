@@ -96,7 +96,7 @@
               <div class="form-group">
                   <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
               </div>
-          </form>
+            </form>
         </div>
       </div>
     </div>
