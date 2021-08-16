@@ -16,8 +16,8 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="contact-box contact-form">
                             <h2 class="box-title">Leave a Message</h2>
-                            <form action="{{route('contact.store')}}" method="get" name="frm-contact">
-
+                            <form action="{{route('contact.store')}}" method="Post" name="frm-contact">
+                                @csrf
                                 <label for="firstname">Firstname<span>*</span></label>
                                 <input type="text" value="" id="firstname" name="firstname" >
 

@@ -37,7 +37,6 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $feedbackCust = $request->all();
-        
         Feedback::create($feedbackCust);
         return redirect()->route('contact.index');
     }

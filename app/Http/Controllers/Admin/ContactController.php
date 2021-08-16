@@ -17,6 +17,7 @@ class ContactController extends Controller
     {
         $custFb = Feedback::all();
         return view('admin.feedback.index', compact('custFb'));
+
     }
 
     /**
@@ -56,9 +57,10 @@ class ContactController extends Controller
      * @param  \App\Models\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function edit(Feedback $feedback)
-    {
-        return view('admin.feedback.check', compact('feedback'));
+    public function edit($id)
+    {   
+        $feedback = Feedback::find($id);
+        return view('admin.feedback.update', compact('feedback'));
     }
 
     /**
@@ -68,8 +70,9 @@ class ContactController extends Controller
      * @param  \App\Models\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Feedback $feedback)
+    public function update(Request $request , $id)
     {
+        $feedback = Feedback::find($id);
         $feedback->read  = $request->read;
         $feedback->note  = $request->note;
         $feedback->save();
