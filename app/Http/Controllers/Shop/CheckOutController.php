@@ -98,6 +98,8 @@ class CheckOutController extends Controller
         $semail = $request->semail;
         $sphone = $request->sphone;
         $sadd = $request->sadd;
+        $ordernumber=$request->ordernumber;
+        $sta=$request->status;
        
         if ($request->session()->has('cart')) {
             $cart = $request->session()->get('cart');
@@ -116,11 +118,22 @@ class CheckOutController extends Controller
             // tạo và lưu order
             $ord = new Order();
             $ord->cust_id=$cust->id;
+            if($ordernumber ==null){
+                $str='0123456789';
+                $ordernumber=str_shuffle($str);
+                $ord->ordernumber=$ordernumber;
+            }
+           
             $ord->firstname = $fname;
             $ord->lastname = $lname;
             $ord->email = $email;
             $ord->phone = $phone;
             $ord->address = $add;
+            if($sta==null){
+                $sta=1;
+                $ord->status=$sta;
+            }
+           
            
             $ord->order_date = \Carbon\Carbon::now();
             // lưu order
