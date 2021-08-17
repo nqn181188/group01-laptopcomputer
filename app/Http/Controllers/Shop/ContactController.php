@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ContactController extends Controller
 {
@@ -15,6 +16,9 @@ class ContactController extends Controller
      */
     public function index()
     {
+        // if (session('success_message')){
+        //     Alert::success('Success Title', 'Success Message');
+        // }
         return view('shop.contact');
     }
 
@@ -38,7 +42,7 @@ class ContactController extends Controller
     {
         $feedbackCust = $request->all();
         Feedback::create($feedbackCust);
-        return redirect()->route('contact.index');
+        return redirect()->route('contact.index')->withSuccessMessage('We will reply to you soon');
     }
 
     /**

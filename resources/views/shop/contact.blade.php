@@ -16,16 +16,21 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="contact-box contact-form">
                             <h2 class="box-title">Leave a Message</h2>
+
+                            @if (Session::has('success_message'))
+                            
+                            <h1><span style="color:green">Successfully sent</span></h1>   
+                            @endif
                             <form action="{{route('contact.store')}}" method="Post" name="frm-contact">
                                 @csrf
                                 <label for="firstname">Firstname<span>*</span></label>
-                                <input type="text" value="" id="firstname" name="firstname" >
+                                <input type="text" value="" id="firstname" name="firstname" required>
 
                                 <label for="lastname">Lastname<span>*</span></label>
-                                <input type="text" value="" id="lastname" name="lastname" >
+                                <input type="text" value="" id="lastname" name="lastname" required>
 
                                 <label for="email">Email<span>*</span></label>
-                                <input type="text" value="" id="email" name="email" >
+                                <input type="text" value="" id="email" name="email" required>
 
                                 <label for="phone">Number Phone</label>
                                 <input type="text" value="" id="phone" name="phone" >
@@ -36,6 +41,7 @@
                                 <input type="submit" name="ok" value="Submit" >
                                 
                             </form>
+                            
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -98,4 +104,14 @@
     </div><!--end container-->
 
 
+@endsection
+
+@section('my-scripts')
+@if (Session::has('success_message'))
+<script>
+    swal("Thank you for your feedback!","{!! Session::get('success_message') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
 @endsection

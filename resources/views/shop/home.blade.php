@@ -217,3 +217,13 @@
 
     </script>
 @endsection
+
+@section('my-scripts')
+@if (Session::has('success_login'))
+<script>
+    swal("Congratulation","{!! Session::get('success_login') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
+@endsection

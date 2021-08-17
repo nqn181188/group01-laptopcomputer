@@ -16,7 +16,7 @@
                             <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         @else
                             <li class="menu-item" ><a title="My account" href="{{ route('customer.show',Session::get('user')->id)}}">{{Session::get('user')->firstname}}</a></li>
-                            <li class="menu-item" ><a href="{{ route('customer.edit', Session::get('user')->id) }}">Change Profile</a></li>
+                            <li class="menu-item" ><a href="{{ route('customer.edit-pass', Session::get('user')->id) }}">Change password</a></li>
                             <li class="menu-item" ><a href="{{ route('customer.process-logout')}}">Logout</a></li>
                         @endif
                 </div>
