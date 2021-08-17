@@ -60,8 +60,12 @@
                 <td>{{$item->phone}}</td>
                 <td>{{$item->address}}</td>
                 <td class="text-center align-middle">
-                  @if($item->status)
-                    <span class="badge badge-success">Status</span>
+                  @if($item->status==1)
+                    <span class="badge badge-success"> In Process</span>
+                    @elseif($item->status==2)
+                    <span class="badge badge-success">Shipping</span>
+                    @elseif($item->status==3)
+                    <span class="badge badge-success">Shipped</span>
                   @endif
                 </td>
                 <td>

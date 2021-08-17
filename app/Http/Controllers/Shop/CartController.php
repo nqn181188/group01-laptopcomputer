@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Shop;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Models\OrderDetail;
 use App\Models\CartItem;
+use App\Models\Order;
+use App\Models\Customer;
+
 class CartController extends Controller
 {
     /**
@@ -18,6 +22,13 @@ class CartController extends Controller
         //
         return view('shop.viewcart');
     }
+
+    public function checkout()
+    {
+        //
+        return view('shop.checkout');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -158,5 +169,81 @@ class CartController extends Controller
         session()->forget('cart');
         return redirect()->route('home');
     
+    }
+    public function doCheckout(Request $request) {
+        
+        $fname = $request->fname;
+        $lname = $request->lname;
+        $email = $request->email;
+        $phone = $request->phone;
+        $add = $request->add;
+        $sfname = $request->sfname;
+        $slname = $request->slname;
+        $semail = $request->semail;
+        $sphone = $request->sphone;
+        $sadd = $request->sadd;
+        $ordernumber=$request->ordernumber;
+        $sta=$request->status;
+       
+        if ($request->session()->has('cart')) {
+            $cart = $request->session()->get('cart');
+
+            if (isset($request->createAccount)) {
+                $cust = new Customer();
+                $cust->firstname = $fname;
+                $cust->lastname = $lname;
+             
+                $cust->password = \md5('123456');
+                $cust->email = $email;
+                $cust->phone = $phone;
+                $cust->address = $add;
+                $cust->save();
+            }
+            // tạo và lưu order
+            $ord = new Order();
+            $ord->cust_id=$cust->id;
+            if($ordernumber ==null){
+                $str='0123456789';
+                $ordernumber=str_shuffle($str);
+                $ord->ordernumber=$ordernumber;
+            }
+           
+            $ord->firstname = $fname;
+            $ord->lastname = $lname;
+            $ord->email = $email;
+            $ord->phone = $phone;
+            $ord->address = $add;
+            if($sta==null){
+                $sta=1;
+                $ord->status=$sta;
+            }
+           
+           
+            $ord->order_date = \Carbon\Carbon::now();
+            // lưu order
+            $ord->save();
+
+            // xử lý order detail
+            foreach($cart as $item) {
+                $detail = new OrderDetail();
+                
+                $detail->ordernumber = $ord->$ordernumber;
+                $detail->product_id = $item->id;
+                $detail->quantity = $item->quantity;
+                $detail->price = $item->price;
+                $detail->shipfirstname = $cust->sfname;
+                $detail->shiplastname = $cust->slname;
+                $detail->shipemail= $cust->semail;
+                $detail->shipphone = $cust->sphone;
+                $detail->shipaddress = $cust->sadd;
+                $detail->save();
+            }
+        }
+
+    
+
+        // xóa session
+        session()->forget('cart');
+        return redirect()->route('home');
     }
 }
