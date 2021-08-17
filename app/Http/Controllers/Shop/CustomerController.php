@@ -58,7 +58,7 @@ class CustomerController extends Controller
 
     public function processLogout(){
         session()->forget('user');
-        return redirect()->route('home');
+        return redirect()->route('home')->withSuccessLogout('Thank for using our service');
     }
 
     public function checkEmail(Request $request){
@@ -101,7 +101,6 @@ class CustomerController extends Controller
             'email'    => 'email|unique:customers,email,',
             'password' => 'required|between:1,32',
             'confirm' => 'same:password',
-            'phone' => 'required|regex:/(0)[0-9]{9}/',
         ]);
 
         if( $validator->fails() ){
@@ -112,7 +111,7 @@ class CustomerController extends Controller
         $customer = $request->all();
         $customer['password'] = md5($customer['password']);
         Customer::create($customer);
-        return redirect()->route('login');
+        return redirect()->route('login')->withSuccessRegister('Register Success');
     }
 
     /**

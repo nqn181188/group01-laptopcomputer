@@ -135,6 +135,6 @@ class CustomerController extends Controller
         //     }
         // }
         $customer->delete();
-        return redirect()->route('admin.customer.index');
+        return redirect()->route('admin.customer.index')->withSuccessDelete('Deleted');
     }
 }

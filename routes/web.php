@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
+    // Alert::info('Info Title', 'Info Message');
 //     return view('welcome');
 // });
+
 Route::get('/clear-cart', 'Shop\CartController@clearSession')->name('clear-cart');
    
 //=========ROUTE ON SHOP PAGE========
@@ -36,7 +40,6 @@ Route::put('/customer/{customer}','Shop\CustomerController@updatePass')->name('c
 // Route::patch('/customer/{customer}','Shop\CustomerController@updatePass')->name('customer.update-pass');
 Route::get('/check-email','Shop\CustomerController@checkEmail')->name('check-email');
 
-// Route::get('/customer/{customer}/my-account','Shop\CustomerController@myAccount')->name('my-account');
 route::resource('customer', 'Shop\CustomerController');
 route::resource('contact', 'Shop\ContactController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');

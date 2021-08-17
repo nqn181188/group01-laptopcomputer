@@ -84,3 +84,16 @@
   </section>
   <!-- /.content -->
 @endsection
+
+
+@section('my-scripts')
+    
+@if (Session::has('success_delete'))
+<script>
+    swal("Success Delete","{!! Session::get('success_delete') !!}", "success",{
+        button: "Close"
+    });
+</script>
+@endif
+
+@endsection

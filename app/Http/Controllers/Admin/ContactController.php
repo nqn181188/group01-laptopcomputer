@@ -86,8 +86,9 @@ class ContactController extends Controller
      * @param  \App\Models\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Feedback $feedback)
+    public function destroy($id)
     {
-        //
+        Feedback::destroy($id);
+        return redirect()->route('admin.contact.index')->withSuccessDelete('Deleted'); 
     }
 }

@@ -68,7 +68,7 @@ class AdminController extends Controller
         // }
         //lưu thông tin đăng nhập vào session
         $request->session()->put('user',$account);
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->withSuccessLogin('Login Success');
     }
 
     public function processLogout(){
