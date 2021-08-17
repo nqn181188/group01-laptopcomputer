@@ -217,3 +217,20 @@
 
     </script>
 @endsection
+@section('my-scripts')
+@if (Session::has('success_login'))
+<script>
+    swal("Welcome to Laptop Computer","{!! Session::get('success_login') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
+
+@if (Session::has('success_logout'))
+<script>
+    swal("Welcome to Laptop Computer","{!! Session::get('success_logout') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
+@endsection

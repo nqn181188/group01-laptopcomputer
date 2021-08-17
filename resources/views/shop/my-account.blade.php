@@ -41,6 +41,8 @@
                                 <label for="phone">Phone</label>
                                 <input type="text" id="phone" value="{{$customer->phone}}" name="phone" placeholder="Phone number" readonly>
                             </fieldset>
+                            <a href="{{ route('customer.edit', Session::get('user')->id) }}" class="btn btn-sign">Change Profile</a>
+                            <a href="{{ route('customer.edit-pass', Session::get('user')->id) }}" class="btn btn-sign">Change Password</a>
                         </form>
                     </div>											
                 </div>

@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Feedback</h1>
+          <h1>Account</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Customer Feedback</li>
+            <li class="breadcrumb-item active">Admin account</li>
           </ol>
         </div>
       </div>
@@ -24,10 +24,10 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Customer Feedback</h3>
+        <h3 class="card-title">Admin Account</h3>
 
         <div class="card-tools">
-          <a href="{{ route('admin.contact.create') }}"><i class="fas fa-user-plus"></i></a>
+          <a href="{{ route('admin.account.create') }}"><i class="fas fa-user-plus"></i></a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
           </button>
@@ -63,9 +63,8 @@
                     <span class="badge badge-success">Readed</span>
                   @endif
                 </td>
-                
                 <td>{{ $item->note }}</td>
-                <td> 
+                <td>
                   <a href="{{ route('admin.contact.edit', $item->id) }}" class="btn btn-primary">Check</a>
                   <form style="display:inline-block" action="{{ route('admin.contact.destroy', $item->id) }}" method="POST">
                     @method("DELETE")
@@ -84,4 +83,17 @@
 
   </section>
   <!-- /.content -->
+@endsection
+
+
+@section('my-scripts')
+    
+@if (Session::has('success_delete'))
+<script>
+    swal("Success Delete","{!! Session::get('success_delete') !!}", "success",{
+        button: "Close"
+    });
+</script>
+@endif
+
 @endsection

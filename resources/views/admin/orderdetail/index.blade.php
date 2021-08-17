@@ -55,7 +55,7 @@
              <tbody>
               @foreach($orderdetail as $item)
               <tr>
-                <td>{{$item->order_id}}</td>
+                <td>{{$item->ordernumber}}</td>
                 <td>{{$item->product_id}}</td>
                 <td>{{$item->price}}</td>
                 <td>{{$item->quantity}}</td>

@@ -93,4 +93,16 @@
 
         });
     </script>
+
+
+@endsection
+
+@section('my-scripts')
+@if (Session::has('success_register'))
+<script>
+    swal("Now you can join with us","{!! Session::get('success_register') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
+    // Alert::info('Info Title', 'Info Message');
 //     return view('welcome');
 // });
+
 Route::get('/clear-cart', 'Shop\CartController@clearSession')->name('clear-cart');
    
 //=========ROUTE ON SHOP PAGE========
@@ -32,10 +35,12 @@ Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
 Route::get('/customer/process-logout','Shop\CustomerController@processLogout')->name('customer.process-logout');
 Route::get('/register','Shop\CustomerController@register')->name('register');
+Route::get('/customer/{customer}/edit-pass','Shop\CustomerController@editPass')->name('customer.edit-pass');
+Route::put('/customer/{customer}','Shop\CustomerController@updatePass')->name('customer.update-pass');
+// Route::patch('/customer/{customer}','Shop\CustomerController@updatePass')->name('customer.update-pass');
 Route::get('/check-email','Shop\CustomerController@checkEmail')->name('check-email');
 Route::post('/product-comment','Shop\ProductDetailController@comment')->name('product-comment');
 
-// Route::get('/customer/{customer}/my-account','Shop\CustomerController@myAccount')->name('my-account');
 route::resource('customer', 'Shop\CustomerController');
 route::resource('contact', 'Shop\ContactController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');
@@ -63,7 +68,6 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::resource('product', 'Admin\ProductController');
     Route::resource('order', 'Admin\OrderController');
     Route::resource('orderdetail', 'Admin\OrderDetailController');
-    Route::resource('customercomment', 'Admin\CustomerCommentController');
     Route::resource('brand','Admin\BrandController');
     Route::resource('contact','Admin\ContactController');
     Route::resource('gallery','Admin\GalleryController');

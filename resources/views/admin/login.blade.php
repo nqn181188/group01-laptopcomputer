@@ -94,28 +94,29 @@
 
     $(document).ready(function(){
 
-    $("#email").keyup(function(){
-        emailInput = $(this).val();
-        
-        $.ajax({
-        type:'get',
-        url:'{{ route('admin.check-email-login') }}',
-        data:{ email:emailInput },
-        success:function(data){
-            // alert(data);
-            if(data==1){
-                $("#messageEmail").html('');
-            }else if(!emailInput){
-                $("#messageEmail").html('');
-            }else{
-                $("#messageEmail").html('Email is not exist');
+        $("#email").keyup(function(){
+            emailInput = $(this).val();
+            
+            $.ajax({
+            type:'get',
+            url:'{{ route('admin.check-email-login') }}',
+            data:{ email:emailInput },
+            success:function(data){
+                // alert(data);
+                if(data==1){
+                    $("#messageEmail").html('');
+                }else if(!emailInput){
+                    $("#messageEmail").html('');
+                }else{
+                    $("#messageEmail").html('Email is not exist');
+                }
             }
-        }
+            });
+
         });
 
     });
-
-    });
 </script>
+
 </body>
 </html>

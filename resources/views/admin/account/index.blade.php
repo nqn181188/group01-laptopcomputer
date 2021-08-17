@@ -67,11 +67,13 @@
                       
                   @else
                   <a href="{{ route('admin.account.edit', $item->id) }}" class="btn btn-primary">Update</a>
+                  
                   <form style="display:inline-block" action="{{ route('admin.account.destroy', $item->id) }}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>
-                  </form>
+                </form>
+
                   @endif
                 </td>
               </tr>
@@ -86,3 +88,63 @@
   </section>
   <!-- /.content -->
 @endsection
+
+@section('my-scripts')
+    
+@if (Session::has('success_delete'))
+<script>
+    swal("Success Delete","{!! Session::get('success_delete') !!}", "success",{
+        button: "Close"
+    });
+</script>
+@endif
+
+@endsection
+
+
+{{-- 
+@section('my-scripts')
+<script>
+  function deleteConfirmation(id) {
+      swal.fire({
+          title: "Delete?",
+          icon: 'question',
+          text: "Please ensure and then confirm!",
+          type: "warning",
+          showCancelButton: !0,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel!",
+          reverseButtons: !0
+      }).then(function (e) {
+
+          if (e.value === true) {
+              var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+              $.ajax({
+                  type: 'POST',
+                  url: "{{url('/delete')}}/" + id,
+                  data: {_token: CSRF_TOKEN},
+                  dataType: 'JSON',
+                  success: function (results) {
+                      if (results.success === true) {
+                          swal.fire("Done!", results.message, "success");
+                          // refresh page after 2 seconds
+                          setTimeout(function(){
+                              location.reload();
+                          },2000);
+                      } else {
+                          swal.fire("Error!", results.message, "error");
+                      }
+                  }
+              });
+
+          } else {
+              e.dismiss;
+          }
+
+      }, function (dismiss) {
+          return false;
+      })
+  }
+</script>
+@endsection --}}

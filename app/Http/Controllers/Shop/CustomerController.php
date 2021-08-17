@@ -53,12 +53,12 @@ class CustomerController extends Controller
         }
         //lưu thông tin đăng nhập vào session
         $request->session()->put('user',$account);
-        return redirect()->route('home');
+        return redirect()->route('home')->withSuccessLogin('Welcome to Laptop Computer');
     }
 
     public function processLogout(){
         session()->forget('user');
-        return redirect()->route('home');
+        return redirect()->route('home')->withSuccessLogout('Thank for using our service');
     }
 
     public function checkEmail(Request $request){
@@ -101,7 +101,6 @@ class CustomerController extends Controller
             'email'    => 'email|unique:customers,email,',
             'password' => 'required|between:1,32',
             'confirm' => 'same:password',
-            'phone' => 'required|regex:/(0)[0-9]{9}/',
         ]);
 
         if( $validator->fails() ){
@@ -112,7 +111,7 @@ class CustomerController extends Controller
         $customer = $request->all();
         $customer['password'] = md5($customer['password']);
         Customer::create($customer);
-        return redirect()->route('login');
+        return redirect()->route('login')->withSuccessRegister('Register Success');
     }
 
     /**
@@ -133,7 +132,26 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function myAccount(Customer $customer){
+    public function editPass(Customer $customer){
+        return view('shop.update-pass-my-account',compact('customer'));
+    }
+
+    public function updatePass(Request $request, Customer $customer)
+    {
+        $validator = Validator::make($request->all(),[
+            'password' => 'required|between:1,32',
+            'confirm' => 'same:password',
+        ]);
+
+        if( $validator->fails() ){
+            return redirect()->back()->
+            withErrors($validator)->withInput();
+        }
+        $customer->password  = $request->password;
+        $customer['password'] = md5($customer['password']);
+        $customer->save();
+        dd($customer);
+        return redirect()->route('home');
     }
 
     public function edit(Customer $customer)
@@ -152,8 +170,6 @@ class CustomerController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'email'    => 'email|unique:customers,email,'.$customer->id,
-            'password' => 'required|between:1,32',
-            'confirm' => 'same:password',
             'phone' => 'required|regex:/(0)[0-9]{9}/',
         ]);
 
@@ -164,10 +180,8 @@ class CustomerController extends Controller
         $customer->email  = $request->email;
         $customer->phone  = $request->phone;
         $customer->address  = $request->address;
-        $customer->password  = $request->password;
-        $customer['password'] = md5($customer['password']);
         $customer->save();
-        return redirect()->route('home');
+        return redirect()->route('home')->withSuccessChange('Changed');
     }
 
     /**

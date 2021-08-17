@@ -54,11 +54,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="firstname">First name</label>
-                    <input type="text" id="firstname" name="firstname" class="form-control"/>
+                    <input type="text" id="firstname" value="{{ old('firstname')}}" name="firstname" class="form-control"/>
                 </div>
                 <div class="form-group">
                   <label for="lastname">Last name</label>
-                  <input type="text" id="lastname" name="lastname" class="form-control"/>
+                  <input type="text" id="lastname" value="{{ old('lastname')}}" name="lastname" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -70,12 +70,12 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email" class="form-control"/>
+                    <input type="text" id="email" value="{{ old('email')}}" name="email" class="form-control"/>
                 </div>
-                <div ><span id="messageEmail" class="text-danger"></span></div>
+                <div ><span id="messageEmail"  class="text-danger"></span></div>
                 <div class="form-group">
                   <label for="address">Address</label>
-                  <input type="text" id="address" name="address" class="form-control"/>
+                  <input type="text" id="address" value="{{ old('address')}}" name="address" class="form-control"/>
                 </div>
                 <div class="form-group">
                   <label for="role">Role</label>

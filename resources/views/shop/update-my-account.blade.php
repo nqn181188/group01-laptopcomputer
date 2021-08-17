@@ -53,23 +53,7 @@
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
                             </fieldset>
-                            <fieldset class="wrap-title">
-                                <h3 class="form-title">Login Information</h3>
-                            </fieldset>
-                            <fieldset class="wrap-input item-width-in-half left-item ">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" value="{{ old('password',$customer->password)}}" name="password" placeholder="Password">
-                                @error('password')
-                                <div><span class="text-danger">{{$message}}</span></div>
-                                @enderror
-                            </fieldset>
-                            <fieldset class="wrap-input item-width-in-half ">
-                                <label for="confirm">Confirm Password</label>
-                                <input type="password" id="confirm" value="{{$customer->password}}" name="confirm" placeholder="Confirm Password">
-                                @error('confirm')
-                                <div><span class="text-danger">{{$message}}</span></div>
-                                @enderror
-                            </fieldset>
+                            
                             <input type="submit" class="btn btn-sign" value="Update" name="Update">
                         </form>
                     </div>											
@@ -80,4 +64,46 @@
 
 </div><!--end container-->
 
+@endsection
+
+
+@section('my-scripts')
+<script>
+    $('#frm-login').validate({
+    ignore : [],
+    rules : { 
+     // rules here  for validation
+    },
+    messages : {
+     // messages here for validation
+    },
+    errorPlacement : function (error, element) {
+    if (element.hasClass('select2')) {
+        error.insertAfter(element.next('span'));
+    } 
+    else {
+        error.insertAfter(element);
+    }
+    },
+    submitHandler : function (form){
+        $.ajax({
+            type: 'POST',
+            url: 'url',
+            async: true,
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+
+            },
+            complete: function () {
+                return;
+            },
+            success: function() {
+                swal("Good job!", "You clicked the button!", "success");
+            }
+        });
+    }
+});
+</script>
 @endsection

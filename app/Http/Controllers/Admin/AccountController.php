@@ -99,18 +99,19 @@ class AccountController extends Controller
             'role' => 'required',
         ];
         $this->validate($request, $rules,
-        [
-            'firstname.required' => 'Bạn chưa nhập Tên',
-            'lastname.required' => 'Bạn chưa nhập Họ',
-            'password.required' => 'Bạn chưa nhập mật khẩu',
-            'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
-            'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
-            'email.required' => 'Bạn chưa nhập email',
-            'email.unique' => 'Email này đã tồn tại',
-            'address.required' => 'Bạn chưa nhập địa chỉ',
-            'role.required' => 'Bạn chưa chọn vai trò',
-            
-        ]);
+            // [
+            //     'firstname.required' => 'Bạn chưa nhập Tên',
+            //     'lastname.required' => 'Bạn chưa nhập Họ',
+            //     'password.required' => 'Bạn chưa nhập mật khẩu',
+            //     'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
+            //     'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
+            //     'email.required' => 'Bạn chưa nhập email',
+            //     'email.unique' => 'Email này đã tồn tại',
+            //     'address.required' => 'Bạn chưa nhập địa chỉ',
+            //     'role.required' => 'Bạn chưa chọn vai trò',
+                
+            // ]
+        );
 
         $account->firstname  = $request->firstname;
         $account->lastname  = $request->lastname;
@@ -137,7 +138,21 @@ class AccountController extends Controller
         //         unlink('images/' . $account->image);
         //     }
         // }
-        $account->delete();
-        return redirect()->route('admin.account.index');
+        $delete = Admin::destroy($account->id);
+        // if ($delete == 1) {
+        //     $success = true;
+        //     $message = "User deleted successfully";
+        // } else {
+        //     $success = true;
+        //     $message = "User not found";
+        // }
+
+        // //  return response
+        // return response()->json([
+        //     'success' => $success,
+        //     'message' => $message,
+        // ]);
+
+        return redirect()->route('admin.account.index')->withSuccessDelete('Deleted');
     }
 }
