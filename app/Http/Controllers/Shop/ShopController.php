@@ -30,7 +30,7 @@ class ShopController extends Controller
         $checked_cputypes=array();
         $checked_price='';
 
-        $products = Product::where('id','!=',0)->orderBy('featured','desc');
+        $products = Product::where('id','!=',0);
         if($request->checked_brands){
             $checked_brands = $request->checked_brands;
             $products->whereIn('brand_id',$checked_brands);
@@ -80,7 +80,7 @@ class ShopController extends Controller
             switch ($orderby){
                 case 'price-asc' : $products->orderBy('price','asc'); break;
                 case 'price-desc' : $products->orderBy('price','desc'); break;
-                default : $products->orderBy('featured','desc'); break;
+                default : $products=$products; break;
             }
         }
         $products=$products->paginate($paginate);

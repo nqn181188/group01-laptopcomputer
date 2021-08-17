@@ -46,6 +46,7 @@ route::resource('contact', 'Shop\ContactController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');
 Route::get('/shop/product/{id}','Shop\ProductDetailController@index')->name('product-detail');
 Route::get('/shop/search-product','Shop\HomeController@searchproduct')->name('search-product');
+Route::post('/comment','Shop\ProductDetailController@comment')->name('comment');
  
 //////////////////////////////////////
 

@@ -27,7 +27,7 @@
                                 @endif
                                 <option value="featured"{{$orderby=='featured'?'selected':''}}>Default sorting</option>
                                 <option value="price-asc" {{$orderby=='price-asc'?'selected':''}}>Sort by price: Low to High</option>
-                                <option value="price-desc"{{$orderby=='price_desc'?'selected':''}}>Sort by price: High to Low</option>
+                                <option value="price-desc"{{$orderby=='price-desc'?'selected':''}}>Sort by price: High to Low</option>
                             </select>
                         </div>
                         <div class="sort-item product-per-page">
@@ -142,20 +142,5 @@
                 $('#sort-item').submit();
             });
         });
-        $('.add-to-cart').click(function(e) {
-        e.preventDefault();     
-        quantity = $('#product-quantity').val();
-        pid = {{ $item->id}}
-
-        $.ajax({
-            type:'GET',
-            url:'{{ route('add-cart') }}',
-            data:{ pid:pid, quantity:quantity },
-            success:function(data){
-                window.location='{{ route('home') }}'  
-            }
-        });
-    });
-
     </script>
 @endsection

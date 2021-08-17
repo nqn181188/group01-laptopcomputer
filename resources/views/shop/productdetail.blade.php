@@ -55,6 +55,7 @@
                     <h2 class="product-name">{{$product->name}}</h2>
                     <div class="short-desc">
                         <ul>
+                            <input id="product--id" type="hidden" value="{{$product->id}}">
                             <li>CPU : {{$product->cpu}}</li>
                             <li>RAM : {{$product->amountofram}} {{$product->typeofram}}</li>
                             <li>Hard Drive : {{$product->hdcapacity}} {{$product->hdtype}} </li>
@@ -91,7 +92,7 @@
                     <div class="tab-control normal">
                         <a href="#description" class="tab-control-item active">description</a>
                         <a href="#add_infomation" class="tab-control-item">Tech Specs</a>
-                        <a href="#review" class="tab-control-item">Reviews</a>
+                        <a href="#review" id="review-tab" class="tab-control-item">Reviews</a>
                     </div>
                     <div class="tab-contents">
                         <div class="tab-content-item active" id="description">
@@ -144,19 +145,24 @@
                                     <ol class="commentlist">
                                         <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
                                             <div id="comment-20" class="comment_container"> 
-                                                <div class="comment-text">
-                                                    <div class="star-rating">
-                                                        <span class="width-100-percent">Rated <strong class="rating">4</strong> out of 5</span>
+                                                @foreach ($reviews as $review)
+                                                <div style="border-bottom: 1px solid rgb(218, 214, 214) " class="comment-text">
+                                                    <div class="product-rating">
+                                                        @for ($i = 0; $i <= $review->rate; $i++)
+                                                            <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
+                                                        @endfor
                                                     </div>
                                                     <p class="meta"> 
-                                                        <strong class="woocommerce-review__author">admin</strong> 
+                                                        <strong class="woocommerce-review__author">{{$review->name}}</strong> 
                                                         <span class="woocommerce-review__dash">–</span>
-                                                        <time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >Tue, Aug 15,  2017</time>
+                                                        <time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >{{$review->created_at}}</time>
                                                     </p>
                                                     <div class="description">
-                                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                                        <p>{{$review->comment}}</p>
                                                     </div>
                                                 </div>
+                                                @endforeach
+                                                
                                             </div>
                                         </li>
                                     </ol>
@@ -164,9 +170,9 @@
                                 <div id="review_form_wrapper">
                                     <div id="review_form">
                                         <div id="respond" class="comment-respond"> 
-
-                                            <form action="{{route('product-comment')}}" method="post" id="commentform" class="comment-form" novalidate="">
+                                            <form id="form-review" action="{{route('comment')}}" method="post" id="commentform" class="comment-form" novalidate="">
                                                 @csrf
+                                                <input type="hidden" value="{{$product->id}}" name="product_id">
                                                 <p class="comment-notes">
                                                     <span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
                                                 </p>
@@ -176,7 +182,7 @@
                                                         <label for="rated-1"></label>
                                                         <input type="radio" id="rated-1" name="rate" value="1">
                                                         <label for="rated-2"></label>
-                                                        <input type="radio" id="rated-2" name="rate value="2">
+                                                        <input type="radio" id="rated-2" name="rate" value="2">
                                                         <label for="rated-3"></label>
                                                         <input type="radio" id="rated-3" name="rate" value="3">
                                                         <label for="rated-4"></label>
@@ -190,21 +196,20 @@
                                                     <div id="emailErr" class="text-danger font-italic errMessager"></div>
                                                     <div id="commentErr" class="text-danger font-italic errMessager"></div>
                                                 </ul>
-                                                <input type="hidden" name="product_id" value="{{$product->id}}">
                                                 <p class="comment-form-author">
                                                     <label for="author">Name <span class="required">*</span></label> 
-                                                    <input id="author" name="name" type="text">
+                                                    <input id="author" name="name" type="text" required>
                                                     
                                                 </p>
                                                  
                                                 <p class="comment-form-email">
                                                     <label for="email">Email <span class="required">*</span></label> 
-                                                    <input id="email" name="email" type="email">
+                                                    <input id="email" name="email" type="email" required>
                                                 </p>
                                                 <p class="comment-form-comment">
                                                     <label for="comment">Your review <span class="required">*</span>
                                                     </label>
-                                                    <textarea id="comment" name="comment" cols="45" rows="8"></textarea>
+                                                    <textarea id="comment" name="comment" cols="45" rows="8" required></textarea>
                                                 </p>
                                                 <p class="form-submit">
                                                     <input name="submit" type="submit" id="submit" onclick="return validateCommentForm()" class="submit" value="Submit">
@@ -277,7 +282,7 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                                 </div>
                             </div>
                         </li>
@@ -305,7 +310,7 @@
                             </div>
                             <div class="product-info">
                                 <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                <div class="wrap-price"><span class="product-price">${{$item->price}}</span></div>
+                                <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
                             </div>
                         </div>
                         @endforeach
@@ -344,7 +349,6 @@
             }
         });
     });
-    ///////
     function printErr(elementID,hintMess)
     {
         document.getElementById(elementID).innerHTML=hintMess;
