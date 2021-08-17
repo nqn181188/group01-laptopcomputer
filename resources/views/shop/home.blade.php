@@ -217,7 +217,7 @@
 
     </script>
 @endsection
-@section('my-scripts')
+{{-- @section('my-scripts')
 @if (Session::has('success_login'))
 <script>
     swal("Welcome to Laptop Computer","{!! Session::get('success_login') !!}", "success",{
@@ -233,4 +233,4 @@
     });
 </script>
 @endif
-@endsection
+@endsection --}}
