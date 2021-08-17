@@ -347,19 +347,6 @@ if (amountofram==""){
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     if (NameErr==true||QuantityErr==true||PriceErr==true||BrandErr==true||ModelErr==true||
         ImageErr==true||CpuErr==true||AmountoframErr==true||TypeoframErr==true||ScreensizeErr==true||
         GcardErr==true||HdcapacityErr==true||HdtypeErr==true||WidthErr==true||DepthErr==true||

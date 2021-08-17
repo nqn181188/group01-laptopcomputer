@@ -33,7 +33,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
                             <label for="name">Brand Name</label>
-                            <input type="text" id="brand" class="form-control" name="brand">
+                            <input type="text" id="name" class="form-control" name="brand">
                             <div id="brandErr" class="text-danger font-italic errMessager"></div>
                             @if(isset($errorUploadImage))
                                 <div class="text-danger font-italic errMessager">{{$erroUploadImage}}</div>
@@ -45,8 +45,8 @@
                             <input type="hidden" id='check-image' value='0'>
                             <label class="form-label" for="image">Image</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="image" name="image">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="custom-file-input" id="img" name="image">
+                                <label class="custom-file-label" for="image">Choose file</label>
                                 <div id="imageErr" class="text-danger font-italic errMessager"></div>
                             </div>
                         </div>
@@ -72,5 +72,7 @@
       var fileName = $(this).val().split("\\").pop();
       $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    
     </script>
 @endsection

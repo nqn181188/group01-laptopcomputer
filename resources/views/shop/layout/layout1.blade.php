@@ -16,6 +16,16 @@
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/css/flexslider.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
+		<style>
+			.input-err{
+			  border: 1px solid rgb(204, 86, 86);
+			  box-shadow: 0px 1px 10px 0px rgb(204, 86, 86,0.5);
+			}
+			.errMessager{
+			  font-size: 90%;
+			  padding-top: 5px;
+			}
+		</style>
 	</head>
 <body class="home-page home-01 ">
 

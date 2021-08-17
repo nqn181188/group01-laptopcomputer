@@ -10,5 +10,5 @@ class CustomerComment extends Model
     use HasFactory;
     protected $table = 'customer_comments';
     //mô hình mass assignment
-    protected $fillable = ['cust_id','product_id','comment','rate'];
+    protected $fillable = ['name','email','product_id','comment','rate'];
 }

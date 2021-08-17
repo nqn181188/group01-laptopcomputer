@@ -100,11 +100,7 @@ class BrandController extends Controller
         $brand = Brand::find($id);
         $brand->brand=$request->brand;
         if($request->hasFile('image')){
-            if($brand->image!=null){
-                if(File::exists(public_path("images/brands/$brand->image"))){
-                    File::delete(public_path("images/brands/$brand->image"));
-                }
-            }
+            
             $file=$request->file('image');
             $extension = $file->getClientOriginalExtension();
             if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){

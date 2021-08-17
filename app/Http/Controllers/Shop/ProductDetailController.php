@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\CustomerComment;
 
 class ProductDetailController extends Controller
 {
@@ -17,5 +18,14 @@ class ProductDetailController extends Controller
             'relatedProduct',
             'featuredProduct',
         ));
+    }
+    public function comment(REQUEST $request){
+        $comment = $request->all();
+        $id = $request->product_id;
+        CustomerComment::create($comment);
+        return redirect()->route('product-detail',$id)->with(
+            'id',
+        );
+
     }
 }

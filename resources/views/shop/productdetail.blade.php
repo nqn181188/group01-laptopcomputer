@@ -165,33 +165,41 @@
                                     <div id="review_form">
                                         <div id="respond" class="comment-respond"> 
 
-                                            <form action="#" method="post" id="commentform" class="comment-form" novalidate="">
+                                            <form action="{{route('product-comment')}}" method="post" id="commentform" class="comment-form" novalidate="">
+                                                @csrf
                                                 <p class="comment-notes">
                                                     <span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
                                                 </p>
                                                 <div class="comment-form-rating">
                                                     <span>Your rating</span>
                                                     <p class="stars">
-                                                        
                                                         <label for="rated-1"></label>
-                                                        <input type="radio" id="rated-1" name="rating" value="1">
+                                                        <input type="radio" id="rated-1" name="rate" value="1">
                                                         <label for="rated-2"></label>
-                                                        <input type="radio" id="rated-2" name="rating" value="2">
+                                                        <input type="radio" id="rated-2" name="rate value="2">
                                                         <label for="rated-3"></label>
-                                                        <input type="radio" id="rated-3" name="rating" value="3">
+                                                        <input type="radio" id="rated-3" name="rate" value="3">
                                                         <label for="rated-4"></label>
-                                                        <input type="radio" id="rated-4" name="rating" value="4">
+                                                        <input type="radio" id="rated-4" name="rate" value="4">
                                                         <label for="rated-5"></label>
-                                                        <input type="radio" id="rated-5" name="rating" value="5" checked="checked">
+                                                        <input type="radio" id="rated-5" name="rate" value="5" checked="checked">
                                                     </p>
                                                 </div>
+                                                <ul>
+                                                    <div id="authorErr" class="text-danger font-italic errMessager"></div>
+                                                    <div id="emailErr" class="text-danger font-italic errMessager"></div>
+                                                    <div id="commentErr" class="text-danger font-italic errMessager"></div>
+                                                </ul>
+                                                <input type="hidden" name="product_id" value="{{$product->id}}">
                                                 <p class="comment-form-author">
                                                     <label for="author">Name <span class="required">*</span></label> 
-                                                    <input id="author" name="author" type="text" value="">
+                                                    <input id="author" name="name" type="text">
+                                                    
                                                 </p>
+                                                 
                                                 <p class="comment-form-email">
                                                     <label for="email">Email <span class="required">*</span></label> 
-                                                    <input id="email" name="email" type="email" value="" >
+                                                    <input id="email" name="email" type="email">
                                                 </p>
                                                 <p class="comment-form-comment">
                                                     <label for="comment">Your review <span class="required">*</span>
@@ -199,7 +207,7 @@
                                                     <textarea id="comment" name="comment" cols="45" rows="8"></textarea>
                                                 </p>
                                                 <p class="form-submit">
-                                                    <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+                                                    <input name="submit" type="submit" id="submit" onclick="return validateCommentForm()" class="submit" value="Submit">
                                                 </p>
                                             </form>
 
@@ -336,5 +344,68 @@
             }
         });
     });
+    ///////
+    function printErr(elementID,hintMess)
+    {
+        document.getElementById(elementID).innerHTML=hintMess;
+    }
+    function validateCommentForm()
+    {
+        var author = document.getElementById('author').value;
+        var email = document.getElementById('email').value;
+        var comment = document.getElementById('comment').value;
+        var Author = document.getElementById('author');
+        var Email = document.getElementById('email');
+        var Comment = document.getElementById('comment');
+        var AuthorErr = EmailErr = CommentErr = true;
+    // Validate author
+        if (author==""){
+            printErr("authorErr","-- Name is required.");
+            Author.classList.add("input-err");
+        }else{
+            printErr("authorErr","");
+            Author.classList.remove("input-err");
+            AuthorErr = false;
+        }
+    // Validate email
+    if (email==""){
+        printErr("emailErr"," -- Email Address is required.");
+        Email.classList.add("input-err");
+    }else{
+        var regex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;  
+        if (regex.test(email)==false)
+        {
+            printErr("emailErr","-- Email Address is invalid");
+            Email.classList.add("input-err");
+        }else{
+            printErr("emailErr","");
+            Email.classList.remove("input-err");
+            EmailErr = false;
+        }
+    }
+    // Validate comment
+    if (comment==""){
+        printErr("commentErr","-- Comment must not be blank.");
+        Comment.classList.add("input-err");
+    }else{
+        if(comment.length<10){
+            printErr("commentErr","-- Comment must be greater than 10 characters");
+            Comment.classList.add("input-err");
+        }else{
+            printErr("commentErr","");
+            Comment.classList.remove("input-err");
+            CommentErr = false;
+        }
+        
+    }
+        if (AuthorErr==true||EmailErr==true||CommentErr==true)
+        {
+            return false;
+        }
+        else
+        {
+            return;
+        }
+    }
 </script>
 @endsection

@@ -33,12 +33,13 @@ Route::post('/customer/process-login','Shop\CustomerController@processLogin')->n
 Route::get('/customer/process-logout','Shop\CustomerController@processLogout')->name('customer.process-logout');
 Route::get('/register','Shop\CustomerController@register')->name('register');
 Route::get('/check-email','Shop\CustomerController@checkEmail')->name('check-email');
+Route::post('/product-comment','Shop\ProductDetailController@comment')->name('product-comment');
 
 // Route::get('/customer/{customer}/my-account','Shop\CustomerController@myAccount')->name('my-account');
 route::resource('customer', 'Shop\CustomerController');
 route::resource('contact', 'Shop\ContactController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');
-Route::get('/shop/product/{name}','Shop\ProductDetailController@index')->name('product-detail');
+Route::get('/shop/product/{id}','Shop\ProductDetailController@index')->name('product-detail');
 Route::get('/shop/search-product','Shop\HomeController@searchproduct')->name('search-product');
  
 //////////////////////////////////////
@@ -65,6 +66,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::resource('customercomment', 'Admin\CustomerCommentController');
     Route::resource('brand','Admin\BrandController');
     Route::resource('contact','Admin\ContactController');
+    Route::resource('gallery','Admin\GalleryController');
     
 
 

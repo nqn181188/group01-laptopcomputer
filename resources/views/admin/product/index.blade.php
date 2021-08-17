@@ -115,6 +115,7 @@
                 </td>
                 <td class="text-center">
                   <a href="{{route('admin.product.edit',$item)}}" class="btn btn-primary">Edit</a>
+                  <a href="#" class="btn btn-primary">Upload Gallery</a>
                   <form style="display:inline-block" action="{{route('admin.product.destroy',$item)}}" method="POST">
                     @method("DELETE")
                     @csrf
