@@ -22,26 +22,27 @@
                                 <h4 class="form-subtitle">Personal infomation</h4>
                             </fieldset>									
                             <fieldset class="wrap-input">
-                                <label for="firstname">Firstname</label>
-                                <input type="text" id="firstname" value="{{$customer->firstname}}" name="firstname" placeholder="First name" readonly>
+                                <label for="firstname">Firstname: {{$customer->firstname}}</label>
+                                {{-- <input type="text" id="firstname" value="{{$customer->firstname}}" name="firstname" placeholder="First name" readonly> --}}
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="lastname">Lastname</label>
-                                <input type="text" id="lastname" value="{{$customer->lastname}}" name="lastname" placeholder="Last name" readonly>
+                                <label for="lastname">Lastname: {{$customer->lastname}}</label>
+                                {{-- <input type="text" id="lastname" value="{{$customer->lastname}}" name="lastname" placeholder="Last name" readonly> --}}
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" value="{{$customer->email}}" name="email" placeholder="Email address" readonly>
+                                <label for="email">Email Address: {{$customer->email}}</label>
                             </fieldset>
-                            <fieldset class="wrap-input">
-                                <label for="address">Address</label>
-                                <input type="text" id="address" value="{{$customer->address}}" name="address" placeholder="address" readonly>
-                            </fieldset>
-                            <fieldset class="wrap-input">
-                                <label for="phone">Phone</label>
-                                <input type="text" id="phone" value="{{$customer->phone}}" name="phone" placeholder="Phone number" readonly>
-                            </fieldset>
-                            <a href="{{ route('customer.edit', Session::get('user')->id) }}" class="btn btn-sign">Change Profile</a>
+                            @if ($customer->address)
+                                <fieldset class="wrap-input">
+                                    <label for="address">Address: {{$customer->address}}</label>
+                                </fieldset>
+                            @endif
+                            @if ($customer->phone)
+                                <fieldset class="wrap-input">
+                                    <label for="phone">Phone: {{$customer->phone}}</label>
+                                </fieldset>
+                            @endif
+                            <a href="{{ route('customer.edit-profile', Session::get('user')->id) }}" class="btn btn-sign">Change Profile</a>
                             <a href="{{ route('customer.edit-pass', Session::get('user')->id) }}" class="btn btn-sign">Change Password</a>
                         </form>
                     </div>											

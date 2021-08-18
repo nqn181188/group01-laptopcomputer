@@ -35,8 +35,10 @@ Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
 Route::get('/customer/process-logout','Shop\CustomerController@processLogout')->name('customer.process-logout');
 Route::get('/register','Shop\CustomerController@register')->name('register');
-Route::get('/customer/edit-pass','Shop\CustomerController@editPass')->name('customer.edit-pass');
-Route::put('/customer/{id}','Shop\CustomerController@updatePass')->name('customer.update-pass');
+Route::get('/customer/{id1}/edit-pass','Shop\CustomerController@editPass')->name('customer.edit-pass');
+Route::put('/customer/{id1}','Shop\CustomerController@updatePass')->name('customer.update-pass');
+Route::get('/customer/{id2}/edit-profile','Shop\CustomerController@editProfile')->name('customer.edit-profile');
+Route::put('/customer/{id2}','Shop\CustomerController@updateProfile')->name('customer.update-profile');
 // Route::patch('/customer/{customer}','Shop\CustomerController@updatePass')->name('customer.update-pass');
 Route::get('/check-email','Shop\CustomerController@checkEmail')->name('check-email');
 Route::post('/product-comment','Shop\ProductDetailController@comment')->name('product-comment');
@@ -71,7 +73,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::resource('orderdetail', 'Admin\OrderDetailController');
     Route::resource('brand','Admin\BrandController');
     Route::resource('contact','Admin\ContactController');
-    Route::resource('gallery','Admin\GalleryController');
+    // Route::resource('gallery','Admin\GalleryController');
     
 
 

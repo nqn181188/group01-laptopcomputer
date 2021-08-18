@@ -166,6 +166,7 @@
             <i class="nav-icon fas fa-cart-arrow-down"></i>
             <p>
               Order
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">

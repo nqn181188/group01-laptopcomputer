@@ -132,11 +132,12 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function editPass(Customer $customer){
+    public function editPass($id){
+        $customer = Customer::find($id);
         return view('shop.update-pass-my-account',compact('customer'));
     }
 
-    public function updatePass(Request $request, Customer $customer)
+    public function updatePass(Request $request,$id)
     {
         $validator = Validator::make($request->all(),[
             'password' => 'required|between:1,32',
@@ -147,27 +148,21 @@ class CustomerController extends Controller
             return redirect()->back()->
             withErrors($validator)->withInput();
         }
+        $customer = Customer::find($id);
         $customer->password  = $request->password;
         $customer['password'] = md5($customer['password']);
         $customer->save();
-        dd($customer);
         return redirect()->route('home');
     }
 
-    public function edit(Customer $customer)
-    {
+    public function editProfile($id){
+        $customer = Customer::find($id);
         return view('shop.update-my-account',compact('customer'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Customer $customer)
+    public function updateProfile(Request $request,$id)
     {
+        $customer = Customer::find($id);
         $validator = Validator::make($request->all(),[
             'email'    => 'email|unique:customers,email,'.$customer->id,
             'phone' => 'required|regex:/(0)[0-9]{9}/',
@@ -181,7 +176,37 @@ class CustomerController extends Controller
         $customer->phone  = $request->phone;
         $customer->address  = $request->address;
         $customer->save();
-        return redirect()->route('home')->withSuccessChange('Changed');
+        return redirect()->route('home');
+    }
+
+    public function edit(Customer $customer)
+    {
+        // return view('shop.update-my-account',compact('customer'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Customer $customer)
+    {
+        // $validator = Validator::make($request->all(),[
+        //     'email'    => 'email|unique:customers,email,'.$customer->id,
+        //     'phone' => 'required|regex:/(0)[0-9]{9}/',
+        // ]);
+
+        // if( $validator->fails() ){
+        //     return redirect()->back()->
+        //     withErrors($validator)->withInput();
+        // }
+        // $customer->email  = $request->email;
+        // $customer->phone  = $request->phone;
+        // $customer->address  = $request->address;
+        // $customer->save();
+        // return redirect()->route('home');
     }
 
     /**
