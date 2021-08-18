@@ -32,7 +32,7 @@
                                 <input style="cursor: not-allowed" type="text" id="lastname" value="{{ old('lastname',$customer->lastname)}}" name="lastname" placeholder="Last name" readonly>
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="email">Email Address</label>
+                                <label for="email">Email Address<span>*</span></label>
                                 <input type="email" id="email" value="{{ old('email',$customer->email)}}" name="email" placeholder="Email address">
                                 @error('email')
                                 <div><span class="text-danger">{{$message}}</span></div>
@@ -40,14 +40,14 @@
                             </fieldset>
                                 
                             <fieldset class="wrap-input">
-                                <label for="address">Address*</label>
+                                <label for="address">Address<span>*</span></label>
                                 <input type="text" id="address" value="{{ old('address',$customer->address)}}" name="address" placeholder="Address">
                                 @error('address')
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="phone">Phone*</label>
+                                <label for="phone">Phone<span>*</span></label>
                                 <input type="text" id="phone" value="{{ old('phone',$customer->phone)}}" name="phone" placeholder="Phone number">
                                 @error('phone')
                                 <div><span class="text-danger">{{$message}}</span></div>
