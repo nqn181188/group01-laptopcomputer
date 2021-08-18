@@ -53,12 +53,12 @@ class CustomerController extends Controller
         }
         //lưu thông tin đăng nhập vào session
         $request->session()->put('user',$account);
-        return redirect()->route('home')->withSuccessLogin('Welcome to Laptop Computer');
+        return redirect()->route('home')->with(['success_login'=>'Welcome to Laptop Computer']);
     }
 
     public function processLogout(){
         session()->forget('user');
-        return redirect()->route('home')->withSuccessLogout('Thank for using our service');
+        return redirect()->route('home')->with(['success_logout'=>'Thank for using our service']);
     }
 
     public function checkEmail(Request $request){

@@ -52,7 +52,7 @@ class CustomerController extends Controller
         $customer = $request->all();
         $customer['password'] = md5($customer['password']);
         Customer::create($customer);
-        return redirect()->route('admin.customer.index');
+        return redirect()->route('admin.customer.index')->with(['success_create'=>'Created']);
     }
 
     /**
@@ -89,8 +89,8 @@ class CustomerController extends Controller
         $rules = [
             
             'email'    => 'email|unique:customers,email,'.$customer->id,
-            'password' => 'required|between:1,32',
-            'confirm' => 'same:password',
+            // 'password' => 'required|between:1,32',
+            // 'confirm' => 'same:password',
             'address' => 'required',
             'phone' => 'required|regex:/(0)[0-9]{9}/',
         ];
@@ -114,11 +114,11 @@ class CustomerController extends Controller
         $customer->email  = $request->email;
         $customer->phone  = $request->phone;
         $customer->address  = $request->address;
-        $customer->password  = $request->password;
+        // $customer->password  = $request->password;
         $customer->lock  = $request->lock;
-        $customer['password'] = md5($customer['password']);
+        // $customer['password'] = md5($customer['password']);
         $customer->save();
-        return redirect()->route('admin.customer.index');
+        return redirect()->route('admin.customer.index')->with(['success_update'=>'Updated']);
     }
 
     /**

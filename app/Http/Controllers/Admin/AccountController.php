@@ -55,7 +55,7 @@ class AccountController extends Controller
         // $account['password'] = Hash::make($request->password);
         
         Admin::create($account);
-        return redirect()->route('admin.account.index');
+        return redirect()->route('admin.account.index')->with(['success_update'=>'Updated']);
     }
 
     /**
@@ -93,8 +93,8 @@ class AccountController extends Controller
             'firstname' => 'required|min:3',
             'lastname' => 'required|min:3',
             'email'    => 'email|unique:admins,email,'.$account->id,
-            'password' => 'required|between:1,32',
-            'confirm' => 'same:password',
+            // 'password' => 'required|between:1,32',
+            // 'confirm' => 'same:password',
             'address' => 'required',
             'role' => 'required',
         ];
@@ -117,12 +117,12 @@ class AccountController extends Controller
         $account->lastname  = $request->lastname;
         $account->email  = $request->email;
         $account->address  = $request->address;
-        $account->password  = $request->password;
+        // $account->password  = $request->password;
         $account->role  = $request->role;
-        $account['password'] = md5($account['password']);
+        // $account['password'] = md5($account['password']);
         // $account['password'] = Hash::make($request->password);
         $account->save();
-        return redirect()->route('admin.account.index');
+        return redirect()->route('admin.dashboard')->with(['success_update'=>'Updated']);
     }
 
     /**
