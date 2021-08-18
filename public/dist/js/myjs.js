@@ -359,3 +359,43 @@ if (amountofram==""){
         return;
     }
 }
+function validateInsertBrandForm()
+{
+    var brand = document.getElementById('name').value;
+    var image = document.getElementById('image').value;
+    var Brand = document.getElementById('name');
+    var Image = document.getElementById('image');
+    var checkimage = document.getElementById('check-image').value;
+    var BrandErr = ImageErr = true;
+// Validate Name
+    if (brand==""){
+        printErr("brandErr","Brand Name must not be blank.");
+        Brand.classList.add("input-err");
+    }else{
+        printErr("brandErr","");
+        Brand.classList.remove("input-err");
+        BrandErr = false;
+    }
+
+// Validate image
+if (checkimage==0){
+    if (image==""){
+        printErr("imageErr","Please choose a image.");
+        Image.classList.add("input-err");
+    }else{
+        printErr("imageErr","");
+        Image.classList.remove("input-err");
+        ImageErr = false;
+    }
+}else{
+    ImageErr = false;
+}
+    if (BrandErr==true||ImageErr==true)
+    {
+        return false;
+    }
+    else
+    {
+        return;
+    }
+}

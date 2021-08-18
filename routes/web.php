@@ -72,10 +72,9 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::resource('brand','Admin\BrandController');
     Route::resource('contact','Admin\ContactController');
     Route::resource('gallery','Admin\GalleryController');
-    
-
-
 });
+Route::get('/product/upload-gallrery/{id}','Admin\ProductController@uploadGallery')->name('upload-gallery');
+Route::post('/product/process-upload-gallrery/{id}','Admin\ProductController@processuploadGallery')->name('process-upload-gallery');
 
 ////////////////////////////////////////////
 
