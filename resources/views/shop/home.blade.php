@@ -110,7 +110,7 @@
                                         <span class="flash-item new-label">new</span>
                                     </div>
                                     <div class="wrap-btn">
-                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal"  name="add-to-cart" data-id_product ="{{$item->id}}">
                                         {{-- <a href="#" class="function-link">quick view</a> --}}
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                                             <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
                                         </a>
                                         <div class="wrap-btn">
-                                            <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-id_product ="{{$item->id}}">
+                                            <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal"  name="add-to-cart" data-id_product ="{{$item->id}}">
                                             {{-- <a href="#" class="function-link">quick view</a> --}}
                                         </div>
                                     </div>
@@ -214,7 +214,7 @@
                 }
             });
         });
-
+       
     </script>
 @endsection
 {{-- @section('my-scripts')

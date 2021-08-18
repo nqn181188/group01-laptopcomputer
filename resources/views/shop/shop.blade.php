@@ -64,7 +64,7 @@
                                     @endif
                                 </div>
                                 <div class="wrap-btn">
-                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id ="{{$item->id}}">
+                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id ="{{$item->id}}" name="add-to-cart">
                                     {{-- <a href="#" class="function-link">quick view</a> --}}
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                     <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
                                 </div>
                                 <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
-                                <a href="#" class="btn add-to-cart">Add To Cart</a>
+                                <a href="#" class="btn add-to-cart" data-id="{{ $item->id }}">Add To Cart</a>
                                 {{-- <button type="button" class="btn add-to-cart" name="add-cart">Add To Cart</button> --}}
                             </div>
                         </div>
@@ -136,11 +136,28 @@
                     $('#quickview_avail').html(data.avail);
                 }
             });
+            
         });
         $(function(){
             $('.use-chosen').change(function(){
                 $('#sort-item').submit();
             });
         });
+        $('.add-to-cart').click(function(e) {
+        e.preventDefault();     
+        //quantity = $('#product-quantity').val();
+        //pid = "{{ $item->id }}";
+        var pid = $(this).data("id");
+
+        $.ajax({
+            type:'GET',
+            url:'{{ route('add-cart') }}',
+            data:{ pid:pid, quantity:1 },
+            success:function(data){
+                window.location='{{ route('shop') }}'  
+            }
+        });
+    });
+    
     </script>
 @endsection

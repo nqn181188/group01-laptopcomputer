@@ -31,6 +31,10 @@ class QuickViewController extends Controller
         $output['weight']=$product->weight. ' kg';
         $output['os']=$product->os;
         $output['releaseyear']=$product->releaseyear;
+        
+        
+      
+
         echo json_encode($output);
     }
 }
