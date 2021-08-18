@@ -111,7 +111,7 @@ class CustomerController extends Controller
         $customer = $request->all();
         $customer['password'] = md5($customer['password']);
         Customer::create($customer);
-        return redirect()->route('login')->withSuccessRegister('Register Success');
+        return redirect()->route('login')->with(['success_register'=>'Register Success']);
     }
 
     /**
