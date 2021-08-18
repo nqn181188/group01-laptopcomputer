@@ -77,7 +77,7 @@ class ContactController extends Controller
         $feedback->read  = $request->read;
         $feedback->note  = $request->note;
         $feedback->save();
-        return redirect()->route('admin.contact.index');
+        return redirect()->route('admin.contact.index')->with(['success_update'=>'Updated']);
     }
 
     /**

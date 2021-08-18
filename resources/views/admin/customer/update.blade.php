@@ -64,14 +64,14 @@
                 <label for="lastname">Last name</label>
                 <input type="text" id="lastname" value="{{ old('lastname',$customer->lastname)}}" name="lastname" class="form-control"/>
               </div>
-              <div class="form-group">
+              {{-- <div class="form-group">
                   <label for="password">Password</label>
                   <input type="password" id="password" value="{{ old('password', $customer->password)}}" name="password" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="confirm">Confirm</label>
                   <input type="password" id="confirm" value="{{ $customer->password}}" name="confirm" class="form-control"/>
-              </div>
+              </div> --}}
               <div class="form-group">
                   <label for="email">Email</label>
                   <input type="text" id="email" value="{{ old('email',$customer->email)}}" name="email" class="form-control"/>
@@ -96,6 +96,8 @@
                   <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
               </div>
           </form>
+         
+          </div>
         </div>
       </div>
     </div>

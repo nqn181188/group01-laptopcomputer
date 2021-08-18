@@ -54,14 +54,14 @@
                             </fieldset>
                             <fieldset class="wrap-input item-width-in-half left-item ">
                                 <label for="password">Password</label>
-                                <input type="text" id="password" name="password" placeholder="Password">
+                                <input type="password" id="password" name="password" placeholder="Password">
                                 @error('password')
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
                             </fieldset>
                             <fieldset class="wrap-input item-width-in-half ">
                                 <label for="confirm">Confirm Password</label>
-                                <input type="text" id="confirm" name="confirm" placeholder="Confirm Password">
+                                <input type="password" id="confirm" name="confirm" placeholder="Confirm Password">
                                 @error('confirm')
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror

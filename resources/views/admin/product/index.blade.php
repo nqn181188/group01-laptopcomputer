@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Product</h1>
+          <h1>Product List</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
         <div class="card-header bg-secondary">
             <form id="filter-products" class="form-inline bg-secondary">
               <input type="hidden" value={{$products->currentPage()}} name="page">
-              <div class="row">
+              <div class="row mx-auto">
                   <div class="d-inline use-chosen">
                     <input name="name" type="text" class="form-control search-name" value="{{$name}}" id="name" placeholder="Search by name...">
                   </div>
@@ -113,9 +113,9 @@
                     <span class="badge badge-success">Featured</span>
                   @endif
                 </td>
-                <td class="text-center">
+                <td class="text-center align-middle">
                   <a href="{{route('admin.product.edit',$item)}}" class="btn btn-primary">Edit</a>
-                  <a href="#" class="btn btn-primary">Upload Gallery</a>
+                  <a href="{{route('upload-gallery',$item->id)}}" class="btn btn-primary">Upload Gallery</a>
                   <form style="display:inline-block" action="{{route('admin.product.destroy',$item)}}" method="POST">
                     @method("DELETE")
                     @csrf
@@ -162,4 +162,31 @@
             });
         });
     </script>
+
+  
+@if (Session::has('success_delete'))
+<script>
+    swal("Success Delete","{!! Session::get('success_delete') !!}", "success",{
+        button: "Close"
+    });
+</script>
+@endif
+
+
+@if (Session::has('success_update'))
+<script>
+    swal("Update account success","{!! Session::get('success_update') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
+
+
+@if (Session::has('success_create'))
+<script>
+    swal("Create account success","{!! Session::get('success_create') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
 @endsection

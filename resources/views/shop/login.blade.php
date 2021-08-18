@@ -16,6 +16,13 @@
                         <form action="{{route('customer.process-login')}}" method="POST" name="frm-login">
                             @csrf
                             <fieldset class="wrap-title">
+
+                                @if (Session::has('success_register'))
+                                <div class="alert alert-success" role="alert">
+                                    <h2 class="form-title">Register Success</h2>										
+                                  </div>
+                                @endif
+
                                 <h3 class="form-title">Log in to your account</h3>										
                             </fieldset>
                             <fieldset class="wrap-input">

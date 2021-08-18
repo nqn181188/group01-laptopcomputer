@@ -35,6 +35,18 @@
             </div>
         </div>
       <div class="card-body p-0">
+            @if ($error = Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                    <strong>{{ $error }}</strong>
+                </div>
+                <br>
+            @endif
+            @if ($success = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <strong>{{ $success }}</strong>
+                </div>
+                <br>
+            @endif
         <form id="create-product-form"  action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
@@ -101,9 +113,6 @@
                         <input type="file" class="custom-file-input" id="image" name="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                         <div id="imageErr" class="text-danger font-italic errMessager"></div>
-                        @if(isset($errorUploadImage))
-                        <div class="text-danger font-italic errMessager">{{$erroUploadImage}}</div>
-                        @endif
                     </div>
                 </div>
                 
