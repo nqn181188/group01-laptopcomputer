@@ -35,6 +35,18 @@
             </div>
         </div>
       <div class="card-body p-0">
+            @if ($error = Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                    <strong>{{ $error }}</strong>
+                </div>
+                <br>
+            @endif
+            @if ($success = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <strong>{{ $success }}</strong>
+                </div>
+                <br>
+            @endif
         <form id="create-product-form"  action="{{route('admin.product.update',$product->id)}}" method="POST" enctype="multipart/form-data">
             @method('PATCH')
             @csrf

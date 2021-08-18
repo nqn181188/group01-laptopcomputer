@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use File;
 class ProductController extends Controller
@@ -95,17 +96,14 @@ class ProductController extends Controller
             $file=$request->file('image');
             $extension = $file->getClientOriginalExtension();
             if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
-                $erroUploadImage = 'Please choose the file with extension is jpg, jpeg or png';
-                return redirect()->route('admin.product.create')->with(
-                    'erroUploadImage',
-                );
+                return back()->with('error', 'File upload must be have extension is jpg, jpeg or png.');
             }
             $imgName=$file->getClientOriginalName();
             $file->move('images/products',$imgName);
             $product['image']=$imgName;
         }
         Product::create($product);
-        return redirect()->route('admin.product.create');
+        return back()->with('success', $product['name'].'has been successfully created.');
     }
 
     /**
@@ -172,18 +170,14 @@ class ProductController extends Controller
             $file=$request->file('image');
             $extension = $file->getClientOriginalExtension();
             if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
-                $item=Product::where('id',$id)->first();
-                $erroUploadImage = 'Please choose the file with extension is jpg, jpeg or png';
-                return redirect()->route('admin.product.edit',$item)->with(
-                    'erroUploadImage',
-                );
+                return back()->with('error', 'File upload must be have extension is jpg, jpeg or png.');
             }
             $imgName=$file->getClientOriginalName();
             $file->move('images/products',$imgName);
             $product['image']=$imgName;
         }
         $product->save();
-        return redirect()->route('admin.product.index');
+        return back()->with('success', $product['name'].'has been successfully updated.');
     }
 
     /**
@@ -198,8 +192,49 @@ class ProductController extends Controller
                 File::delete(public_path("images/products/$product->image"));
             }
         }
-            $product->delete();
-            return redirect()->route('admin.product.index');
+        $pid = $product->id;
+        $images = ProductImage::where('product_id',$pid)->get();
+        if ($images!=null){
+            foreach ($images as $image){
+                if(File::exists(public_path("images/gallery/$image->image"))){
+                    File::delete(public_path("images/gallery/$image->image"));
+                }
+            }
+        }
+        $images = ProductImage::where('product_id',$pid)->delete();
+        $product->delete();
+        return redirect()->route('admin.product.index');
     }
+    public function uploadGallery($id){
+        $product = Product::find($id);
+        $images = ProductImage::where('product_id',$id)->get();
+        return view('admin.product.uploadgallery',compact(
+            'product',
+            'images',
+        ));
+    }
+    public function processuploadGallery(REQUEST $request,$id){
+        if($request->hasfile('gallery')){
+            foreach($request->file('gallery') as $file)
+            {
+                $extension = $file->getClientOriginalExtension();
+                if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
+                    return back()->with('error', 'File upload must be have extension is jpg, jpeg or png.');
+                }
+            }
+            foreach($request->file('gallery') as $file)
+            {
+                $image = new ProductImage;
+                $image->product_id=$id;
+                $imgName=$file->getClientOriginalName();
+                $file->move('images/gallery',$imgName);
+                $image['image']=$imgName;
+                $image->save();
+            }
+            return back()->with('success', 'Has been successfully updated gallery.');
+        }else{
+            return back()->with('error', 'No image has been upload to gallery.');
 
+        }
+    }
 }

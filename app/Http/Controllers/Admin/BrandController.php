@@ -51,17 +51,14 @@ class BrandController extends Controller
             $file=$request->file('image');
             $extension = $file->getClientOriginalExtension();
             if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
-                $erroUploadImage = 'Please choose the file with extension is jpg, jpeg or png';
-                return redirect()->route('admin.product.create')->with(
-                    'erroUploadImage',
-                );
+                return back()->with('error', 'File upload must be have extension is jpg, jpeg or png.');
             }
             $imgName=$file->getClientOriginalName();
             $file->move('images/brands',$imgName);
             $brand['image']=$imgName;
         }
         Brand::create($brand);
-        return redirect()->route('admin.brand.index');
+        return back()->with('success', 'Brand'. $brand['brand'].' has been successfully inserted');    
     }
 
     /**
