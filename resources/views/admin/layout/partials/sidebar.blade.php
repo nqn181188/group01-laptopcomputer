@@ -18,6 +18,9 @@
       <div class="infor ml-0">
         <a href="#" class="d-block">{{Session::get('user')->firstname}}</a>
         <a href="{{ route('admin.account.edit', Session::get('user')->id) }}">Change Profile</a>
+        <div>
+          <a href="{{ route('admin.account.edit-pass', Session::get('user')->id) }}">Change Password</a>
+        </div>
         <a href="{{ route('admin.logout')}}" class="d-block">Logout</a>
       </div>
     </div>
