@@ -334,7 +334,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+   
     $('.add-to-cart').click(function(e) {
         e.preventDefault();     
         quantity = $('#product-quantity').val();

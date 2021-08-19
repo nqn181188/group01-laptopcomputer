@@ -106,12 +106,15 @@
 
 @endsection
 @section('my-scripts')
+
     <script type="text/javascript">
+   
         $.ajaxSetup({
 			headers:{
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
 		});
+     
         $('.quickview').click(function(){
             var product_id = $(this).data("product_id");
             var _token = $('input[name="_token"]').val();
@@ -156,6 +159,7 @@
             success:function(data){
                 window.location='{{ route('shop') }}'  
             }
+           
         });
     });
     

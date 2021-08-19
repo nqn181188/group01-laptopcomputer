@@ -29,6 +29,8 @@ class CartController extends Controller
         return view('shop.checkout');
     }
 
+    
+
 
     /**
      * Show the form for creating a new resource.
