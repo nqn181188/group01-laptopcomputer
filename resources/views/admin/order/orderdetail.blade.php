@@ -86,7 +86,7 @@
                       <img class="d-block mx-auto" src="{{asset('/images/products/'.$orderProduct['image'])}}" alt="{{$orderProduct['name']}}" style="width: 30%">
                       @endif
                   </td>
-                  <td class="align-middle">{{$orderProduct['name']}}</td>
+                  <td class="align-middle text-center">{{$orderProduct['name']}}</td>
                   <td class="text-center align-middle">{{$orderProduct['quantity']}}</td>
                   <td class="text-right align-middle">${{number_format($orderProduct['price'], 2, '.',',')}}</td>
                 </tr>
