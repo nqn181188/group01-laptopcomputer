@@ -103,11 +103,16 @@
                             <div class="item-content">
                                 <div class="wrap-vertical-nav">
                                     <ul>
-                                        <li class="menu-item"><a href="#" class="link-term">My Account</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Brands</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Gift Certificates</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Affiliates</a></li>
+                                        @if (Session::get('user')==null)
+                                        <li class="menu-item"><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
+                                        <li class="menu-item"><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
+                                            
+                                        @else
+                                        <li class="menu-item"><a href="{{ route('customer.show',Session::get('user')->id)}}" class="link-term">My Account</a></li>
+                                        <li class="menu-item"><a href="#" class="link-term">Order History</a></li>
                                         <li class="menu-item"><a href="#" class="link-term">Wish list</a></li>
+                                        @endif
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -117,11 +122,7 @@
                             <div class="item-content">
                                 <div class="wrap-vertical-nav">
                                     <ul>
-                                        <li class="menu-item"><a href="#" class="link-term">Contact Us</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Returns</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Site Map</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Specials</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Order History</a></li>
+                                        <li class="menu-item"><a href="{{route('contact.index')}}" class="link-term">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>

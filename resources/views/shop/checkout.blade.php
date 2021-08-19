@@ -76,7 +76,7 @@
                 <p class="row-in-form fill-wife">
                     <label class="checkbox-field">
                         <input name="createAccount" id="create-account" value="1" type="checkbox">
-                        <span>Create an account?</span>
+                        <span>Create Shipping Address?</span>
                     </label>
                     {{-- <label class="checkbox-field">
                         <input name="different-add" id="different-add" value="forever" type="checkbox">

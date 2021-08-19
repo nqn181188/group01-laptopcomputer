@@ -29,6 +29,8 @@ class CartController extends Controller
         return view('shop.checkout');
     }
 
+    
+
 
     /**
      * Show the form for creating a new resource.
@@ -199,6 +201,8 @@ class CartController extends Controller
                 $cust->address = $add;
                 $cust->save();
             }
+            
+
             // tạo và lưu order
             $ord = new Order();
             $ord->cust_id=$cust->id;
@@ -231,11 +235,11 @@ class CartController extends Controller
                 $detail->product_id = $item->id;
                 $detail->quantity = $item->quantity;
                 $detail->price = $item->price;
-                $detail->shipfirstname = $cust->sfname;
-                $detail->shiplastname = $cust->slname;
-                $detail->shipemail= $cust->semail;
-                $detail->shipphone = $cust->sphone;
-                $detail->shipaddress = $cust->sadd;
+                $detail->shipfirstname = $item->sfname;
+                $detail->shiplastname = $item->slname;
+                $detail->shipemail= $item->semail;
+                $detail->shipphone = $item->sphone;
+                $detail->shipaddress = $item->sadd;
                 $detail->save();
             }
         }

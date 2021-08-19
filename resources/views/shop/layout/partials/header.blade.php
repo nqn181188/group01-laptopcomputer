@@ -15,8 +15,8 @@
                             <li class="menu-item" ><a title="Register or Login" href="{{ route('login')}}">Login</a></li>
                             <li class="menu-item" ><a title="Register or Login" href="{{ route('register')}}">Register</a></li>
                         @else
-                            <li class="menu-item" ><a title="My account" href="{{ route('customer.show',Session::get('user')->id)}}">{{Session::get('user')->firstname}}</a></li>
-                            <li class="menu-item" ><a href="{{ route('customer.edit-pass', Session::get('user')->id) }}">Change password</a></li>
+                        <li class="menu-item" ><a title="My account" href="{{ route('customer.show',Session::get('user')->id)}}">{{Session::get('user')->firstname}}</a></li>
+                        <li class="menu-item" ><a href="{{ route('customer.edit-pass', Session::get('user')->id) }}">Change password</a></li>
                             <li class="menu-item" ><a href="{{ route('customer.process-logout')}}">Logout</a></li>
                         @endif
                 </div>
@@ -53,13 +53,14 @@
                         <a href="{{route('viewcart')}}" class="link-direction">
                             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index">4 items</span>
+                                <span class="index"></span>
                                 <span class="title">
                                    <a href="{{route('viewcart')}}">CART</a>
                                 </span>
                             </div>
                         </a>
                     </div>
+                  
                     <div class="wrap-icon-section show-up-after-1024">
                         <a href="#" class="mobile-navigation">
                             <span></span>
@@ -93,7 +94,15 @@
                         </li>
                         <li class="menu-item">
                             <a href="{{route('contact.index')}}" class="link-term mercado-item-title">Contact Us</a>
-                        </li>																	
+                        </li>	
+                        @if (Session::has('user'))
+                        <li class="menu-item" >
+                            <a href="{{ route('customer.show',Session::get('user')->id)}}"  class="link-term mercado-item-title">My Account</a></li>
+                        @endif	
+                        @if (Session::has('user'))
+                        <li class="menu-item" >
+                            <a href="#"  class="link-term mercado-item-title">Order History</a></li>
+                        @endif																
                     </ul>
                 </div>
             </div>

@@ -40,7 +40,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Update Account</h3>
+        <h3 class="card-title">Update Profile</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -64,14 +64,14 @@
                 <label for="lastname">Last name</label>
                 <input type="text" id="lastname" value="{{ old('lastname',$account->lastname)}}" name="lastname" class="form-control"/>
               </div>
-              <div class="form-group">
+              {{-- <div class="form-group">
                   <label for="password">Password</label>
                   <input type="password" id="password" value="{{ old('password',$account->password)}}" name="password" class="form-control"/>
               </div>
               <div class="form-group">
                   <label for="confirm">Confirm</label>
                   <input type="password" id="confirm" value="{{$account->password}}" name="confirm" class="form-control"/>
-              </div>
+              </div> --}}
               <div class="form-group">
                   <label for="email">Email</label>
                   <input type="text" id="email" value="{{ old('email',$account->email)}}" name="email" class="form-control"/>
@@ -99,7 +99,48 @@
             </form>
         </div>
       </div>
+    <div class="card">
+      @if (Session::get('user')->id==$account->id)
+   
+      <div class="card-header">
+        <h3 class="card-title">Update Password</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+          <form action="#" method="POST">
+            @method('put')
+            <input type="hidden" name="id" value="{{ $account->id}}">
+            @csrf
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="confirm">Confirm</label>
+                <input type="password" id="confirm" name="confirm" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
+            </div>
+          </form>
+      </div>
+    @endif
     </div>
+    </div>
+
+
+   
+
+   
   </section>
   <!-- /.content -->
 @endsection
