@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
+
 class OrderController extends Controller
 {
     /**
@@ -16,8 +18,8 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $order = Order::all();
-        return view('admin.order.index', compact('order'));
+        $orders = Order::all();
+        return view('admin.order.index', compact('orders'));
     }
 
     /**
@@ -47,9 +49,33 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($ordernumber)
     {
-        //
+        $billInfor = Order::where('ordernumber',$ordernumber)->first();
+        $shipInfor = OrderDetail::where('ordernumber',$ordernumber)->distinct()->first();
+            // dd($shipInfor);
+        $shipProducts = OrderDetail::where('ordernumber',$ordernumber)->get();
+        $orderProducts = array();
+        
+        foreach ($shipProducts as $shipProduct){
+            $productOrderDetail = array(); 
+            $product = Product::where('id',$shipProduct->product_id)->first();
+            $productOrderDetail['name']=$product->name;
+            $productOrderDetail['image']= $product->image;
+            $productOrderDetail['quantity']= $shipProduct->quantity;
+            $productOrderDetail['price']= $shipProduct->price;
+            $orderProducts[]= $productOrderDetail;
+        }
+        $totalPrice =0;
+        foreach ($orderProducts as $orderProduct ){
+            $totalPrice += $orderProduct['quantity']*$orderProduct['price'];
+        }
+        return view('admin.order.orderdetail',compact(
+            'billInfor',
+            'shipInfor',
+            'orderProducts',
+            'totalPrice',
+        ));
     }
 
     /**

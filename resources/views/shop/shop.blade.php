@@ -87,13 +87,17 @@
 
             <div class="wrap-pagination-info">
                 <ul class="page-numbers">
-                    <li><a href="{{ request()->fullUrlWithQuery(['page' => 1]) }} " class="page-number-item next-link">First</a></li>
-                    <li><a href="{{ request()->fullUrlWithQuery(['page' => $products->currentPage()-1])}}" class="page-number-item next-link">Previous</a></li>
+                    @if ($products->currentPage()>1)
+                        <li><a href="{{ request()->fullUrlWithQuery(['page' => 1]) }} " class="page-number-item next-link">First</a></li>
+                        <li><a href="{{ request()->fullUrlWithQuery(['page' => $products->currentPage()-1])}}" class="page-number-item next-link">Previous</a></li>
+                    @endif
                     @for($i=1; $i<=$products->lastPage(); $i++) 
                         <li><a class="page-number-item {{$i==$products->currentPage()?'current':''}}" href="{{ request()->fullUrlWithQuery(['page' => $i])}}">{{$i}}</a></li>
                     @endfor
-                    <li><a class="page-number-item next-link" href="{{ request()->fullUrlWithQuery(['page' => $products->currentPage()+1])}}" >Next</a></li>
-                    <li><a href="{{ request()->fullUrlWithQuery(['page' => ceil($products->total()/$paginate)])}}" class="page-number-item next-link">Last</a></li>
+                    @if ($products->currentPage()<$products->lastPage())
+                        <li><a class="page-number-item next-link" href="{{ request()->fullUrlWithQuery(['page' => $products->currentPage()+1])}}" >Next</a></li>
+                        <li><a href="{{ request()->fullUrlWithQuery(['page' => ceil($products->total()/$paginate)])}}" class="page-number-item next-link">Last</a></li>
+                    @endif
                 </ul>
                 <p class="result-count">Showing {{($products->currentPage()-1)*$paginate+1}}-{{($products->currentPage()-1)*$paginate+$products->count()}} of {{$products->total()}}</p>
             </div>

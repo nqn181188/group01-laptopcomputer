@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Order</h1>
+          <h1>Order List</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Order</li>
+            <li class="breadcrumb-item active">Order List</li>
           </ol>
         </div>
       </div>
@@ -24,54 +24,42 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Order</h3>
-
-        <div class="card-tools">
-          <a href="{{ route('admin.order.create') }}"><i class="fas fa-user-plus"></i></a>
-          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
+        <h3 class="card-title">Order List</h3>
       </div>
       <div class="card-body p-0">
         <table class="table table-striped projects">
-            <thead>
+            <thead class="bg-dark">
                 <tr>
-                  <th>Order </th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th class="text-center align-middle" style="width: 5%">Roll Number</th>
+                  <th class="text-center align-middle" style="width: 15%">Order Number</th>
+                  <th class="text-center align-middle" style="width: 30%">Email</th>
+                  <th class="text-center align-middle" style="width: 10%">Total Price</th>
+                  <th class="text-center align-middle" style="width: 10%">Status</th>
+                  <th class="text-center align-middle" style="width: 30%">Actions</th>
                 </tr>
             </thead>
             <tbody>
-              @foreach($order as $item)
+              @php
+                  $count=1;
+              @endphp
+              @foreach($orders as $order)
               <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->firstname}}</td>
-                <td>{{$item->lastname}}</td>
-                <td>{{$item->email}}</td>
-                <td>{{$item->phone}}</td>
-                <td>{{$item->address}}</td>
+                <td class="text-center align-middle">{{$count++}}</td>
+                <td class="text-center align-middle">{{$order->ordernumber}}</td>
+                <td class="text-center align-middle">{{$order->email}}</td>
+                <td class="text-center align-middle">{{$order->email}}</td>
                 <td class="text-center align-middle">
-                  @if($item->status==1)
+                  @if($order->status==1)
                     <span class="badge badge-success"> In Process</span>
-                    @elseif($item->status==2)
+                    @elseif($order->status==2)
                     <span class="badge badge-success">Shipping</span>
-                    @elseif($item->status==3)
+                    @elseif($order->status==3)
                     <span class="badge badge-success">Shipped</span>
                   @endif
                 </td>
-                <td>
-                
-                  <a href="{{ route('admin.orderdetail.index', $item->id) }}" class="btn btn-primary">Detail</a>
-                  <form style="display:inline-block" action="{{ route('admin.order.destroy', $item->id) }}" method="POST">
+                <td class="text-center align-middle">
+                  <a href="{{ route('admin.order.show',$order->ordernumber)}}" class="btn btn-primary">Detail</a>
+                  <form style="display:inline-block" action="{{ route('admin.order.destroy', $order->id) }}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>

@@ -22,8 +22,8 @@
 
     <!-- Default box -->
     <div class="card">
-        <div class="card-header bg-secondary">
-            <form id="filter-products" class="form-inline bg-secondary">
+        <div class="card-header bg-dark">
+            <form id="filter-products" class="form-inline bg-dark">
               <input type="hidden" value={{$products->currentPage()}} name="page">
               <div class="row mx-auto">
                   <div class="d-inline use-chosen">
@@ -80,7 +80,7 @@
         
       <div class="card-body p-0">
         <table class="table table-striped project ">
-          <thead class="thead-light">
+          <thead class="thead-dark">
             <tr>
               <th class="text-center align-middle" style="width: 5%">Roll Number</th>
               <th class="text-center align-middle" style="width: 15%">Image</th>

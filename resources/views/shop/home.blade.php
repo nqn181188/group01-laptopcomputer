@@ -13,7 +13,11 @@
                     <h2 class="f-title">Latest Model <b>HP <i class="fa fa-laptop" aria-hidden="true"></i></b></h2>
                     <span class="subtitle">New Model HP Laptop with 11th Generation Processor are available</span>
                     <p class="sale-info">Stating at: <span class="price">$600</span></p>
-                    <a href="{{route('search-product','hp')}}" class="btn-link">Shop Now</a>
+                    <form action="{{route('search-product')}}" id="search-banner-hp">
+                        <a id="banner-hp" class="btn-link">Shop Now</a>
+                        <input type="hidden" name="search" value="hp">
+                    </form>
+                    
                 </div>
             </div>
             <div class="item-slide">
@@ -32,7 +36,10 @@
                     <h2 class="f-title">MacBook Air <b>Power. It’s in the Air.</b></h2>
                     <span class="f-subtitle">Supercharged by the Apple M1 chip</span>
                     <p class="sale-info">Stating at: <b class="price">$1200.00</b></p>
-                    <a href="{{route('search-product','maccbook')}}" class="btn-link">Shop Now</a>
+                    <form action="{{route('search-product')}}" id="search-banner-mac">
+                        <a id="banner-mac" class="btn-link">Shop Now</a>
+                        <input type="hidden" name="search" value="macbook">
+                    </form>
                 </div>
             </div>
         </div>
@@ -214,7 +221,12 @@
                 }
             });
         });
-       
+        $('#banner-hp').click(function(){
+            $('#search-banner-hp').submit();
+        })
+        $('#banner-mac').click(function(){
+            $('#search-banner-mac').submit();
+        })
     </script>
 @endsection
 {{-- @section('my-scripts')

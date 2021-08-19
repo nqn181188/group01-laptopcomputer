@@ -162,33 +162,12 @@
         </li>
 
         <li class="nav-item">
-          <a href=#" class="nav-link">
+          <a href="{{route('admin.order.index')}}" class="nav-link">
             <i class="nav-icon fas fa-cart-arrow-down"></i>
             <p>
               Order
-              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{route('admin.order.index')}}" class="nav-link ml-3">
-                <i class="nav-icon fas fa-th-list"></i>
-                <p>
-                  Order List
-                </p>
-              </a>
-            </li> 
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{route('admin.orderdetail.index')}}" class="nav-link ml-3">
-                <i class="nav-icon fas fa-plus-square"></i>
-                <p>
-                  Order Detail
-                </p>
-              </a>
-            </li> 
-          </ul>
         </li>
         <li class="nav-item">
           <a href="{{route('admin.contact.index')}}" class="nav-link">

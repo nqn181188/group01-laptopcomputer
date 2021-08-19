@@ -22,13 +22,9 @@
 
     <!-- Default box -->
     <div class="card">
-        <div class="card-header bg-secondary">
-            
-        </div>
-        
       <div class="card-body p-0">
         <table class="table table-striped project ">
-          <thead class="thead-light">
+          <thead class="bg-dark">
             <tr>
               <th class="text-center align-middle" style="width: 5%">Roll Number</th>
               <th class="text-center align-middle" style="width: 15%">Image</th>

@@ -17,34 +17,11 @@
                             <li data-thumb="{{asset('images/products/'.$product->image)}}">
                             <img src="{{asset('images/products/'.$product->image)}}" />
                         </li>
-
-                        <li data-thumb="{{asset('assets/images/products/digital_17.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_17.jpg')}}" alt="product thumbnail" />
-                        </li>
-
-                        <li data-thumb="{{asset('assets/images/products/digital_15.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_15.jpg')}}" alt="product thumbnail" />
-                        </li>
-
-                        <li data-thumb="{{asset('assets/images/products/digital_02.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_02.jpg')}}" alt="product thumbnail" />
-                        </li>
-
-                        <li data-thumb="{{asset('assets/images/products/digital_08.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_08.jpg')}}" alt="product thumbnail" />
-                        </li>
-
-                        <li data-thumb="{{asset('assets/images/products/digital_10.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_10.jpg')}}" alt="product thumbnail" />
-                        </li>
-
-                        <li data-thumb="{{asset('assets/images/products/digital_12.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_12.jpg')}}" alt="product thumbnail" />
-                        </li>
-
-                        <li data-thumb="{{asset('assets/images/products/digital_14.jpg')}}">
-                            <img src="{{asset('assets/images/products/digital_14.jpg')}}" alt="product thumbnail" />
-                        </li>
+                        @foreach ($images as $image)
+                            <li data-thumb="{{asset('images/gallery/'.$image->image)}}">
+                                <img src="{{asset('images/gallery/'.$image->image)}}" alt="{{$product->name}}" />
+                            </li>
+                        @endforeach
                       </ul>
                     </div>
                 </div>

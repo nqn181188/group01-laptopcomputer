@@ -91,13 +91,18 @@
 
             <div class="wrap-pagination-info">
                 <ul class="page-numbers">
+                        @if ($searchproducts->currentPage()>1)
                         <li><a href="{{ request()->fullUrlWithQuery(['page' => 1]) }} " class="page-number-item next-link">First</a></li>
                         <li><a href="{{ request()->fullUrlWithQuery(['page' => $searchproducts->currentPage()-1])}}" class="page-number-item next-link">Previous</a></li>
+                        @endif
                         @for($i=1; $i<=$searchproducts->lastPage(); $i++) 
                             <li><a class="page-number-item {{$i==$searchproducts->currentPage()?'current':''}}" href="{{ request()->fullUrlWithQuery(['page' => $i])}}">{{$i}}</a></li>
                         @endfor
+                        @if ($searchproducts->currentPage()<$searchproducts->lastPage())
                         <li><a class="page-number-item next-link" href="{{ request()->fullUrlWithQuery(['page' => $searchproducts->currentPage()+1])}}" >Next</a></li>
                         <li><a href="{{ request()->fullUrlWithQuery(['page' => ceil($searchproducts->total()/$paginate)])}}" class="page-number-item next-link">Last</a></li>
+
+                        @endif
                 </ul>
                 <p class="result-count">Showing {{($searchproducts->currentPage()-1)*$paginate+1}}-{{($searchproducts->currentPage()-1)*$paginate+$searchproducts->count()}} of {{$searchproducts->total()}}</p>
             </div>

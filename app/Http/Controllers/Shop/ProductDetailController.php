@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\CustomerComment;
+use App\Models\ProductImage;
+
 
 class ProductDetailController extends Controller
 {
     public function index($id){
+        $images = ProductImage::where('product_id',$id)->get();
         $product = Product::find($id);
         $reviews = CustomerComment::where('product_id',$id)->orderBy('created_at','desc')->limit(20)->get();
         $relatedProduct = Product::where('brand_id',$product->brand_id)->get();
@@ -19,6 +22,7 @@ class ProductDetailController extends Controller
             'relatedProduct',
             'featuredProduct',
             'reviews',
+            'images',
         ));
     }
     public function comment(REQUEST $request){
