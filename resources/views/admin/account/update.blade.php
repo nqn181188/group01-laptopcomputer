@@ -51,92 +51,48 @@
           </button>
         </div>
       </div>
-        <div class="card-body">
-            <form action="{{ route('admin.account.update',  $account->id) }}" method="POST">
-              @method('put')
-              <input type="hidden" name="id" value="{{ $account->id}}">
-              @csrf
-              <div class="form-group">
-                  <label for="firstname">First name</label>
-                  <input type="text" id="firstname" value="{{ old('firstname',$account->firstname)}}" name="firstname" class="form-control"/>
-              </div>
-              <div class="form-group">
-                <label for="lastname">Last name</label>
-                <input type="text" id="lastname" value="{{ old('lastname',$account->lastname)}}" name="lastname" class="form-control"/>
-              </div>
-              {{-- <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" value="{{ old('password',$account->password)}}" name="password" class="form-control"/>
-              </div>
-              <div class="form-group">
-                  <label for="confirm">Confirm</label>
-                  <input type="password" id="confirm" value="{{$account->password}}" name="confirm" class="form-control"/>
-              </div> --}}
-              <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="text" id="email" value="{{ old('email',$account->email)}}" name="email" class="form-control"/>
-              </div>
-              <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" id="address" value="{{ old('address',$account->address)}}" name="address" class="form-control"/>
-              </div>
-              <div class="form-group">
-                <label for="role">Role</label>
-                
-                <select id="role" name="role" class="form-control">
-                  <option value="">Choose</option>
-                  <option value="1"  @if ( $account->role == 1)
-                    selected
-                  @endif>Admin</option>
-                  <option value="2" @if ( $account->role == 2)
-                    selected
-                  @endif>Manager</option>
-                </select>
-              </div>
-              <div class="form-group">
-                  <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
-              </div>
-            </form>
-        </div>
-      </div>
-    <div class="card">
-      @if (Session::get('user')->id==$account->id)
-   
-      <div class="card-header">
-        <h3 class="card-title">Update Password</h3>
-
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
       <div class="card-body">
-          <form action="#" method="POST">
+          <form action="{{ route('admin.account.update',  $account->id) }}" method="POST">
             @method('put')
             <input type="hidden" name="id" value="{{ $account->id}}">
             @csrf
-            
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control"/>
+                <label for="firstname">First name</label>
+                <input type="text" id="firstname" value="{{ old('firstname',$account->firstname)}}" name="firstname" class="form-control"/>
             </div>
             <div class="form-group">
-                <label for="confirm">Confirm</label>
-                <input type="password" id="confirm" name="confirm" class="form-control"/>
+              <label for="lastname">Last name</label>
+              <input type="text" id="lastname" value="{{ old('lastname',$account->lastname)}}" name="lastname" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" value="{{ old('email',$account->email)}}" name="email" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" id="address" value="{{ old('address',$account->address)}}" name="address" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label for="role">Role</label>
+              
+              <select id="role" name="role" class="form-control">
+                <option value="">Choose</option>
+                <option value="1"  @if ( $account->role == 1)
+                  selected
+                @endif>Admin</option>
+                <option value="2" @if ( $account->role == 2)
+                  selected
+                @endif>Manager</option>
+              </select>
             </div>
             <div class="form-group">
                 <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
             </div>
           </form>
       </div>
-    @endif
     </div>
-    </div>
-
+   
+    
 
    
 

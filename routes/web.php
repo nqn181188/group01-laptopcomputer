@@ -68,6 +68,8 @@ Route::get('/admin/check-email-login','Admin\AdminController@checkEmailLogin')->
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],function(){
     Route::get('dashboard','Admin\AdminController@dashboard')->name('dashboard');
     Route::resource('account', 'Admin\AccountController');
+    Route::get('/account/{id}/edit-pass','Admin\AccountController@editPass')->name('account.edit-pass');
+    Route::put('/account/{id}','Admin\AccountController@updatePass')->name('account.update-pass');
     Route::resource('customer', 'Admin\CustomerController');
     Route::resource('product', 'Admin\ProductController');
     Route::resource('order', 'Admin\OrderController');
