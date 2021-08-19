@@ -75,11 +75,45 @@ class AccountController extends Controller
      * @param  \App\Models\Admin  $account
      * @return \Illuminate\Http\Response
      */
+    public function editPass($id)
+    {
+        $user = Admin::find($id);
+        return view('admin.account.update-pass', compact('user'));
+    }
+
+    
     public function edit(Admin $account)
     {
         return view('admin.account.update', compact('account'));
     }
 
+     /**
+     * Change the current password
+     * @param Request $request
+     * @return Renderable
+     */
+    public function updatePass(Request $request,$id)
+    {       
+        $user = Admin::find($id);
+        $userPassword = $user->password;
+        
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|same:confirm_password|min:6',
+            'confirm_password' => 'required',
+        ]);
+
+        if (md5($request->current_password) != $userPassword) {
+            return back()->withErrors(['current_password'=>'password not match']);
+        }
+        $user->password  = $request->password;
+        $user['password'] = md5($user['password']);
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return redirect()->back()->with('success','password successfully updated');
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -122,7 +156,7 @@ class AccountController extends Controller
         // $account['password'] = md5($account['password']);
         // $account['password'] = Hash::make($request->password);
         $account->save();
-        return redirect()->route('admin.dashboard')->with(['success_update'=>'Updated']);
+        return redirect()->route('admin.account.index')->with(['success_update'=>'Updated']);
     }
 
     /**
