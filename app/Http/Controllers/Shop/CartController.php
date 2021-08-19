@@ -184,7 +184,7 @@ class CartController extends Controller
         $semail = $request->semail;
         $sphone = $request->sphone;
         $sadd = $request->sadd;
-        $ordernumber=$request->ordernumber;
+       
         $sta=$request->status;
        
         if ($request->session()->has('cart')) {
@@ -201,16 +201,14 @@ class CartController extends Controller
                 $cust->address = $add;
                 $cust->save();
             }
-            
-
+            $ordernumber=substr(md5(microtime()),rand(0,26),10);
+         
+          
             // tạo và lưu order
             $ord = new Order();
             $ord->cust_id=$cust->id;
-            if($ordernumber ==null){
-                $str='0123456789';
-                $ordernumber=str_shuffle($str);
-                $ord->ordernumber=$ordernumber;
-            }
+            $ord->ordernumber=$ordernumber;
+            
             $ord->firstname = $fname;
             $ord->lastname = $lname;
             $ord->email = $email;
@@ -230,7 +228,7 @@ class CartController extends Controller
             // xử lý order detail
             foreach($cart as $item) {
                 $detail = new OrderDetail();
-                $detail->ordernumber = $ord->$ordernumber;
+                $detail->ordernumber = $ordernumber;
                 $detail->product_id = $item->id;
                 $detail->quantity = $item->quantity;
                 $detail->price = $item->price;
