@@ -211,12 +211,12 @@ class CartController extends Controller
                 $ordernumber=str_shuffle($str);
                 $ord->ordernumber=$ordernumber;
             }
-           
             $ord->firstname = $fname;
             $ord->lastname = $lname;
             $ord->email = $email;
             $ord->phone = $phone;
             $ord->address = $add;
+         
             if($sta==null){
                 $sta=1;
                 $ord->status=$sta;
@@ -230,16 +230,15 @@ class CartController extends Controller
             // xử lý order detail
             foreach($cart as $item) {
                 $detail = new OrderDetail();
-                
                 $detail->ordernumber = $ord->$ordernumber;
                 $detail->product_id = $item->id;
                 $detail->quantity = $item->quantity;
                 $detail->price = $item->price;
-                $detail->shipfirstname = $item->sfname;
-                $detail->shiplastname = $item->slname;
-                $detail->shipemail= $item->semail;
-                $detail->shipphone = $item->sphone;
-                $detail->shipaddress = $item->sadd;
+                $detail->shipfirstname =$sfname;
+                $detail->shiplastname = $slname;
+                $detail->shipemail= $semail;
+                $detail->shipphone =$sphone;
+                $detail->shipaddress =$sadd;
                 $detail->save();
             }
         }
