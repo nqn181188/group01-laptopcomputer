@@ -111,7 +111,7 @@ class ProductController extends Controller
             $product['image']=$imgName;
         }
         Product::create($product);
-        return back()->with('success', $product['name'].'has been successfully created.');
+        return back()->with('success', $product['name'].' has been successfully created.');
     }
 
     /**
@@ -185,7 +185,7 @@ class ProductController extends Controller
             $product['image']=$imgName;
         }
         $product->save();
-        return back()->with('success', $product['name'].'has been successfully updated.');
+        return back()->with('success', $product['name'].' has been successfully updated.');
     }
 
     /**
@@ -211,7 +211,7 @@ class ProductController extends Controller
         }
         $images = ProductImage::where('product_id',$pid)->delete();
         $product->delete();
-        return back()->with('success', $product['name'].'has been successfully deleted.');
+        return back()->with('success', $product['name'].' has been successfully deleted.');
 
     }
     public function uploadGallery($id){
@@ -240,7 +240,7 @@ class ProductController extends Controller
                 $image['image']=$imgName;
                 $image->save();
             }
-            return back()->with('success', 'Has been successfully updated gallery.');
+            return back()->with('success', 'Successfully updated gallery.');
         }else{
             return back()->with('error', 'No image has been upload to gallery.');
 

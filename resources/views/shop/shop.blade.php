@@ -25,9 +25,13 @@
                                 @if (isset($page))
                                 <input type="hidden" value={{$page}} name=page>
                                 @endif
-                                <option value="featured"{{$orderby=='featured'?'selected':''}}>Default sorting</option>
-                                <option value="price-asc" {{$orderby=='price-asc'?'selected':''}}>Sort by price: Low to High</option>
-                                <option value="price-desc"{{$orderby=='price-desc'?'selected':''}}>Sort by price: High to Low</option>
+                                <option {{$orderby=='featured'?'selected':''}} value="featured">Default sorting</option>
+                                <option {{$orderby=='price-asc'?'selected':''}} value="price-asc" >Sort by price: Low to High</option>
+                                <option {{$orderby=='price-desc'?'selected':''}} value="price-desc">Sort by price: High to Low</option>
+                                <option {{$orderby=='name-asc'?'selected':''}} value='name-asc'>Sort by name : A-Z</option>
+                                <option {{$orderby=='name-desc'?'selected':''}} value='name-desc'>Sort by name : Z-A</option>
+                                <option {{$orderby=='newest'?'selected':''}} value='newest'>Sort by date : Newest to Oldest</option>
+                                <option {{$orderby=='oldest'?'selected':''}} value='oldest'>Sort by date : Oldest to Newest</option>
                             </select>
                         </div>
                         <div class="sort-item product-per-page">
@@ -48,39 +52,43 @@
 
             <div class="row">
                 <ul class="product-list grid-products equal-container">
-                    @foreach ($products as $item)
-                    <form>
-                    @csrf
-                    <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
-                        <div class="product product-style-3 product-style-2 equal-elem ">
-                            <div class="product-thumnail">
-                                <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
-                                    <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
-                                </a>
-                                
-                                <div class="group-flash">
-                                    @if ($item->featured)
-                                    <span class="flash-item sale-label">HOT</span>
-                                    @endif
+                    @if ($products!=null)
+                        @foreach ($products as $item)
+                        <form>
+                        @csrf
+                        <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                            <div class="product product-style-3 product-style-2 equal-elem ">
+                                <div class="product-thumnail">
+                                    <a href="{{route('product-detail',$item->id)}}" title="{{$item->name}}">
+                                        <figure><img src="{{asset('images/products/'.$item->image)}}" width="800" height="800" alt="{{$item->name}}"></figure>
+                                    </a>
+                                    
+                                    <div class="group-flash">
+                                        @if ($item->featured)
+                                        <span class="flash-item sale-label">HOT</span>
+                                        @endif
+                                    </div>
+                                    <div class="wrap-btn">
+                                        <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id ="{{$item->id}}" name="add-to-cart">
+                                        {{-- <a href="#" class="function-link">quick view</a> --}}
+                                    </div>
                                 </div>
-                                <div class="wrap-btn">
-                                    <input value="Quick View" class="function-link quickview" type="button" data-target="#quickview" data-toggle="modal" data-product_id ="{{$item->id}}" name="add-to-cart">
-                                    {{-- <a href="#" class="function-link">quick view</a> --}}
+                                <div class="product-info">
+                                    <a href="#" class="product-name" style="font-weight: bold"><span>{{$item->name}}</span></a>
+                                    <div class="star-rating">
+                                        <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
+                                    </div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                                    <a href="#" class="btn add-to-cart" data-id="{{ $item->id }}">Add To Cart</a>
+                                    {{-- <button type="button" class="btn add-to-cart" name="add-cart">Add To Cart</button> --}}
                                 </div>
                             </div>
-                            <div class="product-info">
-                                <a href="#" class="product-name" style="font-weight: bold"><span>{{$item->name}}</span></a>
-                                <div class="star-rating">
-                                    <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
-                                </div>
-                                <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
-                                <a href="#" class="btn add-to-cart" data-id="{{ $item->id }}">Add To Cart</a>
-                                {{-- <button type="button" class="btn add-to-cart" name="add-cart">Add To Cart</button> --}}
-                            </div>
-                        </div>
-                    </li>
-                    </form>
-                    @endforeach
+                        </li>
+                        </form>
+                        @endforeach
+                    @else
+                        <h3>No product is shown.</h3>
+                    @endif
                     
                 </ul>
             </div>

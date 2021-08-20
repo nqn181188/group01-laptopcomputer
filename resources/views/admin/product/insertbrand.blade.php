@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
-                            <label for="name">Brand Name</label>
+                            <label for="name">Brand Name<span class="text-danger">*</span></label>
                             <input type="text" id="name" class="form-control" name="brand">
                             <div id="brandErr" class="text-danger font-italic errMessager"></div>
                         </div>
@@ -52,7 +52,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
                             <input type="hidden" id='check-image' value='0'>
-                            <label class="form-label" for="image">Image</label>
+                            <label class="form-label" for="image">Image<span class="text-danger">*</span></label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="image" name="image">
                                 <label class="custom-file-label" for="image">Choose file</label>

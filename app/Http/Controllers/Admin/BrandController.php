@@ -58,7 +58,7 @@ class BrandController extends Controller
             $brand['image']=$imgName;
         }
         Brand::create($brand);
-        return back()->with('success', 'Brand'. $brand['brand'].' has been successfully inserted');    
+        return back()->with('success', 'Brand '. $brand['brand'].' has been successfully inserted');    
     }
 
     /**

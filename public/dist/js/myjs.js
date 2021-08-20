@@ -143,11 +143,11 @@ if (checkimage==0){
     }
 //Validate Amountofram
 if (amountofram==""){
-    printErr("amountoframErr","Amountofram must not be blank.");
+    printErr("amountoframErr","Amount of ram must not be blank.");
     Amountofram.classList.add("input-err");
 }else{
     if(isNaN(amountofram)){
-        printErr("amountoframErr","Amountofram must be a number");
+        printErr("amountoframErr","Amount of ram must be a number");
         Amountofram.classList.add("input-err");
     }else{
         if(amountofram<=0){
@@ -206,19 +206,19 @@ if (amountofram==""){
     }
 //Validate Hdcapacity
     if (hdcapacity==""){
-        printErr("hdcapacityErr","Hdcapacity must not be blank.");
+        printErr("hdcapacityErr","Hard Drive Capacity must not be blank.");
         Hdcapacity.classList.add("input-err");
     }else{
         if(isNaN(hdcapacity)){
-            printErr("hdcapacityErr","Hdcapacity must be a number");
+            printErr("hdcapacityErr","Hard Drive Capacity must be a number");
             Hdcapacity.classList.add("input-err");
         }else{
             if(hdcapacity<=0){
-                printErr("hdcapacityErr","Amount of ram must be greater than 0.");
+                printErr("hdcapacityErr","Hard Drive Capacity must be greater than 0.");
                 Hdcapacity.classList.add("input-err");
             }else{
                 if(hdcapacity%1!==0){
-                    printErr("hdcapacityErr","Amount of ram must be an integer");
+                    printErr("hdcapacityErr","Hard Drive Capacity must be an integer");
                     Hdcapacity.classList.add("input-err");
                 }else{
                     printErr("hdcapacityErr","");
