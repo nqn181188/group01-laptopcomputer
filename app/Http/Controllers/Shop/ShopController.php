@@ -37,7 +37,7 @@ class ShopController extends Controller
         }
         if($request->checked_cputypes){
             $checked_cputypes = $request->checked_cputypes;
-            $products->whereIn('cputype',$checked_cputypes);
+            $products->whereIn('cputype','like',$checked_cputypes);
         }
         if($request->checked_rams){
             $checked_rams = $request->checked_rams;
@@ -78,9 +78,13 @@ class ShopController extends Controller
         if($request->orderby){
             $orderby=$request->orderby;
             switch ($orderby){
-                case 'price-asc' : $products->orderBy('price','asc'); break;
-                case 'price-desc' : $products->orderBy('price','desc'); break;
-                default : $products=$products; break;
+                case 'price-asc' : $products->orderBy('price','asc'); 
+                case 'price-desc' : $products->orderBy('price','desc'); 
+                case 'name-asc' : $products->orderBy('name','asc'); 
+                case 'name-desc' : $products->orderBy('name','desc'); 
+                case 'newest' : $products->orderBy('created_at','desc'); 
+                case 'oldest' : $products->orderBy('created_at','asc'); 
+                default : $products=$products;
             }
         }
         $products=$products->paginate($paginate);
