@@ -61,14 +61,15 @@
               </div>
               <div class="form-group">
                 <label for="comment">Comment</label>
-                <textarea name="comment" value="{{$feedback->comment}}" id="comment" class="form-control" readonly></textarea>
+                <div class="alert alert-light" role="alert">
+                  <p>{{$feedback->comment}}</p>
+                </div>
               </div>
               
               <div class="form-group">
                 <label for="note">Note</label>
               <input type="text" id="note" name="note" 
-                value="@if ($feedback->note)
-                    {{$feedback->note}}
+                value="@if($feedback->note){{$feedback->note}}
                 @endif" class="form-control">
               </div>
               <div class="form-check form-check-inline">
