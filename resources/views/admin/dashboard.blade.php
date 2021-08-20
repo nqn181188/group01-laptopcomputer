@@ -597,6 +597,13 @@
 </script>
 @endif
 
+@if (Session::has('success_change'))
+<script>
+    swal("Change password success","{!! Session::get('success_change') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
 
 @if (Session::has('success_create'))
 <script>

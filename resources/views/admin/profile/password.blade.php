@@ -48,9 +48,10 @@
         </div>
       </div>
         <div class="card-body">
-          <form action="{{route('admin.account.update-pass',$user->id)}}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+          <form action="{{route('admin.password.update',$user->id)}}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
             @method('put')
             @csrf         
+            
             <div class="row ">
                 <div class="col-md-12">
                     <div class="main-card mb-3  card">

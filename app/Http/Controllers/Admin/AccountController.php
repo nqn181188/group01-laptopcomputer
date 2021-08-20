@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
-use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -75,45 +74,13 @@ class AccountController extends Controller
      * @param  \App\Models\Admin  $account
      * @return \Illuminate\Http\Response
      */
-    public function editPass($id)
-    {
-        $user = Admin::find($id);
-        return view('admin.account.update-pass', compact('user'));
-    }
-
     
     public function edit(Admin $account)
     {
         return view('admin.account.update', compact('account'));
     }
 
-     /**
-     * Change the current password
-     * @param Request $request
-     * @return Renderable
-     */
-    public function updatePass(Request $request,$id)
-    {       
-        $user = Admin::find($id);
-        $userPassword = $user->password;
-        
-        $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|same:confirm_password|min:6',
-            'confirm_password' => 'required',
-        ]);
-
-        if (md5($request->current_password) != $userPassword) {
-            return back()->withErrors(['current_password'=>'password not match']);
-        }
-        $user->password  = $request->password;
-        $user['password'] = md5($user['password']);
-        $user->password = Hash::make($request->password);
-
-        $user->save();
-
-        return redirect()->back()->with('success','password successfully updated');
-    }
+    
     /**
      * Update the specified resource in storage.
      *
