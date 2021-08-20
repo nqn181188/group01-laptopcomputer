@@ -240,9 +240,6 @@ class CartController extends Controller
                 $detail->save();
             }
         }
-
-    
-
         // xóa session
         session()->forget('cart');
         return redirect()->route('home');

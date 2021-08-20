@@ -54,7 +54,7 @@
                   <form style="display:inline-block" action="{{route('admin.brand.destroy',$brand)}}" method="POST">
                     @method("DELETE")
                     @csrf
-                    <button class="btn btn-danger">Delete</button>
+                    <button {{$count["$brand->id"]>0?'disabled':''}} class="btn btn-danger">Delete</button>
                   </form>
                 </td>
               </tr>

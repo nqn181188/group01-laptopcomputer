@@ -152,8 +152,6 @@
         });
         $('.add-to-cart').click(function(e) {
         e.preventDefault();     
-        //quantity = $('#product-quantity').val();
-        //pid = "{{ $item->id }}";
         var pid = $(this).data("id");
 
         $.ajax({

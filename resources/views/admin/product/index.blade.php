@@ -55,7 +55,7 @@
                       <option {{$sortby=='name-asc'?'selected':''}} value='name-asc'>Sort by name : A-Z</option>
                       <option {{$sortby=='name-desc'?'selected':''}} value='name-desc'>Sort by name : Z-A</option>
                       <option {{$sortby=='newest'?'selected':''}} value='newest'>Sort by date : Newest to Oldest</option>
-                      <option {{$sortby=='oldest'?'selected':''}} value=oldest'>Sort by date : Oldest to Newest</option>
+                      <option {{$sortby=='oldest'?'selected':''}} value='oldest'>Sort by date : Oldest to Newest</option>
                     </select>
                   </div>
                   <div class="d-inline px-2">
@@ -107,7 +107,7 @@
                 </td>
                 <td class="align-middle">{{$item->name}}</td>
                 <td class="text-center align-middle">{{$item->quantity}}</td>
-                <td class="text-center align-middle">{{$item->price}}</td>
+                <td class="text-center align-middle">{{number_format($item->price, 0, '.', ',')}}</td>
                 <td class="text-center align-middle">
                   @if($item->featured)
                     <span class="badge badge-success">Featured</span>
@@ -119,7 +119,7 @@
                   <form style="display:inline-block" action="{{route('admin.product.destroy',$item)}}" method="POST">
                     @method("DELETE")
                     @csrf
-                    <button class="btn btn-danger">Delete</button>
+                    <button {{in_array($item->id,$checkDelete)?'disabled':''}} class="btn btn-danger">Delete</button>
                   </form>
                 </td>
               </tr>
