@@ -23,6 +23,13 @@
                                 <h3 class="form-title">Login Information</h3>
                             </fieldset>
                             <fieldset class="wrap-input ">
+                                <label for="current_password">Old Password</label>
+                                <input type="password" id="password" name="current_password" placeholder="Current Password" class="@error('current_password') is-invalid @enderror" required>
+                                @error('current_password')
+                               <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </fieldset>
+                            <fieldset class="wrap-input ">
                                 <label for="password">Password</label>
                                 <input type="password" id="password" name="password" placeholder="Password">
                                 @error('password')
@@ -49,3 +56,5 @@
 </div><!--end container-->
 
 @endsection
+
+php artisan make:controller Shop/Profile/PasswordController -m Customer

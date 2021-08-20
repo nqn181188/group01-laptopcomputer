@@ -102,8 +102,15 @@
     </script>
 
 
+@if (Session::has('success_register'))
+<script>
+    swal("Congratulation Login Now","{!! Session::get('success_register') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
 @endsection
-
+{{-- 
 @section('my-scripts')
 @if (Session::has('success_register'))
 <script>
@@ -112,4 +119,4 @@
     });
 </script>
 @endif
-@endsection
+@endsection --}}

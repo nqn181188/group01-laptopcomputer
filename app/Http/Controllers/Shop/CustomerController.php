@@ -140,6 +140,7 @@ class CustomerController extends Controller
     public function updatePass(Request $request,$id)
     {
         $validator = Validator::make($request->all(),[
+            'current_password' => 'required',
             'password' => 'required|between:1,32',
             'confirm' => 'same:password',
         ]);
@@ -149,35 +150,40 @@ class CustomerController extends Controller
             withErrors($validator)->withInput();
         }
         $customer = Customer::find($id);
+        $current_password = md5($request->current_password);
+        $userPassword = $customer->password;
+        if ($current_password!==$userPassword) {
+            return back()->withErrors(['current_password'=>'password not match']);
+        }
         $customer->password  = $request->password;
         $customer['password'] = md5($customer['password']);
         $customer->save();
         return redirect()->route('home');
     }
 
-    public function editProfile($id){
-        $customer = Customer::find($id);
-        return view('shop.update-my-account',compact('customer'));
-    }
+    // public function editProfile($id){
+    //     $customer = Customer::find($id);
+    //     return view('shop.update-my-account',compact('customer'));
+    // }
 
-    public function updateProfile(Request $request,$id)
-    {
-        $customer = Customer::find($id);
-        $validator = Validator::make($request->all(),[
-            'email'    => 'email|unique:customers,email,'.$customer->id,
-            'phone' => 'required|regex:/(0)[0-9]{9}/',
-        ]);
+    // public function updateProfile(Request $request,$id)
+    // {
+    //     $customer = Customer::find($id);
+    //     $validator = Validator::make($request->all(),[
+    //         'email'    => 'email|unique:customers,email,'.$customer->id,
+    //         'phone' => 'required|regex:/(0)[0-9]{9}/',
+    //     ]);
 
-        if( $validator->fails() ){
-            return redirect()->back()->
-            withErrors($validator)->withInput();
-        }
-        $customer->email  = $request->email;
-        $customer->phone  = $request->phone;
-        $customer->address  = $request->address;
-        $customer->save();
-        return redirect()->route('home');
-    }
+    //     if( $validator->fails() ){
+    //         return redirect()->back()->
+    //         withErrors($validator)->withInput();
+    //     }
+    //     $customer->email  = $request->email;
+    //     $customer->phone  = $request->phone;
+    //     $customer->address  = $request->address;
+    //     $customer->save();
+    //     return redirect()->route('home');
+    // }
 
     public function edit(Customer $customer)
     {

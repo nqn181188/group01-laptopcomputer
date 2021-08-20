@@ -228,11 +228,20 @@
             $('#search-banner-mac').submit();
         })
     </script>
-@endsection
-{{-- @section('my-scripts')
+
+    
 @if (Session::has('success_login'))
 <script>
-    swal("Welcome to Laptop Computer","{!! Session::get('success_login') !!}", "success",{
+    swal("Login success","{!! Session::get('success_login') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
+
+
+@if (Session::has('change_profile'))
+<script>
+    swal("Your infomation updated","{!! Session::get('change_profile') !!}", "success",{
         button: "OK"
     });
 </script>
@@ -240,9 +249,14 @@
 
 @if (Session::has('success_logout'))
 <script>
-    swal("Welcome to Laptop Computer","{!! Session::get('success_logout') !!}", "success",{
+    swal("Byee","{!! Session::get('success_logout') !!}", "success",{
         button: "OK"
     });
 </script>
 @endif
-@endsection --}}
+
+
+
+@endsection
+
+

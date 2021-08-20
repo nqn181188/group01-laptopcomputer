@@ -14,7 +14,7 @@
                 <div class="wrap-login-item ">
                     
                     <div class="register-form form-item ">
-                        <form class="form-stl" action="{{route('customer.update-profile',$customer->id)}}" name="frm-login" method="POST" >
+                        <form class="form-stl" action="{{route('profile.update',$customer->id)}}" name="frm-login" method="POST" >
                             @method('put')
                             @csrf
                             <input type="hidden" id="id" name="id" value="{{$customer->id}}">

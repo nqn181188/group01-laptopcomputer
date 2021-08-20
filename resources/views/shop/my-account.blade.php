@@ -42,7 +42,7 @@
                                     <label for="phone">Phone: {{$customer->phone}}</label>
                                 </fieldset>
                             @endif
-                            <a href="{{ route('customer.edit-profile', Session::get('user')->id) }}" class="btn btn-sign">Change Profile</a>
+                            <a href="{{ route('profile.edit', Session::get('user')->id) }}" class="btn btn-sign">Change Profile</a>
                             <a href="{{ route('customer.edit-pass', Session::get('user')->id) }}" class="btn btn-sign">Change Password</a>
                         </form>
                     </div>											

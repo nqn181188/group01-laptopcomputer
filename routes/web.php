@@ -43,7 +43,7 @@ Route::put('/customer/{id2}','Shop\CustomerController@updateProfile')->name('cus
 // Route::patch('/customer/{customer}','Shop\CustomerController@updatePass')->name('customer.update-pass');
 Route::get('/check-email','Shop\CustomerController@checkEmail')->name('check-email');
 Route::post('/product-comment','Shop\ProductDetailController@comment')->name('product-comment');
-
+Route::resource('customer/profile','Shop\Profile\ProfileController');
 route::resource('customer', 'Shop\CustomerController');
 route::resource('contact', 'Shop\ContactController');
 Route::post('/quick-view','Shop\QuickViewController@quickview')->name('quick-view');

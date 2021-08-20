@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Profile;
+namespace App\Http\Controllers\Shop\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class PasswordController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,10 +43,10 @@ class PasswordController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show(Customer $customer)
     {
         //
     }
@@ -54,55 +54,50 @@ class PasswordController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $user = Admin::find($id);
-        return view('admin.profile.password', compact('user'));
+        $customer = Customer::find($id);
+        return view('shop.profile.update-my-account', compact('customer'));
     }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $user = Admin::find($id);
-        $current_password = md5($request->current_password);
-        $userPassword = $user->password;
-        
-        $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|same:confirm_password',
-            'confirm_password' => 'required',
+        $customer = Customer::find($id);
+        $validator = Validator::make($request->all(),[
+            'email'    => 'email|unique:customers,email,'.$customer->id,
+            'phone' => 'required|regex:/(0)[0-9]{9}/',
         ]);
 
-        if ($current_password!==$userPassword) {
-            return back()->withErrors(['current_password'=>'password not match']);
+        if( $validator->fails() ){
+            return redirect()->back()->
+            withErrors($validator)->withInput();
         }
-        $user->password  = $request->password;
-        $user['password'] = md5($user['password']);
-        // $admin->password = Hash::make($request->password);
-
-        $user->save();
-
-        return redirect()->route('admin.account.index')->with('success-change','password successfully updated');
+        $customer->email  = $request->email;
+        $customer->phone  = $request->phone;
+        $customer->address  = $request->address;
+        $customer->save();
+        return redirect()->route('home')->with(['change_profile'=>'Update profile success']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(Customer $customer)
     {
         //
     }
 }
-
