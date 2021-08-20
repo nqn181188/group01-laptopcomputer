@@ -19,23 +19,24 @@
                             <fieldset class="wrap-title">
                                 <h3 class="form-title">Create an account</h3>
                                 <h4 class="form-subtitle">Personal infomation</h4>
+                                <h4 class="form-subtitle"><span style="color: red">*</span> Require fillable</h4>
                             </fieldset>									
                             <fieldset class="wrap-input">
-                                <label for="firstname">Firstname</label>
+                                <label for="firstname">Firstname <span style="color: red">*</span></label>
                                 <input type="text" id="firstname" name="firstname" placeholder="First name">
                                 @error('firstname')
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="lastname">Lastname</label>
+                                <label for="lastname">Lastname <span style="color: red">*</span></label>
                                 <input type="text" id="lastname" name="lastname" placeholder="Last name">
                                 @error('lastname')
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="email">Email Address</label>
+                                <label for="email">Email Address <span style="color: red">*</span></label>
                                 <input type="email" id="email" name="email" placeholder="Email address">
                                 <div  ><span id="messageEmail" class="text-danger"></span></div>
                                 @error('email')
@@ -44,7 +45,7 @@
                             </fieldset>
                             <input type="hidden" id="role" name="role" value="0">
                             {{-- <fieldset class="wrap-input">
-                                <label for="phone">Phone</label>
+                                <label for="phone">Phone <span style="color: red">*</span></label>
                                 <input type="text" id="phone" name="phone" placeholder="Phone number">
                                  @error('email')
                                 <div><span class="text-danger">{{$message}}</span></div>
@@ -54,7 +55,7 @@
                                 <h3 class="form-title">Login Information</h3>
                             </fieldset>
                             <fieldset class="wrap-input item-width-in-half left-item ">
-                                <label for="password">Password</label>
+                                <label for="password">Password <span style="color: red">*</span></label>
                                 <input type="password" id="password" name="password" placeholder="Password">
                                 @error('password')
                                 <div><span class="text-danger">{{$message}}</span></div>

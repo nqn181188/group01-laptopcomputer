@@ -75,7 +75,6 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::resource('product', 'Admin\ProductController');
 
     Route::resource('order', 'Admin\OrderController');
-    route::get('/order-history','Admin\OrderController@orderHistoty')->name('order-history');
     Route::resource('orderdetail', 'Admin\OrderDetailController');
 
     Route::resource('brand','Admin\BrandController');

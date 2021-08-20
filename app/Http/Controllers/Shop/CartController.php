@@ -25,44 +25,13 @@ class CartController extends Controller
 
     public function checkout()
     {
-        //
-        return view('shop.checkout');
-    }
-
-    public function orderHistoty($email){
-        $orders = Order::find($email);
-        return view('admin.order.index', compact('orders'));
-    }
-
-    public function showOrderHistory($ordernumber)
-    {
-        $billInfor = Order::where('ordernumber',$ordernumber)->first();
-        $shipInfor = OrderDetail::where('ordernumber',$ordernumber)->distinct()->first();
-            // dd($shipInfor);
-        $shipProducts = OrderDetail::where('ordernumber',$ordernumber)->get();
-        $orderProducts = array();
-        
-        foreach ($shipProducts as $shipProduct){
-            $productOrderDetail = array(); 
-            $product = Product::where('id',$shipProduct->product_id)->first();
-            $productOrderDetail['name']=$product->name;
-            $productOrderDetail['image']= $product->image;
-            $productOrderDetail['quantity']= $shipProduct->quantity;
-            $productOrderDetail['price']= $shipProduct->price;
-            $orderProducts[]= $productOrderDetail;
+        $user = session()->get('user');
+        if(!$user){
+            return redirect()->route('login')->with(['need_login'=>'You need login to shoping']);
+        }else{
+            return view('shop.checkout');
         }
-        $totalPrice =0;
-        foreach ($orderProducts as $orderProduct ){
-            $totalPrice += $orderProduct['quantity']*$orderProduct['price'];
-        }
-        return view('admin.order.orderdetail',compact(
-            'billInfor',
-            'shipInfor',
-            'orderProducts',
-            'totalPrice',
-        ));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -235,10 +204,10 @@ class CartController extends Controller
             }
             $ordernumber=substr(md5(microtime()),rand(0,26),10);
          
-          
+            $user = session()->get('user');
             // tạo và lưu order
             $ord = new Order();
-            $ord->cust_id=$cust->id;
+            $ord->cust_id=$user->id;
             $ord->ordernumber=$ordernumber;
             
             $ord->firstname = $fname;

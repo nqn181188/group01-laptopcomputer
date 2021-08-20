@@ -16,7 +16,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="contact-box contact-form">
                             <h2 class="box-title">Leave a Message</h2>
-
+                            <h4 class="form-subtitle"><span style="color: red">*</span> Require fillable</h4>
                             @if (Session::has('success_message'))
                             
                             <h1><span style="color:green">Successfully sent</span></h1>   

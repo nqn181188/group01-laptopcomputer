@@ -4,8 +4,9 @@
 
     <div class="wrap-breadcrumb">
         <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
-            <li class="item-link"><span>Register</span></li>
+            <li class="item-link"><a href="{{route('home')}}" class="link">home</a></li>
+            <li class="item-link"><span>My Account</span></li>
+            <li class="item-link"><span>Change Password</span></li>
         </ul>
     </div>
     <div class="row">

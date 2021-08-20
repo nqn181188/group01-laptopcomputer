@@ -16,13 +16,13 @@
             @csrf
             <div class="wrap-address-billing">
                 <h3 class="box-title">Billing Address</h3>
-           
+                <h4 class="form-subtitle"><span style="color: red" style="color:  red">*</span> Require fillable</h4>
                 <p class="row-in-form">
-                    <label for="fname">first name<span>*</span></label>
+                    <label for="fname">first name<span style="color:  red">*</span></label>
                     <input id="fname" type="text" name="fname" value="" placeholder="Your name">
                 </p>
                 <p class="row-in-form">
-                    <label for="lname">last name<span>*</span></label>
+                    <label for="lname">last name<span style="color:  red">*</span></label>
                     <input id="lname" type="text" name="lname" value="" placeholder="Your last name">
                 </p>
                 <p class="row-in-form">
@@ -30,7 +30,7 @@
                     <input id="email" type="email" name="email" value="" placeholder="Type your email">
                 </p>
                 <p class="row-in-form">
-                    <label for="phone">Phone number<span>*</span></label>
+                    <label for="phone">Phone number<span style="color:  red">*</span></label>
                     <input id="phone" type="number" name="phone" value="" placeholder="10 digits format">
                 </p>
                 <p class="row-in-form fill-wife">
@@ -44,11 +44,11 @@
                 <h3 class="box-title">Shipping Address</h3>
             
                 <p class="row-in-form">
-                    <label for="fname">Ship first name<span>*</span></label>
+                    <label for="fname">Ship first name<span style="color:  red">*</span></label>
                     <input id="fname" type="text" name="sfname" value="" placeholder="First Name">
                 </p>
                 <p class="row-in-form">
-                    <label for="lname">Ship last name<span>*</span></label>
+                    <label for="lname">Ship last name<span style="color:  red">*</span></label>
                     <input id="lname" type="text" name="slname" value="" placeholder="Last Name">
                 </p>
                 <p class="row-in-form">
@@ -56,7 +56,7 @@
                     <input id="email" type="email" name="semail" value="" placeholder="Email Address">
                 </p>
                 <p class="row-in-form">
-                    <label for="phone">Ship phone number<span>*</span></label>
+                    <label for="phone">Ship phone number<span style="color:  red">*</span></label>
                     <input id="phone" type="number" name="sphone" value="" placeholder="10 digits format">
                 </p>
                 <p class="row-in-form fill-wife">

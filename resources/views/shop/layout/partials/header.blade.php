@@ -101,7 +101,7 @@
                         @endif	
                         @if (Session::has('user'))
                         <li class="menu-item" >
-                            <a href="#"  class="link-term mercado-item-title">Order History</a></li>
+                            <a href="{{route('profile.index')}}"  class="link-term mercado-item-title">Order History</a></li>
                         @endif																
                     </ul>
                 </div>
