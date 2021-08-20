@@ -73,9 +73,13 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     // Route::put('/account/{id}','Admin\AccountController@updatePass')->name('account.update-pass');
     Route::resource('customer', 'Admin\CustomerController');
     Route::resource('product', 'Admin\ProductController');
+
     Route::resource('order', 'Admin\OrderController');
+    route::get('/order-history','Admin\OrderController@orderHistoty')->name('order-history');
     Route::resource('orderdetail', 'Admin\OrderDetailController');
+
     Route::resource('brand','Admin\BrandController');
+
     Route::resource('contact','Admin\ContactController');
 });
 Route::get('/product/upload-gallrery/{id}','Admin\ProductController@uploadGallery')->name('upload-gallery');

@@ -22,6 +22,10 @@ class OrderController extends Controller
         return view('admin.order.index', compact('orders'));
     }
 
+    public function orderHistoty($cust_id){
+        $orders = Order::where('cust_id',$cust_id);
+        return view('admin.customer.order-history', compact('orders'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -76,6 +80,8 @@ class OrderController extends Controller
             'totalPrice',
         ));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

@@ -91,7 +91,7 @@ class CustomerController extends Controller
             'email'    => 'email|unique:customers,email,'.$customer->id,
             // 'password' => 'required|between:1,32',
             // 'confirm' => 'same:password',
-            'address' => 'required',
+            // 'address' => 'required',
             'phone' => 'required|regex:/(0)[0-9]{9}/',
         ];
         $this->validate($request, $rules,
@@ -134,7 +134,7 @@ class CustomerController extends Controller
         //         unlink('images/' . $customer->image);
         //     }
         // }
-        $customer->delete();
+        // $customer->delete();
         return redirect()->route('admin.customer.index')->withSuccessDelete('Deleted');
     }
 }

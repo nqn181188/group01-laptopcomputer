@@ -29,7 +29,39 @@ class CartController extends Controller
         return view('shop.checkout');
     }
 
-    
+    public function orderHistoty($email){
+        $orders = Order::find($email);
+        return view('admin.order.index', compact('orders'));
+    }
+
+    public function showOrderHistory($ordernumber)
+    {
+        $billInfor = Order::where('ordernumber',$ordernumber)->first();
+        $shipInfor = OrderDetail::where('ordernumber',$ordernumber)->distinct()->first();
+            // dd($shipInfor);
+        $shipProducts = OrderDetail::where('ordernumber',$ordernumber)->get();
+        $orderProducts = array();
+        
+        foreach ($shipProducts as $shipProduct){
+            $productOrderDetail = array(); 
+            $product = Product::where('id',$shipProduct->product_id)->first();
+            $productOrderDetail['name']=$product->name;
+            $productOrderDetail['image']= $product->image;
+            $productOrderDetail['quantity']= $shipProduct->quantity;
+            $productOrderDetail['price']= $shipProduct->price;
+            $orderProducts[]= $productOrderDetail;
+        }
+        $totalPrice =0;
+        foreach ($orderProducts as $orderProduct ){
+            $totalPrice += $orderProduct['quantity']*$orderProduct['price'];
+        }
+        return view('admin.order.orderdetail',compact(
+            'billInfor',
+            'shipInfor',
+            'orderProducts',
+            'totalPrice',
+        ));
+    }
 
 
     /**

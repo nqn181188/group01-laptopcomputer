@@ -66,11 +66,12 @@
                 </td>
                 <td>
                   <a href="{{ route('admin.customer.edit', $item->id) }}" class="btn btn-primary">Update</a>
-                  <form style="display:inline-block" action="{{ route('admin.customer.destroy', $item->id) }}" method="POST">
+                  <a href="{{ route('admin.order-history', $item->id) }}" class="btn btn-primary">Order History</a>
+                  {{-- <form style="display:inline-block" action="{{ route('admin.customer.destroy', $item->id) }}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button class="btn btn-danger">Delete</button>
-                  </form>
+                  </form> --}}
                 </td>
               </tr>
               @endforeach

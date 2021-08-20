@@ -42,6 +42,7 @@
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
                             </fieldset>
+                            <input type="hidden" id="role" name="role" value="0">
                             {{-- <fieldset class="wrap-input">
                                 <label for="phone">Phone</label>
                                 <input type="text" id="phone" name="phone" placeholder="Phone number">

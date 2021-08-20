@@ -174,4 +174,13 @@
     });
     
     </script>
+
+    
+{{-- @if (Session::has('cart'))
+<script>
+    swal("Added Cart","{!! Session::get('cart') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif --}}
 @endsection
