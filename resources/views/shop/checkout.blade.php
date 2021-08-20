@@ -37,16 +37,6 @@
                     <label for="add">Address:</label>
                     <input id="add" type="text" name="add" value="" placeholder="Street at apartment number">
                 </p>
-                <p class="row-in-form fill-wife">
-                    <label class="checkbox-field">
-                        <input name="createAccount" id="create-account" value="1" type="checkbox">
-                        <span>Create an account?</span>
-                    </label>
-                    {{-- <label class="checkbox-field">
-                        <input name="different-add" id="different-add" value="forever" type="checkbox">
-                        <span>Ship to a different address?</span>
-                    </label> --}}
-                </p>
             
             </div>
 
@@ -55,15 +45,15 @@
             
                 <p class="row-in-form">
                     <label for="fname">Ship first name<span>*</span></label>
-                    <input id="fname" type="text" name="sfname" value="" placeholder="Your name">
+                    <input id="fname" type="text" name="sfname" value="" placeholder="First Name">
                 </p>
                 <p class="row-in-form">
                     <label for="lname">Ship last name<span>*</span></label>
-                    <input id="lname" type="text" name="slname" value="" placeholder="Your last name">
+                    <input id="lname" type="text" name="slname" value="" placeholder="Last Name">
                 </p>
                 <p class="row-in-form">
                     <label for="email">ship email addreess:</label>
-                    <input id="email" type="email" name="semail" value="" placeholder="Type your email">
+                    <input id="email" type="email" name="semail" value="" placeholder="Email Address">
                 </p>
                 <p class="row-in-form">
                     <label for="phone">Ship phone number<span>*</span></label>
@@ -73,16 +63,7 @@
                     <label for="add">Ship address:</label>
                     <input id="add" type="text" name="sadd" value="" placeholder="Street at apartment number">
                 </p>
-                <p class="row-in-form fill-wife">
-                    <label class="checkbox-field">
-                        <input name="createAccount" id="create-account" value="1" type="checkbox">
-                        <span>Create Shipping Address?</span>
-                    </label>
-                    {{-- <label class="checkbox-field">
-                        <input name="different-add" id="different-add" value="forever" type="checkbox">
-                        <span>Ship to a different address?</span>
-                    </label> --}}
-                </p>
+                
             
             </div>
             <div class="summary summary-checkout">
@@ -108,21 +89,11 @@
                             <span class="payment-desc">card if you don't have a paypal account</span>
                         </label>
                     </div>
-                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price"> {{number_format($total)}} đ</span></p>
+                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price"> ${{number_format($total, 0, '.', ',')}}</span></p>
                     {{-- <a href="thankyou.html" class="btn btn-medium">Place order now</a> --}}
                     <button type="submit" class="btn btn-medium">Place order now</button>
                 </div>
-                <div class="summary-item shipping-method">
-                    <h4 class="title-box f-title">Shipping method</h4>
-                    <p class="summary-info"><span class="title">Flat Rate</span></p>
-                    <p class="summary-info"><span class="title">Fixed $50.00</span></p>
-                    <h4 class="title-box">Discount Codes</h4>
-                    <p class="row-in-form">
-                        <label for="coupon-code">Enter Your Coupon code:</label>
-                        <input id="coupon-code" type="text" name="coupon-code" value="" placeholder="">	
-                    </p>
-                    <a href="#" class="btn btn-small">Apply</a>
-                </div>
+                
             </div>
         </form>
     </div><!--end main content area-->

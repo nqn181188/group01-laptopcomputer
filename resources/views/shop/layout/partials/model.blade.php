@@ -27,22 +27,6 @@
                                 <div class="stock-info in-stock">
                                     <p class="availability">Availability: <b id="quickview_avail"></b></p>
                                 </div>
-                                <div class="quantity">
-                                    <span>Quantity:</span>
-                                    <div class="quantity-input">
-                                        <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
-                                        
-                                        <a class="btn btn-reduce" href="#"></a>
-                                        <a class="btn btn-increase" href="#"></a>
-                                    </div>
-                                </div>
-                                <div class="wrap-butons">
-                                    <a href="#" class="btn add-to-cart">Add to Cart</a>
-                                    <div class="wrap-btn">
-                                        <a href="#" class="btn btn-compare">Add Compare</a>
-                                        <a href="#" class="btn btn-wishlist">Add Wishlist</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12 col-lg-6">

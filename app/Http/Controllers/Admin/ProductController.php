@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\ProductImage;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use File;
 class ProductController extends Controller
@@ -18,15 +19,20 @@ class ProductController extends Controller
     
     public function index(REQUEST $request)
     {
+        $orderdetails = OrderDetail::get(['product_id']);
+        $checkDelete = array();
+        foreach($orderdetails as $orderdetail){
+            $checkDelete[] = $orderdetail->product_id;
+        }
         $paginate = $request->paginate??12 ;
         $page=$request->page;
-        $brands = Brand::all();
+        $brands = Brand::all(); 
         $name = $request->name??'';
         $brand_id = $request->brand_id??0;
         $price = $request->price??'';
         $sortby = $request->sortby??'';
         $featured = $request->featured??0;
-        $products = Product::where('id','!=','0')->orderBy('created_at','desc');
+        $products = Product::where('id','!=','0');
         if($name){
             $products->where('name','like','%'.$name.'%');
         }
@@ -45,13 +51,13 @@ class ProductController extends Controller
         }
         if($sortby){
             switch($sortby){
-                case 'price-asc' : $products->orderBy('price','asc'); break;
-                case 'price-desc' : $products->orderBy('price','desc'); break;
-                case 'name-asc' : $products->orderBy('name','asc'); break;
-                case 'name-desc' : $products->orderBy('name','desc'); break;
-                case 'newest' : $products->orderBy('created_at','desc'); break;
-                case 'oldest' : $products->orderBy('created_at','asc'); break;
-                default : $products->orderBy('created_at','desc');
+                case 'price-asc' : $products->orderBy('price','asc'); 
+                case 'price-desc' : $products->orderBy('price','desc'); 
+                case 'name-asc' : $products->orderBy('name','asc'); 
+                case 'name-desc' : $products->orderBy('name','desc'); 
+                case 'newest' : $products->orderBy('created_at','desc'); 
+                case 'oldest' : $products->orderBy('created_at','asc'); 
+                default : $products=$products;
             }
         }
         if($featured){
@@ -67,6 +73,8 @@ class ProductController extends Controller
             'price',
             'sortby',
             'featured',
+            'orderdetail',
+            'checkDelete',
         ));
     }
 
@@ -203,7 +211,8 @@ class ProductController extends Controller
         }
         $images = ProductImage::where('product_id',$pid)->delete();
         $product->delete();
-        return redirect()->route('admin.product.index');
+        return back()->with('success', $product['name'].'has been successfully deleted.');
+
     }
     public function uploadGallery($id){
         $product = Product::find($id);

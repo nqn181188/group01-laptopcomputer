@@ -33,7 +33,6 @@
                   <th class="text-center align-middle" style="width: 5%">Roll Number</th>
                   <th class="text-center align-middle" style="width: 15%">Order Number</th>
                   <th class="text-center align-middle" style="width: 30%">Email</th>
-                  <th class="text-center align-middle" style="width: 10%">Total Price</th>
                   <th class="text-center align-middle" style="width: 10%">Status</th>
                   <th class="text-center align-middle" style="width: 30%">Actions</th>
                 </tr>
@@ -46,7 +45,6 @@
               <tr>
                 <td class="text-center align-middle">{{$count++}}</td>
                 <td class="text-center align-middle">{{$order->ordernumber}}</td>
-                <td class="text-center align-middle">{{$order->email}}</td>
                 <td class="text-center align-middle">{{$order->email}}</td>
                 <td class="text-center align-middle">
                   @if($order->status==1)
