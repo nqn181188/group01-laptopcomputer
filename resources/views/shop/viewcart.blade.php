@@ -96,8 +96,11 @@
             url:'{{ route('delete-cart-item') }}',
             data:{ pid:pid },
             success:function(data){
-                alert('hoàn thành xóa sản phẩm khỏi giỏ hàng');
-                window.location='{{ route('viewcart') }}'
+                // alert('hoàn thành xóa sản phẩm khỏi giỏ hàng');
+                swal("Deleted", "The item has been removed from your cart", "warning",{
+                    button: "Close"
+                });
+                // window.location='{{ route('viewcart') }}'
             }
         });
     });

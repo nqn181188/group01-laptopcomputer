@@ -205,7 +205,7 @@
         </div><!--end main products area-->
 
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
-            <div class="widget widget-our-services ">
+            {{-- <div class="widget widget-our-services ">
                 <div class="widget-content">
                     <ul class="our-services">
 
@@ -243,7 +243,8 @@
                         </li>
                     </ul>
                 </div>
-            </div><!-- Categories widget-->
+            </div> --}}
+            <!-- Categories widget-->
 
             <div class="widget mercado-widget widget-product">
                 <h2 class="widget-title">Featured Product</h2>
@@ -322,7 +323,10 @@
             url:'{{ route('add-cart') }}',
             data:{ pid:pid, quantity:quantity },
             success:function(data){
-                window.location='{{ route('home') }}'  
+                // window.location='{{ route('home') }}'  
+                swal("Thanks", "The item has been added to your cart", "success",{
+                    button: "Close"
+                });
             }
         });
     });

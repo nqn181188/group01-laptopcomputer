@@ -162,16 +162,18 @@
         e.preventDefault();     
         var pid = $(this).data("id");
 
-        $.ajax({
-            type:'GET',
-            url:'{{ route('add-cart') }}',
-            data:{ pid:pid, quantity:1 },
-            success:function(data){
-                window.location='{{ route('shop') }}'  
-            }
-           
+            $.ajax({
+                type:'GET',
+                url:'{{ route('add-cart') }}',
+                data:{ pid:pid, quantity:1 },
+                success:function(data){
+                    swal("Thanks", "The item has been added to your cart", "success",{
+                        button: "Close"
+                    });
+                }
+            
+            });
         });
-    });
     
     </script>
 

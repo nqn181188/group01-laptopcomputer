@@ -127,7 +127,7 @@
 
 @if (Session::has('need_login'))
 <script>
-    swal("Oops sorry!!","{!! Session::get('need_login') !!}", "success",{
+    swal("Oops sorry!!","{!! Session::get('need_login') !!}", "info",{
         button: "OK"
     });
 </script>
