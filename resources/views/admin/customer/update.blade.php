@@ -58,11 +58,11 @@
               @csrf
               <div class="form-group">
                   <label for="firstname">First name</label>
-                  <input type="text" id="firstname" value="{{ old('firstname',$customer->firstname)}}" name="firstname" class="form-control"/>
+                  <input type="text" id="firstname" value="{{ old('firstname',$customer->firstname)}}" name="firstname" class="form-control" readonly/>
               </div>
               <div class="form-group">
                 <label for="lastname">Last name</label>
-                <input type="text" id="lastname" value="{{ old('lastname',$customer->lastname)}}" name="lastname" class="form-control"/>
+                <input type="text" id="lastname" value="{{ old('lastname',$customer->lastname)}}" name="lastname" class="form-control" readonly/>
               </div>
               {{-- <div class="form-group">
                   <label for="password">Password</label>
@@ -74,7 +74,7 @@
               </div> --}}
               <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="text" id="email" value="{{ old('email',$customer->email)}}" name="email" class="form-control"/>
+                  <input type="text" id="email" value="{{ old('email',$customer->email)}}" name="email" class="form-control" readonly/>
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
@@ -82,10 +82,11 @@
               </div>
               <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" id="phone" value="{{ old('phone',$customer->phone)}}" name="phone" class="form-control"/>
+                <input type="text" id="phone" value="{{ old('phone',$customer->phone)}}" name="phone" class="form-control" />
               </div>
               <div class="form-group">
                 <label for="role">Lock</label>
+                
                 
                 <select id="lock" name="lock" class="form-control">
                   <option value="1"  @if ( $customer->lock == 1) selected  @endif>Lock</option>

@@ -44,10 +44,13 @@ class CustomerController extends Controller
         $email = $request->email;
         $pass = md5($request->password);
         $account = Customer::where('email',$email)->first();
+
         if(!$account){
             return redirect()->route('login');
         }
-        if($pass!==$account->password){
+        if($account->lock=='1'){
+            return redirect()->route('login')->with(['customer_lock'=>'Your account has been locked.']);
+        }else if($pass!==$account->password){
             $request->session()->flash('msgPass', 'Wrong password !');
             return redirect()->route('login');
         }

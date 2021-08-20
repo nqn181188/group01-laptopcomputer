@@ -53,32 +53,32 @@
             <form action="{{ route('admin.account.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="firstname">First name</label>
+                    <label for="firstname">First name <span style="color: red">*</span></label>
                     <input type="text" id="firstname" value="{{ old('firstname')}}" name="firstname" class="form-control"/>
                 </div>
                 <div class="form-group">
-                  <label for="lastname">Last name</label>
+                  <label for="lastname">Last name <span style="color: red">*</span></label>
                   <input type="text" id="lastname" value="{{ old('lastname')}}" name="lastname" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password <span style="color: red">*</span></label>
                     <input type="password" id="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="confirm">Confirm</label>
+                    <label for="confirm">Confirm <span style="color: red">*</span></label>
                     <input type="password" id="confirm" name="confirm" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Email <span style="color: red">*</span></label>
                     <input type="text" id="email" value="{{ old('email')}}" name="email" class="form-control"/>
                 </div>
                 <div ><span id="messageEmail"  class="text-danger"></span></div>
                 <div class="form-group">
-                  <label for="address">Address</label>
+                  <label for="address">Address <span style="color: red">*</span></label>
                   <input type="text" id="address" value="{{ old('address')}}" name="address" class="form-control"/>
                 </div>
                 <div class="form-group">
-                  <label for="role">Role</label>
+                  <label for="role">Role <span style="color: red">*</span></label>
                   
                   <select id="role" name="role" class="form-control">
                     <option value="">Choose</option>

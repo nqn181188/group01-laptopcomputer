@@ -57,23 +57,28 @@
             <input type="hidden" name="id" value="{{ $account->id}}">
             @csrf
             <div class="form-group">
-                <label for="firstname">First name</label>
+                <label for="firstname">First name <span style="color: red">*</span></label>
                 <input type="text" id="firstname" value="{{ old('firstname',$account->firstname)}}" name="firstname" class="form-control"/>
             </div>
             <div class="form-group">
-              <label for="lastname">Last name</label>
+              <label for="lastname">Last name <span style="color: red">*</span></label>
               <input type="text" id="lastname" value="{{ old('lastname',$account->lastname)}}" name="lastname" class="form-control"/>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Email <span style="color: red">*</span></label>
                 <input type="text" id="email" value="{{ old('email',$account->email)}}" name="email" class="form-control"/>
             </div>
             <div class="form-group">
-              <label for="address">Address</label>
+              <label for="address">Address <span style="color: red">*</span></label>
               <input type="text" id="address" value="{{ old('address',$account->address)}}" name="address" class="form-control"/>
             </div>
+
+            @if (Session::get('user')->id==$account->id)
+                <label for="role">Role: </label> Admin
+                <input id="role" name="role" type="hidden" value="{{$account->role}}">
+            @else
             <div class="form-group">
-              <label for="role">Role</label>
+              <label for="role">Role <span style="color: red">*</span></label>
               
               <select id="role" name="role" class="form-control">
                 <option value="">Choose</option>
@@ -85,6 +90,8 @@
                 @endif>Manager</option>
               </select>
             </div>
+            @endif
+            
             <div class="form-group">
                 <input type="submit" name="btnUpdate" value="Update" class="btn btn-primary"/>
             </div>
