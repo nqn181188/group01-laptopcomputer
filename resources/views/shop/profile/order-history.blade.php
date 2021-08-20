@@ -22,7 +22,7 @@
                                         <tr>
                                         <th class="text-center align-middle" style="width: 5%">Roll Number</th>
                                         <th class="text-center align-middle" style="width: 15%">Order Number</th>
-                                        <th class="text-center align-middle" style="width: 30%">Name's Billing Address</th>
+                                        <th class="text-center align-middle" style="width: 30%">Name on Billing Address</th>
                                         <th class="text-center align-middle" style="width: 10%">Status</th>
                                         <th class="text-center align-middle" style="width: 30%">Actions</th>
                                         </tr>
@@ -47,13 +47,13 @@
                                         </td>
                                         <td class="text-center align-middle">
                                         <a href="{{ route('profile.show',$order->ordernumber)}}" class="btn btn-primary">Detail</a>
-                                        @if ($order->status==1)
-                                        <form style="display:inline-block" action="{{ route('admin.order.destroy', $order->id) }}" method="POST">
+                                        {{-- @if ($order->status==1)
+                                        <form style="display:inline-block" action="{{ route('profile.destroy', $order->id) }}" method="POST">
                                             @method("DELETE")
                                             @csrf
                                             <button class="btn btn-danger">Delete</button>
                                         </form>
-                                        @endif
+                                        @endif --}}
                                         
                                         </td>
                                     </tr>

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="wrap-breadcrumb">
         <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
+            <li class="item-link"><a href="{{route('home')}}" class="link">home</a></li>
             <li class="item-link"><span>detail</span></li>
         </ul>
     </div>
@@ -330,6 +330,24 @@
             }
         });
     });
+
+    $('.btn-wishlist').click(function(e) {
+        e.preventDefault();     
+        pid = {{ $product->id }}
+
+        $.ajax({
+            type:'GET',
+            url:'{{ route('add-wishlist') }}',
+            data:{ pid:pid },
+            success:function(data){
+                // window.location='{{ route('home') }}'  
+                swal("Thanks", "The item has been added to your wishlist", "success",{
+                    button: "Close"
+                });
+            }
+        });
+    });
+
     function printErr(elementID,hintMess)
     {
         document.getElementById(elementID).innerHTML=hintMess;

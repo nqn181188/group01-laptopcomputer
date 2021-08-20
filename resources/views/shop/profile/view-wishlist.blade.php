@@ -10,6 +10,7 @@
     </div>
     <div class=" main-content-area">
 
+        @if (Session::has('wishlist'))
         <form action="" method="POST">
             @php
             $total = 0;
@@ -17,10 +18,10 @@
             @csrf
         <div class="wrap-iten-in-cart">
             <h3 class="box-title">Products Name</h3>
-            @if (Session::has('cart'))
+            @if (Session::has('wishlist'))
             <ul class="products-cart">
                
-                @foreach(Session::get('cart') as $item)
+                @foreach(Session::get('wishlist') as $item)
                 @php
                 $total += $item->quantity * $item->price;
                 @endphp
@@ -32,17 +33,18 @@
                         <a class="link-to-product" href="{{ route('product-detail', $item->id) }}">{{ $item->name }}</a>
                     </div>
                     <div class="price-field produtc-price"><p class="price">${{ $item->price }}</p></div>
-                    <div class="quantity">
+                    {{-- <div class="quantity">
                         <div class="quantity-input" data-id={{ $item->id }}>
                             <input type="text" name="product-quantity" value="{{ $item->quantity }}" data-max="120" pattern="[0-9]*" >									
                             <a class="btn btn-increase" href="#"></a>
                             <a class="btn btn-reduce" href="#"></a>
                         </div>
-                    </div>
-                    <div class="price-field sub-total"><p class="price">${{ $item->quantity * $item->price }}</p></div>
+                    </div> --}}
+                    <a href="#" class="btn add-to-cart">Add to Cart</a>
+
                     <div class="delete">
                         <a href="#" class="btn btn-delete" title="" data-id={{ $item->id }}>
-                            <span>Delete from your cart</span>
+                            <span>Delete</span>
                             <i class="fa fa-times-circle" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -51,28 +53,13 @@
             </ul>
             @endif
         </div>
-
-        <div class="summary">
-            <div class="order-summary">
-                <h4 class="title-box">Order Summary</h4>
-                <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ $total }}</b></p>
-                <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{ $total }}</b></p>
-            </div>
-            <div class="checkout-info">
-                <label class="checkbox-field">
-                    <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
-                </label>
-                <a class="btn btn-checkout" href="{{route('checkout')}}">Check out</a>
-                <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-            </div>
-            <div class="update-clear">
-                <a class="btn btn-clear" href="{{route('clear-cart')}}">Clear Shopping Cart</a>
-               
-            </div>
-        </div>
-
         </form>
+        @else
+            <div class="card">
+                <a href="{{route('shop')}}"><h1>Go shoping now</h1></a>
+            </div>
+        @endif
+        
 
     </div><!--end main content area-->
 </div><!--end container-->
@@ -93,42 +80,20 @@
         // alert(id);
         $.ajax({
             type:'GET',
-            url:'{{ route('delete-cart-item') }}',
+            url:'{{ route('delete-wishlist') }}',
             data:{ pid:pid },
             success:function(data){
                 // alert('hoàn thành xóa sản phẩm khỏi giỏ hàng');
-                swal("Deleted", "The item has been removed from your cart", "warning",{
+                swal("Deleted", "The item has been removed from your wishlist", "warning",{
                     button: "Close"
                 });
                 // window.location='{{ route('viewcart') }}'
             }
         });
     });
-   
-    $(".quantity-input").on('click', '.btn', function(event) {
-        event.preventDefault();
-        
-        // alert(pid);
-        var _this = $(this),
-            _input = _this.siblings('input[name=product-quantity]'),
-            _current_value = _this.siblings('input[name=product-quantity]').val(),
-            _max_value = _this.siblings('input[name=product-quantity]').attr('data-max');
-        if(_this.hasClass('btn-reduce')){
-            if (parseInt(_current_value, 10) > 1) _input.val(parseInt(_current_value, 10) - 1);
-        }else {
-            if (parseInt(_current_value, 10) < parseInt(_max_value, 10)) _input.val(parseInt(_current_value, 10) + 1);
-        }
+    
+    
 
-        pid = $('.quantity-input').data("id");
-        quantity = _input.val();
-        $.ajax({
-            type:'GET',
-            url:'{{ route('change-cart-quantity') }}',
-            data:{ pid:pid, quantity:quantity },
-            success:function(data){
-                window.location='{{ route('viewcart') }}'
-            }
-        });
-    });
+
 </script>
 @endsection

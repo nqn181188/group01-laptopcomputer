@@ -98,6 +98,64 @@ class CartController extends Controller
     {
         //
     }
+
+    public function viewWishlist(){
+        $user = session()->get('user');
+        if(!$user){
+            return redirect()->route('login')->with(['need_login'=>'You need login to shoping']);
+        }else{
+            return view('shop.profile.view-wishlist');
+        }
+    }
+
+    public function addWishlist(Request $request) {
+        $id = $request->pid;
+        $product = Product::find($id);
+        // lấy wishlist từ session, nếu chưa có thì tạo mới
+        // wishlist là 1 mảng các CartItem
+        if ($request->session()->has('wishlist')) {
+            $wishlist = $request->session()->get('wishlist');
+        } else {
+            $wishlist = [];
+        }
+        // xử lý thêm số lượng nếu item đã có trong wishlist
+        // duyệt $wishlist để tìm xem có sản phẩm trong wishlist không?
+        foreach($wishlist as $elem) {
+            if ($elem->id === $id) {
+                $item = $elem;
+                break;
+            }
+        }
+        // có sản phẩm -> tăng số lượng
+        // if (isset($item)) {
+        //     $item->quantity = $quantity;
+        // } else {
+            // chưa có sản phẩm, tạo mới
+            // tạo đối tượng wishlist item
+            $item = new CartItem($id, $product->name, $product->quantity, $product->price, $product->image);
+            // thêm vào giỏ hàng
+            $wishlist[] = $item;
+        // }
+        // lưu vào session
+        $request->session()->put('wishlist', $wishlist);
+    }
+
+    public function deleteWishlist(Request $request) {
+        $id = $request->pid;
+        if ($request->session()->has('wishlist')) {
+            $wishlist = $request->session()->get('wishlist');
+            
+            for($i = 0; $i < count($wishlist); $i++) {
+                if ($wishlist[$i]->id === $id) {
+                    break;
+                }
+            }
+            \array_splice($wishlist, $i, 1);   // xóa và reindex chỉ số
+            // lưu vào session
+            $request->session()->put('wishlist', $wishlist);
+        }
+    }
+
     public function addCart(Request $request) {
         $id = $request->pid;
         $quantity = $request->quantity;
