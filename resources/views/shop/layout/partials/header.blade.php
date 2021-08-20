@@ -67,7 +67,21 @@
                         <a href="{{route('viewcart')}}" class="link-direction">
                             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index"></span>
+                                <span class="index">
+                                    @if (Session::has('cart'))
+                                    @php
+                                        $count =0;
+                                    @endphp
+                                    @foreach (Session::get('cart') as $item)
+                                        @php
+                                            $count ++;
+                                        @endphp
+                                    @endforeach
+                                    {{$count}} item
+                                @else
+                                    0 item
+                                @endif
+                                </span>
                                 <span class="title">
                                    <a href="{{route('viewcart')}}">CART</a>
                                 </span>
