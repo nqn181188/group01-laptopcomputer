@@ -80,7 +80,7 @@
                                         <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
                                     </div>
                                     <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
-                                    <a href="#" class="btn add-to-cart" data-id="{{ $item->id }}">Add To Cart</a>
+                                    <a href="#" class="btn add-to-cart add-cart" data-id="{{ $item->id }}">Add To Cart</a>
                                     {{-- <button type="button" class="btn add-to-cart" name="add-cart">Add To Cart</button> --}}
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                 $('#sort-item').submit();
             });
         });
-        $('.add-to-cart').click(function(e) {
+        $('.add-cart').click(function(e) {
         e.preventDefault();     
         var pid = $(this).data("id");
 

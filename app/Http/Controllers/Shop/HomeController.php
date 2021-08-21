@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function searchproduct(REQUEST $request){
         $paginate=12;
         $searchname = $request->search;
-        $searchproducts = Product::where('name','like','%'.$searchname.'%')->orderBy('featured','desc');
+        $searchproducts = Product::where('name','like','%'.$searchname.'%');
         $orderby='';
         if($request->orderby){
             $orderby=$request->orderby;

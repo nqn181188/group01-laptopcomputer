@@ -9,9 +9,12 @@
         </ul>
     </div>
     <div class=" main-content-area">
-        <form action="{{ route('do-checkout') }}" method="post" name="frm-billing" >
+        <form action="{{route('chosen-payment') }}" method="post" name="frm-billing" >
             @php
             $total = 0;
+            foreach(Session::get('cart') as $item){
+                $total += $item->quantity * $item->price;
+            }
             @endphp
             @csrf
             <div class="wrap-address-billing">
@@ -19,7 +22,7 @@
                 <h4 class="form-subtitle"><span style="color: red" style="color:  red">*</span> Require fillable</h4>
                 <p class="row-in-form">
                     <label for="fname">first name<span style="color:  red" >*</span></label>
-                    <input id="fname" type="text" name="fname" value="" placeholder="Your name"  pattern="[a-zA-Z]+"  title="No special characters or number" required />
+                    <input id="fname" type="text" name="fname" value="{{Session::has('billInfor')}}" placeholder="Your name"  pattern="[a-zA-Z]+"  title="No special characters or number" required />
                 </p>
                 <p class="row-in-form">
                     <label for="lname">last name<span style="color:  red">*</span></label>
@@ -70,23 +73,12 @@
             <div class="summary summary-checkout">
                 <div class="summary-item payment-method">
                     <h4 class="title-box">Payment Method</h4>
-                    <p class="summary-info"><span class="title">Check / Money order</span></p>
-                    <p class="summary-info"><span class="title">Credit Cart (saved)</span></p>
                     <div class="choose-payment-methods">
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-bank" value="bank" type="radio">
-                            <span>Cash On Delivery</span>
-                            <span class="payment-desc"></span>
-                        </label>
-                      
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-paypal" value="paypal" type="radio">
-                            <span>Paypal</span>
-                            <span class="payment-desc"></span>
-                            <span class="payment-desc"></span>
-                        </label>
+                        <div class="checkbox">
+                            <input type="radio" name="checked_payment" value="paypal" checked /><img style="width: 50% ; margin-left:20px" src="{{asset('images/paypalbutton.png')}}" alt="Paypal Checkout">
+                        </div>
                     </div>
-                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price"> ${{number_format($total, 0, '.', ',')}}</span></p>
+                    <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price"> ${{number_format($total, 2, '.', ',')}}</span></p>
                     {{-- <a href="thankyou.html" class="btn btn-medium">Place order now</a> --}}
                     <button type="submit" class="btn btn-medium">Place order now</button>
                 </div>

@@ -69,18 +69,10 @@
                             <div class="left-info">
                                 <span class="index">
                                     @if (Session::has('cart'))
-                                    @php
-                                        $count =0;
-                                    @endphp
-                                    @foreach (Session::get('cart') as $item)
-                                        @php
-                                            $count ++;
-                                        @endphp
-                                    @endforeach
-                                    {{$count}} item
-                                @else
+                                    {{count(Session::get('cart')).' item'}}
+                                    @else
                                     0 item
-                                @endif
+                                    @endif
                                 </span>
                                 <span class="title">
                                    <a href="{{route('viewcart')}}">CART</a>

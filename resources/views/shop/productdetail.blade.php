@@ -59,11 +59,8 @@
                         </div>
                     </div>
                     <div class="wrap-butons">
-                        <a href="#" class="btn add-to-cart">Add to Cart</a>
-                        <div class="wrap-btn">
-                            <a href="#" class="btn btn-compare">Add Compare</a>
-                            <a href="#" class="btn btn-wishlist">Add Wishlist</a>
-                        </div>
+                        <a href="#" class="btn add-to-cart add-cart">Add to Cart</a>
+                        <a class="btn add-to-cart add-wishlist">Add Wishlist</a>
                     </div>
                 </div>
                 <div class="advance-info">
@@ -314,11 +311,10 @@
         }
     });
    
-    $('.add-to-cart').click(function(e) {
+    $('.add-cart').click(function(e) {
         e.preventDefault();     
         quantity = $('#product-quantity').val();
         pid = {{ $product->id }}
-
         $.ajax({
             type:'GET',
             url:'{{ route('add-cart') }}',
@@ -332,14 +328,13 @@
         });
     });
 
-    $('.btn-wishlist').click(function(e) {
-        e.preventDefault();     
+    $('.add-wishlist').click(function(e) {
+        e.preventDefault();
         pid = {{ $product->id }}
-
         $.ajax({
-            type:'GET',
-            url:'{{ route('add-wishlist') }}',
-            data:{ pid:pid },
+            type:'get',
+            url:'{{route('add-wishlist')}}',
+            data:{pid:pid},
             success:function(data){
                 // window.location='{{ route('home') }}'  
                 swal("Thanks", "The item has been added to your wishlist", "success",{
