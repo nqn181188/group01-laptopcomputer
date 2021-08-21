@@ -199,7 +199,7 @@ class CartController extends Controller
                     break;
                 }
             }
-            \array_splice($cart, $i, 1);   // xóa và reindex chỉ số
+            array_splice($cart, $i, 1);   // xóa và reindex chỉ số
             // lưu vào session
             $request->session()->put('cart', $cart);
         }
