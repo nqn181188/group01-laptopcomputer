@@ -22,7 +22,7 @@
                                         <tr>
                                         <th class="text-center align-middle" style="width: 5%">Roll Number</th>
                                         <th class="text-center align-middle" style="width: 15%">Order Number</th>
-                                        <th class="text-center align-middle" style="width: 30%">Name on Billing Address</th>
+                                        <th class="text-center align-middle" style="width: 30%">Order Date</th>
                                         <th class="text-center align-middle" style="width: 10%">Status</th>
                                         <th class="text-center align-middle" style="width: 30%">Actions</th>
                                         </tr>
@@ -35,7 +35,7 @@
                                     <tr>
                                         <td class="text-center align-middle">{{$count++}}</td>
                                         <td class="text-center align-middle">{{$order->ordernumber}}</td>
-                                        <td class="text-center align-middle">{{$order->firstname}}</td>
+                                        <td class="text-center align-middle">{{$order->order_date}}</td>
                                         <td class="text-center align-middle">
                                         @if($order->status==1)
                                             <span class="badge badge-success"> In Process</span>
@@ -46,7 +46,7 @@
                                         @endif
                                         </td>
                                         <td class="text-center align-middle">
-                                        <a href="{{ route('profile.show',$order->ordernumber)}}" class="btn btn-primary">Detail</a>
+                                        <a href="{{route('profile.show',$order->ordernumber)}}" class="btn btn-primary">Detail</a>
                                         {{-- @if ($order->status==1)
                                         <form style="display:inline-block" action="{{ route('profile.destroy', $order->id) }}" method="POST">
                                             @method("DELETE")

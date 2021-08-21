@@ -36,12 +36,14 @@ class WishListController extends Controller
      */
     public function store(Request $request)
     {
-        $id = $product->pid;
-        $cust_id = $request->Session::get('user')->id;
+        return redirect()->route('home');
+        $id = $request->pid;
+        $cust_id = $request->session()->get('user')->id;
         $wistlist = new WishList;
         $wishlist->cust_id = $cust_id;
         $wishlist->product_id = $id;
         $wistlist->save();
+        
     }
 
     /**

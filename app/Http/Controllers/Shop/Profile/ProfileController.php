@@ -59,7 +59,6 @@ class ProfileController extends Controller
         $shipInfor = OrderDetail::where('ordernumber',$ordernumber)->distinct()->first();
         $shipProducts = OrderDetail::where('ordernumber',$ordernumber)->get();
         $orderProducts = array();
-        
         foreach ($shipProducts as $shipProduct){
             $productOrderDetail = array(); 
             $product = Product::where('id',$shipProduct->product_id)->first();

@@ -327,7 +327,6 @@
             }
         });
     });
-
     $('.add-wishlist').click(function(e) {
         e.preventDefault();
         pid = {{ $product->id }}

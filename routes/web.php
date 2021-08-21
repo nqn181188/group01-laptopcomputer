@@ -33,9 +33,9 @@ Route::get('/view-wishlist','Shop\CartController@viewWishlist')->name('view-wish
 Route::get('/add-wishlist','Shop\CartController@addWishlist')->name('add-wishlist');
 Route::get('/delete-wishlist', 'Shop\CartController@deleteWishlist')->name('delete-wishlist');
 
+Route::resource('profile', 'Shop\Profile\ProfileController');
 Route::get('/change-cart-quantity', 'Shop\CartController@changeCartQuantity')->name('change-cart-quantity');
 Route::get('/checkout','Shop\CartController@checkout')->name('checkout');
-Route::post('/do-checkout', 'Shop\CartController@doCheckout')->name('do-checkout');
 Route::get('/aboutus','Shop\AboutUsController@index')->name('aboutus');
 Route::get('/login','Shop\CustomerController@login')->name('login');
 Route::post('/customer/process-login','Shop\CustomerController@processLogin')->name('customer.process-login');
@@ -58,10 +58,11 @@ Route::post('/comment','Shop\ProductDetailController@comment')->name('comment');
  
 //////////////////////////////////////
 Route::post('chosen-payment','Shop\PaymentController@chosenPayment')->name('chosen-payment');
+Route::get('save-order','Shop\PaymentController@saveOrder')->name('save-order');
 Route::get('/paypal-checkout','PayPalTestController@index')->name('paypal-checkout');
 Route::get('/paypal/status','PayPalTestController@status');
-Route::get('/pay/list','PayPalTestController@paymentList');
-Route::get('/pay/{id}/details','PayPalTestController @paymentDetail');
+// Route::get('/pay/list','PayPalTestController@paymentList');
+// Route::get('/pay/{id}/details','PayPalTestController @paymentDetail');
 
 //===========ROUTE ON ADMIN PAGE==============
 // Route::get('/admin','Admin\AdminController@dashboard')->middleware('adminLogin')->name('admin.dashboard');

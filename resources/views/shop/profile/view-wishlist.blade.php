@@ -5,23 +5,22 @@
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><span><a href="{{ route('home')}}" class="link">home</a></span></li>
-            <li class="item-link"><span><a href="{{ route('login')}}" class="link">login</a></span></li>
+            <li class="item-link"><span><a href="{{ route('login')}}" class="link">Wishlist</a></span></li>
         </ul>
     </div>
     <div class=" main-content-area">
 
-        @if (Session::has('wishlist'))
+        @if ($items!=null)
         <form action="" method="POST">
             {{-- @php
             $total = 0;
             @endphp --}}
             @csrf
         <div class="wrap-iten-in-cart">
-            <h3 class="box-title">Products Name</h3>
-            @if (Session::has('wishlist'))
+            <h3 class="box-title">Wishlist</h3>
             <ul class="products-cart">
                
-                @foreach(Session::get('wishlist') as $item)
+                @foreach($items as $item)
                 {{-- @php
                 $total += $item->quantity * $item->price;
                 @endphp --}}
@@ -32,7 +31,7 @@
                     <div class="product-name">
                         <a class="link-to-product" href="{{ route('product-detail', $item->id) }}">{{ $item->name }}</a>
                     </div>
-                    <div class="price-field produtc-price"><p class="price">Price: ${{ $item->price }}</p></div>
+                    <div class="price-field produtc-price"><p class="price">${{number_format($item->price,2,'.',',') }}</p></div>
                     {{-- <div class="quantity">
                         <div class="quantity-input" data-id={{ $item->id }}>
                             <input type="text" name="product-quantity" value="{{ $item->quantity }}" data-max="120" pattern="[0-9]*" >									
@@ -41,7 +40,6 @@
                         </div>
                     </div> --}}
                     <a href="#" class="btn btn-outline-info add-to-cart" data-id="{{ $item->id }}">Add to Cart</a>
-
                     <div class="delete">
                         <a href="#" class="btn btn-delete" title="" data-id={{ $item->id }}>
                             <span>Delete</span>
@@ -51,12 +49,11 @@
                 </li>
               	@endforeach								
             </ul>
-            @endif
         </div>
         </form>
         @else
             <div class="card">
-                <a href="{{route('shop')}}"><h1>Go shoping now</h1></a>
+                <a href="{{route('shop')}}"><h5>There are no products in the wishlist</h5></a>
             </div>
         @endif
         

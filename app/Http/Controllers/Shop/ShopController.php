@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Order;
+use App\Models\WishList;
 
 use Illuminate\Http\Request;
 
