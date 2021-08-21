@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="product-info">
-                                    <a href="#" class="product-name" style="font-weight: bold"><span>{{$item->name}}</span></a>
+                                    <a href="{{route('product-detail',$item->id)}}" class="product-name" style="font-weight: bold"><span>{{$item->name}}</span></a>
                                     <div class="star-rating">
                                         <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
                                     </div>
