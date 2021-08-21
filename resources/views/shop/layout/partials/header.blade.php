@@ -110,7 +110,7 @@
                             <a href="{{route('viewcart')}}" class="link-term mercado-item-title">Cart</a>
                         </li>
                         <li class="menu-item">
-                            <a href="{{route('checkout')}}" class="link-term mercado-item-title">Checkout</a>
+                            <a href="{{count(Session::get('cart'))>0?route('checkout'):'javascript:void(0)'}}" class="link-term mercado-item-title">Checkout</a>
                         </li>
                         <li class="menu-item">
                             <a href="{{route('contact.index')}}" class="link-term mercado-item-title">Contact Us</a>

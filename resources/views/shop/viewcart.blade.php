@@ -17,7 +17,7 @@
             @endphp
             @csrf
         <div class="wrap-iten-in-cart">
-            <h3 class="box-title">Products Name</h3>
+            <h3 class="box-title">Shopping Cart</h3>
             @if (Session::has('cart'))
             <ul class="products-cart">
                

@@ -20,34 +20,34 @@
             <h3 class="box-title">Wishlist</h3>
             <ul class="products-cart">
                
-                @foreach($items as $item)
                 {{-- @php
                 $total += $item->quantity * $item->price;
                 @endphp --}}
-                <li class="pr-cart-item">
-                    <div class="product-image">
-                        <figure><img src="{{ asset('images/products/' . $item->image) }}" alt="{{ $item->name }}"></figure>
-                    </div>
-                    <div class="product-name">
-                        <a class="link-to-product" href="{{ route('product-detail', $item->id) }}">{{ $item->name }}</a>
-                    </div>
-                    <div class="price-field produtc-price"><p class="price">${{number_format($item->price,2,'.',',') }}</p></div>
-                    {{-- <div class="quantity">
-                        <div class="quantity-input" data-id={{ $item->id }}>
-                            <input type="text" name="product-quantity" value="{{ $item->quantity }}" data-max="120" pattern="[0-9]*" >									
-                            <a class="btn btn-increase" href="#"></a>
-                            <a class="btn btn-reduce" href="#"></a>
-                        </div>
-                    </div> --}}
-                    <a href="#" class="btn btn-outline-info add-to-cart" data-id="{{ $item->id }}">Add to Cart</a>
-                    <div class="delete">
-                        <a href="#" class="btn btn-delete" title="" data-id={{ $item->id }}>
-                            <span>Delete</span>
-                            <i class="fa fa-times-circle" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </li>
-              	@endforeach								
+                <div class="wrap-iten-in-cart">
+                    <ul class="products-cart">
+                        @foreach($items as $item)
+                        <li class="pr-cart-item">
+                            <div class="product-image">
+                                <figure><img src="{{ asset('images/products/' . $item->image) }}" alt="{{ $item->name }}"></figure>
+                            </div>
+                            <div class="product-name">
+                                <a class="link-to-product" href="{{ route('product-detail', $item->id) }}">{{ $item->name }}</a>
+                            </div>
+                            <div class="price-field produtc-price"><p class="price">${{number_format($item->price, 2, '.', ',')}}</p></div>
+                            
+                            {{-- <a href="#" class="btn add-to-cart add-cart">Add to Cart</a> --}}
+
+                            <div class="delete">
+                                <a href="#" class="btn btn-delete" title="" data-id={{ $item->id }}>
+                                    <span>Delete from your cart</span>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>
+                          @endforeach								
+                    </ul>
+                </div>
+                						
             </ul>
         </div>
         </form>
