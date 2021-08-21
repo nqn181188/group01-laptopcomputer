@@ -1,6 +1,7 @@
 @extends('shop.layout.layout1')
 @section('contents')
 @include('shop.layout.partials.model')
+@include('shop.layout.partials.alert')
 <div class="container">
     <div class="wrap-breadcrumb">
         <ul>
@@ -78,7 +79,7 @@
                                     <div class="star-rating">
                                         <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
                                     </div>
-                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                                     <a href="#" class="btn add-to-cart" data-id="{{ $item->id }}">Add To Cart</a>
                                     {{-- <button type="button" class="btn add-to-cart" name="add-cart">Add To Cart</button> --}}
                                 </div>
@@ -167,7 +168,10 @@
             url:'{{ route('add-cart') }}',
             data:{ pid:pid, quantity:1 },
             success:function(data){
-                window.location='{{ route('shop') }}'  
+                $('#alert').show();
+                $('.hideAlert').click(function(){
+                    $('#alert').hide();
+                });
             }
            
         });

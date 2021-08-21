@@ -37,7 +37,7 @@ class ShopController extends Controller
         }
         if($request->checked_cputypes){
             $checked_cputypes = $request->checked_cputypes;
-            $products->whereIn('cputype','like',$checked_cputypes);
+            $products->whereIn('cputype',$checked_cputypes);
         }
         if($request->checked_rams){
             $checked_rams = $request->checked_rams;

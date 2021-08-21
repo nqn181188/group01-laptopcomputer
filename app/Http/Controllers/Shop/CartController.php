@@ -158,12 +158,12 @@ class CartController extends Controller
             // thêm vào giỏ hàng
             $cart[] = $item;
         }
-        // lưu vào session
         $request->session()->put('cart', $cart);
     }
 
     public function deleteCartItem(Request $request) {
         $id = $request->pid;
+        $name = Product::where('id',$id)->get(['name']);
         if ($request->session()->has('cart')) {
             $cart = $request->session()->get('cart');
             
@@ -201,8 +201,7 @@ class CartController extends Controller
         
     
         session()->forget('cart');
-        return redirect()->route('home');
-    
+        return redirect()->route('viewcart');
     }
     public function doCheckout(Request $request) {
         

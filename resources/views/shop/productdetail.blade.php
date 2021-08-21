@@ -1,5 +1,6 @@
 @extends('shop.layout.layout1')
 @section('contents')
+@include('shop.layout.partials.alert')
 <div class="container">
     <div class="wrap-breadcrumb">
         <ul>
@@ -44,7 +45,7 @@
                             <li>Release Year : {{$product->releaseyear}}</li>
                         </ul>
                     </div>
-                    <div class="wrap-price"><span class="product-price">${{number_format($product->price, 0, '.', ',')}}</span></div>
+                    <div class="wrap-price"><span class="product-price">${{number_format($product->price, 2, '.', ',')}}</span></div>
                     <div class="stock-info in-stock">
                         <p class="availability">Availability: <b>{{$product->quantity>0?'In Stock':'Out Of Stock'}}</b></p>
                     </div>
@@ -259,7 +260,7 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                                 </div>
                             </div>
                         </li>
@@ -287,7 +288,7 @@
                             </div>
                             <div class="product-info">
                                 <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                                <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                             </div>
                         </div>
                         @endforeach
@@ -322,7 +323,10 @@
             url:'{{ route('add-cart') }}',
             data:{ pid:pid, quantity:quantity },
             success:function(data){
-                window.location='{{ route('home') }}'  
+                $('#alert').show();
+                $('.hideAlert').click(function(){
+                    $('#alert').hide();
+                })  
             }
         });
     });

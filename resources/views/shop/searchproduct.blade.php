@@ -2,6 +2,8 @@
 @section('contents')
 <div class="container">
     @include('shop.layout.partials.model')
+    @include('shop.layout.partials.alert')
+
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="#" class="link">home</a></li>
@@ -75,8 +77,8 @@
                                 <div class="star-rating">
                                     <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
                                 </div>
-                                <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
-                                <a href="#" class="btn add-to-cart">Add To Cart</a>
+                                <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
+                                <a class="btn add-to-cart" data-id="{{$item->id}}">Add To Cart</a>
                             </div>
                         </div>
                     </li>
@@ -162,7 +164,7 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                                 </div>
                             </div>
                         </li>
@@ -385,6 +387,20 @@
                 $('#sort-item').submit();
             });
         });
-    
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();     
+            var pid = $(this).data("id");
+            $.ajax({
+                type:'GET',
+                url:'{{ route('add-cart') }}',
+                data:{ pid:pid, quantity:1 },
+                success:function(data){
+                    $('#alert').show();
+                    $('.hideAlert').click(function(){
+                        $('#alert').hide();
+                    })  
+                }
+            });
+        });
     </script>
 @endsection
