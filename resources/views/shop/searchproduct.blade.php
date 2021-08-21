@@ -387,19 +387,21 @@
                 $('#sort-item').submit();
             });
         });
+        
         $('.add-to-cart').click(function(e) {
-            e.preventDefault();     
-            var pid = $(this).data("id");
+        e.preventDefault();     
+        var pid = $(this).data("id");
+
             $.ajax({
                 type:'GET',
                 url:'{{ route('add-cart') }}',
                 data:{ pid:pid, quantity:1 },
                 success:function(data){
-                    $('#alert').show();
-                    $('.hideAlert').click(function(){
-                        $('#alert').hide();
-                    })  
+                    swal("Thanks", "The item has been added to your cart", "success",{
+                        button: "Close"
+                    });
                 }
+            
             });
         });
     </script>

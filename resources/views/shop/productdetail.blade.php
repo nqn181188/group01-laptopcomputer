@@ -4,7 +4,7 @@
 <div class="container">
     <div class="wrap-breadcrumb">
         <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
+            <li class="item-link"><a href="{{route('home')}}" class="link">home</a></li>
             <li class="item-link"><span>detail</span></li>
         </ul>
     </div>
@@ -206,7 +206,7 @@
         </div><!--end main products area-->
 
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
-            <div class="widget widget-our-services ">
+            {{-- <div class="widget widget-our-services ">
                 <div class="widget-content">
                     <ul class="our-services">
 
@@ -244,7 +244,8 @@
                         </li>
                     </ul>
                 </div>
-            </div><!-- Categories widget-->
+            </div> --}}
+            <!-- Categories widget-->
 
             <div class="widget mercado-widget widget-product">
                 <h2 class="widget-title">Featured Product</h2>
@@ -323,13 +324,31 @@
             url:'{{ route('add-cart') }}',
             data:{ pid:pid, quantity:quantity },
             success:function(data){
-                $('#alert').show();
-                $('.hideAlert').click(function(){
-                    $('#alert').hide();
-                })  
+                // window.location='{{ route('home') }}'  
+                swal("Thanks", "The item has been added to your cart", "success",{
+                    button: "Close"
+                });
             }
         });
     });
+
+    $('.btn-wishlist').click(function(e) {
+        e.preventDefault();     
+        pid = {{ $product->id }}
+
+        $.ajax({
+            type:'GET',
+            url:'{{ route('add-wishlist') }}',
+            data:{ pid:pid },
+            success:function(data){
+                // window.location='{{ route('home') }}'  
+                swal("Thanks", "The item has been added to your wishlist", "success",{
+                    button: "Close"
+                });
+            }
+        });
+    });
+
     function printErr(elementID,hintMess)
     {
         document.getElementById(elementID).innerHTML=hintMess;

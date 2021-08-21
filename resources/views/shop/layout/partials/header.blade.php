@@ -41,10 +41,24 @@
 
                 <div class="wrap-icon right-section">
                     <div class="wrap-icon-section wishlist">
-                        <a href="#" class="link-direction">
+                        <a href="{{route('view-wishlist')}}" class="link-direction">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index">0 item</span>
+                                <span class="index">
+                                    @if (Session::has('wishlist'))
+                                        @php
+                                            $count =0;
+                                        @endphp
+                                        @foreach (Session::get('wishlist') as $item)
+                                            @php
+                                                $count ++;
+                                            @endphp
+                                        @endforeach
+                                        {{$count}} item
+                                    @else
+                                        0 item
+                                    @endif
+                                </span>
                                 <span class="title">Wishlist</span>
                             </div>
                         </a>
@@ -53,7 +67,21 @@
                         <a href="{{route('viewcart')}}" class="link-direction">
                             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                             <div class="left-info">
-                                <span class="index"></span>
+                                <span class="index">
+                                    @if (Session::has('cart'))
+                                    @php
+                                        $count =0;
+                                    @endphp
+                                    @foreach (Session::get('cart') as $item)
+                                        @php
+                                            $count ++;
+                                        @endphp
+                                    @endforeach
+                                    {{$count}} item
+                                @else
+                                    0 item
+                                @endif
+                                </span>
                                 <span class="title">
                                    <a href="{{route('viewcart')}}">CART</a>
                                 </span>
@@ -101,7 +129,7 @@
                         @endif	
                         @if (Session::has('user'))
                         <li class="menu-item" >
-                            <a href="#"  class="link-term mercado-item-title">Order History</a></li>
+                            <a href="{{route('profile.index')}}"  class="link-term mercado-item-title">Order History</a></li>
                         @endif																
                     </ul>
                 </div>

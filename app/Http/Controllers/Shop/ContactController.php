@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
@@ -41,6 +41,19 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $feedbackCust = $request->all();
+
+        $validator = Validator::make($request->all(),[
+            'firstname' => 'required|min:3',
+            'lastname' => 'required|min:3',
+            'email'    => 'required',
+            'comment' => 'required|between:8,200',
+        ]);
+
+        if( $validator->fails() ){
+            return redirect()->back()->
+            withErrors($validator)->withInput();
+        }
+        
         Feedback::create($feedbackCust);
         return redirect()->route('contact.index')->withSuccessMessage('We will reply to you soon');
     }

@@ -26,8 +26,13 @@ Route::get('/','Shop\HomeController@index')->name('home');
 Route::get('/shop','Shop\ShopController@index')->name('shop');
 Route::get('/viewcart','Shop\CartController@index')->name('viewcart');
 Route::get('/add-cart','Shop\CartController@addCart')->name('add-cart');
-Route::get('/show-cart','Shop\CartController@show_cart')->name('show-cart');
 Route::get('/delete-cart-item', 'Shop\CartController@deleteCartItem')->name('delete-cart-item');
+// Route::get('/show-cart','Shop\CartController@show_cart')->name('show-cart');
+
+Route::get('/view-wishlist','Shop\CartController@viewWishlist')->name('view-wishlist');
+Route::get('/add-wishlist','Shop\CartController@addWishlist')->name('add-wishlist');
+Route::get('/delete-wishlist', 'Shop\CartController@deleteWishlist')->name('delete-wishlist');
+
 Route::get('/change-cart-quantity', 'Shop\CartController@changeCartQuantity')->name('change-cart-quantity');
 Route::get('/checkout','Shop\CartController@checkout')->name('checkout');
 Route::post('/do-checkout', 'Shop\CartController@doCheckout')->name('do-checkout');
@@ -75,7 +80,6 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin','as'=>'admin.'],funct
     Route::resource('product', 'Admin\ProductController');
 
     Route::resource('order', 'Admin\OrderController');
-    route::get('/order-history','Admin\OrderController@orderHistoty')->name('order-history');
     Route::resource('orderdetail', 'Admin\OrderDetailController');
 
     Route::resource('brand','Admin\BrandController');

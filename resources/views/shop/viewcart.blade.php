@@ -93,11 +93,11 @@
             url:'{{ route('delete-cart-item') }}',
             data:{ pid:pid },
             success:function(data){
-                $("#alertContent").text("Successfully delete product out of cart.");
-                $('#alert').show();
-                $('.hideAlert').click(function(){
-                    $('#alert').hide();
-                })  
+                // alert('hoàn thành xóa sản phẩm khỏi giỏ hàng');
+                swal("Deleted", "The item has been removed from your cart", "warning",{
+                    button: "Close"
+                });
+                // window.location='{{ route('viewcart') }}'
             }
         });
     });

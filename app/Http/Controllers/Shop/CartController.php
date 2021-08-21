@@ -25,44 +25,13 @@ class CartController extends Controller
 
     public function checkout()
     {
-        //
-        return view('shop.checkout');
-    }
-
-    public function orderHistoty($email){
-        $orders = Order::find($email);
-        return view('admin.order.index', compact('orders'));
-    }
-
-    public function showOrderHistory($ordernumber)
-    {
-        $billInfor = Order::where('ordernumber',$ordernumber)->first();
-        $shipInfor = OrderDetail::where('ordernumber',$ordernumber)->distinct()->first();
-            // dd($shipInfor);
-        $shipProducts = OrderDetail::where('ordernumber',$ordernumber)->get();
-        $orderProducts = array();
-        
-        foreach ($shipProducts as $shipProduct){
-            $productOrderDetail = array(); 
-            $product = Product::where('id',$shipProduct->product_id)->first();
-            $productOrderDetail['name']=$product->name;
-            $productOrderDetail['image']= $product->image;
-            $productOrderDetail['quantity']= $shipProduct->quantity;
-            $productOrderDetail['price']= $shipProduct->price;
-            $orderProducts[]= $productOrderDetail;
+        $user = session()->get('user');
+        if(!$user){
+            return redirect()->route('login')->with(['need_login'=>'You need login to shoping']);
+        }else{
+            return view('shop.checkout');
         }
-        $totalPrice =0;
-        foreach ($orderProducts as $orderProduct ){
-            $totalPrice += $orderProduct['quantity']*$orderProduct['price'];
-        }
-        return view('admin.order.orderdetail',compact(
-            'billInfor',
-            'shipInfor',
-            'orderProducts',
-            'totalPrice',
-        ));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -129,6 +98,64 @@ class CartController extends Controller
     {
         //
     }
+
+    public function viewWishlist(){
+        $user = session()->get('user');
+        if(!$user){
+            return redirect()->route('login')->with(['need_login'=>'You need login to shoping']);
+        }else{
+            return view('shop.profile.view-wishlist');
+        }
+    }
+
+    public function addWishlist(Request $request) {
+        $id = $request->pid;
+        $product = Product::find($id);
+        // lấy wishlist từ session, nếu chưa có thì tạo mới
+        // wishlist là 1 mảng các CartItem
+        if ($request->session()->has('wishlist')) {
+            $wishlist = $request->session()->get('wishlist');
+        } else {
+            $wishlist = [];
+        }
+        // xử lý thêm số lượng nếu item đã có trong wishlist
+        // duyệt $wishlist để tìm xem có sản phẩm trong wishlist không?
+        foreach($wishlist as $elem) {
+            if ($elem->id === $id) {
+                $item = $elem;
+                break;
+            }
+        }
+        // có sản phẩm -> tăng số lượng
+        // if (isset($item)) {
+        //     $item->quantity = $quantity;
+        // } else {
+            // chưa có sản phẩm, tạo mới
+            // tạo đối tượng wishlist item
+            $item = new CartItem($id, $product->name, $product->quantity, $product->price, $product->image);
+            // thêm vào giỏ hàng
+            $wishlist[] = $item;
+        // }
+        // lưu vào session
+        $request->session()->put('wishlist', $wishlist);
+    }
+
+    public function deleteWishlist(Request $request) {
+        $id = $request->pid;
+        if ($request->session()->has('wishlist')) {
+            $wishlist = $request->session()->get('wishlist');
+            
+            for($i = 0; $i < count($wishlist); $i++) {
+                if ($wishlist[$i]->id === $id) {
+                    break;
+                }
+            }
+            \array_splice($wishlist, $i, 1);   // xóa và reindex chỉ số
+            // lưu vào session
+            $request->session()->put('wishlist', $wishlist);
+        }
+    }
+
     public function addCart(Request $request) {
         $id = $request->pid;
         $quantity = $request->quantity;
@@ -234,10 +261,10 @@ class CartController extends Controller
             }
             $ordernumber=substr(md5(microtime()),rand(0,26),10);
          
-          
+            $user = session()->get('user');
             // tạo và lưu order
             $ord = new Order();
-            $ord->cust_id=$cust->id;
+            $ord->cust_id=$user->id;
             $ord->ordernumber=$ordernumber;
             
             $ord->firstname = $fname;

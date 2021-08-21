@@ -5,7 +5,7 @@
 <div class="container">
     <div class="wrap-breadcrumb">
         <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
+            <li class="item-link"><a href="{{route('home')}}" class="link">home</a></li>
             <li class="item-link"><span>SHOP</span></li>
         </ul>
     </div>
@@ -163,19 +163,18 @@
         e.preventDefault();     
         var pid = $(this).data("id");
 
-        $.ajax({
-            type:'GET',
-            url:'{{ route('add-cart') }}',
-            data:{ pid:pid, quantity:1 },
-            success:function(data){
-                $('#alert').show();
-                $('.hideAlert').click(function(){
-                    $('#alert').hide();
-                });
-            }
-           
+            $.ajax({
+                type:'GET',
+                url:'{{ route('add-cart') }}',
+                data:{ pid:pid, quantity:1 },
+                success:function(data){
+                    swal("Thanks", "The item has been added to your cart", "success",{
+                        button: "Close"
+                    });
+                }
+            
+            });
         });
-    });
     
     </script>
 

@@ -4,7 +4,7 @@
 
     <div class="wrap-breadcrumb">
         <ul>
-            <li class="item-link"><a href="#" class="link">home</a></li>
+            <li class="item-link"><a href="{{route('home')}}" class="link">home</a></li>
             <li class="item-link"><span>login</span></li>
         </ul>
     </div>
@@ -120,6 +120,14 @@
 @if (Session::has('customer_lock'))
 <script>
     swal("Oops sorry!!","{!! Session::get('customer_lock') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
+
+@if (Session::has('need_login'))
+<script>
+    swal("Oops sorry!!","{!! Session::get('need_login') !!}", "info",{
         button: "OK"
     });
 </script>

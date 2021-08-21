@@ -63,15 +63,15 @@ class AccountRequest extends FormRequest
         return [
             // 'username.required' => 'Bạn chưa nhập tài khoản',
             // 'username.unique' => 'Tài khoản này đã tồn tại',
-            'firstname.required' => 'Bạn chưa nhập Tên',
-            'lastname.required' => 'Bạn chưa nhập Họ',
-            'password.required' => 'Bạn chưa nhập mật khẩu',
-            'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
-            'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
-            'email.required' => 'Bạn chưa nhập email',
-            'email.unique' => 'Email này đã tồn tại',
-            'address.required' => 'Bạn chưa nhập địa chỉ',
-            'role.required' => 'Bạn chưa chọn vai trò',
+            // 'firstname.required' => 'Bạn chưa nhập Tên',
+            // 'lastname.required' => 'Bạn chưa nhập Họ',
+            // 'password.required' => 'Bạn chưa nhập mật khẩu',
+            // 'confirm.required_with' => 'Bạn chưa nhập xác nhận mật khẩu',
+            // 'confirm.same' => 'Xác nhận mật khẩu không giống mật khẩu',
+            // 'email.required' => 'Bạn chưa nhập email',
+            // 'email.unique' => 'Email này đã tồn tại',
+            // 'address.required' => 'Bạn chưa nhập địa chỉ',
+            // 'role.required' => 'Bạn chưa chọn vai trò',
         ];
     }
 }

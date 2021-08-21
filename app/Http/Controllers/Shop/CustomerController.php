@@ -61,6 +61,8 @@ class CustomerController extends Controller
 
     public function processLogout(){
         session()->forget('user');
+        session()->forget('wishlist');
+        
         return redirect()->route('home')->with(['success_logout'=>'Thank for using our service']);
     }
 
