@@ -27,8 +27,10 @@
                     </div>
                 </div>
                 <div class="detail-info">
-                    <div class="star-rating">
-                        <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
+                    <div class="product-rating">
+                        @for ($i = 1; $i <= $rates["$product->id"]; $i++)
+                            <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
+                        @endfor
                     </div>
                     <h2 class="product-name">{{$product->name}}</h2>
                     <div class="short-desc">
@@ -207,46 +209,7 @@
         </div><!--end main products area-->
 
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
-            {{-- <div class="widget widget-our-services ">
-                <div class="widget-content">
-                    <ul class="our-services">
-
-                        <li class="service">
-                            <a class="link-to-service" href="#">
-                                <i class="fa fa-truck" aria-hidden="true"></i>
-                                <div class="right-content">
-                                    <b class="title">Free Shipping</b>
-                                    <span class="subtitle">On Oder Over $99</span>
-                                    <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="service">
-                            <a class="link-to-service" href="#">
-                                <i class="fa fa-gift" aria-hidden="true"></i>
-                                <div class="right-content">
-                                    <b class="title">Special Offer</b>
-                                    <span class="subtitle">Get a gift!</span>
-                                    <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="service">
-                            <a class="link-to-service" href="#">
-                                <i class="fa fa-reply" aria-hidden="true"></i>
-                                <div class="right-content">
-                                    <b class="title">Order Return</b>
-                                    <span class="subtitle">Return within 7 days</span>
-                                    <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div> --}}
-            <!-- Categories widget-->
+            
 
             <div class="widget mercado-widget widget-product">
                 <h2 class="widget-title">Featured Product</h2>
@@ -290,6 +253,11 @@
                             </div>
                             <div class="product-info">
                                 <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
+                                <div class="product-rating">
+                                    @for ($i = 1; $i <= $rates["$item->id"]; $i++)
+                                        <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
+                                    @endfor
+                                </div>
                                 <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                             </div>
                         </div>

@@ -7,6 +7,9 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Order;
 use App\Models\WishList;
+use App\Models\CustomerComment;
+
+
 
 use Illuminate\Http\Request;
 
@@ -20,6 +23,7 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {   
+
         $paginate=$request->post_per_page??12;
         $brands=Brand::all();
         $rams = Product::select('amountofram')->distinct()->orderBy('amountofram','asc')->get();
@@ -92,7 +96,13 @@ class ShopController extends Controller
             }
         }
         $products=$products->paginate($paginate);
-
+        $pids = Product::get(['id']);
+        $rates = array();
+        foreach($pids as $pid){
+            $rate = CustomerComment::where('product_id',$pid->id)->sum('rate');
+            $num = CustomerComment::where('product_id',$pid->id)->count();
+            $rates["$pid->id"]=round($rate/$num);
+        }
         return view('shop.shop',compact(
             'products',
             'paginate',
@@ -109,6 +119,7 @@ class ShopController extends Controller
             'cputypes',
             'checked_cputypes',
             'checked_price',
+            'rates',
 
         ));
 

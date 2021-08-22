@@ -17,12 +17,20 @@ class ProductDetailController extends Controller
         $reviews = CustomerComment::where('product_id',$id)->orderBy('created_at','desc')->limit(20)->get();
         $relatedProduct = Product::where('brand_id',$product->brand_id)->get();
         $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(5)->get();
+        $pids = Product::get(['id']);
+        $rates = array();
+        foreach($pids as $pid){
+            $rate = CustomerComment::where('product_id',$pid->id)->sum('rate');
+            $num = CustomerComment::where('product_id',$pid->id)->count();
+            $rates["$pid->id"]=round($rate/$num);
+        }
         return view('shop.productdetail',compact(
             'product',
             'relatedProduct',
             'featuredProduct',
             'reviews',
             'images',
+            'rates',
         ));
     }
     public function comment(REQUEST $request){

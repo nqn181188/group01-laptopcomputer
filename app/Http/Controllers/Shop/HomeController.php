@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\CustomerComment;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $pids = Product::get(['id']);
+        $rates = array();
+        foreach($pids as $pid){
+            $rate = CustomerComment::where('product_id',$pid->id)->sum('rate');
+            $num = CustomerComment::where('product_id',$pid->id)->count();
+            $rates["$pid->id"]=round($rate/$num);
+        }
         $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(20)->get();
         $lastestProduct = Product::orderBy('created_at','desc')->limit(20)->get();
         $brands = Brand::all();
@@ -25,10 +33,11 @@ class HomeController extends Controller
             'lastestProduct',
             'products',
             'brands',
+            'rates',
         ));
     }
     public function searchproduct(REQUEST $request){
-        $paginate=12;
+        $paginate=$request->paginate??12;
         $searchname = $request->search;
         $searchproducts = Product::where('name','like','%'.$searchname.'%');
         $orderby='';
@@ -47,12 +56,20 @@ class HomeController extends Controller
         }
         $searchproducts=$searchproducts->paginate($paginate);
         $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit($paginate)->get();
+        $pids = Product::get(['id']);
+        $rates = array();
+        foreach($pids as $pid){
+            $rate = CustomerComment::where('product_id',$pid->id)->sum('rate');
+            $num = CustomerComment::where('product_id',$pid->id)->count();
+            $rates["$pid->id"]=round($rate/$num);
+        }
         return view('shop.searchproduct',compact(
             'searchproducts',
             'featuredProduct',
             'paginate',
             'searchname',
             'orderby',
+            'rates'
         ));
     }
 

@@ -75,9 +75,9 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('product-detail',$item->id)}}" class="product-name" style="font-weight: bold"><span>{{$item->name}}</span></a>
-                                    <div class="star-rating">
-                                        <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
-                                    </div>
+                                        @for ($i = 1; $i <= $rates["$item->id"]; $i++)
+                                            <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
+                                        @endfor
                                     <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                                     <a href="#" class="btn add-to-cart add-cart" data-id="{{ $item->id }}">Add To Cart</a>
                                     {{-- <button type="button" class="btn add-to-cart" name="add-cart">Add To Cart</button> --}}

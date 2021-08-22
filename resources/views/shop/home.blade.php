@@ -15,7 +15,7 @@
                     <p class="sale-info">Stating at: <span class="price">$600</span></p>
                     <form action="{{route('search-product')}}" id="search-banner-hp">
                         <a id="banner-hp" class="btn-link">Shop Now</a>
-                        <input type="hidden" name="search" value="hp">
+                        <input type="hidden" name="search" value="hp ">
                     </form>
                     
                 </div>
@@ -81,10 +81,12 @@
                 </div>
                 <div class="product-info">
                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                    <div class="star-rating">
-                        <span class="width-80-percent">Rated <strong class="rating">4</strong> out of 5</span>
-                    </div>
-                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                        <div class="product-rating">
+                            @for ($i = 1; $i <= $rates["$item->id"]; $i++)
+                                <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
+                            @endfor
+                        </div>
+                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                 </div>
             </div>
             </form>
@@ -123,7 +125,12 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                                    <div class="product-rating">
+                                        @for ($i = 1; $i <= $rates["$item->id"]; $i++)
+                                            <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                    <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                                 </div>
                                 <!-- Button to Open the Modal -->
                             </div>
@@ -173,7 +180,12 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="{{route('product-detail',$item->id)}}" class="product-name"><span>{{$item->name}}</span></a>
-                                        <div class="wrap-price"><span class="product-price">${{number_format($item->price, 0, '.', ',')}}</span></div>
+                                        <div class="product-rating">
+                                            @for ($i = 1; $i <= $rates["$item->id"]; $i++)
+                                                <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
+                                            @endfor
+                                        </div>
+                                        <div class="wrap-price"><span class="product-price">${{number_format($item->price, 2, '.', ',')}}</span></div>
                                     </div>
                                 </div>
                             </form>
