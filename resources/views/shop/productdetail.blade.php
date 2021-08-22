@@ -127,7 +127,7 @@
                                                 @foreach ($reviews as $review)
                                                 <div style="border-bottom: 1px solid rgb(218, 214, 214) " class="comment-text">
                                                     <div class="product-rating">
-                                                        @for ($i = 0; $i <= $review->rate; $i++)
+                                                        @for ($i = 1; $i <= $review->rate; $i++)
                                                             <i style="color: #efce4a" class="fa fa-star" aria-hidden="true"></i>
                                                         @endfor
                                                     </div>
