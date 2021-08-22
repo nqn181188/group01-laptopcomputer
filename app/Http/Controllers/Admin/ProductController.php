@@ -103,8 +103,8 @@ class ProductController extends Controller
         if($request->hasFile('image')){
             $file=$request->file('image');
             $extension = $file->getClientOriginalExtension();
-            if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
-                return back()->with('error', 'File upload must be have extension is jpg, jpeg or png.');
+            if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'&&$extension!='jfif'){
+                return back()->with('error', 'File upload must be have extension is jpg, jpeg, png or jfif.');
             }
             $imgName=$file->getClientOriginalName();
             $file->move('images/products',$imgName);
@@ -177,8 +177,8 @@ class ProductController extends Controller
             }
             $file=$request->file('image');
             $extension = $file->getClientOriginalExtension();
-            if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
-                return back()->with('error', 'File upload must be have extension is jpg, jpeg or png.');
+            if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'&&$extension!='jfif'){
+                return back()->with('error', 'File upload must be have extension is jpg, jpeg, png or jiif.');
             }
             $imgName=$file->getClientOriginalName();
             $file->move('images/products',$imgName);
@@ -227,8 +227,8 @@ class ProductController extends Controller
             foreach($request->file('gallery') as $file)
             {
                 $extension = $file->getClientOriginalExtension();
-                if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'){
-                    return back()->with('error', 'File upload must be have extension is jpg, jpeg or png.');
+                if($extension!='jpg'&&$extension!='jpeg'&&$extension!='png'&&$extension!='jfif'){
+                    return back()->with('error', 'File upload must be have extension is jpg, jpeg, png or jfif.');
                 }
             }
             foreach($request->file('gallery') as $file)
