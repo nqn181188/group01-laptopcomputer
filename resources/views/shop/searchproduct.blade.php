@@ -2,8 +2,6 @@
 @section('contents')
 <div class="container">
     @include('shop.layout.partials.model')
-    @include('shop.layout.partials.alert')
-
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="#" class="link">home</a></li>

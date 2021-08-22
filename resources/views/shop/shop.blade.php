@@ -1,7 +1,6 @@
 @extends('shop.layout.layout1')
 @section('contents')
 @include('shop.layout.partials.model')
-@include('shop.layout.partials.alert')
 <div class="container">
     <div class="wrap-breadcrumb">
         <ul>

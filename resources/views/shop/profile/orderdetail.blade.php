@@ -5,8 +5,8 @@
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="{{route('home')}}" class="link">home</a></li>
-            <li class="item-link"><a href="{{route('')}}" class="link">home</a></li>
-            <li class="item-link"><span>order history</span></li>
+            <li class="item-link"><a href="{{route('profile.index')}}" class="link">Order History</a></li>
+            <li class="item-link"><span>Order Detail</span></li>
         </ul>
     </div>
     <div class="row">
