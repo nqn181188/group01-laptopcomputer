@@ -65,7 +65,7 @@
                 </p>
                 <p class="row-in-form fill-wife">
                     <label for="add">Ship address<span>*</span></label>
-                    <input id="add" type="text" name="sadd" value="{{old('add',Session::get('user')->address)}}" placeholder="Street at apartment number" pattern="[a-zA-Z0-9]+"  title="No special characters" required/>
+                    <input id="add" type="text" name="sadd" value="{{old('add',Session::get('user')->address)}}" placeholder="Street at apartment number"  title="No special characters" required/>
                 </p>
                 
             
