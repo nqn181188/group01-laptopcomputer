@@ -247,6 +247,14 @@
 </script>
 @endif
 
+@if (Session::has('update_pass'))
+<script>
+    swal("Password change success","{!! Session::get('update_pass') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
+
 @if (Session::has('success_logout'))
 <script>
     swal("Byee","{!! Session::get('success_logout') !!}", "success",{
