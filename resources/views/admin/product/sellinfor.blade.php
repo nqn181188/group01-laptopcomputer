@@ -22,64 +22,23 @@
 
     <!-- Default box -->
     <div class="card">
-        {{-- <div class="card-header bg-dark">
+        <div class="card-header bg-dark">
             <form id="filter-products" class="form-inline bg-dark">
-              <input type="hidden" value={{$products->currentPage()}} name="page">
+              <input type="hidden" value={{$page}} name="page">
               <div class="row mx-auto">
-                  <div class="d-inline use-chosen">
-                    <input name="name" type="text" class="form-control search-name" value="{{$name}}" id="name" placeholder="Search by name...">
-                  </div>
-                  <div class="d-inline px-2">
-                    <select class="form-control use-chosen" name="brand_id">
-                      <option value=''>Brand</option>
-                      @foreach ($brands as $brand)
-                        <option {{$brand->id==$brand_id?'selected':''}} value='{{$brand->id}}'>{{$brand->brand}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                  <div class="d-inline px-2">
-                    <select class="form-control use-chosen" name="price">
-                      <option value="">Price</option>
-                      <option {{$price=='0'?'selected':''}} value='0'>$0 - $500</option>
-                      <option {{$price=='500'?'selected':''}} value='500'>$500 - $1000</option>
-                      <option {{$price=='1000'?'selected':''}} value='1000'>$1000 - $1500</option>
-                      <option {{$price=='1500'?'selected':''}} value='1500'>$1500 - $2000</option>
-                      <option {{$price=='2000'?'selected':''}} value='2000'>$2000+</option>
-                    </select>
-                  </div>
                   <div class="d-inline px-2">
                     <select class="form-control use-chosen" name="sortby">
                       <option value=''>Sort by</option>
-                      <option {{$sortby=='price-asc'?'selected':''}} value='price-asc'>Sort by price: Low to High</option>
-                      <option {{$sortby=='price-desc'?'selected':''}} value='price-desc'>Sort by price: High to Low</option>
-                      <option {{$sortby=='name-asc'?'selected':''}} value='name-asc'>Sort by name : A-Z</option>
-                      <option {{$sortby=='name-desc'?'selected':''}} value='name-desc'>Sort by name : Z-A</option>
-                      <option {{$sortby=='quantity-asc'?'selected':''}} value='quantity-asc'>Sort by quantity : Low to High</option>
-                      <option {{$sortby=='quantity-desc'?'selected':''}} value='quantity-desc'>Sort by quantity : Hight to Low</option>
-                      <option {{$sortby=='newest'?'selected':''}} value='newest'>Sort by date : Newest to Oldest</option>
-                      <option {{$sortby=='oldest'?'selected':''}} value='oldest'>Sort by date : Oldest to Newest</option>
+                      <option {{$sortby=='sold-asc'?'selected':''}} value='sold-asc'>Sort by Sold: Low to High</option>
+                      <option {{$sortby=='sold-desc'?'selected':''}} value='sold-desc'>Sort by Sold: High to Low</option>
+                      <option {{$sortby=='quantity-asc'?'selected':''}} value='quantity-asc'>Sort by Quantity : Low to High</option>
+                      <option {{$sortby=='quantity-desc'?'selected':''}} value='quantity-desc'>Sort by Quantity : High to Low</option>
                     </select>
-                  </div>
-                  <div class="d-inline px-2">
-                    <select class="form-control use-chosen" name="paginate">
-                      <option {{$paginate=='6'?'selected':''}} value='6'>6 per page</option>
-                      <option {{$paginate=='12'?'selected':''}} value='12'>12 per page</option>
-                      <option {{$paginate=='18'?'selected':''}} value='18'>18 per page</option>
-                      <option {{$paginate=='24'?'selected':''}} value='24'>24 per page</option>
-                      <option {{$paginate=='36'?'sele   cted':''}} value='36'>36 per page</option>
-                    </select>
-                  </div>
-                  <div class="d-inline px-2">
-                    <div class="form-check-inline use-chosen">
-                      <label class="form-check-label pt-2">
-                        <input {{$featured==1?'checked':''}} name="featured" type="checkbox" class="form-check-input" value="1">Featured
-                      </label>
-                    </div>
                   </div>
               </div>
             </form>
         </div>
-         --}}
+        
       <div class="card-body p-0">
         <table class="table table-striped project ">
           <thead class="thead-dark">
@@ -94,9 +53,9 @@
           </thead>
           <tbody>
             @php
-                $count=1;
+                $count=($page-1)*12+1;
             @endphp
-            @foreach ($sellinfors as $item)
+            @foreach ($show as $item)
               <tr>
                 <td class="text-center align-middle">
                   <span>{{$count++}}</span>
@@ -135,6 +94,18 @@
             <p class="text-center text-secondary">Showing {{($products->currentPage()-1)*$paginate+1}}-{{($products->currentPage()-1)*$paginate+$products->count()}} of {{$products->total()}}</p>
         </nav> --}}
       </div>
+      <nav aria-label="Page navigation example" class="mt-4">
+          <ul class="pagination justify-content-center">
+            <li class="page-item {{$page==1?'disabled':''}}"><a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item {{$page==1?'disabled':''}}"><a class="page-link" href="?page={{$page-1}}">Previous</a></li>
+            @for ($i = 1; $i <= $totalPage; $i++)
+              <li class="page-item {{$page==$i?'active':''}}"><a class="page-link" href="?page={{$i}}">{{$i}}</a></li>
+            @endfor
+            <li class="page-item {{$page==$totalPage?'disabled':''}}"><a class="page-link" href="?page={{$page+1}}">Next</a></li>
+            <li class="page-item {{$page==$totalPage?'disabled':''}}"><a class="page-link" href="?page={{$totalPage}}">Last</a></li>
+
+          </ul>
+      </nav>  
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
@@ -150,31 +121,4 @@
             });
         });
     </script>
-
-  
-@if (Session::has('success_delete'))
-<script>
-    swal("Success Delete","{!! Session::get('success_delete') !!}", "success",{
-        button: "Close"
-    });
-</script>
-@endif
-
-
-@if (Session::has('success_update'))
-<script>
-    swal("Update account success","{!! Session::get('success_update') !!}", "success",{
-        button: "OK"
-    });
-</script>
-@endif
-
-
-@if (Session::has('success_create'))
-<script>
-    swal("Create account success","{!! Session::get('success_create') !!}", "success",{
-        button: "OK"
-    });
-</script>
-@endif
 @endsection

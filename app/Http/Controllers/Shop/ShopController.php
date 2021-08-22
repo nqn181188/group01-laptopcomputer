@@ -23,7 +23,7 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {   
-
+        $page=$request->page??1;
         $paginate=$request->post_per_page??12;
         $brands=Brand::all();
         $rams = Product::select('amountofram')->distinct()->orderBy('amountofram','asc')->get();
@@ -120,6 +120,8 @@ class ShopController extends Controller
             'checked_cputypes',
             'checked_price',
             'rates',
+            'page',
+            
 
         ));
 

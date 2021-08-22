@@ -18,13 +18,9 @@
                 <h1 class="shop-title">LAPTOP LIST</h1>
 
                 <div class="wrap-right">
-
-                    
+                        {{-- <input type="hidden" value="1" name="page"> --}}
                         <div class="sort-item orderby">
                             <select name="orderby" class="use-chosen">
-                                @if (isset($page))
-                                <input type="hidden" value={{$page}} name=page>
-                                @endif
                                 <option {{$orderby=='featured'?'selected':''}} value="featured">Default sorting</option>
                                 <option {{$orderby=='price-asc'?'selected':''}} value="price-asc" >Sort by price: Low to High</option>
                                 <option {{$orderby=='price-desc'?'selected':''}} value="price-desc">Sort by price: High to Low</option>
@@ -43,9 +39,7 @@
                                 <option value="36" {{$paginate=='36'?'selected':''}}>36 per page</option>
                             </select>
                         </div>
-                        <input type="hidden" value="{{$products->currentPage()}}" name="page">
                     </form>
-
                 </div>
 
             </div><!--end wrap shop control-->

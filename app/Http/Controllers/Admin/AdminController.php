@@ -93,7 +93,7 @@ class AdminController extends Controller
         session()->forget('user');
         return redirect()->route('admin.login');
     }
-    public function sellInfor(){
+    public function sellInfor(REQUEST $request){
         $orderdetails = OrderDetail::get('product_id');
         $soldProductId = array();
         foreach($orderdetails as $orderdetail){
@@ -115,11 +115,36 @@ class AdminController extends Controller
             }
             $sellinfors[]=$sellinfor;
         }
-        usort($sellinfors, function($a, $b) {
-            return $b['sold'] <=> $a['sold'];
-        });
+        $sortby = $request->sortby??'sold-desc';
+        if($sortby=='sold-asc'){
+            usort($sellinfors, function($a, $b) {
+                return $a['sold'] <=> $b['sold'];
+            });
+        }
+        if($sortby=='sold-desc'){
+            usort($sellinfors, function($a, $b) {
+                return $b['sold'] <=> $a['sold'];
+            });
+        }
+        if($sortby=='quantity-asc'){
+            usort($sellinfors, function($a, $b) {
+                return $a['quantity'] <=> $b['quantity'];
+            });
+        }
+        if($sortby=='quantity-desc'){
+            usort($sellinfors, function($a, $b) {
+                return $b['quantity'] <=> $a['quantity'];
+            });
+        }
+        
+        $totalPage = ceil(count($sellinfors)/12);
+        $page=$request->page??1;
+        $show= array_slice($sellinfors,($page-1)*12,12);
         return view('admin.product.sellinfor',compact(
-            'sellinfors',
+            'show',
+            'totalPage',
+            'page',
+            'sortby',
         ));
     }
 }
