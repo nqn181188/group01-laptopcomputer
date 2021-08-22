@@ -21,13 +21,19 @@ class AdminController extends Controller
     public function dashboard(){
         $totalOrders = Order::all()->count();
         $numOrderOnCurrentMonth=Order::whereYear('created_at','=',date('Y'))->whereMonth('created_at','=',date('m'))->count();
-        $totalProducts = Product::all()->count();
+        $warehouse = Product::all()->sum('quantity');
         $totalProductSold = OrderDetail::get()->sum('quantity');
+        $newCusts = Customer::whereYear('created_at','=',date('Y'))->whereMonth('created_at','=',date('m'))->count();
+        $totalCusts = Customer::all()->count();
+        $users = Admin::all()->count();
         return view('admin.dashboard',compact(
             'totalOrders',
             'numOrderOnCurrentMonth',
             'totalProductSold',
-            'totalProducts',
+            'warehouse',
+            'newCusts',
+            'totalCusts',
+            'users',
         ));
     }
     public function login(){
@@ -86,5 +92,34 @@ class AdminController extends Controller
     public function processLogout(){
         session()->forget('user');
         return redirect()->route('admin.login');
+    }
+    public function sellInfor(){
+        $orderdetails = OrderDetail::get('product_id');
+        $soldProductId = array();
+        foreach($orderdetails as $orderdetail){
+            $soldProductId[]=$orderdetail->product_id;
+        }
+        $products = Product::get(['id','name','image','quantity','price']);
+        $sellinfors = array();
+        foreach($products as $product){
+            $sellinfor = array();
+            $sellinfor['id']=$product->id;
+            $sellinfor['image']=$product->image;
+            $sellinfor['name']=$product->name;
+            $sellinfor['price']=$product->price;
+            $sellinfor['quantity']=$product->quantity;
+            if(in_array($product->id,$soldProductId)){
+                $sellinfor['sold']=OrderDetail::where('product_id',$product->id)->sum('quantity');
+            }else{
+                $sellinfor['sold']=0;
+            }
+            $sellinfors[]=$sellinfor;
+        }
+        usort($sellinfors, function($a, $b) {
+            return $b['sold'] <=> $a['sold'];
+        });
+        return view('admin.product.sellinfor',compact(
+            'sellinfors',
+        ));
     }
 }

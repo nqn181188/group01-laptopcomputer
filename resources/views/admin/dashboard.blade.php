@@ -7,7 +7,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>{{$numOrderOnCurrentMonth}}/{{$totalOrders}}</h3>
+            <h3>{{$numOrderOnCurrentMonth}} / {{$totalOrders}}</h3>
 
             <p>Orders On Current Month/Total Orders</p>
           </div>
@@ -22,14 +22,14 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>{{$totalProductSold}}<sup style="font-size: 20px"></sup></h3>
+            <h3>{{$totalProductSold}} / {{$warehouse}}<sup style="font-size: 20px"></sup></h3>
 
-            <p>Total Number Of Products Sold</p>
+            <p>Sold/Warehouse</p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="{{route('sell-info')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -37,14 +37,14 @@
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>44</h3>
+            <h3>{{$newCusts}} / {{$totalCusts}} </h3>
 
-            <p>User Registrations</p>
+            <p> New Registrations/Total Customer Registered  </p>
           </div>
           <div class="icon">
             <i class="ion ion-person-add"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="{{route('admin.customer.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -52,14 +52,13 @@
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>65</h3>
-
-            <p>Unique Visitors</p>
+            <h3>{{$users}}</h3>
+            <p>Account On Admin System</p>
           </div>
           <div class="icon">
             <i class="ion ion-pie-graph"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="{{route('admin.account.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->

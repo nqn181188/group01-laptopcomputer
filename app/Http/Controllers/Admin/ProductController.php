@@ -55,6 +55,8 @@ class ProductController extends Controller
                 case 'price-desc' : $products->orderBy('price','desc'); 
                 case 'name-asc' : $products->orderBy('name','asc'); 
                 case 'name-desc' : $products->orderBy('name','desc'); 
+                case 'quantity-asc' : $products->orderBy('quantity','asc'); 
+                case 'quantity-desc' : $products->orderBy('quantity','desc'); 
                 case 'newest' : $products->orderBy('created_at','desc'); 
                 case 'oldest' : $products->orderBy('created_at','asc'); 
                 default : $products=$products;

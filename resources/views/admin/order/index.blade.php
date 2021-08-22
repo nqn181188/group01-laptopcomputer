@@ -20,7 +20,11 @@
 
   <!-- Main content -->
   <section class="content">
-
+    <span class="badge badge-primary">Total Order : {{$total}} </span>
+    <span class="badge badge-info">In Process : {{$inprocess}}</span>
+    <span class="badge badge-warning">Shipping : {{$shipping}}</span>
+    <span class="badge badge-success">Shipped : {{$shipped}}</span>
+    <span class="badge badge-danger">Canceled : {{$canceled}}</span>
     <!-- Default box -->
     <div class="card">
       <div class="card-header bg-dark">
@@ -36,6 +40,7 @@
                     <option {{$status==1?'selected':''}} value='1'>In Process</option>
                     <option {{$status==2?'selected':''}} value='2'>Shipping</option>
                     <option {{$status==3?'selected':''}} value='3'>Shipped</option>
+                    <option {{$status==4?'selected':''}} value='4'>Cancel</option>
                 </select>
               </div>
           </div>
@@ -64,11 +69,13 @@
                 <td class="text-center align-middle">{{$order->email}}</td>
                 <td class="text-center align-middle">
                   @if($order->status==1)
-                    <span class="badge badge-success"> In Process</span>
+                    <span class="badge badge-info"> In Process</span>
                     @elseif($order->status==2)
-                    <span class="badge badge-success">Shipping</span>
+                    <span class="badge badge-warning">Shipping</span>
                     @elseif($order->status==3)
                     <span class="badge badge-success">Shipped</span>
+                    @elseif($order->status==4)
+                    <span class="badge badge-danger">Cancel</span>
                   @endif
                 </td>
                 <td class="text-center align-middle">
@@ -85,7 +92,7 @@
             </tbody>
         </table>
         @else
-        <h4 class="text-danger text-center">There are no matching orders</h4>
+        <h5 class="text-danger text-center btn btn-warning w-100">There are no matching orders</h5>
         @endif
       </div>
       <!-- /.card-body -->

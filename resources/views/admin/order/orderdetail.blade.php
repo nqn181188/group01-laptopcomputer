@@ -67,9 +67,10 @@
               <tr>
                 <th class="text-center align-middle" style="width: 10%">Roll Number</th>
                 <th class="text-center align-middle" style="width: 20%">Product Image</th>
-                <th class="text-center align-middle" style="width: 50%">Product Name</th>
-                <th class="text-center align-middle" style="width: 10%">Quantity</th>
+                <th class="text-center align-middle" style="width: 40%">Product Name</th>
                 <th class="text-center align-middle" style="width: 10%">Price</th>
+                <th class="text-center align-middle" style="width: 10%">Quantity</th>
+                <th class="text-center align-middle" style="width: 10%">Total Price</th>
               </tr>
             </thead>
             <tbody>
@@ -87,12 +88,13 @@
                       @endif
                   </td>
                   <td class="align-middle text-center">{{$orderProduct['name']}}</td>
+                  <td class="text-center align-middle">${{number_format($orderProduct['price'], 2, '.',',')}}</td>
                   <td class="text-center align-middle">{{$orderProduct['quantity']}}</td>
-                  <td class="text-right align-middle">${{number_format($orderProduct['price'], 2, '.',',')}}</td>
+                  <td class="text-right align-middle">${{number_format($orderProduct['price']*$orderProduct['quantity'], 2, '.',',')}}</td>
                 </tr>
               @endforeach
               <tr class="bg-light">
-                <td colspan="4" class="text-center align-middle font-weight-bold">TOTAL</td>
+                <td colspan="5" class="text-center align-middle font-weight-bold">TOTAL</td>
                 <td class="text-right text-success font-weight-bold" >${{number_format($totalPrice, 2, '.', ',')}}</td>
               </tr>
             </tbody>

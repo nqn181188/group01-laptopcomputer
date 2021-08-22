@@ -27,10 +27,20 @@ class OrderController extends Controller
             $orders->where('status',$status);
         }
         $orders=$orders->paginate(12);
+        $total = Order::all()->count();
+        $inprocess = Order::where('status',1)->count();
+        $shipping = Order::where('status',2)->count();
+        $shipped = Order::where('status',3)->count();
+        $canceled = Order::where('status',4)->count();
         return view('admin.order.index', compact(
             'orders',
             'search',
             'status',
+            'total',
+            'inprocess',
+            'shipping',
+            'shipped',
+            'canceled'
         ));
     }
 

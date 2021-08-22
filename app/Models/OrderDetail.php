@@ -12,4 +12,8 @@ class OrderDetail extends Model
     //mô hình mass assignment
     protected $fillable = ['ordernumber','product_id','price','quantity','shipfirstname',
                             'shiplastname','shipemail','shipphone','shipaddress'];
+    public function product()
+    {
+         return $this->belongsTo(Product::class);
+    }         
 }

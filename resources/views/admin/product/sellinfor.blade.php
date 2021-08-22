@@ -5,12 +5,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Product List</h1>
+          <h1>Selling Information</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item active">Product</li>
+            <li class="breadcrumb-item active">Selling Information</li>
           </ol>
         </div>
       </div>
@@ -22,7 +22,7 @@
 
     <!-- Default box -->
     <div class="card">
-        <div class="card-header bg-dark">
+        {{-- <div class="card-header bg-dark">
             <form id="filter-products" class="form-inline bg-dark">
               <input type="hidden" value={{$products->currentPage()}} name="page">
               <div class="row mx-auto">
@@ -79,7 +79,7 @@
               </div>
             </form>
         </div>
-        
+         --}}
       <div class="card-body p-0">
         <table class="table table-striped project ">
           <thead class="thead-dark">
@@ -87,48 +87,34 @@
               <th class="text-center align-middle" style="width: 5%">Roll Number</th>
               <th class="text-center align-middle" style="width: 15%">Image</th>
               <th class="text-center align-middle" style="width: 35%">Name</th>
-              <th class="text-center align-middle" style="width: 5%">Quantity</th>
               <th class="text-center align-middle" style="width: 5%">Price</th>
-              <th class="text-center align-middle" style="width: 5%">Featured</th>
-              <th class="text-center align-middle" style="width: 30%">Action</th>
+              <th class="text-center align-middle" style="width: 5%">Quantity</th>
+              <th class="text-center align-middle" style="width: 5%">Sold</th>
             </tr>
           </thead>
           <tbody>
             @php
                 $count=1;
             @endphp
-            @foreach ($products as $item)
+            @foreach ($sellinfors as $item)
               <tr>
                 <td class="text-center align-middle">
                   <span>{{$count++}}</span>
                 </td>
                 <td>
-                    @if($item->image!=null)
-                    <img class="d-block mx-auto" src="{{asset('/images/products/'.$item->image)}}" alt="{{$item->image}}" style="width: 50%">
+                    @if($item['image']!=null)
+                    <img class="d-block mx-auto" src="{{asset('/images/products/'.$item['image'])}}" alt="{{$item['image']}}" style="width: 50%">
                     @endif
                 </td>
-                <td class="align-middle">{{$item->name}}</td>
-                <td class="text-center align-middle">{{$item->quantity}}</td>
-                <td class="text-center align-middle">{{number_format($item->price, 2, '.', ',')}}</td>
-                <td class="text-center align-middle">
-                  @if($item->featured)
-                    <span class="badge badge-success">Featured</span>
-                  @endif
-                </td>
-                <td class="text-center align-middle">
-                  <a href="{{route('admin.product.edit',$item)}}" class="btn btn-primary">Edit</a>
-                  <a href="{{route('upload-gallery',$item->id)}}" class="btn btn-primary">Upload Gallery</a>
-                  <form style="display:inline-block" action="{{route('admin.product.destroy',$item)}}" method="POST">
-                    @method("DELETE")
-                    @csrf
-                    <button {{in_array($item->id,$checkDelete)?'disabled':''}} class="btn btn-danger">Delete</button>
-                  </form>
-                </td>
+                <td class="align-middle">{{$item['name']}}</td>
+                <td class="text-center align-middle">{{number_format($item['price'], 2, '.', ',')}}</td>
+                <td class="text-center align-middle">{{$item['quantity']}}</td>
+                <td class="text-center align-middle">{{$item['sold']}}</td>
               </tr>
             @endforeach
           </tbody>
         </table>
-        <nav class="mt-3" aria-label="...">
+        {{-- <nav class="mt-3" aria-label="...">
             <ul class="pagination justify-content-center">
                 <li class="page-item {{$products->currentPage()==1?'disabled':''}}">
                     <a href="{{request()->fullUrlWithQuery(['page' => 1]) }} " class="page-link">First</a>
@@ -147,7 +133,7 @@
                 </li>
             </ul>
             <p class="text-center text-secondary">Showing {{($products->currentPage()-1)*$paginate+1}}-{{($products->currentPage()-1)*$paginate+$products->count()}} of {{$products->total()}}</p>
-        </nav>
+        </nav> --}}
       </div>
       <!-- /.card-body -->
     </div>

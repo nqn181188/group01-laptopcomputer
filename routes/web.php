@@ -70,6 +70,8 @@ Route::get('/admin','Admin\AdminController@processLogout')->name('admin.logout')
 Route::get('/admin/login','Admin\AdminController@login')->name('admin.login');
 Route::post('/admin/process-login','Admin\AdminController@processLogin')->name('admin.process-login');
 Route::get('/admin/check-email-login','Admin\AdminController@checkEmailLogin')->name('admin.check-email-login');
+Route::get('/admin/selling-information','Admin\AdminController@sellInfor')->name('sell-info');
+
 // Route::get('/admin/check-email','Admin\AccountController@checkEmail')->name('admin.check-email');
 // Route::get('/admin/check-email-customer','Admin\CustomerController@checkEmail')->name('admin.check-email-customer');
 
