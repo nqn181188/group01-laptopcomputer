@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\OrderDetail;
 
 class PaymentController extends Controller
@@ -62,8 +63,11 @@ class PaymentController extends Controller
             $orderdetail->shipphone = $request->session()->get('shipInfor')['sphone'];
             $orderdetail->shipaddress= $request->session()->get('shipInfor')['sadd'];
             $orderdetail->save();
+            $product = Product::where('id',$cartitem->id)->first();
+            $product->quantity=$product->quantity-$cartitem->quantity;
+            $product->save();
         }
         session()->forget('cart');
-        return redirect()->route('profile.index')->with(['success-checkout'=>'check your order']);
+        return redirect()->route('profile.index')->with(['success-checkout'=>'Check your order']);
     }
 }

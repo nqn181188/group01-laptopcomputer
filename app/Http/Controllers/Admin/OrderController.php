@@ -15,11 +15,23 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(REQUEST $request)
     {
-        //
-        $orders = Order::orderBy('created_at','desc')->get();
-        return view('admin.order.index', compact('orders'));
+        $search = $request->search??'';
+        $status = $request->status??0;        
+        $orders = Order::orderBy('created_at','desc');
+        if($search){
+            $orders->where('ordernumber','like','%'.$search.'%');
+        }
+        if($status){
+            $orders->where('status',$status);
+        }
+        $orders=$orders->paginate(12);
+        return view('admin.order.index', compact(
+            'orders',
+            'search',
+            'status',
+        ));
     }
 
     // public function orderHistoty($cust_id){

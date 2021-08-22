@@ -8,7 +8,10 @@ use App\Models\Admin;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Customer;
+use App\Models\OrderDetail;
 class AdminController extends Controller
 {
     public function index(){
@@ -16,7 +19,16 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
     public function dashboard(){
-        return view('admin.dashboard');
+        $totalOrders = Order::all()->count();
+        $numOrderOnCurrentMonth=Order::whereYear('created_at','=',date('Y'))->whereMonth('created_at','=',date('m'))->count();
+        $totalProducts = Product::all()->count();
+        $totalProductSold = OrderDetail::get()->sum('quantity');
+        return view('admin.dashboard',compact(
+            'totalOrders',
+            'numOrderOnCurrentMonth',
+            'totalProductSold',
+            'totalProducts',
+        ));
     }
     public function login(){
         return view('admin.login');
