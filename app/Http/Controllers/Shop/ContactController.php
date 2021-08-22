@@ -46,7 +46,7 @@ class ContactController extends Controller
             'firstname' => 'required|min:3',
             'lastname' => 'required|min:3',
             'email'    => 'required',
-            'comment' => 'required|between:8,200',
+            'comment' => 'required|between:8,255',
         ]);
 
         if( $validator->fails() ){
