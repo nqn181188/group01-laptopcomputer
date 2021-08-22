@@ -108,13 +108,16 @@ class CartController extends Controller
             $cust_id = $user->id;
             $wishlists=WishList::where('cust_id',$cust_id)->get('product_id');
             $productWishList=array();
+            $countWistList = 0;
             foreach($wishlists as $wishlist){
                 $productWishList[]=$wishlist->product_id;
+                
             }
             $items=array();
             if($productWishList!=null){
                 $items = Product::whereIn('id',$productWishList)->get();
             }
+            $countItems=session()->put('count-wishlist',count($items));
             return view('shop.profile.view-wishlist',compact(
                 'items',
             ));

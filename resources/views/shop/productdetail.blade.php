@@ -344,10 +344,10 @@
                     button: "Close"
                     });
                 }
-                else{
-                    alert(data)
+                // else{
+                //     alert(data)
                 // window.location='{{ route('login') }}'  
-                }
+                // }
             }
             
         });

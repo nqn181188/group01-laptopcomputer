@@ -45,16 +45,8 @@
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             <div class="left-info">
                                 <span class="index">
-                                    @if (Session::has('wishlist'))
-                                        @php
-                                            $count =0;
-                                        @endphp
-                                        @foreach (Session::get('wishlist') as $item)
-                                            @php
-                                                $count ++;
-                                            @endphp
-                                        @endforeach
-                                        {{$count}} item
+                                    @if (Session::has('user'))
+                                        {{Session::get('count-wishlist')}} item
                                     @else
                                         0 item
                                     @endif
@@ -109,7 +101,7 @@
                         <li class="menu-item">
                             <a href="{{route('viewcart')}}" class="link-term mercado-item-title">Cart</a>
                         </li>
-                        @if (Session::has('user'))
+                        @if (Session::get('cart'))
                         <li class="menu-item">
                             <a href="{{count(Session::get('cart'))>0?route('checkout'):'javascript:void(0)'}}" class="link-term mercado-item-title">Checkout</a>
                         </li>

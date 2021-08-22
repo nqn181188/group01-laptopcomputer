@@ -22,7 +22,7 @@
                 <h4 class="form-subtitle"><span style="color: red" style="color:  red">*</span> Require fillable</h4>
                 <p class="row-in-form">
                     <label for="fname">first name<span style="color:  red" >*</span></label>
-                    <input id="fname" type="text" name="fname" value="{{Session::has('billInfor')}}" placeholder="Your name"  pattern="[a-zA-Z]+"  title="No special characters or number" required />
+                    <input id="fname" type="text" name="fname" value="{{Session::has('billInfor')}}" placeholder="Your name" title="No special characters or number" required onkeydown="this.value = this.value.trim()" onkeyup="this.value = this.value.trim()"/>
                 </p>
                 <p class="row-in-form">
                     <label for="lname">last name<span style="color:  red">*</span></label>
@@ -34,12 +34,12 @@
                 </p>
                 <p class="row-in-form">
                     <label for="phone">Phone number<span style="color:  red">*</span></label>
-                    <input id="phone" type="text" name="phone" value="" placeholder="10 digits format"  pattern="(\+84|0)\d{9}" required placeholder="+84/0 xxxxxxxxx"/>
+                    <input id="phone" type="text" name="phone" value="" placeholder="10 digits format"  pattern="(\+84|0)\d{9,10}" required placeholder="+84/0 xxxxxxxxx"/>
                   
                 </p>
                 <p class="row-in-form fill-wife">
                     <label for="add">Address:</label>
-                    <input id="add" type="text" name="add" value="" placeholder="Street at apartment number" pattern="[a-zA-Z0-9]{10,}"  title="No special characters" required />
+                    <input id="add" type="text" name="add" value="" placeholder="Street at apartment number" title="No special characters" required />
                 </p>
             
             </div>
@@ -49,11 +49,11 @@
             
                 <p class="row-in-form">
                     <label for="fname">Ship first name<span style="color:  red">*</span></label>
-                    <input id="fname" type="text" name="sfname" value="" placeholder="First Name"  pattern="[a-zA-Z]+"  title="No special characters or number"  required  />
+                    <input id="fname" type="text" name="sfname" value="" placeholder="First Name"  title="No special characters or number"  required  />
                 </p>
                 <p class="row-in-form">
                     <label for="lname">Ship last name<span style="color:  red">*</span></label>
-                    <input id="lname" type="text" name="slname" value="" placeholder="Last Name" pattern="[a-zA-Z]+"  title="No special characters or number" required />
+                    <input id="lname" type="text" name="slname" value="" placeholder="Last Name" title="No special characters or number" required />
                 </p>
                 <p class="row-in-form">
                     <label for="email">ship email addreess:</label>
@@ -65,7 +65,7 @@
                 </p>
                 <p class="row-in-form fill-wife">
                     <label for="add">Ship address:</label>
-                    <input id="add" type="text" name="sadd" value="" placeholder="Street at apartment number" pattern="[a-zA-Z0-9]+"  title="No special characters" required/>
+                    <input id="add" type="text" name="sadd" value="" placeholder="Street at apartment number"  title="No special characters" required/>
                 </p>
                 
             
