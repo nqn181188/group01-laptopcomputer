@@ -54,3 +54,8 @@
 </div><!--end container-->
 
 @endsection
+
+@section('scripts')
+
+
+@endsection

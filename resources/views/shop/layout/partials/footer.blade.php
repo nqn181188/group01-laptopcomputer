@@ -139,14 +139,14 @@
                         <h3 class="item-header">We Using Safe Payments:</h3>
                         <div class="item-content">
                             <div class="wrap-list-item wrap-gallery">
-                                <img src="assets/images/payment.png" style="max-width: 260px;">
+                                <img src="{{asset('assets/images/payment.png')}}" style="max-width: 260px;">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                    {{-- <div class="wrap-footer-item">
+                {{-- <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                    <div class="wrap-footer-item">
                         <h3 class="item-header">Social network</h3>
                         <div class="item-content">
                             <div class="wrap-list-item social-network">
@@ -159,8 +159,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
 
                 {{-- <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                     <div class="wrap-footer-item">
