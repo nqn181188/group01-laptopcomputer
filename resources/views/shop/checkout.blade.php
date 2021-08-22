@@ -19,26 +19,26 @@
             @csrf
             <div class="wrap-address-billing">
                 <h3 class="box-title">Billing Address</h3>
-                <h4 class="form-subtitle"><span style="color: red" style="color:  red">*</span> Require fillable</h4>
+                <h4 class="form-subtitle"><span style="color: red">*</span> Require fillable</h4>
                 <p class="row-in-form">
-                    <label for="fname">first name<span style="color:  red" >*</span></label>
+                    <label for="fname">first name<span >*</span></label>
                     <input id="fname" type="text" name="fname" value="{{old('fname',Session::get('user')->firstname)}}" placeholder="Your name" title="No special characters or number" required onkeydown="this.value = this.value.trim()" onkeyup="this.value = this.value.trim()"/>
                 </p>
                 <p class="row-in-form">
-                    <label for="lname">last name<span style="color:  red">*</span></label>
+                    <label for="lname">last name<span>*</span></label>
                     <input id="lname" type="text" name="lname" value="{{old('lname',Session::get('user')->lastname)}}" placeholder="Your last name" title="No special characters or number" required />
                 </p>
                 <p class="row-in-form">
-                    <label for="email">Email Addreess<span style="color:  red">*</span></label>
+                    <label for="email">Email Addreess<span>*</span></label>
                     <input id="email" type="email" name="email" value="{{old('email',Session::get('user')->email)}}" placeholder="Type your email"  required email/>
                 </p>
                 <p class="row-in-form">
-                    <label for="phone">Phone number<span style="color:  red">*</span></label>
+                    <label for="phone">Phone number<span>*</span></label>
                     <input id="phone" type="text" name="phone" value="{{old('phone',Session::get('user')->phone)}}" placeholder="10 digits format"  pattern="(\+84|0)\d{9,10}" required placeholder="+84/0 xxxxxxxxx"/>
                   
                 </p>
                 <p class="row-in-form fill-wife">
-                    <label for="add">Address<span style="color:  red">*</span></label>
+                    <label for="add">Address<span>*</span></label>
                     <input id="add" type="text" name="add" value="{{old('add',Session::get('user')->address)}}" placeholder="Street at apartment number" title="No special characters" required />
                 </p>
             
@@ -48,23 +48,23 @@
                 <h3 class="box-title">Shipping Address</h3>
             
                 <p class="row-in-form">
-                    <label for="fname">Ship first name<span style="color:  red">*</span></label>
+                    <label for="fname">Ship first name<span>*</span></label>
                     <input id="fname" type="text" name="sfname" value="{{old('fname',Session::get('user')->firstname)}}" placeholder="First Name"  title="No special characters or number"  required  />
                 </p>
                 <p class="row-in-form">
-                    <label for="lname">Ship last name<span style="color:  red">*</span></label>
+                    <label for="lname">Ship last name<span>*</span></label>
                     <input id="lname" type="text" name="slname" value="{{old('lname',Session::get('user')->lastname)}}" placeholder="Last Name" title="No special characters or number" required />
                 </p>
                 <p class="row-in-form">
-                    <label for="email">ship email addreess<span style="color:  red">*</span></label>
+                    <label for="email">ship email addreess<span>*</span></label>
                     <input id="email" type="email" name="semail" value="{{old('email',Session::get('user')->email)}}" placeholder="Email Address" required  email/>
                 </p>
                 <p class="row-in-form">
-                    <label for="phone">Ship phone number<span style="color:  red">*</span></label>
-                    <input id="phone" type="number" name="sphone" value="{{old('phone',Session::get('user')->phone)}}" placeholder="10 digits format" required   pattern="(\+84|0)\d{9,10}" />
+                    <label for="phone">Ship phone number<span>*</span></label>
+                    <input id="phone" type="text" name="sphone" value="{{old('phone',Session::get('user')->phone)}}" placeholder="10 digits format" required   pattern="(\+84|0)\d{9,10}" />
                 </p>
                 <p class="row-in-form fill-wife">
-                    <label for="add">Ship address<span style="color:  red">*</span></label>
+                    <label for="add">Ship address<span>*</span></label>
                     <input id="add" type="text" name="sadd" value="{{old('add',Session::get('user')->address)}}" placeholder="Street at apartment number" pattern="[a-zA-Z0-9]+"  title="No special characters" required/>
                 </p>
                 
