@@ -23,10 +23,26 @@
 
     <!-- Default box -->
     <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Order List</h3>
-      </div>
+      <div class="card-header bg-dark">
+        <form id="filter-orders" class="form-inline bg-dark">
+          <input type="hidden" value={{$orders->currentPage()}} name="page">
+          <div class="row mx-auto">
+              <div class="d-inline use-chosen">
+                <input name="search" type="text" class="form-control search-name" value="{{$search}}" id="name" placeholder="Search by order number...">
+              </div>
+              <div class="d-inline px-2">
+                <select class="form-control use-chosen" name="status">
+                    <option value=''>Select status</option>
+                    <option {{$status==1?'selected':''}} value='1'>In Process</option>
+                    <option {{$status==2?'selected':''}} value='2'>Shipping</option>
+                    <option {{$status==3?'selected':''}} value='3'>Shipped</option>
+                </select>
+              </div>
+          </div>
+        </form>
+    </div>
       <div class="card-body p-0">
+        @if($orders->count()!=0)
         <table class="table table-striped projects">
             <thead class="bg-dark">
                 <tr>
@@ -68,6 +84,9 @@
               @endforeach
             </tbody>
         </table>
+        @else
+        <h4 class="text-danger text-center">There are no matching orders</h4>
+        @endif
       </div>
       <!-- /.card-body -->
     </div>
@@ -75,4 +94,11 @@
 
   </section>
   <!-- /.content -->
+@endsection
+@section('my-scripts')
+<script type="text/javascript">
+      $('.use-chosen').change(function(){
+          $('#filter-orders').submit();
+      });
+</script>
 @endsection

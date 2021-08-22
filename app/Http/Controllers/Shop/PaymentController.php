@@ -62,8 +62,11 @@ class PaymentController extends Controller
             $orderdetail->shipphone = $request->session()->get('shipInfor')['sphone'];
             $orderdetail->shipaddress= $request->session()->get('shipInfor')['sadd'];
             $orderdetail->save();
+            $product = Product::where('id',$cartitem->id)->get();
+            $product->quantity=$product->quantity-$cartitem->quantity;
+            $product->save();
         }
         session()->forget('cart');
-        return redirect()->route('profile.index')->with(['success-checkout'=>'check your order']);
+        return redirect()->route('profile.index')->with(['success-checkout'=>'Check your order']);
     }
 }
