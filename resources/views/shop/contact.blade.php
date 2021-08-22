@@ -23,6 +23,7 @@
                             @endif
                             <form action="{{route('contact.store')}}" method="Post" name="frm-contact">
                                 @csrf
+                                <input type="hidden" value="0" name="read">
                                 <label for="firstname">Firstname<span>*</span></label>
                                 <input type="text" value="" id="firstname" value="{{old('firstname')}}" name="firstname" required>
                                 @error('firstname')
