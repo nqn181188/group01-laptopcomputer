@@ -115,4 +115,13 @@
     }
 });
 </script>
+
+
+@if (Session::has('success-checkout'))
+<script>
+    swal("Thank you for using our services !!","{!! Session::get('success-checkout') !!}", "success",{
+        button: "OK"
+    });
+</script>
+@endif
 @endsection

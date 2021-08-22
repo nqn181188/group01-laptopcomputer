@@ -397,7 +397,7 @@
                 url:'{{ route('add-cart') }}',
                 data:{ pid:pid, quantity:1 },
                 success:function(data){
-                    swal("Thanks", "The item has been added to your cart", "success",{
+                    swal("Successfully Added", "The item has been added to your cart", "success",{
                         button: "Close"
                     });
                 }

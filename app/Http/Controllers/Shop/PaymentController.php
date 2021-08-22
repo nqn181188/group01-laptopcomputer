@@ -64,6 +64,6 @@ class PaymentController extends Controller
             $orderdetail->save();
         }
         session()->forget('cart');
-        return redirect()->route('profile.index');
+        return redirect()->route('profile.index')->with(['success-checkout'=>'check your order']);
     }
 }

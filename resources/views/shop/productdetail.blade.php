@@ -325,7 +325,7 @@
             data:{ pid:pid, quantity:quantity },
             success:function(data){
                 // window.location='{{ route('home') }}'  
-                swal("Thanks", "The item has been added to your cart", "success",{
+                swal("Successfully Added", "The item has been added to your cart", "success",{
                     button: "Close"
                 });
             }
@@ -340,7 +340,7 @@
             data:{pid:pid},
             success:function(data){
                 if(!data){
-                    swal("Thanks", "The item has been added to your wishlist", "success",{
+                    swal("Successfully Saved", "The item has been added to your wishlist", "success",{
                     button: "Close"
                     });
                 }

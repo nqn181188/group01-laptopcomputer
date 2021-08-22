@@ -109,8 +109,8 @@
                                             
                                         @else
                                         <li class="menu-item"><a href="{{ route('customer.show',Session::get('user')->id)}}" class="link-term">My Account</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Order History</a></li>
-                                        <li class="menu-item"><a href="#" class="link-term">Wish list</a></li>
+                                        <li class="menu-item"><a href="{{route('profile.index')}}" class="link-term">Order History</a></li>
+                                        <li class="menu-item"><a href="{{route('view-wishlist')}}" class="link-term">Wish list</a></li>
                                         @endif
                                         
                                     </ul>
