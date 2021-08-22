@@ -14,10 +14,24 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(REQUEST $request)
     {
-        $custFb = Feedback::all();
-        return view('admin.feedback.index', compact('custFb'));
+        
+        // $paginate = $request->paginate??12 ;
+        // $custFb=$custFb->paginate($paginate);
+        // $custFb = Feedback::all()->orderBy('created_at','desc')->get();
+        // $custFb = Feedback::paginate(8)
+        $read = $request->read??0;
+        $custFb = Feedback::where('id','!=','0');
+        if($read){
+            $custFb->where('read',1);
+        }
+        $custFb = $custFb->paginate(8);
+
+        return view('admin.feedback.index', compact(
+            'custFb',
+            'read',
+        ));
 
     }
 

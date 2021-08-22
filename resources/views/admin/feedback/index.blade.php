@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Account</h1>
+          <h1>Customer</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -25,8 +25,21 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Contact</h3>
-
+       
         <div class="card-tools">
+          <form style="display:inline-block" id="filter-feedback">
+
+            {{-- <input type="hidden" value={{$custFb->currentPage()}} name="page"> --}}
+          <div class="d-inline px-2">
+            <div class="form-check-inline use-chosen">
+              <label class="form-check-label pt-2">
+                <input {{$read==1?'checked':''}} name="read" type="checkbox" class="form-check-input" value="1">read
+              </label>
+            </div>
+          </div>
+          </form>
+          
+
           <a href="{{ route('admin.account.create') }}"><i class="fas fa-user-plus"></i></a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
@@ -50,7 +63,7 @@
                   <div class="row">
                     <div class="col-7">
                       <h2 class="lead"><b>{{ $item->lastname }}</b></h2>
-                      <p class="text-muted text-sm"><b>About: </b> {{  substr($item->comment,0,20) }}</p>
+                      <p class="text-muted text-sm"><b>About: </b> {{  substr($item->comment,0,17) }}@if (strlen($item->comment)>16)...@endif</p>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Email Address: {{ $item->email }}</li>
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: {{ $item->phone }}</li>
@@ -59,7 +72,7 @@
                     @if ($item->note)
                     <div class="col-5 text-center">
                       <h5><b>Check note</b></h1>
-                      <p>{{  substr($item->note,0,40) }}</p>
+                      <p>{{  substr($item->note,0,20) }}@if (strlen($item->comment)>20)...@endif</p>
                       {{-- <img src="../../dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid"> --}}
                     </div>
                     @endif
@@ -91,23 +104,30 @@
             </div>
             @endforeach
           </div>
+          
         </div>
 
         <!-- /.card-body -->
-  {{-- <div class="card-footer">
-    <nav aria-label="Contacts Page Navigation">
-      <ul class="pagination justify-content-center m-0">
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
-        <li class="page-item"><a class="page-link" href="#">6</a></li>
-        <li class="page-item"><a class="page-link" href="#">7</a></li>
-        <li class="page-item"><a class="page-link" href="#">8</a></li>
-      </ul>
-    </nav>
-  </div> --}}
+        <nav class="mt-3" aria-label="...">
+          <ul class="pagination justify-content-center">
+              <li class="page-item {{$custFb->currentPage()==1?'disabled':''}}">
+                  <a href="{{request()->fullUrlWithQuery(['page' => 1]) }} " class="page-link">First</a>
+              </li>
+              <li class="page-item {{$custFb->currentPage()==1?'disabled':''}}">
+                  <a href="{{request()->fullUrlWithQuery(['page' => $custFb->currentPage()-1])}}" class="page-link">Previous</a>
+              </li>
+              @for ($i = 1; $i<=$custFb->lastPage(); $i++)
+                <li class="page-item {{$custFb->currentPage()==$i?'active':''}}" ><a class="page-link" href="{{request()->fullUrlWithQuery(['page' => $i])}}">{{$i}}</a></li>
+              @endfor
+              <li class="page-item {{$custFb->currentPage()==$custFb->lastPage()?'disabled':''}}">
+                <a href="{{request()->fullUrlWithQuery(['page' => $custFb->currentPage()+1])}}" class="page-link">Next</a>
+              </li>
+              <li class="page-item {{$custFb->currentPage()==$custFb->lastPage()?'disabled':''}}">
+                <a href="{{request()->fullUrlWithQuery(['page' => ceil($custFb->total()/12)])}}" class="page-link">Last</a>
+              </li>
+          </ul>
+          <p class="text-center text-secondary">Showing {{($custFb->currentPage()-1)*12+1}}-{{($custFb->currentPage()-1)*12+$custFb->count()}} of {{$custFb->total()}}</p>
+      </nav>
   
       </div>
       <!-- /.card-body -->
@@ -120,6 +140,13 @@
 
 
 @section('my-scripts')
+<script type="text/javascript">
+  $(function(){
+      $('.use-chosen').change(function(){
+          $('#filter-feedback').submit();
+      });
+  });
+</script>
     
 @if (Session::has('success_delete'))
 <script>
