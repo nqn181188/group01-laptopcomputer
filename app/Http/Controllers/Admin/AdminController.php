@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Customer;
 use App\Models\OrderDetail;
 class AdminController extends Controller
@@ -22,7 +23,6 @@ class AdminController extends Controller
         $numOrderOnCurrentMonth=Order::whereYear('created_at','=',date('Y'))->whereMonth('created_at','=',date('m'))->count();
         $totalProducts = Product::all()->count();
         $totalProductSold = OrderDetail::get()->sum('quantity');
-        
         return view('admin.dashboard',compact(
             'totalOrders',
             'numOrderOnCurrentMonth',
