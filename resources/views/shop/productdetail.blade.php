@@ -60,7 +60,11 @@
                     </div>
                     <div class="wrap-butons">
                         <a href="#" class="btn add-to-cart add-cart">Add to Cart</a>
-                        <a class="btn add-to-cart add-wishlist">Add Wishlist</a>
+                        @if (Session::has('user'))
+                            <a class="btn add-to-cart add-wishlist">Add Wishlist</a>
+                        @else
+                            <a href="{{route('view-wishlist')}}" class="btn add-to-cart">Add Wishlist</a>
+                        @endif
                     </div>
                 </div>
                 <div class="advance-info">
@@ -335,11 +339,17 @@
             url:'{{route('add-wishlist')}}',
             data:{pid:pid},
             success:function(data){
-                // window.location='{{ route('home') }}'  
-                swal("Thanks", "The item has been added to your wishlist", "success",{
+                if(!data){
+                    swal("Thanks", "The item has been added to your wishlist", "success",{
                     button: "Close"
-                });
+                    });
+                }
+                else{
+                    alert(data)
+                // window.location='{{ route('login') }}'  
+                }
             }
+            
         });
     });
 

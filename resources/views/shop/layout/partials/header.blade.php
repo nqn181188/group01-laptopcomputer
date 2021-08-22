@@ -109,9 +109,11 @@
                         <li class="menu-item">
                             <a href="{{route('viewcart')}}" class="link-term mercado-item-title">Cart</a>
                         </li>
+                        @if (Session::has('user'))
                         <li class="menu-item">
                             <a href="{{count(Session::get('cart'))>0?route('checkout'):'javascript:void(0)'}}" class="link-term mercado-item-title">Checkout</a>
                         </li>
+                        @endif
                         <li class="menu-item">
                             <a href="{{route('contact.index')}}" class="link-term mercado-item-title">Contact Us</a>
                         </li>	

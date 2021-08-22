@@ -133,6 +133,13 @@
 </script>
 @endif
 
+@if (Session::has('need_login_wishlist'))
+<script>
+    swal("Oops sorry!!","{!! Session::get('need_login_wishlist') !!}", "info",{
+        button: "OK"
+    });
+</script>
+@endif
 @endsection
 {{-- 
 @section('my-scripts')

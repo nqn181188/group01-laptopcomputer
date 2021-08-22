@@ -61,7 +61,9 @@
                 <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{number_format($total, 2, '.', ',')}}</b></p>
             </div>
             <div class="checkout-info">
+                @if (Session::has('cart'))
                 <a class="btn btn-checkout"href="{{count(Session::get('cart'))>0?route('checkout'):'javascript:void(0)'}}">Check out</a>
+                @endif
                 <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
             </div>
             <div class="update-clear">

@@ -101,10 +101,11 @@ class CartController extends Controller
     }
 
     public function viewWishlist(REQUEST $request){
-        $cust_id = session()->get('user')->id;
-        if($cust_id==null){
-            return redirect()->route('login')->with(['need_login'=>'You need login to view Wishlist']);
+        $user = session()->get('user');
+        if(!$user){
+            return redirect()->route('login')->with(['need_login_wishlist'=>'You need login to check wishlist']);
         }else{
+            $cust_id = $user->id;
             $wishlists=WishList::where('cust_id',$cust_id)->get('product_id');
             $productWishList=array();
             foreach($wishlists as $wishlist){
@@ -122,7 +123,6 @@ class CartController extends Controller
 
     public function addWishlist(Request $request) {
         $id = $request->pid;
-        $product = Product::find($id);
         $cust_id = $request->session()->get('user')->id;
         $wishlists = WishList::where('cust_id',$cust_id)->get();
         $counts = WishList::where('cust_id',$cust_id)->count();

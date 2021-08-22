@@ -34,12 +34,12 @@
                 </p>
                 <p class="row-in-form">
                     <label for="phone">Phone number<span style="color:  red">*</span></label>
-                    <input id="phone" type="number" name="phone" value="" placeholder="10 digits format"  pattern="(\+84|0)\d{9,10}"   required />
+                    <input id="phone" type="text" name="phone" value="" placeholder="10 digits format"  pattern="(\+84|0)\d{9}" required placeholder="+84/0 xxxxxxxxx"/>
                   
                 </p>
                 <p class="row-in-form fill-wife">
                     <label for="add">Address:</label>
-                    <input id="add" type="text" name="add" value="" placeholder="Street at apartment number" pattern="[a-zA-Z0-9]+"  title="No special characters" required />
+                    <input id="add" type="text" name="add" value="" placeholder="Street at apartment number" pattern="[a-zA-Z0-9]{10,}"  title="No special characters" required />
                 </p>
             
             </div>
