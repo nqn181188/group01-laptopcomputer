@@ -82,7 +82,7 @@
                         </div>
                     </div>
 
-                    <div class="wrap-footer-item footer-item-second">
+                    {{-- <div class="wrap-footer-item footer-item-second">
                         <h3 class="item-header">Sign up for newsletter</h3>
                         <div class="item-content">
                             <div class="wrap-newletter-footer">
@@ -92,7 +92,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
 
@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                    <div class="wrap-footer-item">
+                    {{-- <div class="wrap-footer-item">
                         <h3 class="item-header">Social network</h3>
                         <div class="item-content">
                             <div class="wrap-list-item social-network">
@@ -159,10 +159,10 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
-                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                {{-- <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                     <div class="wrap-footer-item">
                         <h3 class="item-header">Dowload App</h3>
                         <div class="item-content">
@@ -174,12 +174,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
 
-        <div class="wrap-back-link">
+        {{-- <div class="wrap-back-link">
             <div class="container">
                 <div class="back-link-box">
                     <h3 class="backlink-title">Quick Links</h3>
@@ -227,7 +227,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
@@ -239,10 +239,10 @@
             <div class="coppy-right-item item-right">
                 <div class="wrap-nav horizontal-nav">
                     <ul>
-                        <li class="menu-item"><a href="about-us.html" class="link-term">About us</a></li>								
-                        <li class="menu-item"><a href="privacy-policy.html" class="link-term">Privacy Policy</a></li>
+                        <li class="menu-item"><a href="{{route('aboutus')}}" class="link-term">About us</a></li>								
+                        {{-- <li class="menu-item"><a href="privacy-policy.html" class="link-term">Privacy Policy</a></li>
                         <li class="menu-item"><a href="terms-conditions.html" class="link-term">Terms & Conditions</a></li>
-                        <li class="menu-item"><a href="return-policy.html" class="link-term">Return Policy</a></li>								
+                        <li class="menu-item"><a href="return-policy.html" class="link-term">Return Policy</a></li>								 --}}
                     </ul>
                 </div>
             </div>

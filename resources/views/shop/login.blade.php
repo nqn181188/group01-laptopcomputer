@@ -55,12 +55,12 @@
                                     <div><span class="text-danger">{{Session::get('msgPass')}}</span></div>
                                 @endif
                             
-                            <fieldset class="wrap-input">
+                            {{-- <fieldset class="wrap-input">
                                 <label class="remember-field">
                                     <input class="frm-input " name="rememberme" id="rememberme" value="forever" type="checkbox"><span>Remember me</span>
                                 </label>
                                 <a class="link-function left-position" href="#" title="Forgotten password?">Forgotten password?</a>
-                            </fieldset>
+                            </fieldset> --}}
                             <input type="submit" class="btn btn-submit" value="Login" name="submit">
                         </form>
                     </div>												
