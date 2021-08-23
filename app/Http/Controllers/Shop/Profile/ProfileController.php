@@ -106,6 +106,7 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(),[
             'email'    => 'email|unique:customers,email,'.$customer->id,
             'phone' => 'required|regex:/(0)[0-9]{9}/',
+            'address' => 'required',
         ]);
 
         if( $validator->fails() ){
