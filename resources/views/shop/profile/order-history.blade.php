@@ -65,6 +65,26 @@
                                 @endif
                                 
                             </div>
+                            <nav class="mt-3" aria-label="...">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item {{$orders->currentPage()==1?'disabled':''}}">
+                                        <a href="{{request()->fullUrlWithQuery(['page' => 1]) }} " class="page-link">First</a>
+                                    </li>
+                                    <li class="page-item {{$orders->currentPage()==1?'disabled':''}}">
+                                        <a href="{{request()->fullUrlWithQuery(['page' => $orders->currentPage()-1])}}" class="page-link">Previous</a>
+                                    </li>
+                                    @for ($i = 1; $i<=$orders->lastPage(); $i++)
+                                      <li class="page-item {{$orders->currentPage()==$i?'active':''}}" ><a class="page-link" href="{{request()->fullUrlWithQuery(['page' => $i])}}">{{$i}}</a></li>
+                                    @endfor
+                                    <li class="page-item {{$orders->currentPage()==$orders->lastPage()?'disabled':''}}">
+                                      <a href="{{request()->fullUrlWithQuery(['page' => $orders->currentPage()+1])}}" class="page-link">Next</a>
+                                    </li>
+                                    <li class="page-item {{$orders->currentPage()==$orders->lastPage()?'disabled':''}}">
+                                      <a href="{{request()->fullUrlWithQuery(['page' => ceil($orders->total()/8)])}}" class="page-link">Last</a>
+                                    </li>
+                                </ul>
+                                <p class="text-center text-secondary">Showing {{($orders->currentPage()-1)*8+1}}-{{($orders->currentPage()-1)*8+$orders->count()}} of {{$orders->total()}}</p>
+                              </nav>
                             <!-- /.card-body -->
                             </div>
             </div><!--end main products area-->		

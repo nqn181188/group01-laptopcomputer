@@ -27,6 +27,15 @@
         <h3 class="card-title">Customer Account</h3>
 
         <div class="card-tools">
+          <form style="display:inline-block" id="filter-customer">
+          <div class="d-inline px-2">
+            <div class="form-check-inline use-chosen">
+              <label class="form-check-label pt-2">
+                <input {{$lock==1?'checked':''}} name="lock" type="checkbox" class="form-check-input" value="1">Locked
+              </label>
+            </div>
+          </div>
+          </form>
           <a href="{{ route('admin.customer.create') }}"><i class="fas fa-user-plus"></i></a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
@@ -79,6 +88,26 @@
         </table>
       </div>
       <!-- /.card-body -->
+      <nav class="mt-3" aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {{$customers->currentPage()==1?'disabled':''}}">
+                <a href="{{request()->fullUrlWithQuery(['page' => 1]) }} " class="page-link">First</a>
+            </li>
+            <li class="page-item {{$customers->currentPage()==1?'disabled':''}}">
+                <a href="{{request()->fullUrlWithQuery(['page' => $customers->currentPage()-1])}}" class="page-link">Previous</a>
+            </li>
+            @for ($i = 1; $i<=$customers->lastPage(); $i++)
+              <li class="page-item {{$customers->currentPage()==$i?'active':''}}" ><a class="page-link" href="{{request()->fullUrlWithQuery(['page' => $i])}}">{{$i}}</a></li>
+            @endfor
+            <li class="page-item {{$customers->currentPage()==$customers->lastPage()?'disabled':''}}">
+              <a href="{{request()->fullUrlWithQuery(['page' => $customers->currentPage()+1])}}" class="page-link">Next</a>
+            </li>
+            <li class="page-item {{$customers->currentPage()==$customers->lastPage()?'disabled':''}}">
+              <a href="{{request()->fullUrlWithQuery(['page' => ceil($customers->total()/11)])}}" class="page-link">Last</a>
+            </li>
+        </ul>
+        <p class="text-center text-secondary">Showing {{($customers->currentPage()-1)*11+1}}-{{($customers->currentPage()-1)*11+$customers->count()}} of {{$customers->total()}}</p>
+      </nav>
     </div>
     <!-- /.card -->
 
@@ -89,6 +118,15 @@
 
 @section('my-scripts')
     
+@section('my-scripts')
+<script type="text/javascript">
+  $(function(){
+      $('.use-chosen').change(function(){
+          $('#filter-customer').submit();
+      });
+  });
+</script>
+
 @if (Session::has('success_delete'))
 <script>
     swal("Success Delete","{!! Session::get('success_delete') !!}", "success",{

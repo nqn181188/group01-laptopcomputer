@@ -33,7 +33,7 @@
           <div class="d-inline px-2">
             <div class="form-check-inline use-chosen">
               <label class="form-check-label pt-2">
-                <input {{$read==1?'checked':''}} name="read" type="checkbox" class="form-check-input" value="1">read
+                <input {{$read==1?'checked':''}} name="read" type="checkbox" class="form-check-input" value="1">Readed
               </label>
             </div>
           </div>
@@ -127,7 +127,7 @@
               </li>
           </ul>
           <p class="text-center text-secondary">Showing {{($custFb->currentPage()-1)*12+1}}-{{($custFb->currentPage()-1)*12+$custFb->count()}} of {{$custFb->total()}}</p>
-      </nav>
+        </nav>
   
       </div>
       <!-- /.card-body -->

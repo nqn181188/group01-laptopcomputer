@@ -22,7 +22,7 @@ class ContactController extends Controller
         // $custFb = Feedback::all()->orderBy('created_at','desc')->get();
         // $custFb = Feedback::paginate(8)
         $read = $request->read??0;
-        $custFb = Feedback::where('id','!=','0');
+        $custFb = Feedback::where('id','!=','0')->orderBy('created_at','desc');
         if($read){
             $custFb->where('read',1);
         }

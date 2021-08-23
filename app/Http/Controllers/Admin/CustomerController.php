@@ -14,10 +14,18 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
-        return view('admin.customer.index', compact('customers'));
+        $lock = $request->lock??0;
+        $customers = Customer::where('id','!=','0');
+        if($lock){
+            $customers->where('lock',1);
+        }
+        $customers = $customers->paginate(11);
+        return view('admin.customer.index', compact(
+            'customers',
+            'lock',
+        ));
     }
 
     /**

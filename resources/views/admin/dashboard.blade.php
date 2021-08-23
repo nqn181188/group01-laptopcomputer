@@ -44,7 +44,11 @@
           <div class="icon">
             <i class="ion ion-person-add"></i>
           </div>
+          @if (Session::get('user')->role==2)
+          <a class="small-box-footer">Not have permission<i class="fas fa-warning"></i></a>
+          @else
           <a href="{{route('admin.customer.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          @endif
         </div>
       </div>
       <!-- ./col -->
@@ -58,7 +62,11 @@
           <div class="icon">
             <i class="ion ion-pie-graph"></i>
           </div>
+          @if (Session::get('user')->role==2)
+          <a class="small-box-footer">Not have permission<i class="fas fa-warning"></i></a>
+          @else
           <a href="{{route('admin.account.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          @endif
         </div>
       </div>
       <!-- ./col -->

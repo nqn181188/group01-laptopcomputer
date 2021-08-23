@@ -17,12 +17,12 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user= session()->get('user');
         
-        // dd($userId);
-        $orders = Order::where('cust_id',$user->id)->orderBy('created_at','desc')->get();
+        $orders = Order::where('cust_id',$user->id)->orderBy('created_at','desc');
+        $orders = $orders->paginate(8);
         return view('shop.profile.order-history', compact('orders'));
     }
 
