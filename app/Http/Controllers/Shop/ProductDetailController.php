@@ -22,7 +22,7 @@ class ProductDetailController extends Controller
         foreach($pids as $pid){
             $rate = CustomerComment::where('product_id',$pid->id)->sum('rate');
             $num = CustomerComment::where('product_id',$pid->id)->count();
-            $rates["$pid->id"]=round($rate/$num);
+            $rates["$pid->id"]=$num!=0?round($rate/$num):5;
         }
         return view('shop.productdetail',compact(
             'product',

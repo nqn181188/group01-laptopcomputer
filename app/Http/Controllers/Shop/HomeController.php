@@ -22,7 +22,7 @@ class HomeController extends Controller
         foreach($pids as $pid){
             $rate = CustomerComment::where('product_id',$pid->id)->sum('rate');
             $num = CustomerComment::where('product_id',$pid->id)->count();
-            $rates["$pid->id"]=round($rate/$num);
+            $rates["$pid->id"]=$num!=0?round($rate/$num):5;
         }
         $featuredProduct = Product::where('featured','1')->orderBy('updated_at','desc')->limit(20)->get();
         $lastestProduct = Product::orderBy('created_at','desc')->limit(20)->get();
@@ -61,7 +61,7 @@ class HomeController extends Controller
         foreach($pids as $pid){
             $rate = CustomerComment::where('product_id',$pid->id)->sum('rate');
             $num = CustomerComment::where('product_id',$pid->id)->count();
-            $rates["$pid->id"]=round($rate/$num);
+            $rates["$pid->id"]=$num!=0?round($rate/$num):5;
         }
         return view('shop.searchproduct',compact(
             'searchproducts',
