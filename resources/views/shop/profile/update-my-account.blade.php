@@ -34,8 +34,8 @@
                                 <input style="cursor: not-allowed" type="text" id="lastname" value="{{ old('lastname',$customer->lastname)}}" name="lastname" placeholder="Last name" readonly>
                             </fieldset>
                             <fieldset class="wrap-input">
-                                <label for="email">Email Address<span style="color: red">*</span></label>
-                                <input type="email" id="email" value="{{ old('email',$customer->email)}}" name="email" placeholder="Email address">
+                                <label for="email">Email Address</label>
+                                <input style="cursor: not-allowed" type="email" id="email" value="{{ old('email',$customer->email)}}" name="email" placeholder="Email address" readonly>
                                 @error('email')
                                 <div><span class="text-danger">{{$message}}</span></div>
                                 @enderror
